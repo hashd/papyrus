@@ -9,7 +9,7 @@ System.config({
     "stage": 1
   },
   typescriptOptions: {
-    "module": "commonjs",
+    "module": "es2015",
     "emitDecoratorMetadata": true
   },
   paths: {
