@@ -1,1 +1,7 @@
+# Node and JSPM packages
 node_modules
+public/jspm_packages
+
+# build files
+public/app.js
+public/app.js.map
