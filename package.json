@@ -4,7 +4,7 @@
   "description": "Dynamic Visualization Playground",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run lite\" \"npm run build-app\"",
+    "start": "concurrently \"npm run lite\" \"gulp watch\"",
     "lite": "lite-server -c config/lite-server.json",
     "build-app": "jspm bundle-sfx app public/app.js --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +19,10 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.2.0",
     "jspm": "^0.16.31",
     "lite-server": "^2.1.0"
   },
