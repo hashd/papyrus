@@ -27,6 +27,7 @@ System.config({
 
   map: {
     "angular2": "npm:angular2@2.0.0-beta.13",
+    "d3": "npm:d3@3.5.16",
     "es6-shim": "github:es-shims/es6-shim@0.35.0",
     "jquery": "npm:jquery@2.2.2",
     "lodash": "npm:lodash@4.6.1",
