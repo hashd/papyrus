@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "http://localhost:8080",
+  baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "typescript",
   babelOptions: {
@@ -15,7 +15,7 @@ System.config({
   paths: {
     "npm:*": "jspm_packages/npm/*",
     "github:*": "jspm_packages/github/*",
-    "app": "src"
+    "app": "app"
   },
 
   packages: {
@@ -26,12 +26,12 @@ System.config({
   },
 
   map: {
-    "angular2": "npm:angular2@2.0.0-beta.12",
+    "angular2": "npm:angular2@2.0.0-beta.13",
     "es6-shim": "github:es-shims/es6-shim@0.35.0",
     "jquery": "npm:jquery@2.2.2",
     "lodash": "npm:lodash@4.6.1",
     "typescript": "npm:typescript@1.8.9",
-    "zone.js": "npm:zone.js@0.6.6",
+    "zone.js": "npm:zone.js@0.6.8",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -44,10 +44,10 @@ System.config({
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
     },
-    "npm:angular2@2.0.0-beta.12": {
+    "npm:angular2@2.0.0-beta.13": {
       "reflect-metadata": "npm:reflect-metadata@0.1.2",
       "rxjs": "npm:rxjs@5.0.0-beta.4",
-      "zone.js": "npm:zone.js@0.6.6"
+      "zone.js": "npm:zone.js@0.6.8"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -82,7 +82,7 @@ System.config({
       "inherits": "npm:inherits@2.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:zone.js@0.6.6": {
+    "npm:zone.js@0.6.8": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }

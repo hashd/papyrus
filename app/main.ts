@@ -1,4 +1,4 @@
-import 'angular2/bundles/angular2-polyfills';
+import 'angular2/bundles/angular2-polyfills'
 //you may need es6-shim if you get an error relating to list.fill
 //import es6-shim;
 
