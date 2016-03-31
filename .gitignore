@@ -5,6 +5,11 @@
 node_modules
 jspm_packages
 
+# Log files
+npm-debug.log
+
 # build files
 public/app.js
 public/app.js.map
+public/app.css
+public/app.css.map

@@ -5,13 +5,13 @@ import * as d3 from 'd3'
   selector: 'papyrus-shell',
   template: `
     <div class="row">
-      <div class="col col-md-24">
+      <div class="col col-md-12">
         <h4>Hello {{name}}</h4>
       </div>
     </div>
     <div class="row">
-      <div class="col col-md-6"></div>
-      <div class="col col-md-18"></div>
+      <div class="col col-md-3"></div>
+      <div class="col col-md-9"></div>
     </div>
   `
 })
