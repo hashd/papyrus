@@ -1,3 +1,6 @@
+$primary-color: #ff4242;
+$white: #ffffff;
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -13,7 +16,21 @@ body {
 }
 
 .col {
-  min-height: 200px;
-  background: #fff4f4;
-  border: 1px solid #9d9d9d;
+  min-height: 80px;
+}
+
+.content {
+  min-height: 80px;
+}
+
+.sidebar {
+  border-right: 1px solid #ddd;
+}
+
+pa-visualizations {
+  height: 80px;
+}
+
+pa-editor {
+  height: calc(100% - 80px);
 }

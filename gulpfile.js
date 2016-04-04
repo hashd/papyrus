@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 
 var sassSrc = "styles/**/*.scss",
   sassDest = "styles",
+  sassCssSrc = "styles/scss/app.scss",
   sassJsSrc = "styles/main.ts",
   appSrc = "app/**/*.ts";
 
@@ -16,7 +17,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('compile:css', function () {
-  return gulp.src(sassSrc)
+  return gulp.src(sassCssSrc)
     .pipe(sass())
     .pipe(concat('app.css'))
     .pipe(gulp.dest(sassDest));

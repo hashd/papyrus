@@ -10,7 +10,8 @@ System.config({
   },
   typescriptOptions: {
     "module": "es2015",
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   paths: {
     "npm:*": "jspm_packages/npm/*",

@@ -4,6 +4,6 @@ import '../styles/main.ts!typescript'
 //import es6-shim;
 
 import { bootstrap } from 'angular2/platform/browser'
-import { PapyrusShell } from './components/papyrus_shell'
+import { PapyrusShell } from './components/shell'
 
 bootstrap(PapyrusShell)
