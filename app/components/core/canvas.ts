@@ -4,7 +4,7 @@ import { PanelComponent as Panel } from '../generic/panel'
 @Component({
   selector: 'pa-canvas',
   template: `
-    <pa-panel title="Canvas">
+    <pa-panel header="Canvas">
     
     </pa-panel>
   `,

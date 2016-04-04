@@ -1,0 +1,23 @@
+pa-visualizations {
+  .content {
+    padding: 12px !important;
+  } 
+  
+  pa-vis-preview,
+  pa-create-vis {
+    display: inline-block;
+    height: 80px;
+    width: 96px;
+    margin-right: 16px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  pa-vis-preview {
+    &.selected {
+      border: 1px solid $primary-color;
+    }
+  }
+}

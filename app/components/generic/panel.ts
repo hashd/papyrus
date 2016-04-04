@@ -4,7 +4,7 @@ import { Component, Input } from 'angular2/core'
   selector: 'pa-panel',
   template: `
     <div class="pa-panel">
-      <div class="title">{{title}}</div>
+      <div class="title">{{header}}</div>
       <div class="content">
         <ng-content></ng-content>
       </div>
@@ -18,5 +18,5 @@ import { Component, Input } from 'angular2/core'
 })
 export class PanelComponent {
   @Input()
-  title: string
+  header: string
 }

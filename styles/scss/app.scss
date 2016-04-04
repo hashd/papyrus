@@ -1,5 +1,7 @@
 @import 'general';
+@import 'layout';
 @import 'bootstrap-overrides';
 
 // Components related Styling
-@import 'panel';
+@import 'components/panel';
+@import 'components/visualization';
