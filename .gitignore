@@ -1,5 +1,6 @@
 # Editor specific files
 .idea
+.vscode
 
 # Node and JSPM packages
 node_modules
