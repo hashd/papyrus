@@ -1,4 +1,4 @@
-import { Component, Input, AfterContentInit} from 'angular2/core';
+import { Component, Input, AfterContentInit} from 'angular2/core'
 import { CompositeVisualization } from '../../models/visualization'
 import { FocusMe } from '../../directives/focus_me'
 

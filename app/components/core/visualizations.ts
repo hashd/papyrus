@@ -30,7 +30,7 @@ export class PapyrusVisualizations implements OnInit {
   
   ngOnInit() {
     if (this.visualizations.length === 0) {
-      this.create();
+      this.create()
     }
   }
   
