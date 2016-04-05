@@ -10,9 +10,5 @@ jspm_packages
 npm-debug.log*
 
 # build files
-public/app.js
-public/app.js.map
-public/app.css
-public/app.css.map
-public/jspm_packages
+public
 styles/app.css

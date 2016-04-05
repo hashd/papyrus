@@ -1,21 +1,30 @@
 pa-visualizations {
   .content {
     padding: 12px !important;
-  } 
+    
+    &>* {
+      vertical-align: top;
+    }
+  }
   
-  pa-vis-preview,
+  pa-vis-preview {
+    display: inline-block;
+    margin-right: 16px;
+    width: 96px;
+    cursor: pointer;
+  }
+  
+  .vis-preview,
   pa-create-vis {
     display: inline-block;
     height: 80px;
     width: 96px;
-    margin-right: 16px;
     border: 1px solid #ddd;
     text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
   }
   
   pa-create-vis {
+    cursor: pointer;
     border: none;
     font-size: 4em;
     text-align: left;
@@ -23,8 +32,34 @@ pa-visualizations {
   
   pa-vis-preview {
     &.selected {
-      border: 1px solid $primary-color;
-      box-shadow: 0 0 8px $primary-color;
+      .vis-preview {
+        border: 1px solid $primary-color;
+        box-shadow: 0 0 8px $primary-color;
+      }
     }
+    
+    .vis-name {
+      text-align: center;
+      padding: 2px;
+      cursor: pointer;
+      border-radius: 16px;
+      background: #ddd;
+    }
+    
+    input {
+      width: 100%;
+      text-align: center;
+      border-radius: 16px;
+      border: 1px solid $primary-color;
+      
+      &:focus {
+        padding: 1px;
+        outline: none;
+      }
+    }
+  }
+  
+  .vis-preview+div {
+    margin-top: 4px;
   }
 }
