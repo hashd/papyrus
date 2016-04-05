@@ -1,6 +1,13 @@
 $amethyst: #7e57c2;
+$dark-amethyst: #593598;
+$xl-amethyst: #e0ceff;
+$xxl-amethyst: #fff9ff;
+
 $primary-color: $amethyst;
+$secondary-color: $dark-amethyst;
 $white: #ffffff;
+
+$primary-fonts: 'Catamaran', 'Helvetica Neue', 'Helvetica', 'Arial';
 
 * {
   margin: 0;
@@ -8,6 +15,8 @@ $white: #ffffff;
 }
 
 body {
+  font-family: $primary-fonts;
+  font-size: 12px;
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +30,7 @@ body {
 }
 
 .content {
-  min-height: 80px;
+  background: $xxl-amethyst;
 }
 
 .sidebar {

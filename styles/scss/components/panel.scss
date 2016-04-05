@@ -1,6 +1,7 @@
 .pa-panel {
   &>.title {
-    background: $primary-color;
+    background: linear-gradient($primary-color, $secondary-color);
     color: $white;
+    text-align: center;
   }
 }

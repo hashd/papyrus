@@ -11,13 +11,14 @@ import { FocusMe } from '../../directives/focus_me'
     <div>
       <div class="vis-name" 
         *ngIf="!nameBeingEdited"
-        (click)="editName()"
+        (dblclick)="editName()"
       >{{visualization?.name}}</div>
       <input focus-me
         type="text"
         *ngIf="nameBeingEdited" 
         [(ngModel)]="visualization.name"
-        (blur)="saveName()"
+        (blur)="saveName($event)"
+        (keydown)="$event.keyCode === 13?saveName($event):undefined"
       />
     </div>
   `,
@@ -27,12 +28,19 @@ export class VisualizationPreview implements AfterContentInit {
   @Input()
   visualization: CompositeVisualization
   nameBeingEdited: boolean = false
+  previousName: string
   
   editName() {
+    this.previousName = this.visualization.name
     this.nameBeingEdited = true
   }
   
-  saveName() {
+  saveName(e) {
+    if (this.visualization.name === '') {
+      this.visualization.name = this.previousName
+      this.previousName = undefined
+    }
+    
     this.nameBeingEdited = false
   }
 }

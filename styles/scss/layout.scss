@@ -2,3 +2,9 @@ pa-editor {
   position: absolute;
   bottom: 0;
 }
+
+pa-data,
+pa-steps,
+pa-editor {
+  display: block;
+}

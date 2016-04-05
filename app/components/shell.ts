@@ -2,6 +2,7 @@ import { Component } from 'angular2/core'
 import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
 import { CompositeVisualization } from '../models/visualization'
+import { FullLength } from '../directives/all'
 
 @Component({
   selector: 'papyrus-shell',
@@ -13,13 +14,13 @@ import { CompositeVisualization } from '../models/visualization'
       >
       </pa-visualizations>
     </div>
-    <div class="row row-no-padding">
-      <pa-editor class="col col-md-12">
+    <div class="row row-no-padding" [style.height]="'calc(100% - 157px)'">
+      <pa-editor class="col col-md-12" full-length>
       
       </pa-editor>
     </div>
   `,
-  directives: [PapyrusVisualizations, PapyrusEditor]
+  directives: [PapyrusVisualizations, PapyrusEditor, FullLength]
 })
 export class PapyrusShell {
   visualizations: CompositeVisualization[] = []
@@ -31,6 +32,6 @@ export class PapyrusShell {
   }
   
   load(vis) {
-    console.log(vis.id)
+    // Load visualization in the editor
   }
 }

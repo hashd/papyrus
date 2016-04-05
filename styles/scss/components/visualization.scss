@@ -3,7 +3,7 @@ pa-visualizations {
     padding: 12px !important;
     
     &>* {
-      vertical-align: top;
+      vertical-align: middle;
     }
   }
   
@@ -23,27 +23,40 @@ pa-visualizations {
     text-align: center;
   }
   
+  .vis-preview {
+    background: $white;
+  }
+  
   pa-create-vis {
     cursor: pointer;
     border: none;
     font-size: 4em;
     text-align: left;
+    width: auto;
+    
+    i:hover {
+      color: $secondary-color;
+    }
   }
   
   pa-vis-preview {
     &.selected {
       .vis-preview {
         border: 1px solid $primary-color;
-        box-shadow: 0 0 8px $primary-color;
+        box-shadow: 0 0 8px $secondary-color;
+      }
+      
+      .vis-name {
+        color: $dark-amethyst;
       }
     }
     
     .vis-name {
       text-align: center;
-      padding: 2px;
+      padding: 1px;
       cursor: pointer;
       border-radius: 16px;
-      background: #ddd;
+      background: $xl-amethyst;
     }
     
     input {
@@ -53,7 +66,7 @@ pa-visualizations {
       border: 1px solid $primary-color;
       
       &:focus {
-        padding: 1px;
+        padding: 0px;
         outline: none;
       }
     }
