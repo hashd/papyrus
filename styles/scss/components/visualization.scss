@@ -15,9 +15,16 @@ pa-visualizations {
     cursor: pointer;
   }
   
+  pa-create-vis {
+    border: none;
+    font-size: 4em;
+    text-align: left;
+  }
+  
   pa-vis-preview {
     &.selected {
       border: 1px solid $primary-color;
+      box-shadow: 0 0 8px $primary-color;
     }
   }
 }

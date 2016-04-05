@@ -11,7 +11,9 @@ import { CompositeVisualization } from '../../models/visualization'
         [class.selected]="visualization === selected"  
       >
       </pa-vis-preview>
-      <pa-create-vis (click)="create()">Add</pa-create-vis>
+      <pa-create-vis (click)="create()">
+        <i class="fa fa-plus-circle"></i>
+      </pa-create-vis>
     </pa-panel>
   `,
   directives: [PanelComponent]

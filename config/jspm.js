@@ -34,6 +34,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.20",
     "d3": "npm:d3@3.5.16",
     "es6-shim": "github:es-shims/es6-shim@0.35.0",
+    "font-awesome": "npm:font-awesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
     "lodash": "npm:lodash@4.6.1",
     "typescript": "npm:typescript@1.8.9",
@@ -125,6 +126,9 @@ System.config({
     "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
+    "npm:font-awesome@4.5.0": {
+      "css": "github:systemjs/plugin-css@0.1.20"
+    },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
@@ -179,6 +183,9 @@ System.config({
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
+    "npm:typescript@1.8.9": {
+      "os": "github:jspm/nodelibs-os@0.1.0"
     },
     "npm:url@0.10.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
