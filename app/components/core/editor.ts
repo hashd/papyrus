@@ -27,7 +27,6 @@ export class PapyrusEditor {
   commands: Object
   
   constructor(private commandService: CommandService) {
-    this.commands = commandService.getCommandsByType()
-    console.log(commandService, this.commands)
+    this.commands = commandService.getCommands()
   }
 }

@@ -14,7 +14,7 @@ export class CompositeVisualization implements Visualizable {
   }
   
   draw(data) {
-    this._steps.forEach(s => s.draw())
+    this.steps.forEach(s => s.execute())
   }
   
   move(x, y) {

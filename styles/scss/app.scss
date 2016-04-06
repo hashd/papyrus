@@ -3,7 +3,8 @@
 @import 'bootstrap_overrides';
 
 // Components related Styling
-@import 'components/panel';
-@import 'components/visualization';
 @import 'components/canvas';
+@import 'components/editor';
+@import 'components/panel';
 @import 'components/step_summary';
+@import 'components/visualization';

@@ -7,4 +7,6 @@ export default {
   Svg
 }
 
-export const COMMANDS: Command[] = [Line]
+export const COMMANDS: Command[] = [
+  new Line()
+]

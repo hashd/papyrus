@@ -14,7 +14,7 @@ import { FullLength } from '../directives/all'
       >
       </pa-visualizations>
     </div>
-    <div class="row row-no-padding" [style.height]="'calc(100% - 157px)'">
+    <div class="editor-space row row-no-padding">
       <pa-editor [visualization]="activeVisualization" class="col col-md-12" full-length>
       
       </pa-editor>

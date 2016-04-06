@@ -1,5 +1,5 @@
-import { Component } from 'angular2/core'
-import { Command } from '../../models/command'
+import { Component, Input } from 'angular2/core'
+import { Command } from '../../interfaces/command'
 import { CompositeVisualization } from '../../models/visualization'
 import { Step } from '../../models/step'
 import { StepSummary } from '../core/step_summary'
@@ -22,7 +22,8 @@ import { CommandBar } from '../core/command_bar'
   directives: [StepSummary, VisualizationCanvas, CommandBar]
 })
 export class PapyrusCanvas {
-  commands: Command[] = []
+  @Input()
+  commands: Command[]
   visualization: CompositeVisualization
   currentStep: Step
   currentCommand: Command

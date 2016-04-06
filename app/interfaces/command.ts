@@ -1,9 +1,19 @@
 import { CommandType } from './enums/command_types'
 
-export interface Command {
+export interface CommandInterface {
+  onClick()
+  onDrag()  
+}
+
+export class Command implements CommandInterface {
   type: CommandType
   actionKey: string
   
-  onClick()
-  onDrag()
+  onClick() {
+    console.error('This method needs to be implemented by host command')
+  }
+  
+  onDrag() {
+    console.error('This method needs to be implemented by host command')
+  }
 }

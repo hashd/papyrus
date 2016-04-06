@@ -9,11 +9,6 @@ export class CommandService {
    public commands: Command[]
    
    constructor() {
-     this.loadCommands()
-   }
-   
-   loadCommands() {
-     console.log(COMMANDS)
      this.commands = COMMANDS
    }
    
@@ -21,7 +16,7 @@ export class CommandService {
      return COMMAND_TYPES
    }
    
-   getCommandsByType(): Command[][] {
-     return COMMAND_TYPES.map(type => this.commands.filter(cmd => cmd.type === type))
+   getCommands(): Command[] {
+     return this.commands
    }
 }
