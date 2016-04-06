@@ -1,7 +1,13 @@
 .pa-panel {
+  // border-bottom: 1px solid $xl-amethyst;
+  
   &>.title {
     background: linear-gradient($primary-color, $secondary-color);
     color: $white;
     text-align: center;
+  }
+
+  &>.content {
+    background: $xxl-amethyst;
   }
 }

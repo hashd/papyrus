@@ -10,9 +10,13 @@ import { CommandBar } from '../core/command_bar'
   selector: 'pa-canvas',
   template: `
     <div>
-      <pa-step-summary [step]="currentStep"></pa-step-summary>
-      <pa-vis-canvas [visualization]="visualization"></pa-vis-canvas>
-      <pa-command-bar [commands]="commands"></pa-command-bar>
+      <div class="left-canvas col">
+        <pa-step-summary [step]="currentStep"></pa-step-summary>
+        <pa-vis-canvas [visualization]="visualization"></pa-vis-canvas>
+      </div>
+      <div class="right-canvas col">
+        <pa-command-bar [commands]="commands"></pa-command-bar>
+      </div>
     </div>
   `,
   directives: [StepSummary, VisualizationCanvas, CommandBar]

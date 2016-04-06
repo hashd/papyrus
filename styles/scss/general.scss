@@ -1,5 +1,6 @@
 $amethyst: #7e57c2;
 $dark-amethyst: #593598;
+$light-amethyst: #fef;
 $xl-amethyst: #e0ceff;
 $xxl-amethyst: #fff9ff;
 
@@ -23,14 +24,6 @@ body {
   right: 0;
   bottom: 0;
   margin: 0;
-}
-
-.col {
-  min-height: 80px;
-}
-
-.content {
-  background: $xxl-amethyst;
 }
 
 .sidebar {

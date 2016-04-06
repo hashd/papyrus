@@ -4,7 +4,9 @@ import { Command } from '../../models/command'
 @Component({
   selector: 'pa-command-bar',
   template: `
-  
+    <div class="command-bar">
+      <div class="title">Commands</div>
+    </div>
   `
 })
 export class CommandBar {

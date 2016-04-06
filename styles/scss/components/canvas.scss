@@ -1,0 +1,58 @@
+pa-step-summary,
+pa-vis-canvas,
+pa-command-bar,
+pa-canvas {
+  display: block;
+}
+
+pa-canvas {
+  padding: 24px 8px;
+  
+  &>div {
+    height: 100%;
+  }
+}
+
+pa-step-summary {
+  text-align: center;
+}
+
+pa-vis-canvas {
+  height: calc(100% - 20px);
+}
+
+.canvas {
+  padding: 16px 0;
+  height: 100%;
+  text-align: center;
+  
+  svg {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px #ccc;
+  }
+}
+
+.right-canvas {
+  width: 160px;
+}
+
+.left-canvas {
+  width: calc(100% - 160px);
+  height: 100%;
+}
+
+pa-command-bar {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  right: 0;
+  width: 160px;
+  background: $xxl-amethyst;
+  
+  .title {
+    padding: 4px 0;
+    text-align: center;
+    background: $xl-amethyst;
+    color: $dark-amethyst;
+  }
+}

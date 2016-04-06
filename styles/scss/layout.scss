@@ -5,6 +5,8 @@ pa-editor {
 
 pa-data,
 pa-steps,
-pa-editor {
+pa-editor,
+pa-panel {
   display: block;
+  box-sizing: border-box;
 }
