@@ -15,7 +15,7 @@ import { FullLength } from '../directives/all'
       </pa-visualizations>
     </div>
     <div class="row row-no-padding" [style.height]="'calc(100% - 157px)'">
-      <pa-editor class="col col-md-12" full-length>
+      <pa-editor [visualization]="activeVisualization" class="col col-md-12" full-length>
       
       </pa-editor>
     </div>
@@ -28,10 +28,5 @@ export class PapyrusShell {
   
   select(e) {
     this.activeVisualization = e.selected
-    this.load(e.selected)
-  }
-  
-  load(vis) {
-    // Load visualization in the editor
   }
 }

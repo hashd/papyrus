@@ -4,8 +4,8 @@ import { Step } from './step'
 export class CompositeVisualization implements Visualizable {
   id: string
   name: string = 'unnamed'
-  _dataDef: Object
-  _steps: Step[]
+  data: Object
+  steps: Step[]
   parent: Visualizable
   
   constructor(parent) {

@@ -5,7 +5,8 @@ import { CompositeVisualization } from '../../models/visualization'
   selector: 'pa-vis-canvas',
   template: `
     <div class="canvas" #canvas_parent>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" #canvas></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" #canvas>
+      </svg>
     </div>
   `
 })
