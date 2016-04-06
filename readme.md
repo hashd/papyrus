@@ -1,7 +1,5 @@
 ## Papyrus
-This is an experimental attempt to replicate Bret Victor's dynamic visualization project using Angular 2, d3 at its core.
-
-JSPM is used for bundling the app and sources are written in ts, html, sass.
+This is an experimental attempt to replicate Bret Victor's dynamic visualization project using Angular 2, d3 at its core. JSPM is used for bundling the app and sources are written in ts, html, sass.
 
 ### Prerequisites
 You will need the following to setup development environment
@@ -18,6 +16,7 @@ Also install the following global node packages
 - jspm
 - gulp
 - concurrently
+- lite-server
 ```
 
 ### Setup
@@ -40,3 +39,5 @@ After you have installed prerequisites and have finished setting up, run the fol
 ``` bash
 npm run start
 ```
+
+Note: Build process is WIP and can act cranky
