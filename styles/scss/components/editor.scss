@@ -6,3 +6,8 @@
   border-right: 1px solid $xl-amethyst;
   background: $xxl-amethyst;
 }
+
+.command-entry.selected {
+  font-weight: bold;
+  color: $dark-amethyst;
+}

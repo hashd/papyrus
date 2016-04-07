@@ -10,7 +10,7 @@ import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types
       <div *ngFor="#commandType of commandTypes">
         <div>{{commandType}}</div>
         <div>
-          <div *ngFor="#cmd of getCommandsByType(commandType)">
+          <div class="command-entry" *ngFor="#cmd of getCommandsByType(commandType)" [class.selected]="cmd === currentCommand">
             <span>{{cmd?.constructor?.name}}</span>
             <span>{{cmd.actionKey}}</span>
           </div>
@@ -23,6 +23,8 @@ export class CommandBar implements AfterViewInit {
   @Input()
   commands: Command[]
   commandTypes: CommandType[]
+  @Input()
+  currentCommand: Command
   
   constructor() {
     this.commandTypes = COMMAND_TYPES
