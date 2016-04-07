@@ -6,7 +6,7 @@ export interface Drawable {
   draw(data: Object)
 }
 
-export interface Movable {
+export interface Moveable {
   move(x: number, y: number)
 }
 
@@ -22,7 +22,7 @@ export interface Appendable {
   append(el: ElementRef)
 }
 
-export interface Visualizable extends Drawable, Movable, Scalable, Rotatable {
+export interface Visualizable extends Drawable, Moveable, Scalable, Rotatable {
   
 }
 
