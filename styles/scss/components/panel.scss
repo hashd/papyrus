@@ -1,13 +1,17 @@
 .pa-panel {
   // border-bottom: 1px solid $xl-amethyst;
   
-  &>.title {
+  & > .title {
     background: linear-gradient($primary-color, $secondary-color);
     color: $white;
     text-align: center;
   }
 
-  &>.content {
+  & > .content {
     background: $xxl-amethyst;
+  }
+  
+  & > div {
+    padding: 2px 12px;
   }
 }

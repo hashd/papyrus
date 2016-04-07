@@ -9,12 +9,7 @@ import { Component, Input } from 'angular2/core'
         <ng-content></ng-content>
       </div>
     </div>
-  `,
-  styles: [`
-    .pa-panel > div {
-      padding: 4px 12px;
-    }
-  `]
+  `
 })
 export class PanelComponent {
   @Input()

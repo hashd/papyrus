@@ -6,10 +6,13 @@ pa-canvas {
 }
 
 pa-canvas {
-  padding: 24px 8px;
-  
-  &>div {
+  & > div {
+    padding: 24px;
     height: 100%;
+  }
+  
+  & > div:focus {
+    outline: none;
   }
 }
 
@@ -37,22 +40,24 @@ pa-vis-canvas {
 }
 
 .left-canvas {
-  width: calc(100% - 160px);
+  width: calc(100% - 120px);
   height: 100%;
 }
 
 pa-command-bar {
   position: absolute;
-  top: 40px;
+  top: 72px;
   bottom: 40px;
   right: 0;
-  width: 160px;
-  background: $xxl-amethyst;
+  width: 120px;
   
   .title {
-    padding: 4px 0;
-    text-align: center;
-    background: $xl-amethyst;
-    color: $dark-amethyst;
+    padding: 4px 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .command-set {
+    border-bottom: 1px solid $light-amethyst;
   }
 }

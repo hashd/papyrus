@@ -8,7 +8,7 @@ $primary-color: $amethyst;
 $secondary-color: $dark-amethyst;
 $white: #ffffff;
 
-$primary-fonts: 'Catamaran', 'Helvetica Neue', 'Helvetica', 'Arial';
+$primary-fonts: 'Questrial', 'Helvetica Neue', 'Helvetica', 'Arial';
 
 * {
   margin: 0;
@@ -17,7 +17,7 @@ $primary-fonts: 'Catamaran', 'Helvetica Neue', 'Helvetica', 'Arial';
 
 body {
   font-family: $primary-fonts;
-  font-size: 12px;
+  font-size: 13px;
   position: absolute;
   top: 0;
   left: 0;

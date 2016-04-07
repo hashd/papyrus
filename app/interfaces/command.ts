@@ -7,7 +7,9 @@ export interface CommandInterface {
 
 export class Command implements CommandInterface {
   type: CommandType
-  actionKey: string
+  
+  constructor(public actionKey: string) {
+  }
   
   onClick() {
     console.error('This method needs to be implemented by host command')

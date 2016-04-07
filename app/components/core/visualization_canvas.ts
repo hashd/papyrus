@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit } from 'angular2/core'
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
 import { CompositeVisualization } from '../../models/visualization'
 
 @Component({
@@ -10,7 +10,7 @@ import { CompositeVisualization } from '../../models/visualization'
     </div>
   `
 })
-export class VisualizationCanvas implements AfterViewInit {
+export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Input()
   visualization: CompositeVisualization
   
@@ -27,11 +27,15 @@ export class VisualizationCanvas implements AfterViewInit {
   setCanvasDimensions() {
     const canvasParent = this.canvasParent.nativeElement,
       canvas = this.canvas.nativeElement,
-      width = Math.min(800, canvasParent.clientWidth),
+      width = canvasParent.clientWidth,
       height = canvasParent.clientHeight - 32
     
     canvas.setAttribute('viewBox', `0 0 ${height} ${width}`)
     canvas.setAttribute('height', height)
     canvas.setAttribute('width', width)
+  }
+  
+  ngOnChanges(inputChanges) {
+    console.log(inputChanges)
   }
 }

@@ -9,7 +9,7 @@ import { CommandBar } from '../core/command_bar'
 @Component({
   selector: 'pa-canvas',
   template: `
-    <div (keydown)="activateCommand($event)" tabindex="1">
+    <div (keydown)="activateCommand($event)" tabindex="1" autofocus>
       <div class="left-canvas col">
         <pa-step-summary [step]="currentStep"></pa-step-summary>
         <pa-vis-canvas [visualization]="visualization"></pa-vis-canvas>

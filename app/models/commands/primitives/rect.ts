@@ -4,7 +4,7 @@ import { SVG } from '../../../helpers/svg'
 import { Command } from '../../../interfaces/command'
 import { CommandType } from '../../../interfaces/enums/command_types'
 
-export class LineElement implements Visualizable {
+export class RectElement implements Visualizable {
   parent: AppendableViz
   element: ElementRef
   
@@ -26,7 +26,7 @@ export class LineElement implements Visualizable {
   }
 }
 
-export class Line extends Command {
+export class Rect extends Command {
   type: CommandType = CommandType.PRIMITIVE
   
   constructor(actionKey) {

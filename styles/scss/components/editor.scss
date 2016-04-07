@@ -7,7 +7,39 @@
   background: $xxl-amethyst;
 }
 
-.command-entry.selected {
-  font-weight: bold;
-  color: $dark-amethyst;
+.command-bar {
+  .command-set {
+    padding: 4px 0;
+  
+    &:empty {
+      display: none;
+    }
+  }
+  
+  .command-entry {
+    cursor: pointer;
+    
+    &:hover {
+      color: $amethyst;  
+    }
+    
+    span {
+      padding: 2px 8px;
+    }
+    
+    span:first-child {
+      float: left;
+      color: #888;
+    }
+    
+    span:last-child {
+      float: right;
+      font-weight: bold;
+    }
+    
+    &.selected span {
+      font-weight: bold;
+      color: $dark-amethyst;
+    }
+  }
 }
