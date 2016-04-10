@@ -36,6 +36,6 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
   
   ngOnChanges(inputChanges) {
-    console.log(inputChanges)
+    // Do something on input changes
   }
 }

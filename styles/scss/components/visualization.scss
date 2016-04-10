@@ -32,7 +32,7 @@ pa-visualizations {
   pa-create-vis {
     cursor: pointer;
     border: none;
-    font-size: 4em;
+    font-size: 3em;
     text-align: left;
     width: auto;
     
@@ -55,10 +55,13 @@ pa-visualizations {
     
     .vis-name {
       text-align: center;
-      padding: 1px;
       cursor: pointer;
       border-radius: 16px;
       background: $xl-amethyst;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 1px 8px;
     }
     
     input {

@@ -1,7 +1,5 @@
 import { Injectable } from 'angular2/core'
-import * as _ from 'lodash'
-import { COMMAND_TYPES, CommandType } from '../interfaces/enums/command_types'
-import { Command } from '../interfaces/command'
+import { Command, COMMAND_TYPES, CommandType } from '../models'
 import { COMMANDS } from '../models/commands/all'
 
 @Injectable()
