@@ -48,18 +48,20 @@ gulp.task('compile:css', function () {
     .pipe(gulp.dest(sassDest));
 });
 
-gulp.task('build:js', ['compile:css'], function () {
+gulp.task('build:js', gulp.series('compile:css', function () {
   return exec('npm run build-app');
-});
+}));
 
-gulp.task('build:app', ['build:js']);
+gulp.task('build:app', gulp.series('build:js'));
 
-gulp.task('build', ['clean', 'copy:html', 'copy:fonts', 'build:app']);
+gulp.task('build', gulp.series('clean', 'copy:html', 'copy:fonts', 'build:app'));
 
-gulp.task('watch', ['build'], function () {
-  gulp.watch([sassSrc, appSrc, sassJsSrc], ['build:app']).on('change', function (event) {
+gulp.task('watch', function () {
+  gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
+  });  
 });
 
-gulp.task('default', ['watch']);
+gulp.task('watch:build', gulp.series('build', 'watch'));
+
+gulp.task('default', gulp.series('watch:build'));

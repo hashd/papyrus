@@ -11,7 +11,7 @@ import { CommandBar } from '../core/command_bar'
   template: `
     <div (keydown)="activateCommand($event)" tabindex="1" autofocus>
       <div class="left-canvas col">
-        <pa-step-summary [step]="currentStep"></pa-step-summary>
+        <pa-step-summary [step]="currentCommand"></pa-step-summary>
         <pa-vis-canvas [visualization]="visualization"></pa-vis-canvas>
       </div>
       <div class="right-canvas col">
