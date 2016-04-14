@@ -1,5 +1,7 @@
 import { Component, Input } from 'angular2/core'
-import { PapyrusData, PapyrusSteps, PapyrusCanvas } from '../all'
+import { PapyrusData } from './data'
+import { PapyrusSteps } from './steps'
+import { PapyrusCanvas } from './canvas'
 import { FullLength } from '../../directives/all'
 import { Command } from '../../interfaces/command'
 import { CompositeVisualization } from '../../models/visualization'

@@ -37,6 +37,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
     "lodash": "npm:lodash@4.6.1",
+    "svg.js": "github:wout/svg.js@2.3.0",
     "typescript": "npm:typescript@1.8.9",
     "zone.js": "npm:zone.js@0.6.8",
     "github:jspm/nodelibs-assert@0.1.0": {

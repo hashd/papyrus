@@ -20,26 +20,21 @@ import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types
   `
 })
 export class CommandBar {
-  @Input() commands:       Command[]
-  commandTypes:            CommandType[]
+  @Input() commands: Command[]
   @Input() currentCommand: Command
-  @Output() commandChangeEmitter: EventEmitter<any> = new EventEmitter()
   
-  constructor() {
-    this.commandTypes = COMMAND_TYPES
-  }
+  commandTypes: CommandType[] = COMMAND_TYPES
+  
+  @Output() select: EventEmitter<any> = new EventEmitter()
   
   getCommandsByType(type: CommandType): Command[] {
     return this.commands.filter(cmd => cmd.type === type)
   }
   
-  selectCommand(cmd: Command) {
+  selectCommand(activeCommand: Command) {
     const previousCommand = this.currentCommand
     
-    this.currentCommand = cmd
-    this.commandChangeEmitter.emit({
-      activeCommand: cmd,
-      previousCommand
-    })
+    this.currentCommand = activeCommand
+    this.select.emit({ activeCommand, previousCommand })
   }
 }

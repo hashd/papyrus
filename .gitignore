@@ -5,6 +5,7 @@
 # Node and JSPM packages
 node_modules
 jspm_packages
+typings
 
 # Log files
 npm-debug.log*

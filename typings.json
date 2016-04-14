@@ -1,0 +1,5 @@
+{
+  "ambientDependencies": {
+    "svgjs": "registry:dt/svgjs#0.0.0+20160317120654"
+  }
+}

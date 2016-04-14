@@ -12,18 +12,17 @@ import { CommandBar } from '../core/command_bar'
     <div (keydown)="activateCommand($event)" tabindex="1" autofocus>
       <div class="left-canvas col">
         <pa-step-summary [step]="currentCommand"></pa-step-summary>
-        <pa-vis-canvas [visualization]="visualization"></pa-vis-canvas>
+        <pa-vis-canvas [visualization]="visualization" (mouse)="handleMouseEvent($event)"></pa-vis-canvas>
       </div>
       <div class="right-canvas col">
-        <pa-command-bar [commands]="commands" [currentCommand]="currentCommand"></pa-command-bar>
+        <pa-command-bar [commands]="commands" [currentCommand]="currentCommand" (select)="changeCommand($event)"></pa-command-bar>
       </div>
     </div>
   `,
   directives: [StepSummary, VisualizationCanvas, CommandBar]
 })
 export class PapyrusCanvas {
-  @Input()
-  commands: Command[]
+  @Input() commands: Command[]
   visualization: CompositeVisualization
   currentStep: Step
   currentCommand: Command
@@ -43,5 +42,13 @@ export class PapyrusCanvas {
     if (selectedCommand !== undefined) {
       this.currentCommand = selectedCommand
     }
+  }
+  
+  changeCommand(e) {
+    this.currentCommand = e.activeCommand;
+  }
+  
+  handleMouseEvent(e) {
+    console.log(e)
   }
 }
