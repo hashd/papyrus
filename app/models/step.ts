@@ -10,4 +10,8 @@ export class Step implements Executable {
   execute() {
     
   }
+  
+  getSummary() {
+    
+  }
 }

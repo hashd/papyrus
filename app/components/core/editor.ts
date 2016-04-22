@@ -12,7 +12,11 @@ import { CommandService } from '../../services/all'
   template: `
     <div class="row row-no-padding" full-length>
       <div class="col col-md-3 sidebar" full-length>
-        <pa-data [data]="visualization?.data" [style.height]="'50%'"></pa-data>
+        <pa-data [data]="visualization?.data" 
+          [dataObservables]="visualization?.dataObservables"
+          [datasetDefinition]="visualization?.datasetDefinition"
+          [style.height]="'50%'">
+        </pa-data>
         <pa-steps [steps]="visualization?.steps" [style.height]="'50%'"></pa-steps>
       </div>
       <div class="col col-md-9 editor" full-length>

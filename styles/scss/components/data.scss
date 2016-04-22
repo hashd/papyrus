@@ -1,0 +1,46 @@
+pa-data {
+  pa-panel {
+    height: 100%;
+    
+    & > div {
+      height: 100%;
+      
+      .content {
+        height: calc(100% - 22px);
+        overflow-y: scroll;
+      }  
+    }
+  }
+  
+  .command-bar {
+    margin: -2px -12px;
+    padding: 2px 8px;
+    position: absolute;
+    width: 100%;
+    background: #e2e2e2;
+    margin-bottom: 6px;
+    
+    i:hover {
+      cursor: pointer;
+    }
+  }
+  
+  .data-table {
+    width: 100%;
+    margin-top: 24px;
+    
+    td {
+      padding: 2px 8px;
+    
+      .vname {
+        cursor: pointer;
+        border-radius: 16px;
+        background: #e0ceff;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 1px 8px;
+      }
+    }
+  }
+}
