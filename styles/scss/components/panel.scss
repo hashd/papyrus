@@ -2,13 +2,12 @@
   // border-bottom: 1px solid $xl-amethyst;
   
   & > .title {
-    background: linear-gradient($primary-color, $secondary-color);
+    background: $secondary-color;
     color: $white;
-    text-align: right;
   }
 
   & > .content {
-    background: $xxl-amethyst;
+    background: $xxl-color;
   }
   
   & > div {

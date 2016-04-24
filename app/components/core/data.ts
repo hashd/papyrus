@@ -32,6 +32,6 @@ export class PapyrusData {
   }
   
   addDataDefinition() {
-    this.datasetDefinition.addDataDefinition('unnamed', undefined)
+    this.datasetDefinition.addDataDefinition(undefined, undefined)
   }
 }

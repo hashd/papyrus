@@ -5,7 +5,7 @@ export class DatasetDefinition {
   
   addDataDefinition(name: string, type: string) {
     const dd = new DataDefinition()
-    dd.name = name
+    dd.name = name || `data-element-${this.dataDefinitions.length}`
     dd.type = type
     
     this.dataDefinitions.push(dd)

@@ -1,8 +1,11 @@
 pa-visualizations {
-  border-bottom: 1px solid $xl-amethyst;
+  pa-panel {
+    border-bottom: 1px solid $secondary-color;
+  }
   
   .content {
     padding: 12px !important;
+    white-space: nowrap;
     
     &>* {
       vertical-align: middle;
@@ -57,7 +60,7 @@ pa-visualizations {
       text-align: center;
       cursor: pointer;
       border-radius: 16px;
-      background: $xl-amethyst;
+      background: #e6e6e6;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;

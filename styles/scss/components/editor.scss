@@ -3,8 +3,11 @@
 }
 
 .sidebar {
-  border-right: 1px solid $xl-amethyst;
-  background: $xxl-amethyst;
+  background: $xxl-color;
+  
+  pa-panel > div {
+    border-right: 1px solid $secondary-color;
+  }
 }
 
 .command-bar {
