@@ -10,14 +10,18 @@ import { DataDefinition } from '../../models/data_definition'
       <div class="command-bar">
         <i class="fa fa-plus" (click)="addDataDefinition()"></i>
       </div>
-      <table class="data-table">
-        <tbody>
-          <tr *ngFor="#dd of datasetDefinition?.dataDefinitions">
-            <td><span class="vname">{{dd.name}}</span></td>
-            <td>{{getValue(dd.name)}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <ul class="variables">
+        <li *ngFor="#dd of getDefinitions(false)">
+          <span class="vname" title="{{dd.name}}">{{dd.name}}</span>
+          <span class="vvalue">{{getValue(dd.name)}}</span>
+        </li>     
+      </ul>
+      <ul class="iterables">
+        <li *ngFor="#dd of getDefinitions(true)">
+          <span class="vname" title="{{dd.name}}">{{dd.name}}</span>
+          <span class="vvalue">{{getValue(dd.name)}}</span>
+        </li>
+      </ul>
     </pa-panel>
   `,
   directives: [Panel]
@@ -32,6 +36,13 @@ export class PapyrusData {
   }
   
   addDataDefinition() {
-    this.datasetDefinition.addDataDefinition(undefined, undefined)
+    const dd = this.datasetDefinition.addDataDefinition(undefined, undefined)
+    
+    // Set default value in data
+    this.data[dd.name] = 0
+  }
+  
+  getDefinitions(isIterable: boolean) {
+    return this.datasetDefinition !== null? this.datasetDefinition.dataDefinitions.filter(d => isIterable? (d.type === 'array'): (d.type !== 'array')): null
   }
 }

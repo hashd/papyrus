@@ -1,14 +1,15 @@
 import { Command } from '../models'
 
 interface Executable {
-  execute()
+  execute(context: Object)
 }
 
 export class Step implements Executable {
   command: Command
+  context: Object
   
-  execute() {
-    
+  execute(context: Object) {
+    this.context = context
   }
   
   getSummary() {

@@ -19,10 +19,16 @@ export class CompositeVisualization implements Visualizable {
     this.datasetDefinition.addDataDefinition('length', 'number')
     this.datasetDefinition.addDataDefinition('width', 'number')
     this.datasetDefinition.addDataDefinition('measures', 'array')
+    
+    this.data = {
+      length: 20,
+      width: 50,
+      measures: [1,2,3,4,5]
+    }
   }
   
   draw(data) {
-    this.steps.forEach(s => s.execute())
+    this.steps.forEach(s => s.execute(data))
   }
   
   move(x, y) {

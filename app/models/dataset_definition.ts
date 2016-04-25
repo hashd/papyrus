@@ -3,12 +3,14 @@ import { DataDefinition } from './data_definition'
 export class DatasetDefinition {
   dataDefinitions: DataDefinition[] = []
   
-  addDataDefinition(name: string, type: string) {
+  addDataDefinition(name: string, type: string): DataDefinition {
     const dd = new DataDefinition()
     dd.name = name || `data-element-${this.dataDefinitions.length}`
     dd.type = type
     
     this.dataDefinitions.push(dd)
+    
+    return dd
   }
   
   removeDataDefinition(id) {

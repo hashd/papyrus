@@ -26,23 +26,30 @@ pa-data {
     }
   }
   
-  .data-table {
-    width: 100%;
-    margin-top: 24px;
+  .variables, .iterables {
+    list-style: none;
+    margin-top: 28px;
+    padding-left: 2px;
     
-    td {
-      padding: 4px 0 5px;
+    .vname {
+      display: inline-block;
+      width: 25%;
+      cursor: pointer;
+      border-radius: 16px;
+      background: $light-gray;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 2px 16px;
+      color: $dark-gray;
+      margin-bottom: 2px;
+    }
     
-      .vname {
-        cursor: pointer;
-        border-radius: 16px;
-        background: #e0ceff;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        padding: 2px 8px;
-        color: #593598;
-      }
+    .vvalue {
+      display: inline-block;
+      width: calc(75% - 5px);
+      vertical-align: top;
+      padding: 2px 24px;
     }
   }
 }
