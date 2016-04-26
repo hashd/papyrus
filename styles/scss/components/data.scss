@@ -32,24 +32,49 @@ pa-data {
     padding-left: 2px;
     
     .vname {
+      
+    }
+    
+    .vname span,
+    .vname input {
       display: inline-block;
       width: 25%;
-      cursor: pointer;
+      padding: 2px 16px;
       border-radius: 16px;
+    }
+    
+    .vname span {
+      cursor: pointer;
       background: $light-gray;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      padding: 2px 16px;
       color: $dark-gray;
-      margin-bottom: 2px;
     }
     
-    .vvalue {
+    .vname input {
+      color: $dark-gray;
+      outline: none;
+      border: 1px solid $dark-gray;
+    }
+    
+    .vvalue span,
+    .vvalue input {
       display: inline-block;
-      width: calc(75% - 5px);
       vertical-align: top;
-      padding: 2px 24px;
+      width: calc(75% - 21px);
+      margin-left: 16px;
+      padding: 2px 8px;
+      border-radius: 16px;
+    }
+    
+    .vvalue span {
+      color: $dark-gray;
+    }
+    
+    .vvalue input {
+      outline: none;
+      border: 1px solid $dark-gray;
     }
   }
 }

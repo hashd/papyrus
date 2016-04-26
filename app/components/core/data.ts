@@ -1,5 +1,6 @@
 import { Component, Input } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
+import { EditableField } from '../generic/editable'
 import { DatasetDefinition } from '../../models/dataset_definition'
 import { DataDefinition } from '../../models/data_definition'
 
@@ -12,19 +13,23 @@ import { DataDefinition } from '../../models/data_definition'
       </div>
       <ul class="variables">
         <li *ngFor="#dd of getDefinitions(false)">
-          <span class="vname" title="{{dd.name}}">{{dd.name}}</span>
-          <span class="vvalue">{{getValue(dd.name)}}</span>
+          <pa-editable class="vname" [data]="dd.name" (edited)="saveName(dd, $event)" title="{{dd.name}}"></pa-editable>
+          <pa-editable class="vvalue" [data]="getValue(dd.name)" (edited)="saveValue(dd.name, $event)"></pa-editable>
         </li>     
       </ul>
       <ul class="iterables">
         <li *ngFor="#dd of getDefinitions(true)">
-          <span class="vname" title="{{dd.name}}">{{dd.name}}</span>
-          <span class="vvalue">{{getValue(dd.name)}}</span>
+          <span class="vname" title="{{dd.name}}">
+            <span>{{dd.name}}</span>
+          </span>
+          <span class="vvalue">
+            <span>{{getValue(dd.name)}}</span>
+          </span>
         </li>
       </ul>
     </pa-panel>
   `,
-  directives: [Panel]
+  directives: [Panel, EditableField]
 })
 export class PapyrusData {
   @Input() data: Object
@@ -44,5 +49,17 @@ export class PapyrusData {
   
   getDefinitions(isIterable: boolean) {
     return this.datasetDefinition !== null? this.datasetDefinition.dataDefinitions.filter(d => isIterable? (d.type === 'array'): (d.type !== 'array')): null
+  }
+  
+  saveName(dd: DataDefinition, e) {
+    dd.name = e.value
+    this.data[dd.name] = this.data[e.prevValue]
+    
+    console.log(this.data)
+    delete this.data[e.prevValue]
+  }
+  
+  saveValue(name: string, e) {
+    this.data[name] = e.value
   }
 }
