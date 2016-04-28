@@ -39,6 +39,7 @@ pa-data {
     .vname input {
       display: inline-block;
       width: 25%;
+      min-width: 80px;
       padding: 2px 16px;
       border-radius: 16px;
     }

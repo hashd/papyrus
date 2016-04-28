@@ -31,11 +31,12 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     const canvasParent = this.canvasParent.nativeElement,
       canvas = this.canvas.nativeElement,
       width = canvasParent.clientWidth,
-      height = canvasParent.clientHeight - 32
-    
-    canvas.setAttribute('viewBox', `0 0 ${height} ${width}`)
-    canvas.setAttribute('height', height)
-    canvas.setAttribute('width', width)
+      height = canvasParent.clientHeight - 32,
+      minDim = Math.min(width, height)
+      
+    canvas.setAttribute('viewBox', `0 0 ${minDim} ${minDim}`)
+    canvas.setAttribute('height', minDim)
+    canvas.setAttribute('width', minDim)
   }
   
   ngOnChanges(inputChanges) {

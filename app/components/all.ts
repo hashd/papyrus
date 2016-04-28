@@ -1,25 +1,12 @@
-import { PapyrusShell } from './shell'
-import { PanelComponent } from './generic/panel'
-import { PapyrusCanvas } from './core/canvas'
-import { CommandBar } from './core/command_bar'
-import { PapyrusData } from './core/data'
-import { PapyrusEditor } from './core/editor'
-import { StepSummary } from './core/step_summary'
-import { PapyrusSteps } from './core/steps'
-import { VisualizationCanvas } from './core/visualization_canvas'
-import { VisualizationPreview } from './core/visualization_preview'
-import { PapyrusVisualizations } from './core/visualizations'
-
-export {
-  CommandBar,
-  PanelComponent,
-  PapyrusCanvas,
-  PapyrusData,
-  PapyrusEditor,
-  PapyrusShell,
-  PapyrusSteps,
-  PapyrusVisualizations,
-  StepSummary,
-  VisualizationCanvas,
-  VisualizationPreview
-}
+export * from './shell'
+export * from './generic/editable'
+export * from './generic/panel'
+export * from './core/canvas'
+export * from './core/command_bar'
+export * from './core/data'
+export * from './core/editor'
+export * from './core/step_summary'
+export * from './core/steps'
+export * from './core/visualization_canvas'
+export * from './core/visualization_preview'
+export * from './core/visualizations'
