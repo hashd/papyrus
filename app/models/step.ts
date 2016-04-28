@@ -5,8 +5,7 @@ interface Executable {
 }
 
 export class Step implements Executable {
-  command: Command
-  context: Object
+  constructor(public command: Command, public context: Object) {}
   
   execute(context: Object) {
     this.context = context

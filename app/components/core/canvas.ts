@@ -11,7 +11,7 @@ import { CommandBar } from '../core/command_bar'
   template: `
     <div (keydown)="activateCommand($event)" tabindex="1" autofocus>
       <div class="left-canvas col">
-        <pa-step-summary [step]="currentCommand"></pa-step-summary>
+        <pa-step-summary [step]="currentStep"></pa-step-summary>
         <pa-vis-canvas [visualization]="visualization" (mouse)="handleMouseEvent($event)"></pa-vis-canvas>
       </div>
       <div class="right-canvas col">
@@ -22,7 +22,7 @@ import { CommandBar } from '../core/command_bar'
   directives: [StepSummary, VisualizationCanvas, CommandBar]
 })
 export class PapyrusCanvas {
-  @Input() commands: Command[]
+  @Input() commands
   visualization: CompositeVisualization
   currentStep: Step
   currentCommand: Command
@@ -49,6 +49,13 @@ export class PapyrusCanvas {
   }
   
   handleMouseEvent(e) {
-    console.log(e)
+    if (this.currentCommand.initEvent === e.type) {
+      this.currentStep = new Step(this.currentCommand, e)
+    } else if (this.currentCommand.modifyEvent === e.type && this.currentStep) {
+      this.currentStep.modify(e)
+    } else (this.currentCommand.endEvent === e.type) {
+      this.currentStep.end()
+      this.currentStep = undefined
+    }
   }
 }

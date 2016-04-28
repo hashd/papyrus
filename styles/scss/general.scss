@@ -25,7 +25,7 @@ $white: #ffffff;
 
 $normal-font-color: $dark-gray;
 
-$primary-fonts: 'Questrial', 'Helvetica Neue', 'Helvetica', 'Arial';
+$primary-fonts: 'Muli', 'Helvetica Neue', 'Helvetica', 'Arial';
 
 * {
   margin: 0;
@@ -34,7 +34,7 @@ $primary-fonts: 'Questrial', 'Helvetica Neue', 'Helvetica', 'Arial';
 
 body {
   font-family: $primary-fonts;
-  font-size: 15px;
+  font-size: 13px;
   position: absolute;
   top: 0;
   left: 0;

@@ -4,17 +4,16 @@ import { COMMANDS } from '../models/commands/all'
 
 @Injectable()
 export class CommandService {
-   public commands: Command[]
+   private commands = COMMANDS
    
    constructor() {
-     this.commands = COMMANDS
    }
    
    getCommandTypes(): CommandType[] {
      return COMMAND_TYPES
    }
    
-   getCommands(): Command[] {
+   getCommands() {
      return this.commands
    }
 }

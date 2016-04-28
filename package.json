@@ -43,12 +43,13 @@
       "font-awesome": "npm:font-awesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
       "lodash": "npm:lodash@^4.6.1",
+      "rxjs": "npm:rxjs@^5.0.0-beta.7",
       "svg.js": "github:wout/svg.js@^2.3.0",
       "zone.js": "npm:zone.js@^0.6.6"
     },
     "devDependencies": {
       "clean-css": "npm:clean-css@^3.4.10",
-      "typescript": "npm:typescript@^1.6.2"
+      "typescript": "npm:typescript@^1.8.0"
     }
   }
 }

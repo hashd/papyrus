@@ -12,7 +12,7 @@ import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types
           [class.selected]="cmd === currentCommand"
           (click)="selectCommand(cmd)"
         >
-          <span>{{cmd?.constructor?.name}}</span>
+          <span>{{cmd?.name}}</span>
           <span>{{cmd.actionKey}}</span>
         </div>
       </div>
@@ -20,14 +20,14 @@ import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types
   `
 })
 export class CommandBar {
-  @Input() commands: Command[]
-  @Input() currentCommand: Command
+  @Input() commands
+  @Input() currentCommand
   
   commandTypes: CommandType[] = COMMAND_TYPES
   
   @Output() select: EventEmitter<any> = new EventEmitter()
   
-  getCommandsByType(type: CommandType): Command[] {
+  getCommandsByType(type: CommandType) {
     return this.commands.filter(cmd => cmd.type === type)
   }
   

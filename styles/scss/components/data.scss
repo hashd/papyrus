@@ -62,14 +62,15 @@ pa-data {
     .vvalue input {
       display: inline-block;
       vertical-align: top;
-      width: calc(75% - 21px);
+      //width: calc(75% - 21px);
       margin-left: 16px;
-      padding: 2px 8px;
+      padding: 2px 16px;
       border-radius: 16px;
     }
     
     .vvalue span {
       color: $dark-gray;
+      cursor: ew-resize;
     }
     
     .vvalue input {

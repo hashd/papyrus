@@ -13,9 +13,9 @@ export default {
   Text
 }
 
-export const COMMANDS: Command[] = [
-  new Line('x'),
-  new Circle('c'),
-  new Rect('r'),
-  new Text('t')
+export const COMMANDS = [
+  Line,
+  Rect,
+  Circle,
+  Text
 ]

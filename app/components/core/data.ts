@@ -3,6 +3,7 @@ import { PanelComponent as Panel } from '../generic/panel'
 import { EditableField } from '../generic/editable'
 import { DatasetDefinition } from '../../models/dataset_definition'
 import { DataDefinition } from '../../models/data_definition'
+import { Tweakable } from '../../directives/tweakable'
 
 @Component({
   selector: 'pa-data',
@@ -14,7 +15,7 @@ import { DataDefinition } from '../../models/data_definition'
       <ul class="variables">
         <li *ngFor="#dd of getDefinitions(false)">
           <pa-editable class="vname" [data]="dd.name" (edited)="saveName(dd, $event)" title="{{dd.name}}"></pa-editable>
-          <pa-editable class="vvalue" [data]="getValue(dd.name)" (edited)="saveValue(dd.name, $event)"></pa-editable>
+          <pa-editable class="vvalue" [data]="getValue(dd.name)" (edited)="saveValue(dd.name, $event)" tweakable></pa-editable>
         </li>     
       </ul>
       <ul class="iterables">
@@ -29,7 +30,7 @@ import { DataDefinition } from '../../models/data_definition'
       </ul>
     </pa-panel>
   `,
-  directives: [Panel, EditableField]
+  directives: [Panel, EditableField, Tweakable]
 })
 export class PapyrusData {
   @Input() data: Object

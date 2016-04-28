@@ -37,6 +37,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.5.0",
     "jquery": "npm:jquery@2.2.2",
     "lodash": "npm:lodash@4.6.1",
+    "rxjs": "npm:rxjs@5.0.0-beta.7",
     "svg.js": "github:wout/svg.js@2.3.0",
     "typescript": "npm:typescript@1.8.9",
     "zone.js": "npm:zone.js@0.6.8",
@@ -172,6 +173,11 @@ System.config({
     "npm:rxjs@5.0.0-beta.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:rxjs@5.0.0-beta.7": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "symbol-observable": "npm:symbol-observable@0.2.4"
     },
     "npm:source-map@0.4.4": {
       "amdefine": "npm:amdefine@1.0.0",
