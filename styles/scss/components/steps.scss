@@ -1,0 +1,29 @@
+ul.steps {
+  list-style: none;
+  padding: 0;
+  margin: -2px -12px;
+  
+  & > li {
+    padding: 6px 12px;
+    border-bottom: 1px solid $light-gray;
+    
+    .step-summary {
+      color: $dark-gray;
+      text-align: left;
+      font-size: inherit;
+    } 
+  }
+}
+
+pa-panel[header="Steps"] {
+  height: 100%;
+  
+  .pa-panel {
+    height: 100%;
+  
+    .content {
+      height: calc(100% - 22px);
+      overflow: auto;
+    }
+  }
+}

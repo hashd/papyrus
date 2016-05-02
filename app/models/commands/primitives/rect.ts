@@ -29,6 +29,9 @@ export class RectElement implements Visualizable {
 export class Rect extends Command {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'x'
+  static initEvent: string = 'mousedown'
+  static modifyEvent: string = 'mousemove'
+  static endEvent: string = 'mouseup'
   
   onClick() {
     console.error('Unsupported event by command: Line')

@@ -7,7 +7,10 @@ export interface CommandInterface {
 
 export class Command implements CommandInterface {
   static type: CommandType
-  static actionKey: String
+  static actionKey: string
+  static initEvent: string
+  static modifyEvent: string
+  static endEvent: string
   
   onClick() {
     console.error('This method needs to be implemented by host command')

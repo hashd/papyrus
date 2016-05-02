@@ -29,6 +29,9 @@ export class LineElement implements Visualizable {
 export class Line extends Command {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'l'
+  static initEvent: string = 'mousedown'
+  static modifyEvent: string = 'mousemove'
+  static endEvent: string = 'mouseup'
   
   onClick() {
     console.error('Unsupported event by command: Line')

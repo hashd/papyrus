@@ -29,6 +29,9 @@ export class CircleElement implements Visualizable {
 export class Circle extends Command {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'c'
+  static initEvent: string = 'mousedown'
+  static modifyEvent: string = 'mousemove'
+  static endEvent: string = 'mouseup'
   
   onClick() {
     console.error('Unsupported event by command: Circle')

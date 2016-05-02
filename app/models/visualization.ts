@@ -11,7 +11,7 @@ export class CompositeVisualization implements Visualizable {
   dataObservables: Object = {}
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
   
-  steps: Step[]
+  steps: Step[] = []
   
   constructor(parent) {
     this.id = 'pa-vis-' + (+new Date())

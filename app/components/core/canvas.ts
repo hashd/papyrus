@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core'
 import { Command } from '../../interfaces/command'
 import { CompositeVisualization } from '../../models/visualization'
 import { Step } from '../../models/step'
@@ -11,7 +11,7 @@ import { CommandBar } from '../core/command_bar'
   template: `
     <div (keydown)="activateCommand($event)" tabindex="1" autofocus>
       <div class="left-canvas col">
-        <pa-step-summary [step]="currentStep"></pa-step-summary>
+        <pa-step-summary [step]="currentStep || previousStep"></pa-step-summary>
         <pa-vis-canvas [visualization]="visualization" (mouse)="handleMouseEvent($event)"></pa-vis-canvas>
       </div>
       <div class="right-canvas col">
@@ -23,9 +23,13 @@ import { CommandBar } from '../core/command_bar'
 })
 export class PapyrusCanvas {
   @Input() commands
-  visualization: CompositeVisualization
+  @Input() visualization: CompositeVisualization
+  
   currentStep: Step
-  currentCommand: Command
+  previousStep: Step
+  currentCommand
+  
+  @Output() steps: EventEmitter<Step> = new EventEmitter()
 
   constructor() {
   
@@ -49,13 +53,19 @@ export class PapyrusCanvas {
   }
   
   handleMouseEvent(e) {
-    if (this.currentCommand.initEvent === e.type) {
-      this.currentStep = new Step(this.currentCommand, e)
-    } else if (this.currentCommand.modifyEvent === e.type && this.currentStep) {
-      this.currentStep.modify(e)
-    } else (this.currentCommand.endEvent === e.type) {
-      this.currentStep.end()
-      this.currentStep = undefined
+    if (this.currentCommand) {
+      if (this.currentCommand.initEvent === e.type) {
+        this.currentStep = new Step(this.currentCommand, e)
+      } else if (this.currentStep && this.currentCommand.modifyEvent === e.type && this.currentStep) {
+        this.currentStep.modify(e)
+      } else if (this.currentStep && this.currentCommand.endEvent === e.type) {
+        this.currentStep.end()
+        this.visualization.steps.push(this.currentStep)
+        
+        this.previousStep = this.currentStep
+        this.currentStep = undefined
+        this.steps.emit(this.currentStep)
+      }
     }
   }
 }

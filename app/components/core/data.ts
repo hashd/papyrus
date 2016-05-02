@@ -15,7 +15,7 @@ import { Tweakable } from '../../directives/tweakable'
       <ul class="variables">
         <li *ngFor="#dd of getDefinitions(false)">
           <pa-editable class="vname" [data]="dd.name" (edited)="saveName(dd, $event)" title="{{dd.name}}"></pa-editable>
-          <pa-editable class="vvalue" [data]="getValue(dd.name)" (edited)="saveValue(dd.name, $event)" tweakable></pa-editable>
+          <pa-editable class="vvalue" [data]="dd.defaultValue" (edited)="saveValue(dd, $event)" tweakable></pa-editable>
         </li>     
       </ul>
       <ul class="iterables">
@@ -24,7 +24,7 @@ import { Tweakable } from '../../directives/tweakable'
             <span>{{dd.name}}</span>
           </span>
           <span class="vvalue">
-            <span>{{getValue(dd.name)}}</span>
+            <span>{{dd.defaultValue}}</span>
           </span>
         </li>
       </ul>
@@ -33,19 +33,12 @@ import { Tweakable } from '../../directives/tweakable'
   directives: [Panel, EditableField, Tweakable]
 })
 export class PapyrusData {
-  @Input() data: Object
-  @Input() dataObservables: Object
+  static DEFAULT_TYPE: string = 'number'
+  
   @Input() datasetDefinition: DatasetDefinition
   
-  getValue(name: string) {
-    return this.data[name]
-  }
-  
   addDataDefinition() {
-    const dd = this.datasetDefinition.addDataDefinition(undefined, undefined)
-    
-    // Set default value in data
-    this.data[dd.name] = 0
+    const dd = this.datasetDefinition.addDataDefinition(undefined, PapyrusData.DEFAULT_TYPE)
   }
   
   getDefinitions(isIterable: boolean) {
@@ -54,13 +47,9 @@ export class PapyrusData {
   
   saveName(dd: DataDefinition, e) {
     dd.name = e.value
-    this.data[dd.name] = this.data[e.prevValue]
-    
-    console.log(this.data)
-    delete this.data[e.prevValue]
   }
   
-  saveValue(name: string, e) {
-    this.data[name] = e.value
+  saveValue(dd: DataDefinition, e) {
+    dd.defaultValue = e.value
   }
 }
