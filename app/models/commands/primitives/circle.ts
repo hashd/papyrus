@@ -1,7 +1,7 @@
 import { ElementRef } from 'angular2/core'
 import { Visualizable, AppendableViz } from '../../../interfaces/visualization'
 import { SVG } from '../../../helpers/svg'
-import { Command } from '../../../interfaces/command'
+import { Command, DrawCommand } from '../../../interfaces/command'
 import { CommandType } from '../../../interfaces/enums/command_types'
 
 export class CircleElement implements Visualizable {
@@ -26,18 +26,11 @@ export class CircleElement implements Visualizable {
   }
 }
 
-export class Circle extends Command {
+export class Circle extends DrawCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'c'
-  static initEvent: string = 'mousedown'
-  static modifyEvent: string = 'mousemove'
-  static endEvent: string = 'mouseup'
   
-  onClick() {
-    console.error('Unsupported event by command: Circle')
-  }
-  
-  onDrag() {
-    
+  constructor(parent: ElementRef) {
+    super(parent)
   }
 }

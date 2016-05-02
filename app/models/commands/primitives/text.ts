@@ -1,7 +1,7 @@
 import { ElementRef } from 'angular2/core'
 import { Visualizable, AppendableViz } from '../../../interfaces/visualization'
 import { SVG } from '../../../helpers/svg'
-import { Command } from '../../../interfaces/command'
+import { Command, DrawCommand } from '../../../interfaces/command'
 import { CommandType } from '../../../interfaces/enums/command_types'
 
 export class TextElement implements Visualizable {
@@ -26,18 +26,11 @@ export class TextElement implements Visualizable {
   }
 }
 
-export class Text extends Command {
+export class Text extends DrawCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 't'
-  static initEvent: string = 'mousedown'
-  static modifyEvent: string = 'mousemove'
-  static endEvent: string = 'mouseup'
   
-  onClick() {
-    console.error('Unsupported event by command: Line')
-  }
-  
-  onDrag() {
-    
+  constructor(parent: ElementRef) {
+    super(parent)
   }
 }

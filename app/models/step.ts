@@ -1,28 +1,46 @@
-import { Command } from '../models'
+import { Command, DrawCommand } from '../models'
 
-interface Executable {
-  execute()
-}
-
-export class Step implements Executable {
-  secondaryContext: Object
+export class Step {
+  secondaryContext
   
-  constructor(public command, public context: Object) {
+  constructor(public command: Command, public context) {
     this.secondaryContext = context
+    
+    switch (command.type) {
+      case 'primitive':
+      case 'composite':
+        (<DrawCommand> command).onMouseDown(context.x, context.y)
+        break;
+      default:  
+    }
   }
   
-  execute() {
-  }
-  
-  modify(context: Object) {
+  modify(context) {
     this.secondaryContext = context
+    switch (this.command.type) {
+      case 'primitive':
+      case 'composite':
+        (<DrawCommand> this.command).onMouseMove(context.x, context.y)
+        break;
+      default:  
+    }
   }
   
   end() {
-    this.execute()
+    switch (this.command.type) {
+      case 'primitive':
+      case 'composite':
+        (<DrawCommand> this.command).onMouseUp(this.secondaryContext.x, this.secondaryContext.y)
+        break;
+      default:  
+    }
+  }
+  
+  validate(): boolean {
+    return this.command.validate()
   }
   
   getSummary() {
-    return `Draw ${this.command.name} from (${this.context.x}, ${this.context.y}) to (${this.secondaryContext.x}, ${this.secondaryContext.y})`
+    return this.command.getSummary()
   }
 }

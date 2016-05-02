@@ -15,7 +15,7 @@ import { CommandBar } from '../core/command_bar'
         <pa-vis-canvas [visualization]="visualization" (mouse)="handleMouseEvent($event)"></pa-vis-canvas>
       </div>
       <div class="right-canvas col">
-        <pa-command-bar [commands]="commands" [currentCommand]="currentCommand" (select)="changeCommand($event)"></pa-command-bar>
+        <pa-command-bar [commands]="commands" [currentCommand]="selectedCommand" (select)="changeCommand($event)"></pa-command-bar>
       </div>
     </div>
   `,
@@ -27,7 +27,9 @@ export class PapyrusCanvas {
   
   currentStep: Step
   previousStep: Step
-  currentCommand
+  currentCommand: Command
+  
+  selectedCommand
   
   @Output() steps: EventEmitter<Step> = new EventEmitter()
 
@@ -44,27 +46,31 @@ export class PapyrusCanvas {
     }
     
     if (selectedCommand !== undefined) {
-      this.currentCommand = selectedCommand
+      this.selectedCommand = selectedCommand
     }
   }
   
   changeCommand(e) {
-    this.currentCommand = e.activeCommand;
+    this.selectedCommand = e.activeCommand;
   }
   
   handleMouseEvent(e) {
-    if (this.currentCommand) {
-      if (this.currentCommand.initEvent === e.type) {
+    if (this.selectedCommand) {
+      if (this.selectedCommand.initEvent === e.type) {
+        this.currentCommand = new this.selectedCommand()
         this.currentStep = new Step(this.currentCommand, e)
-      } else if (this.currentStep && this.currentCommand.modifyEvent === e.type && this.currentStep) {
+      } else if (this.currentStep && this.selectedCommand.modifyEvent === e.type && this.currentStep) {
         this.currentStep.modify(e)
-      } else if (this.currentStep && this.currentCommand.endEvent === e.type) {
-        this.currentStep.end()
-        this.visualization.steps.push(this.currentStep)
+      } else if (this.currentStep && this.selectedCommand.endEvent === e.type) {
+        if (this.currentStep.validate()) {
+          this.currentStep.end()
+          this.visualization.steps.push(this.currentStep)
+          
+          this.previousStep = this.currentStep
+          this.steps.emit(this.currentStep)
+        }
         
-        this.previousStep = this.currentStep
         this.currentStep = undefined
-        this.steps.emit(this.currentStep)
       }
     }
   }
