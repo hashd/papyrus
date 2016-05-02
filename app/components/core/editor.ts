@@ -4,6 +4,7 @@ import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
 import { FullLength } from '../../directives/all'
 import { Command } from '../../interfaces/command'
+import { Step } from '../../models/step'
 import { CompositeVisualization } from '../../models/visualization'
 import { CommandService } from '../../services/all'
  
@@ -17,10 +18,10 @@ import { CommandService } from '../../services/all'
           [datasetDefinition]="visualization?.datasetDefinition"
           [style.height]="'50%'">
         </pa-data>
-        <pa-steps [steps]="visualization?.steps" [style.height]="'50%'"></pa-steps>
+        <pa-steps [steps]="visualization?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)"></pa-steps>
       </div>
       <div class="col col-md-9 editor" full-length>
-        <pa-canvas [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
+        <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
       </div>
     </div>
   `,
@@ -31,8 +32,13 @@ export class PapyrusEditor {
   @Input()
   visualization: CompositeVisualization
   commands: Object
+  selectedStep: Step
   
   constructor(private commandService: CommandService) {
     this.commands = commandService.getCommands()
+  }
+  
+  selectStep(e) {
+    this.selectedStep = this.visualization.steps[e.index]
   }
 }

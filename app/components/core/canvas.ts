@@ -24,8 +24,8 @@ import { CommandBar } from '../core/command_bar'
 export class PapyrusCanvas {
   @Input() commands
   @Input() visualization: CompositeVisualization
+  @Input() currentStep: Step
   
-  currentStep: Step
   previousStep: Step
   currentCommand: Command
   
