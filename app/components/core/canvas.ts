@@ -57,7 +57,7 @@ export class PapyrusCanvas {
   handleMouseEvent(e) {
     if (this.selectedCommand) {
       if (this.selectedCommand.initEvent === e.type) {
-        this.currentCommand = new this.selectedCommand()
+        this.currentCommand = new this.selectedCommand(e.canvas)
         this.currentStep = new Step(this.currentCommand, e)
       } else if (this.currentStep && this.selectedCommand.modifyEvent === e.type && this.currentStep) {
         this.currentStep.modify(e)

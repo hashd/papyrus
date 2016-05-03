@@ -12,4 +12,24 @@ export class SVG {
     
     return line
   }
+  
+  static createRect(x: number, y: number, width: number, height: number) {
+    let rect = document.createElementNS(ns, 'rect')
+    rect.setAttributeNS(null, 'x', x.toString())
+    rect.setAttributeNS(null, 'y', y.toString())
+    rect.setAttributeNS(null, 'width', width.toString())
+    rect.setAttributeNS(null, 'height', height.toString())
+    
+    return rect
+  }
+  
+  static createEllipse(cx: number, cy: number, rx: number, ry: number) {
+    let ellipse = document.createElementNS(ns, 'ellipse')
+    ellipse.setAttributeNS(null, 'cx', cx.toString())
+    ellipse.setAttributeNS(null, 'cy', cy.toString())
+    ellipse.setAttributeNS(null, 'rx', rx.toString())
+    ellipse.setAttributeNS(null, 'ry', ry.toString())
+    
+    return ellipse
+  }
 }

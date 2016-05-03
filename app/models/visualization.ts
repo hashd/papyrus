@@ -1,11 +1,12 @@
+import { ElementRef } from 'angular2/core'
+import { DrawCommand } from '../interfaces/command'
 import { Visualizable } from '../interfaces/visualization'
 import { Step } from './step'
 import { DatasetDefinition } from './dataset_definition'
 
-export class CompositeVisualization implements Visualizable {
+export class CompositeVisualization extends DrawCommand implements Visualizable {
   id: string
   name: string = 'unnamed'
-  parent: Visualizable
   
   data: Object = {}
   dataObservables: Object = {}
@@ -13,9 +14,10 @@ export class CompositeVisualization implements Visualizable {
   
   steps: Step[] = []
   
-  constructor(parent) {
+  constructor(private parent: ElementRef) {
+    super(parent)
+    
     this.id = 'pa-vis-' + (+new Date())
-    this.parent = parent
     this.datasetDefinition.addDataDefinition('length', 'number')
     this.datasetDefinition.addDataDefinition('width', 'number')
     this.datasetDefinition.addDataDefinition('measures', 'array')

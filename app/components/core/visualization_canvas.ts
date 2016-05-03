@@ -45,6 +45,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   
   emitMouseEvent(event: MouseEvent) {
     this.mouse.emit({
+      canvas: this.canvas,
       x: event.offsetX,
       y: event.offsetY,
       type: event.type

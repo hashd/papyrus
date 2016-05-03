@@ -27,13 +27,17 @@ export class DrawCommand extends Command {
   static modifyEvent: string = 'mousemove'
   static endEvent: string = 'mouseup'
   
+  element: Element
   startCoordinates: Coordinates
   endCoordinates: Coordinates
   state: 'initiated' | 'drawing' | 'terminated'
   type = 'primitive'
   
-  constructor(private parent: ElementRef) {
+  constructor(protected parent: ElementRef) {
     super()
+  }
+  
+  draw() {
   }
   
   onMouseDown(x: number, y: number) {
@@ -45,11 +49,13 @@ export class DrawCommand extends Command {
   onMouseMove(x: number, y: number) {
     this.endCoordinates = { x, y }
     this.state = 'drawing'
+    this.draw()
   }
   
   onMouseUp(x: number, y: number) {
     this.endCoordinates = { x, y }
     this.state = 'terminated'
+    this.draw()
   }
   
   validate(): boolean {

@@ -35,4 +35,19 @@ export class Circle extends DrawCommand {
   constructor(parent: ElementRef) {
     super(parent)
   }
+  
+  draw() {
+    let { x: x1, y: y1 } = this.startCoordinates,
+        { x: x2, y: y2 } = this.endCoordinates
+        
+    if (!this.element) {
+      this.element = SVG.createEllipse(x1, y1, Math.abs(x2 - x1), Math.abs(y2 - y1))
+      this.element.setAttributeNS(null, 'stroke', '#555')
+      this.element.setAttributeNS(null, 'fill', 'transparent')
+      this.parent.nativeElement.appendChild(this.element)
+    } else {
+      this.element.setAttributeNS(null, 'rx', Math.abs(x2 - x1).toString())
+      this.element.setAttributeNS(null, 'ry', Math.abs(y2 - y1).toString())
+    }
+  }
 }

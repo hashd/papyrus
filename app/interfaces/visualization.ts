@@ -1,8 +1,6 @@
 import { ElementRef } from 'angular2/core'
 
 export interface Drawable {
-  parent: Visualizable
-  
   draw(data: Object)
 }
 
