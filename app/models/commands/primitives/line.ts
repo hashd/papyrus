@@ -30,6 +30,8 @@ export class Line extends DrawCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'l'
   
+  name: string = 'line'
+  
   constructor(parent: ElementRef) {
     super(parent)
   }

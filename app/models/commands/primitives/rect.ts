@@ -30,6 +30,8 @@ export class Rect extends DrawCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'x'
   
+  name: string = 'rectangle'
+  
   constructor(parent: ElementRef) {
     super(parent)
   }

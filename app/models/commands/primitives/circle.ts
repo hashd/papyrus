@@ -30,6 +30,8 @@ export class Circle extends DrawCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'c'
   
+  name: string = 'circle'
+  
   constructor(parent: ElementRef) {
     super(parent)
   }

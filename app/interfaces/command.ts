@@ -11,6 +11,7 @@ export class Command {
   static endEvent: string
   
   type: CommandType
+  name: string = 'unnamed'
   
   validate(): boolean {
     return true
@@ -61,7 +62,7 @@ export class DrawCommand extends Command {
   }
   
   getSummary(): string {
-    return `Draw ${this.constructor.name} from (${this.startCoordinates.x}, ${this.startCoordinates.y}) to (${this.endCoordinates.x}, ${this.endCoordinates.y})`
+    return `Draw ${this.name} from (${this.startCoordinates.x}, ${this.startCoordinates.y}) to (${this.endCoordinates.x}, ${this.endCoordinates.y})`
   }
 }
 
