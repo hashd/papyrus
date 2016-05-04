@@ -1,6 +1,6 @@
 .vscode
 .idea
 
-jspm_packages
-node_modules
-styles
+jspm_packages/*
+node_modules/*
+styles/*
