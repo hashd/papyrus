@@ -1,5 +1,5 @@
 import { ElementRef } from 'angular2/core'
-import { Visualizable, Appendable } from '../../../interfaces/visualization'
+import { Visualizable, Appendable } from '../../../../src/gfx/visualization'
 
 export class Svg implements Visualizable, Appendable {
   parent: ElementRef

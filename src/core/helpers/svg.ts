@@ -1,4 +1,4 @@
-let ns: string = 'http://www.w3.org/2000/svg'
+const ns: string = 'http://www.w3.org/2000/svg'
 
 export class SVG {
   static ns: string = ns

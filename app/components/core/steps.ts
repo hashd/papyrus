@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { StepSummary } from './step_summary'
-import { Step } from '../../models/step'
+import { Step } from '../../../src/core/step'
 
 @Component({
   selector: 'pa-steps',

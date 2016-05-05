@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 var sassSrc = "styles/**/*.scss",
   sassDest = "styles",
   sassCssSrc = "styles/scss/app.scss",
-  sassJsSrc = "styles/main.ts",
+  sassJsSrc = "styles/core.ts",
   appSrc = "app/**/*.ts",
   publicDir = "public";
 

@@ -1,10 +1,10 @@
-import { CommandType, COMMAND_TYPES } from './interfaces/enums/command_types'
-import { Drawable, Moveable, Rotatable, Scalable, Visualizable, Appendable, AppendableViz  } from './interfaces/visualization'
+import { CommandType, COMMAND_TYPES } from '../src/enums/command_types'
+import { Drawable, Moveable, Rotatable, Scalable, Visualizable, Appendable, AppendableViz  } from '../src/gfx/visualization'
 
-import { Step } from './models/step'
+import { Step } from '../src/core/step'
 import { CompositeVisualization } from './models/visualization'
 
-export * from './interfaces/command'
+export * from '../src/core/command'
 
 export {
   Appendable,

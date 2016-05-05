@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core'
-import { Command } from '../../interfaces/command'
-import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types'
+import { Command } from '../../../src/core/command'
+import { CommandType, COMMAND_TYPES } from '../../../src/enums/command_types'
 
 @Component({
   selector: 'pa-command-bar',
@@ -13,7 +13,7 @@ import { CommandType, COMMAND_TYPES } from '../../interfaces/enums/command_types
           (click)="selectCommand(cmd)"
         >
           <span>{{cmd?.name}}</span>
-          <span>{{cmd.actionKey}}</span>
+          <span>{{cmd.shortcutKey}}</span>
         </div>
       </div>
     </div>

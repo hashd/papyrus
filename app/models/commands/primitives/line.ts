@@ -1,8 +1,8 @@
 import { ElementRef } from 'angular2/core'
-import { Visualizable, AppendableViz } from '../../../interfaces/visualization'
-import { SVG } from '../../../helpers/svg'
-import { DrawCommand } from '../../../interfaces/command'
-import { CommandType } from '../../../interfaces/enums/command_types'
+import { Visualizable, AppendableViz } from '../../../../src/gfx/visualization'
+import { SVG } from '../../../../src/core/helpers/svg'
+import { PictureCommand } from '../../../../src/core/command'
+import { CommandType } from '../../../../src/enums/command_types'
 
 export class LineElement implements Visualizable {
   parent: AppendableViz
@@ -26,7 +26,7 @@ export class LineElement implements Visualizable {
   }
 }
 
-export class Line extends DrawCommand {
+export class Line extends PictureCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'l'
   

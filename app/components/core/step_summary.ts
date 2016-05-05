@@ -1,5 +1,5 @@
 import { Component, Input } from 'angular2/core'
-import { Step } from '../../models/step'
+import { Step } from '../../../src/core/step'
 
 @Component({
   selector: 'pa-step-summary',

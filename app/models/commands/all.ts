@@ -1,4 +1,4 @@
-import { Command } from '../../interfaces/command'
+import { Command } from '../../../src/core/command'
 import { Circle } from './primitives/circle'
 import { Line } from './primitives/line'
 import { Rect } from './primitives/rect'

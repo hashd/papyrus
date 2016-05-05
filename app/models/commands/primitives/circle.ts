@@ -1,8 +1,8 @@
 import { ElementRef } from 'angular2/core'
-import { Visualizable, AppendableViz } from '../../../interfaces/visualization'
-import { SVG } from '../../../helpers/svg'
-import { Command, DrawCommand } from '../../../interfaces/command'
-import { CommandType } from '../../../interfaces/enums/command_types'
+import { Visualizable, AppendableViz } from '../../../../src/gfx/visualization'
+import { SVG } from '../../../../src/core/helpers/svg'
+import { Command, PictureCommand } from '../../../../src/core/command'
+import { CommandType } from '../../../../src/enums/command_types'
 
 export class CircleElement implements Visualizable {
   parent: AppendableViz
@@ -26,7 +26,7 @@ export class CircleElement implements Visualizable {
   }
 }
 
-export class Circle extends DrawCommand {
+export class Circle extends PictureCommand {
   static type: CommandType = CommandType.PRIMITIVE
   static actionKey: string = 'c'
   
