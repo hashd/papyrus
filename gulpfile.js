@@ -48,7 +48,7 @@ gulp.task('compile:css', function () {
     .pipe(gulp.dest(sassDest));
 });
 
-gulp.task('build:js', gulp.series('compile:css', function () {
+gulp.task('build:js', gulp.series('compile:css', function run_build_app() {
   return exec('npm run build-app');
 }));
 

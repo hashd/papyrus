@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/",
+  baseURL: ".",
   defaultJSExtensions: true,
   transpiler: "typescript",
   babelOptions: {
@@ -16,13 +16,13 @@ System.config({
   paths: {
     "npm:*": "jspm_packages/npm/*",
     "github:*": "jspm_packages/github/*",
-    "app": "app"
+    "app": "src"
   },
   separateCSS: true,
 
   packages: {
     "app": {
-      "main": "main",
+      "main": "web/main",
       "defaultExtension": "ts"
     }
   },
