@@ -5,6 +5,7 @@ import {Picture} from 'src/core/models/picture'
 import {DatasetDefinition} from 'src/core/data/dataset_definition'
 
 export interface PictureCommandInterface {
+  name: string
   onMousedown: (context: PictureContext) => Element
   onMousemove: (element: Element, context: PictureContext) => Element
   onMouseup: (element: Element, context: PictureContext) => Element
@@ -12,7 +13,7 @@ export interface PictureCommandInterface {
 
 export class PictureCommand extends Command {
   type: CommandType = 'primitive'
-  defaultName: string = 'anonymous_picture'
+  defaultName: string = 'picture'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
 
   constructor(private implementation: PictureCommandInterface) {
@@ -24,7 +25,7 @@ export class PictureCommand extends Command {
     element = this.implementation.onMouseup(element, context)
 
     return {
-      name: this.defaultName,
+      name: this.implementation.name || this.defaultName,
       element
     }
   }
