@@ -38,8 +38,7 @@ export class SVG {
     let group = document.createElementNS(ns, 'g')
     group.setAttributeNS(null, 'width', width.toString())
     group.setAttributeNS(null, 'height', height.toString())
-
-    console.log(elements)
+    
     elements.forEach(element => group.appendChild(element))
     return group
   }

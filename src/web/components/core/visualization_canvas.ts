@@ -71,10 +71,6 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
   
   emitMouseEvent(event: MouseEvent) {
-    if (event.type === 'mouseout') {
-      console.log(event)
-    }
-
     this.mouse.emit({
       canvas: this.canvas,
       x: event.offsetX,
