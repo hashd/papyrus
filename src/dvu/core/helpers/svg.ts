@@ -39,6 +39,7 @@ export class SVG {
     group.setAttributeNS(null, 'width', width.toString())
     group.setAttributeNS(null, 'height', height.toString())
 
+    console.log(elements)
     elements.forEach(element => group.appendChild(element))
     return group
   }

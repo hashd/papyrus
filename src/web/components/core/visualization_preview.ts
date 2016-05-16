@@ -28,8 +28,10 @@ import { Observable } from 'rxjs/Rx'
   `,
   directives: [FocusMe]
 })
-export class VisualizationPreview implements AfterViewInit {
+export class VisualizationPreview implements OnChanges {
   @Input() visualization: CompositeVisualization
+  @Input() arity: number
+
   nameBeingEdited: boolean = false
   previousName: string
 
@@ -49,19 +51,20 @@ export class VisualizationPreview implements AfterViewInit {
     this.nameBeingEdited = false
   }
 
-  ngAfterViewInit() {
-    const preview = this.preview.nativeElement,
-      width = preview.clientWidth,
-      height = preview.clientHeight
+  ngOnChanges(changes) {
+    if (changes.hasOwnProperty('arity') && this.preview) {
+      const preview = this.preview.nativeElement,
+        width = this.visualization.dimensions.width || preview.clientWidth,
+        height = this.visualization.dimensions.height || preview.clientHeight
 
-    this.setCanvasDimensions(width, height)
+      this.clearPreview()
+      this.setPreviewDimensions(width, height)
+      this.drawVisualization(width, height)
+    }
   }
 
-  setCanvasDimensions(width, height) {
-    const preview = this.preview.nativeElement
-    preview.setAttribute('viewBox', `0 0 ${width} ${height}`)
-    preview.setAttribute('height', height)
-    preview.setAttribute('width', width)
+  setPreviewDimensions(width, height) {
+    this.preview.nativeElement.setAttribute('viewBox', `0 0 ${width} ${height}`)
   }
 
   drawVisualization(width, height) {

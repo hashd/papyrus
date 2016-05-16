@@ -9,7 +9,7 @@ import { Picture } from 'src/dvu/core/models/picture'
 export class CompositeVisualization extends PictureCommand {
   name: string = 'unnamed'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
-  dimensions: Dimensions
+  dimensions: Dimensions = { width: 0, height: 0 }
   steps: Step[] = []
 
   constructor() {
@@ -21,7 +21,7 @@ export class CompositeVisualization extends PictureCommand {
   }
 
   execute(context: PictureContext): Picture {
-    const elements: Element[] = this.steps.map(step => step.execute())
+    const elements: Element[] = this.steps.map(step => step.execute().element)
     const group = SVG.createGroup(elements, context.getWidth(), context.getHeight())
 
     return {

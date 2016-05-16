@@ -57,7 +57,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     }
 
     if (changes.hasOwnProperty('visualization') && this.visualization) {
-      if (!this.visualization.dimensions) {
+      if (this.visualization.dimensions.width === 0 && this.visualization.dimensions.height === 0) {
         const canvasParent = this.canvasParent.nativeElement,
               canvas = this.canvas.nativeElement,
               width = canvasParent.clientWidth,

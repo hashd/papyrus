@@ -10,7 +10,8 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
       <pa-vis-preview *ngFor="#visualization of visualizations" 
         (click)="select(visualization)"
         [class.selected]="visualization === selected"
-        [visualization]="visualization"  
+        [visualization]="visualization"
+        [arity]="visualization?.steps.length"
       >
       </pa-vis-preview>
       <pa-create-vis (click)="create()">
