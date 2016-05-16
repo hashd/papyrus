@@ -10,7 +10,11 @@ export const RECT = new PictureCommand('Rect', {
     const initPoint = context.getLeastSignificantPoint(),
       endPoint = context.getMostSignificantPoint()
 
-    return SVG.createRect(initPoint.x, initPoint.y, endPoint.x - initPoint.x, endPoint.y - initPoint.y)
+    const rect = SVG.createRect(initPoint.x, initPoint.y, endPoint.x - initPoint.x, endPoint.y - initPoint.y)
+    rect.setAttributeNS(null, 'stroke', '#555')
+    rect.setAttributeNS(null, 'fill', 'transparent')
+
+    return rect
   },
 
   onMousemove(element: Element, context: PictureContext): Element {
@@ -29,5 +33,11 @@ export const RECT = new PictureCommand('Rect', {
 
   onMouseup(element: Element, context: PictureContext): Element {
     return this.onMousedown(element, context)
+  },
+
+  getSummary(data: PictureContext) {
+    const initPoint = data.getLeastSignificantPoint()
+
+    return `Draw ${data.name || this.name} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
   }
 })

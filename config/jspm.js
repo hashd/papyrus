@@ -19,12 +19,14 @@ System.config({
     "app": "src"
   },
   separateCSS: true,
+
   packages: {
     "app": {
       "main": "web/main",
       "defaultExtension": "ts"
     }
   },
+
   map: {
     "angular2": "npm:angular2@2.0.0-beta.13",
     "bootstrap": "github:twbs/bootstrap@3.3.6",

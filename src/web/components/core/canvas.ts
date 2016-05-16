@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, OnChanges } from 'angular2/core'
 import { Command } from '../../../dvu/core/command'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { Step } from '../../../dvu/core/step'
@@ -24,17 +24,17 @@ import {PictureContext} from 'src/dvu/geometry/picture_context'
   `,
   directives: [StepSummary, VisualizationCanvas, CommandBar]
 })
-export class PapyrusCanvas {
+export class PapyrusCanvas implements OnChanges {
   @Input() commands: Command[]
   @Input() visualization: CompositeVisualization
   @Input() currentStep: Step
 
-  currentCommand: Command
   selectedCommand: Command
-  previousStep: Step
+  previousStep: Step = null
+  currentStep: Step = null
 
   pictureContext: PictureContext
-  currentElement: Element
+  currentElement: Element = null
 
   @Output() steps: EventEmitter<Step> = new EventEmitter()
 
@@ -58,6 +58,15 @@ export class PapyrusCanvas {
   changeCommand(e) {
     this.selectedCommand = e.activeCommand
   }
+
+  ngOnChanges(changes) {
+    if (changes.hasOwnProperty('visualization') && this.visualization) {
+      this.resetUserActions()
+      if (this.visualization.steps.length !== 0) {
+        this.previousStep = this.visualization.steps[this.visualization.steps.length - 1]
+      }
+    }
+  }
   
   private handleMouseEvent(e) {
     // TODO: Update logic to create steps and update visualization/picture instance
@@ -68,17 +77,26 @@ export class PapyrusCanvas {
   }
 
   private handlePictureCommand(command: PictureCommand, e) {
-    if (command.initEvent === e.type) {
+    if ('mousedown' === e.type) {
       this.pictureContext = new PictureContext({x: e.x, y: e.y}, {x: e.x, y: e.y})
       this.currentElement = command.execute(this.pictureContext).element
-    } else if (this.pictureContext && command.modifyEvent === e.type) {
+      this.currentStep = new Step(command, this.pictureContext)
+    } else if (this.pictureContext && 'mousemove' === e.type) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
       this.currentElement = command.execute(this.pictureContext).element
-    } else if (this.pictureContext && command.endEvent === e.type) {
+    } else if (this.pictureContext && ('mouseout' === e.type || 'mouseup' === e.type)) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
-      this.currentElement = null
+      this.visualization.steps.push(new Step(command, this.pictureContext))
+      this.resetUserActions()
     }
+  }
+
+  private resetUserActions() {
+    this.pictureContext = null
+    this.currentElement = null
+    this.previousStep = this.currentStep
+    this.currentStep = null
   }
 }

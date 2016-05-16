@@ -139,9 +139,9 @@ pa-data .variables, pa-data .iterables {
   height: calc(100% - 156px); }
 
 .sidebar {
-  background: #fff3f6; }
+  background: #f9fffc; }
   .sidebar pa-panel > div {
-    border-right: 1px solid #F10C49; }
+    border-right: 1px solid #1F6764; }
 
 .command-bar .command-set {
   padding: 4px 0; }
@@ -165,11 +165,11 @@ pa-data .variables, pa-data .iterables {
     color: #452B72; }
 
 .pa-panel > .title {
-  background: #F10C49;
+  background: #1F6764;
   color: #ffffff; }
 
 .pa-panel > .content {
-  background: #fff3f6; }
+  background: #f9fffc; }
 
 .pa-panel > div {
   padding: 2px 12px; }
@@ -200,7 +200,7 @@ pa-panel[header="Steps"] {
       overflow: auto; }
 
 pa-visualizations pa-panel {
-  border-bottom: 1px solid #F10C49; }
+  border-bottom: 1px solid #1F6764; }
 
 pa-visualizations .content {
   padding: 12px !important;
@@ -232,11 +232,11 @@ pa-visualizations pa-create-vis {
   text-align: left;
   width: auto; }
   pa-visualizations pa-create-vis i:hover {
-    color: #F10C49; }
+    color: #1F6764; }
 
 pa-visualizations pa-vis-preview.selected .vis-preview {
-  border: 1px solid #F54828;
-  box-shadow: 0 0 8px #F10C49; }
+  border: 1px solid #88C425;
+  box-shadow: 0 0 8px #1F6764; }
 
 pa-visualizations pa-vis-preview.selected .vis-name {
   color: #452B72; }
@@ -255,7 +255,7 @@ pa-visualizations pa-vis-preview input {
   width: 100%;
   text-align: center;
   border-radius: 16px;
-  border: 1px solid #F54828; }
+  border: 1px solid #88C425; }
   pa-visualizations pa-vis-preview input:focus {
     padding: 0px;
     outline: none; }

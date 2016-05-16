@@ -2,7 +2,7 @@ import {Command} from 'src/dvu/core/command'
 import {ValueType} from 'src/dvu/core/data/data_definition'
 
 export class Step {
-  constructor(private command: Command, private data: {}) {
+  constructor(public command: Command, public data) {
 
   }
 
@@ -16,5 +16,9 @@ export class Step {
   
   getSummary() {
     return this.command.getSummary(this.data)
+  }
+
+  execute() {
+    return this.command.execute(this.data)
   }
 }

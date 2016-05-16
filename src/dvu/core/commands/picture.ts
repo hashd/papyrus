@@ -9,6 +9,7 @@ export interface PictureCommandInterface extends CommandInterface {
   onMousedown: (context: PictureContext) => Element
   onMousemove: (element: Element, context: PictureContext) => Element
   onMouseup: (element: Element, context: PictureContext) => Element
+  getSummary: (data: PictureContext) => string
 }
 
 export class PictureCommand extends Command {
@@ -25,8 +26,12 @@ export class PictureCommand extends Command {
     let element = this.implementation.onMousedown(context)
 
     return {
-      name: this.implementation.name || this.defaultName,
+      name: context.name || this.implementation.name || this.defaultName,
       element
     }
+  }
+
+  getSummary(data: PictureContext) {
+    return this.implementation.getSummary(data)
   }
 }

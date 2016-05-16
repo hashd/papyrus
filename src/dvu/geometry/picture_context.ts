@@ -1,6 +1,7 @@
 import { Point } from 'cartesian_system'
 
 export class PictureContext {
+  name: string
   points: Point[] = []
 
   constructor(public start:Point, public end:Point) {

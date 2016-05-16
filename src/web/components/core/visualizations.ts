@@ -43,7 +43,7 @@ export class PapyrusVisualizations implements OnInit {
    * Create a new visualization and select it automatically
    */
   create() {
-    let vis = new CompositeVisualization(undefined)
+    let vis = new CompositeVisualization()
     this.visualizations.push(vis)
     this.select(vis)
   }

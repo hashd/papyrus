@@ -9,12 +9,16 @@ export const ELLIPSIS = new PictureCommand('Circle', {
   onMousedown(context: PictureContext): Element {
     const { start, end } = context
 
-    return SVG.createEllipse(start.x, start.y, end.x - start.x, end.y - start.y)
+    const ellipsis = SVG.createEllipse(start.x, start.y, context.getWidth(), context.getHeight())
+    ellipsis.setAttributeNS(null, 'stroke', '#555')
+    ellipsis.setAttributeNS(null, 'fill', 'transparent')
+
+    return ellipsis
   },
 
   onMousemove(element: Element, context: PictureContext): Element {
     const { start, end } = context
-    const rx = end.x - start.x, ry = end.y - start.y
+    const rx = context.getWidth(), ry = context.getHeight()
 
     element.setAttributeNS(null, 'rx', rx.toString())
     element.setAttributeNS(null, 'ry', ry.toString())
@@ -24,5 +28,10 @@ export const ELLIPSIS = new PictureCommand('Circle', {
 
   onMouseup(element: Element, context: PictureContext): Element {
     return this.onMousedown(element, context)
+  },
+
+  getSummary(data: PictureContext) {
+    const radius = (data.getWidth() == data.getHeight()) ? data.getWidth(): `${data.getWidth()}, ${data.getHeight()}`
+    return `Draw ${data.name || (data.getWidth() == data.getHeight())?'circle': 'ellipsis'} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
   }
 })

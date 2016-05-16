@@ -23,5 +23,9 @@ export const LINE = new PictureCommand('Line', {
 
   onMouseup(element: Element, context: PictureContext): Element {
     return this.onMousedown(element, context)
+  },
+
+  getSummary(data: PictureContext) {
+    return `Draw ${data.name || this.name} from (${data.start.x}, ${data.start.y}) to (${data.end.x}, ${data.end.y})`
   }
 })

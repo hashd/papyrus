@@ -33,4 +33,13 @@ export class SVG {
     
     return ellipse
   }
+
+  static createGroup(elements: Element[], width: number, height: number) {
+    let group = document.createElementNS(ns, 'g')
+    group.setAttributeNS(null, 'width', width.toString())
+    group.setAttributeNS(null, 'height', height.toString())
+
+    elements.forEach(element => group.appendChild(element))
+    return group
+  }
 }

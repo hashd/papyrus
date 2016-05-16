@@ -1,6 +1,5 @@
 import { Point } from '../geometry/cartesian_system'
 import { CommandType } from '..//enums/command_types'
-import { DrawContext } from '..//geometry/draw_context'
 
 export class Command {
   type: CommandType
@@ -13,6 +12,10 @@ export class Command {
 
   validate(data: {}): boolean {
     return true
+  }
+
+  execute(data) {
+
   }
   
   getSummary(data: {}): string {
