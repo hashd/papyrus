@@ -14800,15 +14800,16 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                     }
                     this.nameBeingEdited = false;
                 };
-                VisualizationPreview.prototype.ngAfterViewInit = function () {
-                    var preview = this.preview.nativeElement, width = preview.clientWidth, height = preview.clientHeight;
-                    this.setCanvasDimensions(width, height);
+                VisualizationPreview.prototype.ngOnChanges = function (changes) {
+                    if (changes.hasOwnProperty('arity') && this.preview) {
+                        var preview = this.preview.nativeElement, width = this.visualization.dimensions.width || preview.clientWidth, height = this.visualization.dimensions.height || preview.clientHeight;
+                        this.clearPreview();
+                        this.setPreviewDimensions(width, height);
+                        this.drawVisualization(width, height);
+                    }
                 };
-                VisualizationPreview.prototype.setCanvasDimensions = function (width, height) {
-                    var preview = this.preview.nativeElement;
-                    preview.setAttribute('viewBox', "0 0 " + width + " " + height);
-                    preview.setAttribute('height', height);
-                    preview.setAttribute('width', width);
+                VisualizationPreview.prototype.setPreviewDimensions = function (width, height) {
+                    this.preview.nativeElement.setAttribute('viewBox', "0 0 " + width + " " + height);
                 };
                 VisualizationPreview.prototype.drawVisualization = function (width, height) {
                     var preview = this.preview.nativeElement;
@@ -14824,6 +14825,10 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                     core_1.Input(), 
                     __metadata('design:type', (typeof (_a = typeof visualization_1.CompositeVisualization !== 'undefined' && visualization_1.CompositeVisualization) === 'function' && _a) || Object)
                 ], VisualizationPreview.prototype, "visualization", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Number)
+                ], VisualizationPreview.prototype, "arity", void 0);
                 __decorate([
                     core_1.ViewChild('preview'), 
                     __metadata('design:type', (typeof (_b = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _b) || Object)
@@ -14905,7 +14910,7 @@ $__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1)
                 PapyrusVisualizations = __decorate([
                     core_1.Component({
                         selector: 'pa-visualizations',
-                        template: "\n    <pa-panel header=\"Visualizations\">\n      <pa-vis-preview *ngFor=\"#visualization of visualizations\" \n        (click)=\"select(visualization)\"\n        [class.selected]=\"visualization === selected\"\n        [visualization]=\"visualization\"  \n      >\n      </pa-vis-preview>\n      <pa-create-vis (click)=\"create()\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </pa-create-vis>\n    </pa-panel>\n  ",
+                        template: "\n    <pa-panel header=\"Visualizations\">\n      <pa-vis-preview *ngFor=\"#visualization of visualizations\" \n        (click)=\"select(visualization)\"\n        [class.selected]=\"visualization === selected\"\n        [visualization]=\"visualization\"\n        [arity]=\"visualization?.steps.length\"\n      >\n      </pa-vis-preview>\n      <pa-create-vis (click)=\"create()\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </pa-create-vis>\n    </pa-panel>\n  ",
                         directives: [panel_1.PanelComponent, visualization_preview_1.VisualizationPreview]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -15325,7 +15330,7 @@ $__System.register("a7", ["b", "9b"], function(exports_1, context_1) {
                         }
                     }
                     if (changes.hasOwnProperty('visualization') && this.visualization) {
-                        if (!this.visualization.dimensions) {
+                        if (this.visualization.dimensions.width === 0 && this.visualization.dimensions.height === 0) {
                             var canvasParent = this.canvasParent.nativeElement, canvas = this.canvas.nativeElement, width = canvasParent.clientWidth, height = canvasParent.clientHeight - 32, minDim = Math.min(width, height);
                             this.visualization.dimensions = { width: minDim, height: minDim };
                         }
@@ -15679,13 +15684,14 @@ $__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
                     _super.call(this, this.name, this.getPictureCommandInterface());
                     this.name = 'unnamed';
                     this.datasetDefinition = new dataset_definition_1.DatasetDefinition();
+                    this.dimensions = { width: 0, height: 0 };
                     this.steps = [];
                     this.datasetDefinition.addDataDefinition('length', 'number').setDefaultValue(20);
                     this.datasetDefinition.addDataDefinition('width', 'number').setDefaultValue(50);
                     this.datasetDefinition.addDataDefinition('measures', 'array').setDefaultValue([1, 2, 3, 4, 5]);
                 }
                 CompositeVisualization.prototype.execute = function (context) {
-                    var elements = this.steps.map(function (step) { return step.execute(); });
+                    var elements = this.steps.map(function (step) { return step.execute().element; });
                     var group = svg_1.SVG.createGroup(elements, context.getWidth(), context.getHeight());
                     return {
                         name: this.name,
@@ -16026,6 +16032,7 @@ $__System.register("ad", [], function(exports_1, context_1) {
                     var group = document.createElementNS(ns, 'g');
                     group.setAttributeNS(null, 'width', width.toString());
                     group.setAttributeNS(null, 'height', height.toString());
+                    console.log(elements);
                     elements.forEach(function (element) { return group.appendChild(element); });
                     return group;
                 };
