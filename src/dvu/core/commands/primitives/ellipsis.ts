@@ -1,9 +1,10 @@
-import {PictureCommand} from 'src/core/main/commands/picture'
-import {PictureContext} from 'src/core/geometry/picture_context'
-import {SVG} from 'src/core/main/helpers/svg'
+import {PictureCommand} from 'src/dvu/core/commands/picture'
+import {PictureContext} from 'src/dvu/geometry/picture_context'
+import {SVG} from 'src/dvu/core/helpers/svg'
 
-export const ELLIPSIS = new PictureCommand({
-  name: 'ellipsis',
+export const ELLIPSIS = new PictureCommand('Circle', {
+  name: 'circle',
+  shortcutKey: 'c',
 
   onMousedown(context: PictureContext): Element {
     const { start, end } = context

@@ -1,5 +1,5 @@
-import {Command} from 'src/core/main/command'
-import {ValueType} from 'src/core/main/data/data_definition'
+import {Command} from 'src/dvu/core/command'
+import {ValueType} from 'src/dvu/core/data/data_definition'
 
 export class Step {
   constructor(private command: Command, private data: {}) {

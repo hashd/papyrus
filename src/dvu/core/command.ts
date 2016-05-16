@@ -1,7 +1,6 @@
-import { ElementRef } from 'angular2/core'
 import { Point } from '../geometry/cartesian_system'
 import { CommandType } from '..//enums/command_types'
-import {DrawContext} from '..//geometry/draw_context';
+import { DrawContext } from '..//geometry/draw_context'
 
 export class Command {
   type: CommandType

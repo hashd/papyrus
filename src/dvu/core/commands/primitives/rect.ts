@@ -1,9 +1,10 @@
-import { SVG } from 'src/core/main/helpers/svg'
-import { PictureContext } from 'src/core/geometry/picture_context'
-import { PictureCommand } from 'src/core/main/commands/picture';
+import {PictureCommand} from 'src/dvu/core/commands/picture'
+import {PictureContext} from 'src/dvu/geometry/picture_context'
+import {SVG} from 'src/dvu/core/helpers/svg'
 
-export const RECT = new PictureCommand({
+export const RECT = new PictureCommand('Rect', {
   name: 'rect',
+  shortcutKey: 'x',
 
   onMousedown(context: PictureContext): Element {
     const initPoint = context.getLeastSignificantPoint(),

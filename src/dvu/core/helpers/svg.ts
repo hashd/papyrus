@@ -9,7 +9,8 @@ export class SVG {
     line.setAttributeNS(null, 'y1', y1.toString())
     line.setAttributeNS(null, 'x2', x2.toString())
     line.setAttributeNS(null, 'y2', y2.toString())
-    
+    line.setAttributeNS(null, 'stroke', '#555')
+    line.setAttributeNS(null, 'stroke-width', '1')
     return line
   }
   

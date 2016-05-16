@@ -3,10 +3,10 @@ import { PapyrusData } from './data'
 import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
 import { FullLength } from 'src/web/directives/all'
-import { CompositeVisualization } from 'src/core/gfx/visualization'
+import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { CommandService } from 'src/web/services/all'
-import { Step } from 'src/core/main/step'
-import { Command } from 'src/core/main/command'
+import { Step } from '../../../dvu/core/step'
+import { Command } from '../../../dvu/core/command'
  
 @Component({
   selector: 'pa-editor',

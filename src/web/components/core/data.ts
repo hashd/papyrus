@@ -1,8 +1,8 @@
 import { Component, Input } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { EditableField } from '../generic/editable'
-import { DatasetDefinition } from 'src/core/main/data/dataset_definition'
-import { DataDefinition } from 'src/core/main/data/data_definition'
+import { DatasetDefinition } from '../../../dvu/core/data/dataset_definition'
+import { DataDefinition } from '../../../dvu/core/data/data_definition'
 import { Tweakable } from '../../directives/tweakable'
 
 @Component({
@@ -33,12 +33,10 @@ import { Tweakable } from '../../directives/tweakable'
   directives: [Panel, EditableField, Tweakable]
 })
 export class PapyrusData {
-  static DEFAULT_TYPE: string = 'number'
-  
   @Input() datasetDefinition: DatasetDefinition
   
   addDataDefinition() {
-    const dd = this.datasetDefinition.addDataDefinition(undefined, PapyrusData.DEFAULT_TYPE)
+    const dd = this.datasetDefinition.addDataDefinition(undefined, 'number')
   }
   
   getDefinitions(isIterable: boolean) {

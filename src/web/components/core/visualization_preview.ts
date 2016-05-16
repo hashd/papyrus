@@ -1,5 +1,5 @@
 import { Component, Input } from 'angular2/core'
-import { CompositeVisualization } from 'src/core/gfx/visualization'
+import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { FocusMe } from '../../directives/focus_me'
 
 @Component({

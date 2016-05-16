@@ -1,9 +1,10 @@
-import {PictureContext} from 'src/core/geometry/picture_context'
-import {PictureCommand} from 'src/core/main/commands/picture'
-import {SVG} from 'src/core/main/helpers/svg'
+import {PictureCommand} from 'src/dvu/core/commands/picture'
+import {PictureContext} from 'src/dvu/geometry/picture_context'
+import {SVG} from 'src/dvu/core/helpers/svg'
 
-export const LINE = new PictureCommand({
+export const LINE = new PictureCommand('Line', {
   name: 'line',
+  shortcutKey: 'l',
   
   onMousedown(context: PictureContext): Element {
     const { start, end } = context

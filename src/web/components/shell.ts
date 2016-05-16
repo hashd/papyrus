@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core'
 import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
-import { CompositeVisualization } from '../models/visualization'
+import { CompositeVisualization } from 'src/dvu/gfx/visualization'
 import { FullLength } from '../directives/all'
 
 @Component({

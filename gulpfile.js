@@ -5,10 +5,10 @@ var gulp = require('gulp'),
   exec = require('child_process').exec;
 
 var sassSrc = "styles/**/*.scss",
-  sassDest = "styles",
-  sassCssSrc = "styles/scss/app.scss",
+  sassDest = "src/styles",
+  sassCssSrc = "src/styles/scss/app.scss",
   sassJsSrc = "styles/core.ts",
-  appSrc = "app/**/*.ts",
+  appSrc = "src/**/*.ts",
   publicDir = "public";
 
 var htmlSrc = '*.html',

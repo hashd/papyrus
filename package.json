@@ -48,7 +48,7 @@
       "zone.js": "npm:zone.js@^0.6.6"
     },
     "devDependencies": {
-      "clean-css": "npm:clean-css@^3.4.10",
+      "clean-css": "npm:clean-css@^3.4.12",
       "typescript": "npm:typescript@^1.8.0"
     }
   }

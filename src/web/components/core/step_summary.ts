@@ -1,5 +1,5 @@
 import { Component, Input } from 'angular2/core'
-import { Step } from 'src/core/main/step'
+import { Step } from '../../../dvu/core/step'
 
 @Component({
   selector: 'pa-step-summary',

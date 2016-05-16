@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
-import { CompositeVisualization } from 'src/core/gfx/visualization'
+import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 
 @Component({
   selector: 'pa-vis-canvas',
@@ -16,6 +16,7 @@ import { CompositeVisualization } from 'src/core/gfx/visualization'
 })
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Input() visualization: CompositeVisualization
+  @Input() currentElement: Element
   
   @ViewChild('canvas_parent') canvasParent: ElementRef
   @ViewChild('canvas') canvas: ElementRef
@@ -39,8 +40,14 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     canvas.setAttribute('width', minDim)
   }
   
-  ngOnChanges(inputChanges) {
+  ngOnChanges(changes) {
     // Do something on input changes
+    for (let propName in changes) {
+      console.log(propName)
+    }
+
+    if (this.currentElement)
+      this.canvas.nativeElement.appendChild(this.currentElement)
   }
   
   emitMouseEvent(event: MouseEvent) {
@@ -48,6 +55,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
       canvas: this.canvas,
       x: event.offsetX,
       y: event.offsetY,
+      target: event.target,
       type: event.type
     })
   }

@@ -12,14 +12,17 @@ $light-green: #92C7A3;
 $xl-green: #c9e3d1;
 $xxl-green: #f9fffc;
 
+$dark-magenta: #F10C49;
+$xxl-magenta: #fff3f6;
+
 $light-gray: #e6e6e6;
 $gray: #aaa;
 $dark-gray: #555;
 
-$primary-color: $green;
-$secondary-color: $dark-green;
+$primary-color: $cherry-cream;
+$secondary-color: $dark-magenta;
 $light-color: $light-green;
-$xxl-color: $xxl-green;
+$xxl-color: $xxl-magenta;
 
 $white: #ffffff;
 
@@ -44,4 +47,4 @@ body {
   color: $normal-font-color;
 }
 
-@include scrollbars(.5em, $light-color);
+// @include scrollbars(.5em, $light-color);

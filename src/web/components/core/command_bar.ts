@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core'
-import { Command } from 'src/core/main/command'
-import { CommandType, COMMAND_TYPES } from 'src/core/enums/command_types'
+import { Command } from '../../../dvu/core/command'
+import { CommandType, COMMAND_TYPES } from '../../../dvu/enums/command_types'
 
 @Component({
   selector: 'pa-command-bar',

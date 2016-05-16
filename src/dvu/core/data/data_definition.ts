@@ -5,9 +5,13 @@ export class DataDefinition {
   id: string
   defaultValue: ValueType
   
-  constructor(public name: string, public type: DataType) {
+  constructor(public name: string, public type: DataType, public defaultValue: ValueType = this.getDefaultValueForType(type)) {
     this.id = `dd-${+new Date()}`
-    this.defaultValue = this.getDefaultValueForType(type)
+  }
+
+  setDefaultValue(value: ValueType): boolean {
+    this.defaultValue = value
+    return true
   }
 
   private getDefaultValueForType(type: DataType): ValueType {

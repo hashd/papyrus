@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core'
 import { PanelComponent } from '../generic/panel'
 import { VisualizationPreview } from './visualization_preview'
-import { CompositeVisualization } from 'src/core/gfx/visualization'
+import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 
 @Component({
   selector: 'pa-visualizations',
