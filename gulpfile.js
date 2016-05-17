@@ -5,10 +5,10 @@ var gulp = require('gulp'),
   exec = require('child_process').exec;
 
 var sassSrc = "styles/**/*.scss",
-  sassDest = "styles",
-  sassCssSrc = "styles/scss/app.scss",
-  sassJsSrc = "styles/main.ts",
-  appSrc = "app/**/*.ts",
+  sassDest = "src/styles",
+  sassCssSrc = "src/styles/scss/app.scss",
+  sassJsSrc = "styles/core.ts",
+  appSrc = "src/**/*.ts",
   publicDir = "public";
 
 var htmlSrc = '*.html',
@@ -48,7 +48,7 @@ gulp.task('compile:css', function () {
     .pipe(gulp.dest(sassDest));
 });
 
-gulp.task('build:js', gulp.series('compile:css', function () {
+gulp.task('build:js', gulp.series('compile:css', function run_build_app() {
   return exec('npm run build-app');
 }));
 

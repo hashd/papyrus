@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/",
+  baseURL: ".",
   defaultJSExtensions: true,
   transpiler: "typescript",
   babelOptions: {
@@ -16,13 +16,13 @@ System.config({
   paths: {
     "npm:*": "jspm_packages/npm/*",
     "github:*": "jspm_packages/github/*",
-    "app": "app"
+    "app": "src"
   },
   separateCSS: true,
 
   packages: {
     "app": {
-      "main": "main",
+      "main": "web/main",
       "defaultExtension": "ts"
     }
   },
@@ -30,7 +30,7 @@ System.config({
   map: {
     "angular2": "npm:angular2@2.0.0-beta.13",
     "bootstrap": "github:twbs/bootstrap@3.3.6",
-    "clean-css": "npm:clean-css@3.4.10",
+    "clean-css": "npm:clean-css@3.4.12",
     "css": "github:systemjs/plugin-css@0.1.20",
     "d3": "npm:d3@3.5.16",
     "es6-shim": "github:es-shims/es6-shim@0.35.0",
@@ -68,7 +68,7 @@ System.config({
       "path-browserify": "npm:path-browserify@0.0.0"
     },
     "github:jspm/nodelibs-process@0.1.2": {
-      "process": "npm:process@0.11.2"
+      "process": "npm:process@0.11.3"
     },
     "github:jspm/nodelibs-stream@0.1.0": {
       "stream-browserify": "npm:stream-browserify@1.0.0"
@@ -104,7 +104,7 @@ System.config({
       "isarray": "npm:isarray@1.0.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:clean-css@3.4.10": {
+    "npm:clean-css@3.4.12": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "commander": "npm:commander@2.8.1",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -150,13 +150,13 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:process@0.11.2": {
+    "npm:process@0.11.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:readable-stream@1.1.13": {
+    "npm:readable-stream@1.1.14": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "core-util-is": "npm:core-util-is@1.0.2",
       "events": "github:jspm/nodelibs-events@0.1.1",
@@ -186,7 +186,7 @@ System.config({
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
-      "readable-stream": "npm:readable-stream@1.1.13"
+      "readable-stream": "npm:readable-stream@1.1.14"
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"

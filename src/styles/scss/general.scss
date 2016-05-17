@@ -1,0 +1,50 @@
+$amethyst: #7e57c2;
+$dark-amethyst: #452B72;
+$light-amethyst: #fef;
+$xl-amethyst: #e0ceff;
+$xxl-amethyst: #fafaff;
+
+$cherry-cream: #F54828;
+
+$green: #88C425;
+$dark-green: #1F6764;
+$light-green: #92C7A3;
+$xl-green: #c9e3d1;
+$xxl-green: #f9fffc;
+
+$dark-magenta: #F10C49;
+$xxl-magenta: #fff3f6;
+
+$light-gray: #e6e6e6;
+$gray: #aaa;
+$dark-gray: #555;
+
+$primary-color: $green;
+$secondary-color: $dark-green;
+$light-color: $light-green;
+$xxl-color: $xxl-green;
+
+$white: #ffffff;
+
+$normal-font-color: $dark-gray;
+
+$primary-fonts: 'Rubik', 'Helvetica Neue', 'Helvetica', 'Arial';
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-fonts;
+  font-size: 13px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  color: $normal-font-color;
+}
+
+// @include scrollbars(.5em, $light-color);
