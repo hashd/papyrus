@@ -1,3 +1,7 @@
+import {Point} from 'src/dvu/geometry/cartesian_system'
+import {Dimensions} from 'src/dvu/geometry/dimensions'
+import {PictureContext} from 'src/dvu/geometry/picture_context'
+
 const ns: string = 'http://www.w3.org/2000/svg'
 
 export class SVG {
@@ -39,6 +43,19 @@ export class SVG {
     group.setAttributeNS(null, 'width', width.toString())
     group.setAttributeNS(null, 'height', height.toString())
     
+    elements.forEach(element => group.appendChild(element))
+    return group
+  }
+
+  static createSVG(elements: Element[], pictureContext: PictureContext, dimensions: Dimensions) {
+    let group = document.createElementNS(ns, 'svg')
+    group.setAttributeNS(null, 'viewBox', `0 0 ${dimensions.width} ${dimensions.height}`)
+    group.setAttributeNS(null, 'width', pictureContext.getWidth().toString())
+    group.setAttributeNS(null, 'height', pictureContext.getHeight().toString())
+    group.setAttributeNS(null, 'x', pictureContext.start.x.toString())
+    group.setAttributeNS(null, 'y', pictureContext.start.y.toString())
+    group.setAttributeNS(null, 'preserveAspectRatio', 'xMinYMin meet')
+
     elements.forEach(element => group.appendChild(element))
     return group
   }

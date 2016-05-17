@@ -22,7 +22,7 @@ export class CompositeVisualization extends PictureCommand {
 
   execute(context: PictureContext): Picture {
     const elements: Element[] = this.steps.map(step => step.execute().element)
-    const group = SVG.createGroup(elements, context.getWidth(), context.getHeight())
+    const group = SVG.createSVG(elements, context, this.dimensions)
 
     return {
       name: this.name,
@@ -56,8 +56,9 @@ export class CompositeVisualization extends PictureCommand {
       onMouseup(element: Element, context: PictureContext): Element {
 
       },
-      getSummary(data): string {
-        return 'Summary not available.'
+      getSummary(data: PictureContext): string {
+        const lsp = data.getLeastSignificantPoint()
+        return `Draw ${this.name} from (${lsp.x}, ${lsp.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
       }
     }
   }
