@@ -1,29 +1,12 @@
 # Roadmap
 
-### Early Preview [Apr 12th]
-- Visualization editor with support for primitive elements
-  - Line
-  - Circle
-  - Rectangle
-  - Text
-- Create, Drag(Move), Snap support
-- Bind simple values to command parameters
-- Convert commands into human readable steps
+## COMPLETED
+- Ability to draw Line, Circle, Rectangles
+- Ability to compose pictures inside other pictures (recursive composition is also possible)
+- Ability to preview pictures in the pictures panel as and when user makes changes
 
-### First Milestone
-- Add support for primitives: Path
-- Add support for Control flow: If, For
-- Add ability to work with list of data elements
-- Add Scale, Rotate and Duplicate features for primitive elements
-
-### Second Milestone
-- Add support to play and rewind steps through Steps module
-- Refine previously implmented commands
-
-### Third Milestone
-- Add support for glomping elements
-- Add support to embed composite elements(pictures)
-
-### Fourth Milestone
-- Export picture as a single javascript source which can be used in any webpage
-- Add support for data panel for composite elements
+## TODO
+- Ability to draw Paths
+- Ability to adjust picture elements: Move, Rotate, Scale for types: Line, Circle, Rect, Path and Pictures themselves
+- Ability
+- Dynamically bind data to picture properties and measures
