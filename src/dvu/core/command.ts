@@ -14,7 +14,7 @@ export class Command {
     return true
   }
 
-  execute(data) {
+  execute(data, depth) {
 
   }
   

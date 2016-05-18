@@ -16,17 +16,20 @@ export class PictureCommand extends Command {
   type: CommandType = 'primitive'
   defaultName: string = 'picture'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
+  instances: number = 0
 
   constructor(public name: string, private implementation: PictureCommandInterface) {
     super()
     this.shortcutKey = implementation.shortcutKey
   }
 
-  execute(context: PictureContext): Picture {
+  execute(context: PictureContext, depth: number): Picture {
     let element = this.implementation.onMousedown(context)
 
+    this.instances = this.instances + 1
+
     return {
-      name: context.name || this.implementation.name || this.defaultName,
+      name: context.name || `${this.implementation.name}-${this.instances}` || `${this.defaultName}-${this.instances}`,
       element
     }
   }

@@ -8,14 +8,13 @@ import { CommandService } from 'src/web/services/command'
   template: `
     <div class="command-bar">
       <div class="title">Commands</div>
-      <div (click)="refreshCommands()"><i class="fa fa-refresh"></i></div>
       <div class="command-set" *ngFor="#commandType of commandTypes">
         <div class="command-entry clearfix" *ngFor="#cmd of getCommandsByType(commandType)"
           [class.selected]="cmd === currentCommand"
           (click)="selectCommand(cmd)"
         >
           <span>{{cmd?.name}}</span>
-          <span>{{cmd.shortcutKey}}</span>
+          <span>{{cmd?.shortcutKey}}</span>
         </div>
       </div>
     </div>
@@ -33,7 +32,7 @@ export class CommandBar {
   constructor(private commandService: CommandService) {}
   
   getCommandsByType(type: CommandType) {
-    return this.commands.filter(cmd => cmd.type === type)
+    return this.commands.filter(cmd => cmd.type === type && cmd.name !== 'unnamed')
   }
 
   refreshCommands() {

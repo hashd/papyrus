@@ -18,7 +18,7 @@ export class Step {
     return this.command.getSummary(this.data)
   }
 
-  execute() {
-    return this.command.execute(this.data)
+  execute(depth: number = 0) {
+    return this.command.execute(this.data, depth + 1)
   }
 }

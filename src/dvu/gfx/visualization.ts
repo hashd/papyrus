@@ -20,20 +20,27 @@ export class CompositeVisualization extends PictureCommand {
     this.datasetDefinition.addDataDefinition('measures', 'array').setDefaultValue([1,2,3,4,5])
   }
 
-  execute(context: PictureContext): Picture {
-    const elements: Element[] = this.steps.map(step => step.execute().element)
-    const group = SVG.createSVG(elements, context, this.dimensions)
+  execute(context: PictureContext, depth: number = 0): Picture {
+    if (depth < 10) {
+      const elements: Element[] = this.steps.map(step => step.execute(depth).element)
+      const group = SVG.createSVG(elements, context, this.dimensions)
 
-    return {
-      name: this.name,
-      element: group
+      return {
+        name: this.name,
+        element: group
+      }
+    } else {
+      return {
+        name: 'Void',
+        element: SVG.createGroup([], this.dimensions.width, this.dimensions.height)
+      }
     }
   }
 
-  executeUntil(number: number, context: PictureContext) {
+  executeUntil(number: number, context: PictureContext, depth: number = 0) {
     const elements: Element[] = []
     for (let i = 0; i < number && i < this.steps.length; i++) {
-      elements.push(this.steps[i].execute())
+      elements.push(this.steps[i].execute(depth))
     }
 
     const group = SVG.createGroup(elements, context.getWidth(), context.getHeight())
@@ -45,8 +52,9 @@ export class CompositeVisualization extends PictureCommand {
   }
 
   getPictureCommandInterface(): PictureCommandInterface {
+    const self = this
     return {
-      name: this.name,
+      name: self.name,
       onMousedown(context: PictureContext): Element {
 
       },
@@ -58,7 +66,7 @@ export class CompositeVisualization extends PictureCommand {
       },
       getSummary(data: PictureContext): string {
         const lsp = data.getLeastSignificantPoint()
-        return `Draw ${this.name} from (${lsp.x}, ${lsp.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
+        return `Draw ${self.name} from (${lsp.x}, ${lsp.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
       }
     }
   }
