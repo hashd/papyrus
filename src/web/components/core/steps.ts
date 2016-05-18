@@ -12,7 +12,7 @@ import { Step } from 'src/dvu/core/step'
           <pa-step-summary [step]="step"></pa-step-summary>
         </li>
       </ul>
-      <div *ngIf="!steps?.length">Oops!, nothing here yet. Select a command and get creative.</div>
+      <div *ngIf="!steps?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
     </pa-panel>
   `,
   directives: [Panel, StepSummary]

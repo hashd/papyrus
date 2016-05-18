@@ -28,6 +28,9 @@ import { Tweakable } from '../../directives/tweakable'
           </span>
         </li>
       </ul>
+      <div class="data-note" *ngIf="datasetDefinition?.dataDefinitions?.length === 0">
+        No variables defined yet. <span (click)="addDataDefinition()">Add</span>
+      </div>
     </pa-panel>
   `,
   directives: [Panel, EditableField, Tweakable]

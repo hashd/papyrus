@@ -198,6 +198,9 @@ pa-panel[header="Steps"] {
     pa-panel[header="Steps"] .pa-panel .content {
       height: calc(100% - 22px);
       overflow: auto; }
+  pa-panel[header="Steps"] .step-note {
+    padding: 8px 0;
+    text-align: center; }
 
 pa-visualizations pa-panel {
   border-bottom: 1px solid #1F6764; }

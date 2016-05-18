@@ -14,10 +14,6 @@ export class CompositeVisualization extends PictureCommand {
 
   constructor() {
     super(this.name, this.getPictureCommandInterface())
-
-    this.datasetDefinition.addDataDefinition('length', 'number').setDefaultValue(20)
-    this.datasetDefinition.addDataDefinition('width', 'number').setDefaultValue(50)
-    this.datasetDefinition.addDataDefinition('measures', 'array').setDefaultValue([1,2,3,4,5])
   }
 
   execute(context: PictureContext, depth: number = 0): Picture {
