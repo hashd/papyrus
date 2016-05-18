@@ -14814,7 +14814,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                 VisualizationPreview.prototype.drawVisualization = function (width, height) {
                     var preview = this.preview.nativeElement;
                     var pictureContext = new picture_context_1.PictureContext({ x: 0, y: 0 }, { x: width, y: height });
-                    preview.appendChild(this.visualization.execute(pictureContext).element);
+                    preview.appendChild(this.visualization.execute(pictureContext, 0).element);
                 };
                 VisualizationPreview.prototype.clearPreview = function () {
                     while (this.preview.nativeElement.firstChild) {
@@ -14849,7 +14849,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
     }
 });
 
-$__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1) {
+$__System.register("9e", ["b", "9f", "9a", "9b", "a0"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -14861,7 +14861,7 @@ $__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1)
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, panel_1, visualization_preview_1, visualization_1;
+    var core_1, panel_1, visualization_preview_1, visualization_1, command_1;
     var PapyrusVisualizations;
     return {
         setters:[
@@ -14876,10 +14876,14 @@ $__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1)
             },
             function (visualization_1_1) {
                 visualization_1 = visualization_1_1;
+            },
+            function (command_1_1) {
+                command_1 = command_1_1;
             }],
         execute: function() {
             PapyrusVisualizations = (function () {
-                function PapyrusVisualizations() {
+                function PapyrusVisualizations(commandService) {
+                    this.commandService = commandService;
                     this.onSelect = new core_1.EventEmitter();
                 }
                 PapyrusVisualizations.prototype.ngOnInit = function () {
@@ -14897,6 +14901,7 @@ $__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1)
                 PapyrusVisualizations.prototype.create = function () {
                     var vis = new visualization_1.CompositeVisualization();
                     this.visualizations.push(vis);
+                    this.commandService.addCommand(vis);
                     this.select(vis);
                 };
                 __decorate([
@@ -14911,18 +14916,20 @@ $__System.register("9e", ["b", "9f", "9a", "9b"], function(exports_1, context_1)
                     core_1.Component({
                         selector: 'pa-visualizations',
                         template: "\n    <pa-panel header=\"Visualizations\">\n      <pa-vis-preview *ngFor=\"#visualization of visualizations\" \n        (click)=\"select(visualization)\"\n        [class.selected]=\"visualization === selected\"\n        [visualization]=\"visualization\"\n        [arity]=\"visualization?.steps.length\"\n      >\n      </pa-vis-preview>\n      <pa-create-vis (click)=\"create()\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </pa-create-vis>\n    </pa-panel>\n  ",
-                        directives: [panel_1.PanelComponent, visualization_preview_1.VisualizationPreview]
+                        directives: [panel_1.PanelComponent, visualization_preview_1.VisualizationPreview],
+                        providers: [command_1.CommandService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof command_1.CommandService !== 'undefined' && command_1.CommandService) === 'function' && _a) || Object])
                 ], PapyrusVisualizations);
                 return PapyrusVisualizations;
+                var _a;
             }());
             exports_1("PapyrusVisualizations", PapyrusVisualizations);
         }
     }
 });
 
-$__System.register("a0", ["b", "9c"], function(exports_1, context_1) {
+$__System.register("a1", ["b", "9c"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -14997,7 +15004,7 @@ $__System.register("a0", ["b", "9c"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a1", ["b"], function(exports_1, context_1) {
+$__System.register("a2", ["b"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15038,7 +15045,7 @@ $__System.register("a1", ["b"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a2", ["b", "9f", "a0", "a3", "a1"], function(exports_1, context_1) {
+$__System.register("a3", ["b", "9f", "a1", "a4", "a2"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15092,7 +15099,7 @@ $__System.register("a2", ["b", "9f", "a0", "a3", "a1"], function(exports_1, cont
                 PapyrusData = __decorate([
                     core_1.Component({
                         selector: 'pa-data',
-                        template: "\n    <pa-panel header=\"Data\">\n      <div class=\"command-bar\">\n        <i class=\"fa fa-plus\" (click)=\"addDataDefinition()\"></i>\n      </div>\n      <ul class=\"variables\">\n        <li *ngFor=\"#dd of getDefinitions(false)\">\n          <pa-editable class=\"vname\" [data]=\"dd.name\" (edited)=\"saveName(dd, $event)\" title=\"{{dd.name}}\"></pa-editable>\n          <pa-editable class=\"vvalue\" [data]=\"dd.defaultValue\" (edited)=\"saveValue(dd, $event)\" tweakable></pa-editable>\n        </li>     \n      </ul>\n      <ul class=\"iterables\">\n        <li *ngFor=\"#dd of getDefinitions(true)\">\n          <span class=\"vname\" title=\"{{dd.name}}\">\n            <span>{{dd.name}}</span>\n          </span>\n          <span class=\"vvalue\">\n            <span>{{dd.defaultValue}}</span>\n          </span>\n        </li>\n      </ul>\n    </pa-panel>\n  ",
+                        template: "\n    <pa-panel header=\"Data\">\n      <div class=\"command-bar\">\n        <i class=\"fa fa-plus\" (click)=\"addDataDefinition()\"></i>\n      </div>\n      <ul class=\"variables\">\n        <li *ngFor=\"#dd of getDefinitions(false)\">\n          <pa-editable class=\"vname\" [data]=\"dd.name\" (edited)=\"saveName(dd, $event)\" title=\"{{dd.name}}\"></pa-editable>\n          <pa-editable class=\"vvalue\" [data]=\"dd.defaultValue\" (edited)=\"saveValue(dd, $event)\" tweakable></pa-editable>\n        </li>     \n      </ul>\n      <ul class=\"iterables\">\n        <li *ngFor=\"#dd of getDefinitions(true)\">\n          <span class=\"vname\" title=\"{{dd.name}}\">\n            <span>{{dd.name}}</span>\n          </span>\n          <span class=\"vvalue\">\n            <span>{{dd.defaultValue}}</span>\n          </span>\n        </li>\n      </ul>\n      <div class=\"data-note\" *ngIf=\"datasetDefinition?.dataDefinitions?.length === 0\">\n        No variables defined yet. <span (click)=\"addDataDefinition()\">Add</span>\n      </div>\n    </pa-panel>\n  ",
                         directives: [panel_1.PanelComponent, editable_1.EditableField, tweakable_1.Tweakable]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -15146,7 +15153,7 @@ $__System.register("9f", ["b"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a4", ["b", "9f", "a5"], function(exports_1, context_1) {
+$__System.register("a5", ["b", "9f", "a6"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15191,7 +15198,7 @@ $__System.register("a4", ["b", "9f", "a5"], function(exports_1, context_1) {
                 PapyrusSteps = __decorate([
                     core_1.Component({
                         selector: 'pa-steps',
-                        template: "\n    <pa-panel header=\"Steps\">\n      <ul class=\"steps\" *ngIf=\"steps?.length\">\n        <li *ngFor=\"#step of steps; #i=index\" (click)=\"selectStep(i)\">\n          <pa-step-summary [step]=\"step\"></pa-step-summary>\n        </li>\n      </ul>\n      <div *ngIf=\"!steps?.length\">Oops!, nothing here yet. Select a command and get creative.</div>\n    </pa-panel>\n  ",
+                        template: "\n    <pa-panel header=\"Steps\">\n      <ul class=\"steps\" *ngIf=\"steps?.length\">\n        <li *ngFor=\"#step of steps; #i=index\" (click)=\"selectStep(i)\">\n          <pa-step-summary [step]=\"step\"></pa-step-summary>\n        </li>\n      </ul>\n      <div *ngIf=\"!steps?.length\" class=\"step-note\">Oops!, nothing here yet. Select a command and get started.</div>\n    </pa-panel>\n  ",
                         directives: [panel_1.PanelComponent, step_summary_1.StepSummary]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -15204,7 +15211,7 @@ $__System.register("a4", ["b", "9f", "a5"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a6", [], function(exports_1, context_1) {
+$__System.register("a7", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var Step;
@@ -15225,8 +15232,9 @@ $__System.register("a6", [], function(exports_1, context_1) {
                 Step.prototype.getSummary = function () {
                     return this.command.getSummary(this.data);
                 };
-                Step.prototype.execute = function () {
-                    return this.command.execute(this.data);
+                Step.prototype.execute = function (depth) {
+                    if (depth === void 0) { depth = 0; }
+                    return this.command.execute(this.data, depth + 1);
                 };
                 return Step;
             }());
@@ -15235,7 +15243,7 @@ $__System.register("a6", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a5", ["b", "a6"], function(exports_1, context_1) {
+$__System.register("a6", ["b", "a7"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15268,7 +15276,7 @@ $__System.register("a5", ["b", "a6"], function(exports_1, context_1) {
                 StepSummary = __decorate([
                     core_1.Component({
                         selector: 'pa-step-summary',
-                        template: "\n    <div *ngIf=\"step\" class=\"step-summary\">{{step?.getSummary()}}</div>\n    <div *ngIf=\"!step\" class=\"step-summary\">No command selected.</div>\n  "
+                        template: "\n    <div *ngIf=\"step\" class=\"step-summary\">\n      <span class=\"summary\">{{step?.getSummary()}}</span>\n    </div>\n    <div *ngIf=\"!step\" class=\"step-summary\">No command selected.</div>\n  "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], StepSummary);
@@ -15280,7 +15288,7 @@ $__System.register("a5", ["b", "a6"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a7", ["b", "9b"], function(exports_1, context_1) {
+$__System.register("a8", ["b", "9b"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15338,9 +15346,6 @@ $__System.register("a7", ["b", "9b"], function(exports_1, context_1) {
                     }
                 };
                 VisualizationCanvas.prototype.emitMouseEvent = function (event) {
-                    if (event.type === 'mouseout') {
-                        console.log(event);
-                    }
                     this.mouse.emit({
                         canvas: this.canvas,
                         x: event.offsetX,
@@ -15406,7 +15411,7 @@ $__System.register("a7", ["b", "9b"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a8", ["b", "a9", "aa"], function(exports_1, context_1) {
+$__System.register("a9", ["b", "aa", "ab", "a0"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15418,7 +15423,7 @@ $__System.register("a8", ["b", "a9", "aa"], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, command_1, command_types_1;
+    var core_1, command_1, command_types_1, command_2;
     var CommandBar;
     return {
         setters:[
@@ -15430,15 +15435,22 @@ $__System.register("a8", ["b", "a9", "aa"], function(exports_1, context_1) {
             },
             function (command_types_1_1) {
                 command_types_1 = command_types_1_1;
+            },
+            function (command_2_1) {
+                command_2 = command_2_1;
             }],
         execute: function() {
             CommandBar = (function () {
-                function CommandBar() {
+                function CommandBar(commandService) {
+                    this.commandService = commandService;
                     this.commandTypes = command_types_1.COMMAND_TYPES;
                     this.select = new core_1.EventEmitter();
                 }
                 CommandBar.prototype.getCommandsByType = function (type) {
-                    return this.commands.filter(function (cmd) { return cmd.type === type; });
+                    return this.commands.filter(function (cmd) { return cmd.type === type && cmd.name !== 'unnamed'; });
+                };
+                CommandBar.prototype.refreshCommands = function () {
+                    this.commands = this.commandService.getCommands();
                 };
                 CommandBar.prototype.selectCommand = function (activeCommand) {
                     var previousCommand = this.currentCommand;
@@ -15460,12 +15472,13 @@ $__System.register("a8", ["b", "a9", "aa"], function(exports_1, context_1) {
                 CommandBar = __decorate([
                     core_1.Component({
                         selector: 'pa-command-bar',
-                        template: "\n    <div class=\"command-bar\">\n      <div class=\"title\">Commands</div>\n      <div class=\"command-set\" *ngFor=\"#commandType of commandTypes\">\n        <div class=\"command-entry clearfix\" *ngFor=\"#cmd of getCommandsByType(commandType)\"\n          [class.selected]=\"cmd === currentCommand\"\n          (click)=\"selectCommand(cmd)\"\n        >\n          <span>{{cmd?.name}}</span>\n          <span>{{cmd.shortcutKey}}</span>\n        </div>\n      </div>\n    </div>\n  "
+                        template: "\n    <div class=\"command-bar\">\n      <div class=\"title\">Commands</div>\n      <div class=\"command-set\" *ngFor=\"#commandType of commandTypes\">\n        <div class=\"command-entry clearfix\" *ngFor=\"#cmd of getCommandsByType(commandType)\"\n          [class.selected]=\"cmd === currentCommand\"\n          (click)=\"selectCommand(cmd)\"\n        >\n          <span>{{cmd?.name}}</span>\n          <span>{{cmd?.shortcutKey}}</span>\n        </div>\n      </div>\n    </div>\n  ",
+                        providers: [command_2.CommandService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [(typeof (_c = typeof command_2.CommandService !== 'undefined' && command_2.CommandService) === 'function' && _c) || Object])
                 ], CommandBar);
                 return CommandBar;
-                var _a, _b;
+                var _a, _b, _c;
             }());
             exports_1("CommandBar", CommandBar);
         }
@@ -15524,7 +15537,7 @@ $__System.register("9d", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("ab", ["b", "9b", "a6", "a5", "a7", "a8", "ac", "9d"], function(exports_1, context_1) {
+$__System.register("ac", ["b", "9b", "a7", "a6", "a8", "a9", "ad", "9d"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -15656,7 +15669,7 @@ $__System.register("ab", ["b", "9b", "a6", "a5", "a7", "a8", "ac", "9d"], functi
     }
 });
 
-$__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
+$__System.register("9b", ["ad", "a4", "ae"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -15686,22 +15699,29 @@ $__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
                     this.datasetDefinition = new dataset_definition_1.DatasetDefinition();
                     this.dimensions = { width: 0, height: 0 };
                     this.steps = [];
-                    this.datasetDefinition.addDataDefinition('length', 'number').setDefaultValue(20);
-                    this.datasetDefinition.addDataDefinition('width', 'number').setDefaultValue(50);
-                    this.datasetDefinition.addDataDefinition('measures', 'array').setDefaultValue([1, 2, 3, 4, 5]);
                 }
-                CompositeVisualization.prototype.execute = function (context) {
-                    var elements = this.steps.map(function (step) { return step.execute().element; });
-                    var group = svg_1.SVG.createGroup(elements, context.getWidth(), context.getHeight());
-                    return {
-                        name: this.name,
-                        element: group
-                    };
+                CompositeVisualization.prototype.execute = function (context, depth) {
+                    if (depth === void 0) { depth = 0; }
+                    if (depth < 10) {
+                        var elements = this.steps.map(function (step) { return step.execute(depth).element; });
+                        var group = svg_1.SVG.createSVG(elements, context, this.dimensions);
+                        return {
+                            name: this.name,
+                            element: group
+                        };
+                    }
+                    else {
+                        return {
+                            name: 'Void',
+                            element: svg_1.SVG.createGroup([], this.dimensions.width, this.dimensions.height)
+                        };
+                    }
                 };
-                CompositeVisualization.prototype.executeUntil = function (number, context) {
+                CompositeVisualization.prototype.executeUntil = function (number, context, depth) {
+                    if (depth === void 0) { depth = 0; }
                     var elements = [];
                     for (var i = 0; i < number && i < this.steps.length; i++) {
-                        elements.push(this.steps[i].execute());
+                        elements.push(this.steps[i].execute(depth));
                     }
                     var group = svg_1.SVG.createGroup(elements, context.getWidth(), context.getHeight());
                     return {
@@ -15710,8 +15730,9 @@ $__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
                     };
                 };
                 CompositeVisualization.prototype.getPictureCommandInterface = function () {
+                    var self = this;
                     return {
-                        name: this.name,
+                        name: self.name,
                         onMousedown: function (context) {
                         },
                         onMousemove: function (element, context) {
@@ -15719,7 +15740,8 @@ $__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
                         onMouseup: function (element, context) {
                         },
                         getSummary: function (data) {
-                            return 'Summary not available.';
+                            var lsp = data.getLeastSignificantPoint();
+                            return "Draw " + self.name + " from (" + lsp.x + ", " + lsp.y + ") with width: " + data.getWidth() + " and height: " + data.getHeight();
                         }
                     };
                 };
@@ -15731,7 +15753,7 @@ $__System.register("9b", ["ac", "a3", "ad"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("aa", [], function(exports_1, context_1) {
+$__System.register("ab", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var COMMAND_TYPES;
@@ -15745,7 +15767,7 @@ $__System.register("aa", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("ae", ["ac", "ad"], function(exports_1, context_1) {
+$__System.register("af", ["ad", "ae"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var picture_1, svg_1;
@@ -15788,7 +15810,7 @@ $__System.register("ae", ["ac", "ad"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("af", ["ac", "ad"], function(exports_1, context_1) {
+$__System.register("b0", ["ad", "ae"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var picture_1, svg_1;
@@ -15826,7 +15848,7 @@ $__System.register("af", ["ac", "ad"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a9", [], function(exports_1, context_1) {
+$__System.register("aa", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var Command;
@@ -15843,7 +15865,7 @@ $__System.register("a9", [], function(exports_1, context_1) {
                 Command.prototype.validate = function (data) {
                     return true;
                 };
-                Command.prototype.execute = function (data) {
+                Command.prototype.execute = function (data, depth) {
                 };
                 Command.prototype.getSummary = function (data) {
                     return 'This method has not been overriden and should be done for all commands';
@@ -15855,7 +15877,7 @@ $__System.register("a9", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b0", [], function(exports_1, context_1) {
+$__System.register("b1", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var DataDefinition;
@@ -15896,7 +15918,7 @@ $__System.register("b0", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("a3", ["b0"], function(exports_1, context_1) {
+$__System.register("a4", ["b1"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var data_definition_1;
@@ -15944,7 +15966,7 @@ $__System.register("a3", ["b0"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("ac", ["a9", "a3"], function(exports_1, context_1) {
+$__System.register("ad", ["aa", "a4"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -15972,12 +15994,14 @@ $__System.register("ac", ["a9", "a3"], function(exports_1, context_1) {
                     this.type = 'primitive';
                     this.defaultName = 'picture';
                     this.datasetDefinition = new dataset_definition_1.DatasetDefinition();
+                    this.instances = 0;
                     this.shortcutKey = implementation.shortcutKey;
                 }
-                PictureCommand.prototype.execute = function (context) {
+                PictureCommand.prototype.execute = function (context, depth) {
                     var element = this.implementation.onMousedown(context);
+                    this.instances = this.instances + 1;
                     return {
-                        name: context.name || this.implementation.name || this.defaultName,
+                        name: context.name || this.implementation.name + "-" + this.instances || this.defaultName + "-" + this.instances,
                         element: element
                     };
                 };
@@ -15991,7 +16015,7 @@ $__System.register("ac", ["a9", "a3"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("ad", [], function(exports_1, context_1) {
+$__System.register("ae", [], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var ns, SVG;
@@ -16032,7 +16056,17 @@ $__System.register("ad", [], function(exports_1, context_1) {
                     var group = document.createElementNS(ns, 'g');
                     group.setAttributeNS(null, 'width', width.toString());
                     group.setAttributeNS(null, 'height', height.toString());
-                    console.log(elements);
+                    elements.forEach(function (element) { return group.appendChild(element); });
+                    return group;
+                };
+                SVG.createSVG = function (elements, pictureContext, dimensions) {
+                    var group = document.createElementNS(ns, 'svg');
+                    group.setAttributeNS(null, 'viewBox', "0 0 " + dimensions.width + " " + dimensions.height);
+                    group.setAttributeNS(null, 'width', pictureContext.getWidth().toString());
+                    group.setAttributeNS(null, 'height', pictureContext.getHeight().toString());
+                    group.setAttributeNS(null, 'x', pictureContext.start.x.toString());
+                    group.setAttributeNS(null, 'y', pictureContext.start.y.toString());
+                    group.setAttributeNS(null, 'preserveAspectRatio', 'xMinYMin meet');
                     elements.forEach(function (element) { return group.appendChild(element); });
                     return group;
                 };
@@ -16044,7 +16078,7 @@ $__System.register("ad", [], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b1", ["ac", "ad"], function(exports_1, context_1) {
+$__System.register("b2", ["ad", "ae"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var picture_1, svg_1;
@@ -16088,7 +16122,7 @@ $__System.register("b1", ["ac", "ad"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b2", ["ae", "af", "b1"], function(exports_1, context_1) {
+$__System.register("b3", ["af", "b0", "b2"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var ellipsis_1, line_1, rect_1;
@@ -16110,7 +16144,7 @@ $__System.register("b2", ["ae", "af", "b1"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b3", ["b", "aa", "b2"], function(exports_1, context_1) {
+$__System.register("a0", ["b", "ab", "b3"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -16146,6 +16180,9 @@ $__System.register("b3", ["b", "aa", "b2"], function(exports_1, context_1) {
                 CommandService.prototype.getCommands = function () {
                     return this.commands;
                 };
+                CommandService.prototype.addCommand = function (command) {
+                    this.commands.push(command);
+                };
                 CommandService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])
@@ -16157,7 +16194,7 @@ $__System.register("b3", ["b", "aa", "b2"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b4", ["b3"], function(exports_1, context_1) {
+$__System.register("b4", ["a0"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var command_1;
@@ -16172,7 +16209,7 @@ $__System.register("b4", ["b3"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("b5", ["b", "a2", "a4", "ab", "b6", "9b", "b4"], function(exports_1, context_1) {
+$__System.register("b5", ["b", "a3", "a5", "ac", "b6", "9b", "b4"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
