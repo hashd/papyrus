@@ -74,7 +74,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   emitMouseEvent(event: MouseEvent) {
     if (event.which === 1 || (event.which === 0 && this.dragModeEnabled)) {
       this.dragModeEnabled = (event.type === 'mouseup')? false: true
-      
+
       this.mouse.emit({
         canvas: this.canvas,
         x: event.offsetX,

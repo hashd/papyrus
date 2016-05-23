@@ -4,10 +4,10 @@ var gulp = require('gulp'),
   del = require('del'),
   exec = require('child_process').exec;
 
-var sassSrc = "styles/**/*.scss",
+var sassSrc = "src/styles/**/*.scss",
   sassDest = "src/styles",
   sassCssSrc = "src/styles/scss/app.scss",
-  sassJsSrc = "styles/core.ts",
+  sassJsSrc = "src/styles/main.ts",
   appSrc = "src/**/*.ts",
   publicDir = "public";
 
@@ -58,6 +58,7 @@ gulp.task('build', gulp.series('clean', 'copy:html', 'copy:fonts', 'build:app'))
 
 gulp.task('watch', function () {
   gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {
+    console.log(event);
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });  
 });
