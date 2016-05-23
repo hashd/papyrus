@@ -23,7 +23,7 @@ export class PictureCommand extends Command {
     this.shortcutKey = implementation.shortcutKey
   }
 
-  execute(context: PictureContext, depth: number): Picture {
+  execute(context: PictureContext, depth: number = 0): Picture {
     let element = this.implementation.onMousedown(context)
 
     this.instances = this.instances + 1

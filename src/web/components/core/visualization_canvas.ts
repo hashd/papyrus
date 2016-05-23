@@ -20,6 +20,7 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Input() visualization: CompositeVisualization
   @Input() element: Element
+  dragModeEnabled: boolean = false
   
   @ViewChild('canvas_parent') canvasParent: ElementRef
   @ViewChild('canvas') canvas: ElementRef
@@ -71,13 +72,17 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
   
   emitMouseEvent(event: MouseEvent) {
-    this.mouse.emit({
-      canvas: this.canvas,
-      x: event.offsetX,
-      y: event.offsetY,
-      target: event.target,
-      type: event.type
-    })
+    if (event.which === 1 || (event.which === 0 && this.dragModeEnabled)) {
+      this.dragModeEnabled = (event.type === 'mouseup')? false: true
+      
+      this.mouse.emit({
+        canvas: this.canvas,
+        x: event.offsetX,
+        y: event.offsetY,
+        target: event.target,
+        type: event.type
+      })
+    }
   }
 
   private clearWorkCanvas() {
