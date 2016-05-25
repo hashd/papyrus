@@ -5,7 +5,7 @@ import { Point } from 'src/dvu/geometry/cartesian_system'
   name: 'point'
 })
 export class PointTransform implements PipeTransform {
-  transform(point: Point): string {
-    return point? `(${point.x}, ${point.y})`: ''
+  transform(point: Point, prefix: string, suffix: string): string {
+    return point? `${prefix} [${point.x}, ${point.y}]`: ''
   }
 }

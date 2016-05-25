@@ -18,7 +18,7 @@ import { PointTransform } from 'src/web/pipes/point_transform'
       </svg>
       <div class="pa-statusbar">
         <span class="lf"></span>
-        <span class="rf">{{hoveredPoint | point}}</span>
+        <span class="rf">{{hoveredPoint | point: 'At'}}</span>
       </div>
     </div>
   `,
@@ -47,7 +47,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     const canvasParent = this.canvasParent.nativeElement,
       canvas = this.canvas.nativeElement,
       width = canvasParent.clientWidth,
-      height = canvasParent.clientHeight - 48,
+      height = canvasParent.clientHeight - 64,
       minDim = Math.min(width, height)
       
     canvas.setAttribute('viewBox', `0 0 ${minDim} ${minDim}`)
@@ -86,6 +86,9 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
     if (event.which === 1 || (event.which === 0 && this.dragModeEnabled)) {
       this.dragModeEnabled = (event.type === 'mouseup')? false: true
+
+      // event.target should be used to get the selected element
+      // if (event.type === 'mousedown') { console.log(event.target, event) }
 
       this.mouse.emit({
         canvas: this.canvas,

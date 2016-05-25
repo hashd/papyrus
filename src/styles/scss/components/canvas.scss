@@ -23,11 +23,13 @@ pa-vis-canvas {
   height: calc(100% - 20px);
 
   .pa-statusbar {
+    font-family: Ubuntu Mono, Menlo, Monaco, Consolas, Lucida Console, dejavu sans mono, monospace;
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: #eee;
-    font-size: 0.9em;
+    color: #111;
+    border-top: 1px solid #aaa;
+    background: #e2e2e2;
     padding: 2px 8px;
     height: 20px;
     overflow: hidden;
