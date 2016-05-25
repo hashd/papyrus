@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { Point } from 'src/dvu/geometry/cartesian_system'
+import { PointTransform } from 'src/web/pipes/point_transform'
 
 @Component({
   selector: 'pa-vis-canvas',
@@ -14,13 +16,20 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
         <g #vis></g>
         <g #work></g>
       </svg>
+      <div class="pa-statusbar">
+        <span class="lf"></span>
+        <span class="rf">{{hoveredPoint | point}}</span>
+      </div>
     </div>
-  `
+  `,
+  pipes: [PointTransform]
 })
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Input() visualization: CompositeVisualization
   @Input() element: Element
+
   dragModeEnabled: boolean = false
+  hoveredPoint: Point
   
   @ViewChild('canvas_parent') canvasParent: ElementRef
   @ViewChild('canvas') canvas: ElementRef
@@ -38,7 +47,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     const canvasParent = this.canvasParent.nativeElement,
       canvas = this.canvas.nativeElement,
       width = canvasParent.clientWidth,
-      height = canvasParent.clientHeight - 32,
+      height = canvasParent.clientHeight - 48,
       minDim = Math.min(width, height)
       
     canvas.setAttribute('viewBox', `0 0 ${minDim} ${minDim}`)
@@ -72,6 +81,9 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
   
   emitMouseEvent(event: MouseEvent) {
+    // Handle only left button mouse clicks and drag events
+    this.hoveredPoint = { x: event.offsetX, y: event.offsetY }
+
     if (event.which === 1 || (event.which === 0 && this.dragModeEnabled)) {
       this.dragModeEnabled = (event.type === 'mouseup')? false: true
 
@@ -82,6 +94,10 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
         target: event.target,
         type: event.type
       })
+    }
+
+    if (event.type === 'mouseout') {
+      this.hoveredPoint = null
     }
   }
 

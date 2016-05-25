@@ -7,7 +7,6 @@ pa-canvas {
 
 pa-canvas {
   & > div {
-    padding: 24px;
     height: 100%;
   }
   
@@ -22,6 +21,17 @@ pa-step-summary {
 
 pa-vis-canvas {
   height: calc(100% - 20px);
+
+  .pa-statusbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #eee;
+    font-size: 0.9em;
+    padding: 2px 8px;
+    height: 20px;
+    overflow: hidden;
+  }
 }
 
 .canvas {
@@ -41,6 +51,7 @@ pa-vis-canvas {
 
 .left-canvas {
   width: calc(100% - 120px);
+  padding-top: 24px;
   height: 100%;
 }
 

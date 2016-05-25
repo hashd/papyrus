@@ -88,7 +88,10 @@ export class PapyrusCanvas implements OnChanges {
     } else if (this.pictureContext && ('mouseout' === e.type || 'mouseup' === e.type)) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
-      this.visualization.steps.push(new Step(command, this.pictureContext))
+      if (this.pictureContext.end.x !== this.pictureContext.start.x || this.pictureContext.end.y !== this.pictureContext.start.y) {
+        this.visualization.steps.push(new Step(command, this.pictureContext))
+      }
+
       this.resetUserActions()
     }
   }
