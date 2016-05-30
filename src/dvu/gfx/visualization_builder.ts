@@ -4,24 +4,62 @@ import {Step} from 'src/dvu/core/step'
 
 export interface VisualizationBuilder {
   build(): PictureCommand
+  import(def: string): PictureCommand
+  export(): string
+  exportAsCode(): string
 }
 
 export class CompositeVisualizationBuilder implements VisualizationBuilder {
-  constructor(public datasetDefinition: DatasetDefinition = new DatasetDefinition(), public steps: Step[] = []) {
-
+  constructor(public _datasetDefinition: DatasetDefinition = new DatasetDefinition(), 
+              public _measureDefinition: DatasetDefinition = new DatasetDefinition(), 
+              public _steps: Step[] = []) {
+    
   }
   
   addStep(step: Step) {
-    this.steps.push(step)
+    this._steps.push(step)
   }
   
   getStep(idx: number) {
-    return this.steps[idx]
+    return this._steps[idx]
   }
 
+  /**
+   * Build visualization class using the visualization definition provided by the user
+   * through the visual editor
+   */
   build(): PictureCommand {
+    const self = this
+    
     return class CompositeVisualization extends PictureCommand {
-      steps: Step[] = this.steps
+      steps: Step[] = self._steps
+      static datasetDefinition: DatasetDefinition = self._datasetDefinition
+      static measureDefinition: DatasetDefinition = self._measureDefinition
     }
+  }
+
+  /**
+   * Import visualization builder spec from an export
+   */  
+  import(def: string): VisualizationBuilder {
+    let config = JSON.parse(def)
+    
+    return this.build()
+  }
+  
+  /**
+   * Export visualization builder spec into a string format
+   */
+  export(): string {
+    return JSON.stringify({
+      steps: this._steps,
+      datasetDefinition: this._datasetDefinition,
+      measureDefinition: this._measureDefinition
+    })
+  }
+  
+  exportAsCode(): string {
+    // TODO: Implement this later on
+    return 'Nothing here yet.'
   }
 }

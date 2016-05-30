@@ -3,9 +3,8 @@ export type ValueType = string | number | Array<any> | Element
 
 export class DataDefinition {
   id: string
-  defaultValue: ValueType
   
-  constructor(public name: string, public type: DataType, public defaultValue: ValueType = this.getDefaultValueForType(type)) {
+  constructor(public name: string, public type: DataType, public defaultValue: ValueType = DataDefinition.getDefaultValueForType(type)) {
     this.id = `dd-${+new Date()}`
   }
 
@@ -14,7 +13,7 @@ export class DataDefinition {
     return true
   }
 
-  private getDefaultValueForType(type: DataType): ValueType {
+  private static getDefaultValueForType(type: DataType): ValueType {
     switch (type) {
       case 'number':
         return 0

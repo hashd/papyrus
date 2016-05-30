@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "classic",
     "paths": {
       "src/*": ["src/*"]
     }

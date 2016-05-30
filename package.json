@@ -51,5 +51,8 @@
       "clean-css": "npm:clean-css@^3.4.12",
       "typescript": "npm:typescript@^1.8.0"
     }
+  },
+  "dependencies": {
+    "immutable": "^3.8.1"
   }
 }
