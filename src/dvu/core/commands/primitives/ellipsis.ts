@@ -5,6 +5,7 @@ import {SVG} from 'src/dvu/core/helpers/svg'
 export const ELLIPSIS = new PictureCommand('Circle', {
   name: 'circle',
   shortcutKey: 'c',
+  noOfInstances: 0,
 
   onMousedown(context: PictureContext): Element {
     const { start, end } = context
@@ -32,6 +33,6 @@ export const ELLIPSIS = new PictureCommand('Circle', {
 
   getSummary(data: PictureContext) {
     const radius = (data.getWidth() == data.getHeight()) ? data.getWidth(): `${data.getWidth()}, ${data.getHeight()}`
-    return `Draw ${data.name || (data.getWidth() == data.getHeight())?'circle': 'ellipsis'} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
+    return `Draw ${data.name || ((data.getWidth() == data.getHeight())?'circle': 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
   }
 })

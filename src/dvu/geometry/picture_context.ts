@@ -3,6 +3,7 @@ import { Point } from 'cartesian_system'
 export class PictureContext {
   name: string
   points: Point[] = []
+  instanceCount: number = 0
 
   constructor(public start:Point, public end:Point) {
     this.points.push(start)

@@ -6,6 +6,8 @@ import {DatasetDefinition} from '../../core/data/dataset_definition'
 import {CommandInterface} from 'src/dvu/core/commands/command_interface'
 
 export interface PictureCommandInterface extends CommandInterface {
+  name: string,
+  noOfInstances: number,
   onMousedown: (context: PictureContext) => Element
   onMousemove: (element: Element, context: PictureContext) => Element
   onMouseup: (element: Element, context: PictureContext) => Element
@@ -13,10 +15,11 @@ export interface PictureCommandInterface extends CommandInterface {
 }
 
 export class PictureCommand extends Command {
+  static noOfInstances: number = 0
+
   type: CommandType = 'primitive'
   defaultName: string = 'picture'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
-  instances: number = 0
 
   constructor(public name: string, private implementation: PictureCommandInterface) {
     super()
@@ -26,10 +29,15 @@ export class PictureCommand extends Command {
   execute(context: PictureContext, depth: number = 0): Picture {
     let element = this.implementation.onMousedown(context)
 
-    this.instances = this.instances + 1
+    if (!context.instanceCount) {
+      console.log(context.instanceCount, this.implementation.noOfInstances)
+
+      this.implementation.noOfInstances = this.implementation.noOfInstances + 1
+      context.instanceCount = this.implementation.noOfInstances
+    }
 
     return {
-      name: context.name || `${this.implementation.name}-${this.instances}` || `${this.defaultName}-${this.instances}`,
+      name: context.name || `${this.implementation.name}-${context.instanceCount}` || `${this.defaultName}-${context.instanceCount}`,
       element
     }
   }

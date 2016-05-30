@@ -51,6 +51,7 @@ export class CompositeVisualization extends PictureCommand {
     const self = this
     return {
       name: self.name,
+      noOfInstances: 0,
       onMousedown(context: PictureContext): Element {
 
       },

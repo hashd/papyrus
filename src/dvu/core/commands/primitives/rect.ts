@@ -5,6 +5,7 @@ import {SVG} from 'src/dvu/core/helpers/svg'
 export const RECT = new PictureCommand('Rect', {
   name: 'rect',
   shortcutKey: 'x',
+  noOfInstances: 0,
 
   onMousedown(context: PictureContext): Element {
     const initPoint = context.getLeastSignificantPoint(),
@@ -38,6 +39,6 @@ export const RECT = new PictureCommand('Rect', {
   getSummary(data: PictureContext) {
     const initPoint = data.getLeastSignificantPoint()
 
-    return `Draw ${data.name || this.name} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
+    return `Draw ${data.name || (this.name + '-' + data.instanceCount)} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
   }
 })

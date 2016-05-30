@@ -5,6 +5,7 @@ import {SVG} from 'src/dvu/core/helpers/svg'
 export const LINE = new PictureCommand('Line', {
   name: 'line',
   shortcutKey: 'l',
+  noOfInstances: 0,
   
   onMousedown(context: PictureContext): Element {
     const { start, end } = context
@@ -26,6 +27,6 @@ export const LINE = new PictureCommand('Line', {
   },
 
   getSummary(data: PictureContext) {
-    return `Draw ${data.name || this.name} from (${data.start.x}, ${data.start.y}) to (${data.end.x}, ${data.end.y})`
+    return `Draw ${data.name || (this.name + '-' + data.instanceCount)} from (${data.start.x}, ${data.start.y}) to (${data.end.x}, ${data.end.y})`
   }
 })
