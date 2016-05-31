@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run lite\" \"gulp watch\"",
     "lite": "lite-server -c config/lite-server.json",
     "build-app": "jspm bundle-sfx app public/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "data",
@@ -19,12 +19,13 @@
   "license": "MIT",
   "devDependencies": {
     "angular2": "2.0.0-beta.14",
+    "chai": "^3.5.0",
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
     "es6-shim": "^0.35.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.2.0",
+    "gulp-sass": "^2.3.0",
     "jspm": "^0.16.31",
     "lite-server": "^2.1.0",
     "reflect-metadata": "0.1.2",
