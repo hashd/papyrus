@@ -51,14 +51,15 @@ export class CompositeVisualization extends PictureCommand {
     const self = this
     return {
       name: self.name,
+      shortcutKey: '',
       noOfInstances: 0,
-      onMousedown(context: PictureContext): Element {
+      onMousedown(context: PictureContext): Picture {
 
       },
-      onMousemove(element: Element, context: PictureContext): Element {
+      onMousemove(element: Element, context: PictureContext): Picture {
 
       },
-      onMouseup(element: Element, context: PictureContext): Element {
+      onMouseup(element: Element, context: PictureContext): Picture {
 
       },
       getSummary(data: PictureContext): string {
@@ -69,4 +70,4 @@ export class CompositeVisualization extends PictureCommand {
   }
 }
 
-export const Picture = CompositeVisualization
+export const PictureCreator = CompositeVisualization

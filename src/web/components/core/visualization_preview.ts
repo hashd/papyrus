@@ -13,17 +13,8 @@ import { Observable } from 'rxjs/Rx'
       </svg>
     </div>
     <div>
-      <div class="vis-name" 
-        *ngIf="!nameBeingEdited"
-        (dblclick)="editName()"
-      >{{visualization?.name}}</div>
-      <input focus-me
-        type="text"
-        *ngIf="nameBeingEdited" 
-        [(ngModel)]="visualization.name"
-        (blur)="saveName($event)"
-        (keydown)="$event.keyCode === 13?saveName($event):undefined"
-      />
+      <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.name}}</div>
+      <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.name" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
     </div>
   `,
   directives: [FocusMe]

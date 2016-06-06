@@ -1,4 +1,5 @@
 export interface Picture {
-  name: string
+  name?: string
   element: Element
+  boundingElement?: Element
 }

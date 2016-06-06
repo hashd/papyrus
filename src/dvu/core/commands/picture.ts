@@ -7,10 +7,11 @@ import {CommandInterface} from 'src/dvu/core/commands/command_interface'
 
 export interface PictureCommandInterface extends CommandInterface {
   name: string,
+  shortcutKey: string,
   noOfInstances: number,
-  onMousedown: (context: PictureContext) => Element
-  onMousemove: (element: Element, context: PictureContext) => Element
-  onMouseup: (element: Element, context: PictureContext) => Element
+  onMousedown: (context: PictureContext) => Picture
+  onMousemove: (element: Element, context: PictureContext) => Picture
+  onMouseup: (element: Element, context: PictureContext) => Picture
   getSummary: (data: PictureContext) => string
 }
 
@@ -27,6 +28,10 @@ export class PictureCommand extends Command {
   }
 
   execute(context: PictureContext, depth: number = 0): Picture {
+    return this.draw(context, depth)
+  }
+
+  private draw(context: PictureContext, depth: number = 0): Picture {
     let element = this.implementation.onMousedown(context)
 
     if (!context.instanceCount) {
@@ -40,6 +45,10 @@ export class PictureCommand extends Command {
       name: context.name || `${this.implementation.name}-${context.instanceCount}` || `${this.defaultName}-${context.instanceCount}`,
       element
     }
+  }
+
+  redraw(element: Element, context: PictureContext, depth: number = 0) {
+    this.implementation.onMousemove(element, context)
   }
 
   getSummary(data: PictureContext) {

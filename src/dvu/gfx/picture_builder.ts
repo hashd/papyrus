@@ -2,14 +2,17 @@ import {PictureCommand} from 'src/dvu/core/commands/picture'
 import {DatasetDefinition} from 'src/dvu/core/data/dataset_definition'
 import {Step} from 'src/dvu/core/step'
 
-export interface VisualizationBuilder {
+type Definition = string
+type Code = string
+
+export interface PictureBuilderInterface {
   build(): PictureCommand
-  import(def: string): PictureCommand
+  import(def: Definition): PictureCommand
   export(): string
   exportAsCode(): string
 }
 
-export class CompositeVisualizationBuilder implements VisualizationBuilder {
+export class PictureBuilder implements PictureBuilderInterface {
   constructor(public _datasetDefinition: DatasetDefinition = new DatasetDefinition(), 
               public _measureDefinition: DatasetDefinition = new DatasetDefinition(), 
               public _steps: Step[] = []) {
@@ -31,17 +34,21 @@ export class CompositeVisualizationBuilder implements VisualizationBuilder {
   build(): PictureCommand {
     const self = this
     
-    return class CompositeVisualization extends PictureCommand {
-      steps: Step[] = self._steps
+    return class Picture extends PictureCommand {
+      static steps: Step[] = self._steps
       static datasetDefinition: DatasetDefinition = self._datasetDefinition
       static measureDefinition: DatasetDefinition = self._measureDefinition
+
+      constructor() {
+        super()
+      }
     }
   }
 
   /**
    * Import visualization builder spec from an export
    */  
-  import(def: string): VisualizationBuilder {
+  import(def: Definition): PictureBuilderInterface {
     let config = JSON.parse(def)
     
     return this.build()
@@ -50,7 +57,7 @@ export class CompositeVisualizationBuilder implements VisualizationBuilder {
   /**
    * Export visualization builder spec into a string format
    */
-  export(): string {
+  export(): Definition {
     return JSON.stringify({
       steps: this._steps,
       datasetDefinition: this._datasetDefinition,
@@ -58,7 +65,7 @@ export class CompositeVisualizationBuilder implements VisualizationBuilder {
     })
   }
   
-  exportAsCode(): string {
+  exportAsCode(): Code {
     // TODO: Implement this later on
     return 'Nothing here yet.'
   }

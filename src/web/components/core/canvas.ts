@@ -79,12 +79,17 @@ export class PapyrusCanvas implements OnChanges {
   private handlePictureCommand(command: PictureCommand, e) {
     if ('mousedown' === e.type) {
       this.pictureContext = new PictureContext({x: e.x, y: e.y}, {x: e.x, y: e.y})
-      this.currentElement = command.execute(this.pictureContext).element
-      this.currentStep = new Step(command, this.pictureContext)
     } else if (this.pictureContext && 'mousemove' === e.type) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
-      this.currentElement = command.execute(this.pictureContext).element
+      
+      // If element has not already been drawn, draw else redraw (avoid creating new elements)
+      if (!this.currentStep) {
+        this.currentElement = command.execute(this.pictureContext).element
+        this.currentStep = new Step(command, this.pictureContext)
+      } else {
+        command.redraw(this.currentElement, this.pictureContext)
+      }
     } else if (this.pictureContext && ('mouseout' === e.type || 'mouseup' === e.type)) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
