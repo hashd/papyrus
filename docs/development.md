@@ -5,6 +5,7 @@ You will need the following to setup development environment
 
 - node
 - npm
+- gulp v4
 
 Also install the following global node packages
 
@@ -24,6 +25,11 @@ npm install
 - Install JSPM packages
 ``` bash
 jspm install
+```
+
+- Execute `gulp build`
+``` bash
+gulp build
 ```
 
 You're all set, now move on and start the application.
