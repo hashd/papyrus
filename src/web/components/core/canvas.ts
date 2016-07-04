@@ -39,22 +39,22 @@ export class PapyrusCanvas implements OnChanges {
   @Output() steps: EventEmitter<Step> = new EventEmitter()
 
   constructor() {
-  
+
   }
-  
+
   activateCommand(e) {
     const keyCode = e.keyCode
     let selectedCommand: Command
-    
+
     if (keyCode >= 65 && keyCode <= 90) {
       selectedCommand = this.commands.find(cmd => cmd.shortcutKey.charCodeAt(0) - 32 === keyCode)
     }
-    
+
     if (selectedCommand !== undefined) {
       this.selectedCommand = selectedCommand
     }
   }
-  
+
   changeCommand(e) {
     this.selectedCommand = e.activeCommand
   }
@@ -67,7 +67,7 @@ export class PapyrusCanvas implements OnChanges {
       }
     }
   }
-  
+
   private handleMouseEvent(e) {
     // TODO: Update logic to create steps and update visualization/picture instance
     const command = this.selectedCommand
@@ -80,9 +80,15 @@ export class PapyrusCanvas implements OnChanges {
     if ('mousedown' === e.type) {
       this.pictureContext = new PictureContext({x: e.x, y: e.y}, {x: e.x, y: e.y})
     } else if (this.pictureContext && 'mousemove' === e.type) {
-      this.pictureContext.end.x = e.x
-      this.pictureContext.end.y = e.y
-      
+
+      //Needs to remove command name dependancy
+      if(command.name === 'Path') {
+        this.pictureContext.addPoint({x: e.x, y: e.y})
+      } else {
+        this.pictureContext.end.x = e.x
+        this.pictureContext.end.y = e.y
+      }
+
       // If element has not already been drawn, draw else redraw (avoid creating new elements)
       if (!this.currentStep) {
         this.currentElement = command.execute(this.pictureContext).element
