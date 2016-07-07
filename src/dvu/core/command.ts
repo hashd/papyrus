@@ -1,5 +1,6 @@
 import { Point } from '../geometry/cartesian_system'
-import { CommandType } from '..//enums/command_types'
+import { CommandType } from '../enums/command_types'
+import { Scope } from './scope'
 
 export class Command {
   type: CommandType
@@ -14,7 +15,7 @@ export class Command {
     return true
   }
 
-  execute(data, depth) {
+  execute(data, scope: Scope = new Scope()) {
 
   }
   

@@ -1,5 +1,6 @@
 import { PictureCommand, PictureCommandInterface } from '../core/commands/picture'
 import { Step } from '../core/step'
+import { Scope } from './../core/scope'
 import { DatasetDefinition } from '../core/data/dataset_definition'
 import { PictureContext } from '../geometry/picture_context'
 import { SVG } from '../core/helpers/svg'
@@ -16,7 +17,9 @@ export class CompositeVisualization extends PictureCommand {
     super(this.name, this.getPictureCommandInterface())
   }
 
-  execute(context: PictureContext, depth: number = 0): Picture {
+  execute(context: PictureContext, scope: Scope): Picture {
+    const depth = scope.depth
+    
     if (depth < 10) {
       const elements: Element[] = this.steps.map(step => step.execute(depth).element)
       const group = SVG.createSVG(elements, context, this.dimensions)

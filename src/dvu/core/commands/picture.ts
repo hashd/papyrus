@@ -3,7 +3,8 @@ import {CommandType} from '../../enums/command_types'
 import {PictureContext} from '../../geometry/picture_context'
 import {Picture} from '../../core/models/picture'
 import {DatasetDefinition} from '../../core/data/dataset_definition'
-import {CommandInterface} from 'src/dvu/core/commands/command_interface'
+import {CommandInterface} from './command_interface'
+import {Scope} from './../scope'
 
 export interface PictureCommandInterface extends CommandInterface {
   name: string,
@@ -27,8 +28,8 @@ export class PictureCommand extends Command {
     this.shortcutKey = implementation.shortcutKey
   }
 
-  execute(context: PictureContext, depth: number = 0): Picture {
-    return this.draw(context, depth)
+  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
+    return this.draw(context, scope.depth)
   }
 
   private draw(context: PictureContext, depth: number = 0): Picture {
