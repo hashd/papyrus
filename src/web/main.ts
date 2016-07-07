@@ -1,5 +1,5 @@
 import 'angular2/bundles/angular2-polyfills'
-import 'src/styles/main'
+import 'src/web/styles/main'
 //you may need es6-shim if you get an error relating to list.fill
 //import es6-shim;
 
