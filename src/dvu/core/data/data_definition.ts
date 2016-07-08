@@ -13,6 +13,11 @@ export class DataDefinition {
     return true
   }
 
+  validate(value: ValueType): boolean {
+    // TODO: add logic to validate a value against a valuetype
+    return true
+  }
+
   private static getDefaultValueForType(type: DataType): ValueType {
     switch (type) {
       case 'number':

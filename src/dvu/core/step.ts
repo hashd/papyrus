@@ -1,12 +1,13 @@
-import {Command} from 'src/dvu/core/command'
-import {ValueType} from 'src/dvu/core/data/data_definition'
+import {Command} from './command'
+import {Scope} from './scope'
+import {ValueType} from './data/data_definition'
 
 export class Step {
-  constructor(public command: Command, public data) {
+  constructor(public command: Command, public data: Object) {
 
   }
 
-  addParameter(name: String, value: ValueType) {
+  addParameter(name: string, value: ValueType) {
     this.data[name] = value
   }
   
@@ -18,7 +19,7 @@ export class Step {
     return this.command.getSummary(this.data)
   }
 
-  execute(depth: number = 0) {
-    return this.command.execute(this.data, depth + 1)
+  execute(scope: Scope) {
+    return this.command.execute(this.data, scope)
   }
 }

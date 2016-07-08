@@ -36,8 +36,6 @@ export class PictureCommand extends Command {
     let element = this.implementation.onMousedown(context)
 
     if (!context.instanceCount) {
-      console.log(context.instanceCount, this.implementation.noOfInstances)
-
       this.implementation.noOfInstances = this.implementation.noOfInstances + 1
       context.instanceCount = this.implementation.noOfInstances
     }

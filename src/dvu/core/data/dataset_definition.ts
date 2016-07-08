@@ -1,4 +1,4 @@
-import {DataDefinition, DataType, ValueType} from 'src/dvu/core/data/data_definition'
+import {DataDefinition, DataType, ValueType} from './data_definition'
 
 export class DatasetDefinition {
   dataDefinitions: DataDefinition[] = []
@@ -33,5 +33,9 @@ export class DatasetDefinition {
     if (dd !== undefined) {
       dd.setDefaultValue(value)
     }
+  }
+
+  validate(data: Object) {
+    return this.dataDefinitions.reduce((acc, dd) => acc && dd.validate(data[dd.name]), true)
   }
 }
