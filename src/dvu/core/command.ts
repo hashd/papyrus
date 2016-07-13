@@ -2,7 +2,11 @@ import { Point } from '../geometry/cartesian_system'
 import { CommandType } from '../enums/command_types'
 import { Scope } from './scope'
 
-export class Command {
+export interface Executable {
+  execute(data, scope: Scope)
+}
+
+export class Command implements Executable {
   type: CommandType
   shortcutKey: string
   initEvent: string = 'mousedown'
