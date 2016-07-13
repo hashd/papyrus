@@ -25,7 +25,10 @@ body {
 }
 
 .main {
-  margin-top: 20%;
+  margin-top: 18%;
+  background: #104c7b;
+  padding: 20px;
+  box-shadow: 0 2px 6px #444;
 }
 
 .links a {
