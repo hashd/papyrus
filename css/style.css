@@ -30,10 +30,17 @@ body {
 }
 
 .main {
+  margin: 0 auto;
   margin-top: calc(50vh - 108px);
-  background: #104c7b;
+  background: rgba(16, 76, 123, 0.66);
   padding: 20px;
   box-shadow: 0 2px 6px #444;
+  width: 60%;
+  transform: skew(-20deg);
+}
+
+.main > * {
+  transform: skew(20deg);
 }
 
 .links a {
@@ -44,10 +51,14 @@ body {
   font-size: 1.15em;
   text-decoration: none;
   color: #eee;
-  border-radius: 24px;
+  transform: skew(-20deg);
   margin-left: 8px;
   margin-top: 8px;
   font-size: 0.9em;
+}
+
+.links a > div {
+  transform: skew(20deg);
 }
 
 .links a:hover {
