@@ -18,7 +18,7 @@ datasetDefinition.addDataDefinition(END, 'number')
 
 export class ForCommand extends Command {
   type: CommandType = 'flow'
-  shortcutKey: string = 'l'
+  shortcutKey: string = 'f'
   steps: Step[] = []
   datasetDefinition: DatasetDefinition = datasetDefinition
 
