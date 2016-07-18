@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "moduleResolution": "classic",
     "paths": {
       "src/*": ["src/*"]
     }
-  }
+  },
+  "files": [
+    "src"
+  ]
 }

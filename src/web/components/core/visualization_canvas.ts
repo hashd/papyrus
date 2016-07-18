@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
-import { Point } from 'src/dvu/geometry/cartesian_system'
-import { PointTransform } from 'src/web/pipes/point_transform'
+import { Point } from '../../../dvu/geometry/cartesian_system'
+import { PointTransform } from '../../pipes/point_transform'
 
 @Component({
   selector: 'pa-vis-canvas',

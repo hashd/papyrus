@@ -108,9 +108,9 @@ pa-data .command-bar {
   padding: 2px 12px;
   position: absolute;
   width: 100%;
-  background: #555;
   margin-bottom: 6px;
-  color: #ffffff; }
+  font-size: 1em;
+  color: #104c7b; }
   pa-data .command-bar i:hover {
     cursor: pointer; }
 
@@ -153,7 +153,7 @@ pa-data .variables, pa-data .iterables {
     border: 1px solid #555; }
 
 .editor-space {
-  height: calc(100% - 157px); }
+  height: calc(100% - 161px); }
 
 .sidebar {
   background: #fcfcfc; }
