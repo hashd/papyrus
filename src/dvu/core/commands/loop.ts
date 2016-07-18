@@ -1,6 +1,6 @@
 import { Command } from './../command'
 import { Scope } from './../scope'
-import { CommandType } from './../../enums/command_types'
+import { CommandType } from './../command_types'
 import { DatasetDefinition } from './../data/dataset_definition'
 import { Step } from './../step'
 import { Range } from './../../utils/range'

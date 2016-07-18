@@ -1,5 +1,5 @@
 import {Command} from '../../core/command'
-import {CommandType} from '../../enums/command_types'
+import {CommandType} from '../command_types'
 import {PictureContext} from '../../geometry/picture_context'
 import {Picture} from '../../core/models/picture'
 import {DatasetDefinition} from '../../core/data/dataset_definition'
