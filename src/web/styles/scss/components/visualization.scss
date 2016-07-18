@@ -47,12 +47,12 @@ pa-visualizations {
   pa-vis-preview {
     &.selected {
       .vis-preview {
-        border: 1px solid $primary-color;
-        box-shadow: 0 0 8px $secondary-color;
+        border: 1px solid $alternate-color;
+        box-shadow: 0 0 8px $alternate-color;
       }
       
       .vis-name {
-        color: $dark-amethyst;
+        color: $alternate-color;
       }
     }
     

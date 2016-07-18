@@ -8,7 +8,12 @@ import { Step } from 'src/dvu/core/step'
   template: `
     <pa-panel header="Steps">
       <ul class="steps" *ngIf="steps?.length">
-        <li *ngFor="#step of steps; #i=index" (click)="selectStep(i)">
+        <li 
+          class="step"
+          [class.selected]="step === currentStep"
+          *ngFor="#step of steps; #i=index;"
+          (click)="selectStep(i, step)"
+        >
           <pa-step-summary [step]="step"></pa-step-summary>
         </li>
       </ul>
@@ -17,12 +22,17 @@ import { Step } from 'src/dvu/core/step'
   `,
   directives: [Panel, StepSummary]
 })
-export class PapyrusSteps {
-  @Input() steps: Step[] = []
+export class PapyrusSteps implements OnChanges {
+  @Input() 
+  steps: Step[] = []
   
-  @Output() selectedStep: EventEmitter<any> = new EventEmitter()
+  currentStep: Step
   
-  selectStep(index: number) {
+  @Output() 
+  selectedStep: EventEmitter<any> = new EventEmitter()
+  
+  selectStep(index: number, step: Step) {
+    this.currentStep = step
     this.selectedStep.emit({ index })
   }
 }

@@ -156,9 +156,9 @@ pa-data .variables, pa-data .iterables {
   height: calc(100% - 157px); }
 
 .sidebar {
-  background: #f9fffc; }
+  background: #fcfcfc; }
   .sidebar pa-panel > div {
-    border-right: 1px solid #1F6764; }
+    border-right: 1px solid #104c7b; }
 
 .command-bar .command-set {
   padding: 4px 0; }
@@ -178,22 +178,22 @@ pa-data .variables, pa-data .iterables {
     float: right;
     font-weight: bold; }
   .command-bar .command-entry.selected span {
-    font-weight: bold;
-    color: #452B72; }
+    color: #F10C49; }
 
 .pa-panel > .title {
-  background: #1F6764;
+  background: #104c7b;
   color: #ffffff; }
 
 .pa-panel > .content {
-  background: #f9fffc; }
+  background: #fcfcfc; }
 
 .pa-panel > div {
   padding: 2px 12px; }
 
 .step-summary {
-  color: #452B72;
-  font-size: 14px; }
+  color: #104c7b;
+  font-size: 14px;
+  border: 2px solid transparent; }
 
 ul.steps {
   list-style: none;
@@ -201,12 +201,15 @@ ul.steps {
   margin: -2px -12px; }
   ul.steps > li {
     padding: 6px 12px;
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #e6e6e6;
+    cursor: pointer; }
     ul.steps > li .step-summary {
       color: #555;
       text-align: left;
       font-size: inherit;
       cursor: pointer; }
+    ul.steps > li.selected .step-summary {
+      color: #F10C49; }
 
 pa-panel[header="Steps"] {
   height: 100%; }
@@ -220,7 +223,7 @@ pa-panel[header="Steps"] {
     text-align: center; }
 
 pa-visualizations pa-panel {
-  border-bottom: 1px solid #1F6764; }
+  border-bottom: 1px solid #104c7b; }
 
 pa-visualizations .content {
   padding: 12px !important;
@@ -252,14 +255,14 @@ pa-visualizations pa-create-vis {
   text-align: left;
   width: auto; }
   pa-visualizations pa-create-vis i:hover {
-    color: #1F6764; }
+    color: #104c7b; }
 
 pa-visualizations pa-vis-preview.selected .vis-preview {
-  border: 1px solid #88C425;
-  box-shadow: 0 0 8px #1F6764; }
+  border: 1px solid #F10C49;
+  box-shadow: 0 0 8px #F10C49; }
 
 pa-visualizations pa-vis-preview.selected .vis-name {
-  color: #452B72; }
+  color: #F10C49; }
 
 pa-visualizations pa-vis-preview .vis-name {
   text-align: center;
@@ -275,7 +278,7 @@ pa-visualizations pa-vis-preview input {
   width: 100%;
   text-align: center;
   border-radius: 16px;
-  border: 1px solid #88C425; }
+  border: 1px solid #269; }
   pa-visualizations pa-vis-preview input:focus {
     padding: 0px;
     outline: none; }

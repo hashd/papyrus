@@ -12,17 +12,22 @@ $light-green: #92C7A3;
 $xl-green: #c9e3d1;
 $xxl-green: #f9fffc;
 
+$dark-blue: #104c7b;
+$blue: #269;
+
 $dark-magenta: #F10C49;
 $xxl-magenta: #fff3f6;
 
 $light-gray: #e6e6e6;
+$xxl-gray: #fcfcfc;
 $gray: #aaa;
 $dark-gray: #555;
 
-$primary-color: $green;
-$secondary-color: $dark-green;
-$light-color: $light-green;
-$xxl-color: $xxl-green;
+$primary-color: $blue;
+$secondary-color: $dark-blue;
+$light-color: $light-gray;
+$xxl-color: $xxl-gray;
+$alternate-color: $dark-magenta;
 
 $white: #ffffff;
 
