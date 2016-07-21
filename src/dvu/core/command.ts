@@ -1,5 +1,5 @@
 import { Point } from '../geometry/cartesian_system'
-import { CommandType } from '../enums/command_types'
+import { CommandType } from './command_types'
 import { Scope } from './scope'
 
 export interface Executable {

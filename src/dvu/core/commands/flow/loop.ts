@@ -1,9 +1,9 @@
-import { Command } from './../command'
-import { Scope } from './../scope'
-import { CommandType } from './../command_types'
-import { DatasetDefinition } from './../data/dataset_definition'
-import { Step } from './../step'
-import { Range } from './../../utils/range'
+import { Command } from './../../command'
+import { Scope } from './../../scope'
+import { CommandType } from './../../command_types'
+import { DatasetDefinition } from './../../data/dataset_definition'
+import { Step } from './../../step'
+import { Range } from './../../../utils/range'
 
 const START: string = 'start'
 const END: string = 'end'
@@ -17,6 +17,7 @@ datasetDefinition.addDataDefinition(START, 'number')
 datasetDefinition.addDataDefinition(END, 'number')
 
 export class ForCommand extends Command {
+  name: string = 'For'
   type: CommandType = 'flow'
   shortcutKey: string = 'f'
   steps: Step[] = []

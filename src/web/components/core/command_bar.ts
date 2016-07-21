@@ -29,7 +29,8 @@ export class CommandBar {
   
   @Output() select: EventEmitter<any> = new EventEmitter()
 
-  constructor(private commandService: CommandService) {}
+  constructor(private commandService: CommandService) {
+  }
   
   getCommandsByType(type: CommandType) {
     return this.commands.filter(cmd => cmd.type === type && cmd.name !== 'unnamed')
