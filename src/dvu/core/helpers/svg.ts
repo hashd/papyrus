@@ -1,6 +1,6 @@
-import {Point} from 'src/dvu/geometry/cartesian_system'
-import {Dimensions} from 'src/dvu/geometry/dimensions'
-import {PictureContext} from 'src/dvu/geometry/picture_context'
+import {Point} from '../../geometry/cartesian_system'
+import {Dimensions} from '../../geometry/dimensions'
+import {PictureContext} from '../../geometry/picture_context'
 
 const ns: string = 'http://www.w3.org/2000/svg'
 
@@ -53,6 +53,8 @@ export class SVG {
     path.setAttributeNS(null, 'fill', 'none')
     path.setAttributeNS(null, 'stroke', '#555')
     path.setAttributeNS(null, 'stroke-width', '1')
+
+    // points.forEach(point => d = `${d}`);
 
     points.forEach(function(point) {
       if(d === '') {

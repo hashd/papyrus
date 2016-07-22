@@ -46,7 +46,7 @@ export class PictureCommand extends Command {
     }
   }
 
-  redraw(element: Element, context: PictureContext, depth: number = 0) {
+  redraw(element: Element, context: PictureContext) {
     this.implementation.onMousemove(element, context)
   }
 

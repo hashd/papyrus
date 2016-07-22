@@ -61,8 +61,9 @@ export class VisualizationPreview implements OnChanges {
   drawVisualization(width, height) {
     const preview = this.preview.nativeElement
     const pictureContext = new PictureContext({x:0, y:0}, {x:width,y:height})
+    const element = this.visualization.execute(pictureContext).element
 
-    preview.appendChild(this.visualization.execute(pictureContext, 0).element)
+    preview.appendChild(element)
   }
 
   private clearPreview() {

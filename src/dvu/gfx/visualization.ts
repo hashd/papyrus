@@ -17,11 +17,11 @@ export class CompositeVisualization extends PictureCommand {
     super(this.name, this.getPictureCommandInterface())
   }
 
-  execute(context: PictureContext, scope: Scope): Picture {
+  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
     const depth = scope.depth
     
     if (depth < 10) {
-      const elements: Element[] = this.steps.map(step => step.execute(depth).element)
+      const elements: Element[] = this.steps.map(step => step.execute(new Scope(scope)).element)
       const group = SVG.createSVG(elements, context, this.dimensions)
 
       return {
@@ -56,13 +56,16 @@ export class CompositeVisualization extends PictureCommand {
       name: self.name,
       shortcutKey: '',
       noOfInstances: 0,
-      onMousedown(context: PictureContext): Picture {
+      onMousedown(context: PictureContext): Element {
 
       },
-      onMousemove(element: Element, context: PictureContext): Picture {
+      onMousemove(element: Element, context: PictureContext): Element {
+        element.setAttributeNS(null, 'width', context.getWidth())
+        element.setAttributeNS(null, 'height', context.getHeight())
 
+        return element
       },
-      onMouseup(element: Element, context: PictureContext): Picture {
+      onMouseup(element: Element, context: PictureContext): Element {
 
       },
       getSummary(data: PictureContext): string {
