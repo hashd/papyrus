@@ -48,7 +48,7 @@ pa-vis-canvas {
 }
 
 .right-canvas {
-  width: 160px;
+  width: 0px;
 }
 
 .left-canvas {
@@ -61,7 +61,7 @@ pa-command-bar {
   position: absolute;
   top: 72px;
   bottom: 40px;
-  right: 0;
+  left: 0;
   width: 120px;
   
   .title {

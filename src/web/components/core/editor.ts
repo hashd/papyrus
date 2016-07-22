@@ -12,16 +12,18 @@ import { Command } from '../../../dvu/core/command'
   selector: 'pa-editor',
   template: `
     <div class="row row-no-padding" full-length>
+      <div class="col col-md-9 editor" full-length>
+        <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
+      </div>
       <div class="col col-md-3 sidebar" full-length>
+       
         <pa-data [data]="visualization?.data" 
           [dataObservables]="visualization?.dataObservables"
           [datasetDefinition]="visualization?.datasetDefinition"
           [style.height]="'50%'">
+         
         </pa-data>
         <pa-steps [steps]="visualization?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)"></pa-steps>
-      </div>
-      <div class="col col-md-9 editor" full-length>
-        <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
       </div>
     </div>
   `,

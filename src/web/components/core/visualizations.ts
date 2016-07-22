@@ -14,6 +14,7 @@ import { CommandService } from 'src/web/services/command'
         [visualization]="visualization"
         [arity]="visualization?.steps.length"
       >
+      
       </pa-vis-preview>
       <pa-create-vis (click)="create()">
         <i class="fa fa-plus-circle"></i>
@@ -27,7 +28,7 @@ export class PapyrusVisualizations implements OnInit {
   @Input()
   visualizations: CompositeVisualization[]
   selected: CompositeVisualization
-  
+
   @Output()
   onSelect = new EventEmitter()
 
