@@ -7,15 +7,15 @@ import { FullLength } from '../directives/all'
 @Component({
   selector: 'papyrus-shell',
   template: `
-    <div class="row row-no-padding">
-      <pa-visualizations class="col col-md-12"
+  
+    <div class="editor-space row row-no-padding">
+     <pa-visualizations class="col"
         [visualizations]="visualizations"
         (onSelect)="select($event)"
       >
       </pa-visualizations>
-    </div>
-    <div class="editor-space row row-no-padding">
-      <pa-editor [visualization]="activeVisualization" class="col col-md-12" full-length>
+
+      <pa-editor [visualization]="activeVisualization" class="col" full-length>
       
       </pa-editor>
     </div>

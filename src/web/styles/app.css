@@ -75,7 +75,7 @@ pa-vis-canvas {
     box-shadow: 0 0 8px #ccc; }
 
 .right-canvas {
-  width: 160px; }
+  width: 0px; }
 
 .left-canvas {
   width: calc(100% - 120px);
@@ -86,7 +86,7 @@ pa-command-bar {
   position: absolute;
   top: 72px;
   bottom: 40px;
-  right: 0;
+  left: 0;
   width: 120px; }
   pa-command-bar .title {
     padding: 4px 8px;
@@ -153,7 +153,7 @@ pa-data .variables, pa-data .iterables {
     border: 1px solid #555; }
 
 .editor-space {
-  height: calc(100% - 161px); }
+  height: calc(100%); }
 
 .sidebar {
   background: #fcfcfc; }
