@@ -7,12 +7,12 @@ import {CommandInterface} from './command_interface'
 import {Scope} from './../scope'
 
 export interface PictureCommandInterface extends CommandInterface {
-  name: string,
-  shortcutKey: string,
-  noOfInstances: number,
-  onMousedown: (context: PictureContext) => Picture
-  onMousemove: (element: Element, context: PictureContext) => Picture
-  onMouseup: (element: Element, context: PictureContext) => Picture
+  name: string
+  shortcutKey: string
+  noOfInstances: number
+  onMousedown: (context: PictureContext) => Element
+  onMousemove: (element: Element, context: PictureContext) => Element
+  onMouseup: (element: Element, context: PictureContext) => Element
   getSummary: (data: PictureContext) => string
 }
 
@@ -33,7 +33,7 @@ export class PictureCommand extends Command {
   }
 
   private draw(context: PictureContext, depth: number = 0): Picture {
-    let element = this.implementation.onMousedown(context)
+    let element: Element = this.implementation.onMousedown(context)
 
     if (!context.instanceCount) {
       this.implementation.noOfInstances = this.implementation.noOfInstances + 1
