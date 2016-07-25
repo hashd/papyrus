@@ -9,13 +9,13 @@ import { FullLength } from '../directives/all'
   template: `
   
     <div class="editor-space row row-no-padding">
-     <pa-visualizations class="col"
+     <pa-visualizations class="col-md-2"
         [visualizations]="visualizations"
         (onSelect)="select($event)"
       >
       </pa-visualizations>
 
-      <pa-editor [visualization]="activeVisualization" class="col" full-length>
+      <pa-editor [visualization]="activeVisualization" class="col-md-10" full-length>
       
       </pa-editor>
     </div>
