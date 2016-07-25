@@ -1,12 +1,16 @@
 pa-visualizations {
+  width: 140px !important;
+  height: 100%;
+  overflow-y: auto;
+
   pa-panel {
     border-bottom: 1px solid $secondary-color;
   }
   
   .content {
     padding: 12px !important;
-    white-space: nowrap;
-    
+    text-align: center;
+
     &>* {
       vertical-align: middle;
     }
@@ -14,9 +18,10 @@ pa-visualizations {
   
   pa-vis-preview {
     display: inline-block;
-    margin-right: 16px;
+    margin-bottom: 16px;
     width: 96px;
     cursor: pointer;
+    position: relative;
   }
   
   .vis-preview,
@@ -60,11 +65,13 @@ pa-visualizations {
       text-align: center;
       cursor: pointer;
       border-radius: 16px;
-      background: #e6e6e6;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       padding: 1px 8px;
+      position: absolute;
+      top: 31px;
+      left: 12px;
     }
     
     input {
