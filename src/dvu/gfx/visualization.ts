@@ -21,7 +21,7 @@ export class CompositeVisualization extends PictureCommand {
 
   execute(context: PictureContext, scope: Scope = new Scope()): Picture {
     const depth = scope.depth
-    
+
     if (depth < 10) {
       const elements: Element[] = this.steps.map(step => step.execute(new Scope(scope)).element)
       const group = SVG.createSVG(elements, context, this.dimensions)
@@ -73,6 +73,19 @@ export class CompositeVisualization extends PictureCommand {
       getSummary(data: PictureContext): string {
         const lsp = data.getLeastSignificantPoint()
         return `Draw ${self.name} from (${lsp.x}, ${lsp.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
+      }
+    }
+  }
+
+  addStep(step: Step) {
+
+  }
+
+  removeStep(step) {
+    if(this.steps && step) {
+      const index = this.steps.indexOf(step);
+      if(index != -1) {
+      	this.steps.splice(index, 1);
       }
     }
   }
