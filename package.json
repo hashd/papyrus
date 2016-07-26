@@ -4,12 +4,12 @@
   "description": "Dynamic Visualization Playground",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run lite\" \"gulp watch\" \"npm run build-app\"",
-    "lite": "lite-server -c config/lite-server.json",
+    "prod:start": "concurrently \"npm run prod:serve\" \"gulp watch\" \"npm run build-app\"",
+    "prod:serve": "lite-server -c config/lite-server.json",
     "build-app": "jspm bundle-sfx app public/app.js",
     "test": "mocha",
-    "dev:start": "concurrently \"npm run dev:lite\" \"gulp watch\"",
-    "dev:lite": "lite-server -c config/lite-server.dev.json"
+    "start": "concurrently \"npm run serve\" \"gulp watch:dev\"",
+    "serve": "lite-server -c config/lite-server.dev.json"
   },
   "keywords": [
     "data",

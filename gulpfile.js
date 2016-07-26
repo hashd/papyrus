@@ -49,7 +49,12 @@ gulp.task('build', gulp.series('clean', 'copy:fonts', 'build:app'));
 
 gulp.task('watch', function () {
   gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {
-    console.log(event);
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  });  
+});
+
+gulp.task('watch:dev', function () {
+  gulp.watch([sassSrc], gulp.series('compile:css')).on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });  
 });

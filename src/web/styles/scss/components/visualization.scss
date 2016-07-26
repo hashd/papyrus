@@ -1,15 +1,22 @@
 pa-visualizations {
-  width: 140px !important;
+  width: 108px !important;
   height: 100%;
   overflow-y: auto;
+  box-shadow: 2px 0 4px #ddd;
 
-  pa-panel {
-    border-bottom: 1px solid $secondary-color;
+  pa-panel, .pa-panel {
+    height: 100%;
+    
+    .content, .title {
+      text-align: center;
+      background: #333;
+    } 
   }
   
   .content {
-    padding: 12px !important;
+    padding: 12px 0 !important;
     text-align: center;
+    height: calc(100% - 22px);
 
     &>* {
       vertical-align: middle;
@@ -18,7 +25,7 @@ pa-visualizations {
   
   pa-vis-preview {
     display: inline-block;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     width: 96px;
     cursor: pointer;
     position: relative;
@@ -43,21 +50,22 @@ pa-visualizations {
     font-size: 3em;
     text-align: left;
     width: auto;
+    color: $white;
     
     i:hover {
-      color: $secondary-color;
+      color: $alternate-color;
     }
   }
   
   pa-vis-preview {
     &.selected {
       .vis-preview {
-        border: 1px solid $alternate-color;
-        box-shadow: 0 0 8px $alternate-color;
+        border: 3px solid $alternate-color;
+        box-shadow: 0 0 12px $alternate-color;
       }
       
       .vis-name {
-        color: $alternate-color;
+        color: $primary-color;
       }
     }
     
@@ -85,9 +93,5 @@ pa-visualizations {
         outline: none;
       }
     }
-  }
-  
-  .vis-preview+div {
-    margin-top: 4px;
   }
 }

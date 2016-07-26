@@ -7,7 +7,7 @@ import { CommandService } from 'src/web/services/command'
 @Component({
   selector: 'pa-visualizations',
   template: `
-    <pa-panel header="Visualizations">
+    <pa-panel header="Pictures">
       <pa-vis-preview *ngFor="#visualization of visualizations" 
         (click)="select(visualization)"
         [class.selected]="visualization === selected"

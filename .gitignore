@@ -14,4 +14,4 @@ npm-debug.log*
 
 # build files
 public/app*
-src/styles/app.css
+src/web/styles/app.css

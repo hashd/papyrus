@@ -20,16 +20,16 @@ pa-step-summary {
 }
 
 pa-vis-canvas {
-  height: calc(100% - 20px);
+  height: calc(100% - 24px);
 
   .pa-statusbar {
-    font-family: Ubuntu Mono, Menlo, Monaco, Consolas, Lucida Console, dejavu sans mono, monospace;
+    font-family: $mono-fonts;
     position: absolute;
     bottom: 0;
-    width: calc(100% - 120px);
+    width: 100%;
     color: #111;
     border-top: 1px solid #aaa;
-    background: #e2e2e2;
+    background: $light-gray;
     padding: 2px 8px;
     height: 20px;
     overflow: hidden;
@@ -52,7 +52,6 @@ pa-vis-canvas {
 }
 
 .left-canvas {
-  margin-left: 120px;
   width: calc(100% - 120px);
   padding-top: 24px;
   height: 100%;
@@ -60,9 +59,8 @@ pa-vis-canvas {
 
 pa-command-bar {
   position: absolute;
-  top: 72px;
-  bottom: 40px;
-  left: 0;
+  top: 108px;
+  right: 0;
   width: 120px;
   
   .title {

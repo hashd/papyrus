@@ -13,10 +13,10 @@ pa-data {
   }
   
   .command-bar {
-    margin: -2px -13px;
+    margin: -2px -12px;
     padding: 2px 12px;
     position: absolute;
-    width: 100%;
+    width: calc(100% - 1px);
     margin-bottom: 6px;
     font-size: 1em;
     color: $secondary-color;
@@ -39,7 +39,7 @@ pa-data {
     .vname input {
       display: inline-block;
       width: 25%;
-      min-width: 80px;
+      min-width: 120px;
       padding: 2px 16px;
       border-radius: 16px;
     }

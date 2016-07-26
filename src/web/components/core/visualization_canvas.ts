@@ -47,7 +47,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     const canvasParent = this.canvasParent.nativeElement,
       canvas = this.canvas.nativeElement,
       width = canvasParent.clientWidth,
-      height = canvasParent.clientHeight - 64,
+      height = canvasParent.clientHeight - 72,
       minDim = Math.min(width, height)
       
     canvas.setAttribute('viewBox', `0 0 ${minDim} ${minDim}`)

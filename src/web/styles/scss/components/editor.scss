@@ -1,5 +1,5 @@
 pa-editor {
-  width: calc(100% - 140px) !important;
+  width: calc(100% - 108px) !important;
 }
 
 .editor-space {
@@ -7,14 +7,22 @@ pa-editor {
 }
 
 .sidebar {
-  background: $xxl-color;
-  
-  pa-panel > div {
-    border-right: 1px solid $secondary-color;
+  background: $xxl-gray;
+
+  .pa-panel {
+    .title {
+      border-right: 1px solid $secondary-color;
+    }
+
+    .content {
+      border-right: 1px solid #aaa;
+    }
   }
 }
 
 .command-bar {
+  background: $xxl-gray;
+
   .command-set {
     padding: 4px 0;
   
@@ -42,6 +50,7 @@ pa-editor {
     span:last-child {
       float: right;
       font-weight: bold;
+      font-family: $mono-fonts;
     }
     
     &.selected span {

@@ -18,7 +18,7 @@ $blue: #269;
 $dark-magenta: #F10C49;
 $xxl-magenta: #fff3f6;
 
-$light-gray: #e6e6e6;
+$light-gray: #f2f2f2;
 $xxl-gray: #fcfcfc;
 $gray: #aaa;
 $dark-gray: #555;
@@ -34,6 +34,8 @@ $white: #ffffff;
 $normal-font-color: $dark-gray;
 
 $primary-fonts: 'Rubik', 'Helvetica Neue', 'Helvetica', 'Arial';
+$header-fonts: 'Arial';
+$mono-fonts: Ubuntu Mono, Menlo, Monaco, Consolas, Lucida Console, dejavu sans mono, monospace;
 
 * {
   margin: 0;

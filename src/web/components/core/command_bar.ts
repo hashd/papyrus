@@ -13,8 +13,8 @@ import { CommandService } from '../../services/command'
           [class.selected]="cmd === currentCommand"
           (click)="selectCommand(cmd)"
         >
-          <span>{{cmd?.name}}</span>
-          <span>{{cmd?.shortcutKey}}</span>
+          <span class="name">{{cmd?.name}}</span>
+          <span class="key">{{cmd?.shortcutKey}}</span>
         </div>
       </div>
     </div>
