@@ -2,12 +2,19 @@ ul.steps {
   list-style: none;
   padding: 0;
   margin: -2px -12px;
-  
+
   & > li {
     padding: 6px 12px;
     border-bottom: 1px solid $light-gray;
     cursor: pointer;
-    
+    position: relative;
+
+    .remove-icon {
+      position: absolute;
+      top: calc(50% - 14px);
+      right: 5px;
+      font-size: 20px;
+    }
     .step-summary {
       color: $dark-gray;
       text-align: left;
@@ -17,16 +24,16 @@ ul.steps {
 
     &.selected .step-summary {
       color: $alternate-color;
-    } 
+    }
   }
 }
 
 pa-panel[header="Steps"] {
   height: 100%;
-  
+
   .pa-panel {
     height: 100%;
-  
+
     .content {
       height: calc(100% - 22px);
       overflow: auto;

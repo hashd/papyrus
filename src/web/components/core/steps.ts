@@ -8,13 +8,16 @@ import { Step } from 'src/dvu/core/step'
   template: `
     <pa-panel header="Steps">
       <ul class="steps" *ngIf="steps?.length">
-        <li 
+        <li
           class="step"
           [class.selected]="step === currentStep"
           *ngFor="#step of steps; #i=index;"
           (click)="selectStep(i, step)"
         >
           <pa-step-summary [step]="step"></pa-step-summary>
+          <div class="remove-icon" (click)="removeStep(step)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
         </li>
       </ul>
       <div *ngIf="!steps?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
@@ -23,16 +26,20 @@ import { Step } from 'src/dvu/core/step'
   directives: [Panel, StepSummary]
 })
 export class PapyrusSteps implements OnChanges {
-  @Input() 
+  @Input()
   steps: Step[] = []
-  
+
   currentStep: Step
-  
-  @Output() 
-  selectedStep: EventEmitter<any> = new EventEmitter()
-  
+
+  @Output() selectedStep: EventEmitter<any> = new EventEmitter()
+  @Output() removedStep: EventEmitter<any> = new EventEmitter()
+
   selectStep(index: number, step: Step) {
     this.currentStep = step
     this.selectedStep.emit({ index })
+  }
+
+  removeStep(step: Step) {
+    this.removedStep.emit({ step })
   }
 }
