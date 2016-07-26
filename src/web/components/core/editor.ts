@@ -7,18 +7,19 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { CommandService } from 'src/web/services/all'
 import { Step } from '../../../dvu/core/step'
 import { Command } from '../../../dvu/core/command'
- 
+import { Messages, Subjects } from 'src/web/services/messages'
+
 @Component({
   selector: 'pa-editor',
   template: `
     <div class="row row-no-padding" full-length>
       <div class="col col-md-3 sidebar" full-length>
-        <pa-data [data]="visualization?.data" 
+        <pa-data [data]="visualization?.data"
           [dataObservables]="visualization?.dataObservables"
           [datasetDefinition]="visualization?.datasetDefinition"
           [style.height]="'50%'">
         </pa-data>
-        <pa-steps [steps]="visualization?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)"></pa-steps>
+        <pa-steps [steps]="visualization?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
       </div>
       <div class="col col-md-9 editor" full-length>
         <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
@@ -33,12 +34,20 @@ export class PapyrusEditor {
   visualization: CompositeVisualization
   commands: Command[]
   selectedStep: Step
-  
+
   constructor(private commandService: CommandService) {
     this.commands = commandService.getCommands()
   }
-  
+
   selectStep(e) {
     this.selectedStep = this.visualization.steps[e.index]
+  }
+
+  removeStep(e) {
+    this.visualization.removeStep(e.step);
+
+    //to refresh the visualization canvas
+    const refreshVisualizationSubject = Subjects[Messages.REFRESHVISUALIZATION];
+    refreshVisualizationSubject.next();
   }
 }
