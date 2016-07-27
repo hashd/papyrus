@@ -41,14 +41,14 @@ export class PapyrusEditor {
   }
 
   selectStep(e) {
-    this.selectedStep = this.visualization.steps[e.index]
+    this.selectedStep = e.step
   }
 
   removeStep(e) {
     this.visualization.removeStep(e.step);
 
     //to refresh the visualization canvas
-    const refreshVisualizationSubject = Subjects[Messages.REFRESHVISUALIZATION];
+    const refreshVisualizationSubject = Subjects[Messages.REFRESH_VISUALIZATION];
     refreshVisualizationSubject.next();
   }
 }

@@ -9,7 +9,7 @@ pa-canvas {
   & > div {
     height: 100%;
   }
-  
+
   & > div:focus {
     outline: none;
   }
@@ -40,10 +40,16 @@ pa-vis-canvas {
   padding: 16px 0;
   height: 100%;
   text-align: center;
-  
+  outline: 0px;
+
   svg {
     border: 1px solid #ccc;
     box-shadow: 0 0 8px #ccc;
+
+    .selected {
+      stroke: blue;
+      stroke-width: 3;
+    }
   }
 }
 
@@ -62,13 +68,13 @@ pa-command-bar {
   top: 108px;
   right: 0;
   width: 120px;
-  
+
   .title {
     padding: 4px 8px;
     font-weight: bold;
     text-transform: uppercase;
   }
-  
+
   .command-set {
     border-bottom: 1px solid $light-amethyst;
   }

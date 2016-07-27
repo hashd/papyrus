@@ -1,7 +1,8 @@
 import { Subject } from 'rxjs/Subject'
 
 const enum Messages {
-  REFRESHVISUALIZATION
+  REFRESH_VISUALIZATION,
+  CHANGE_STEP_SELECTION
 }
 
 let Subjects = {};

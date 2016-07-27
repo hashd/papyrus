@@ -3,11 +3,12 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { Point } from '../../../dvu/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
 import { Messages, Subjects } from 'src/web/services/messages'
+import * as _  from 'lodash'
 
 @Component({
   selector: 'pa-vis-canvas',
   template: `
-    <div id="vis-canvas" class="canvas" #canvas_parent>
+    <div id="vis-canvas" class="canvas" (keydown)="keydownEvent($event)" tabindex="1" #canvas_parent>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" #canvas
         (mousedown)="emitMouseEvent($event)"
         (mouseup)="emitMouseEvent($event)"
@@ -41,7 +42,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Output() draw: EventEmitter<Object> = new EventEmitter()
 
   constructor () {
-    const refreshVisualizationSubject = Subjects[Messages.REFRESHVISUALIZATION];
+    const refreshVisualizationSubject = Subjects[Messages.REFRESH_VISUALIZATION];
 
     refreshVisualizationSubject.subscribe({
       next: () => {
@@ -114,6 +115,46 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
     if (event.type === 'mouseout') {
       this.hoveredPoint = null
+    }
+  }
+
+  keydownEvent(e) {
+    const keyCode = e.keyCode;
+
+    if(keyCode === 9) {
+      let selectedElement;
+      Array.from(this.vis.nativeElement.children).forEach( element => {
+        if(element.classList.contains('selected')) {
+          selectedElement = element;
+        }
+      });
+
+      if(selectedElement && selectedElement.nextSibling) {
+        this.selectElement(selectedElement.nextSibling)
+      } else {
+        this.selectElement(this.vis.nativeElement.firstElementChild)
+      }
+
+      e.preventDefault();
+    }
+  }
+
+  private selectElement(element) {
+    if(element) {
+      //assuming only one element is selected
+      let selected = element.parentElement.querySelector('.selected')
+      if(selected) {
+        selected.classList.remove('selected')
+      }
+
+      element.classList.add('selected');
+
+      //broadcast step selection change message
+      const selectedStep = _.find(this.visualization.steps, function(step) { return step.getElement() === element })
+      if(selectedStep) {
+        const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION]
+        selectedStepSubject.next(selectedStep)
+      }
     }
   }
 

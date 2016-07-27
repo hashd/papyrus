@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { StepSummary } from './step_summary'
 import { Step } from 'src/dvu/core/step'
+import { Messages, Subjects } from 'src/web/services/messages'
 
 @Component({
   selector: 'pa-steps',
@@ -12,7 +13,7 @@ import { Step } from 'src/dvu/core/step'
           class="step"
           [class.selected]="step === currentStep"
           *ngFor="#step of steps; #i=index;"
-          (click)="selectStep(i, step)"
+          (click)="selectStep(step)"
         >
           <pa-step-summary [step]="step"></pa-step-summary>
           <div class="remove-icon" (click)="removeStep(step)">
@@ -34,9 +35,19 @@ export class PapyrusSteps implements OnChanges {
   @Output() selectedStep: EventEmitter<any> = new EventEmitter()
   @Output() removedStep: EventEmitter<any> = new EventEmitter()
 
-  selectStep(index: number, step: Step) {
+  constructor () {
+    const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION];
+
+    selectedStepSubject.subscribe({
+      next: (selectedStep) => {
+        this.selectStep(selectedStep)
+      }
+    });
+  }
+
+  selectStep(step: Step) {
     this.currentStep = step
-    this.selectedStep.emit({ index })
+    this.selectedStep.emit({ step })
   }
 
   removeStep(step: Step) {
