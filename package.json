@@ -4,10 +4,12 @@
   "description": "Dynamic Visualization Playground",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run lite\" \"gulp watch\"",
+    "start": "concurrently \"npm run lite\" \"gulp watch\" \"npm run build-app\"",
     "lite": "lite-server -c config/lite-server.json",
     "build-app": "jspm bundle-sfx app public/app.js",
-    "test": "mocha"
+    "test": "mocha",
+    "dev:start": "concurrently \"npm run dev:lite\" \"gulp watch\"",
+    "dev:lite": "lite-server -c config/lite-server.dev.json"
   },
   "keywords": [
     "data",
@@ -45,6 +47,7 @@
       "jquery": "npm:jquery@^2.2.2",
       "lodash": "npm:lodash@^4.6.1",
       "rxjs": "npm:rxjs@^5.0.0-beta.7",
+      "scss": "github:mobilexag/plugin-sass@^0.4.6",
       "svg.js": "github:wout/svg.js@^2.3.0",
       "zone.js": "npm:zone.js@^0.6.6"
     },

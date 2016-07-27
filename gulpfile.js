@@ -11,7 +11,7 @@ var sassSrc = "src/web/styles/**/*.scss",
   appSrc = "src/**/*.ts",
   publicDir = "public";
 
-var htmlSrc = '*.html',
+var htmlSrc = 'index.html',
   fontDirs = [
     'jspm_packages*/github/twbs/bootstrap*/fonts/*',
     'jspm_packages*/npm/font-awesome*/fonts/*'
@@ -27,17 +27,8 @@ gulp.task('clean:fonts', function () {
   return del(publicDir + '/' + fontDirs);
 });
 
-gulp.task('clean:html', function () {
-  return del(publicDir + '/' + htmlSrc);
-});
-
 gulp.task('copy:fonts', function () {
   return gulp.src(fontDirs)
-    .pipe(gulp.dest(publicDir));
-});
-
-gulp.task('copy:html', function () {
-  return gulp.src(htmlSrc)
     .pipe(gulp.dest(publicDir));
 });
 
@@ -54,7 +45,7 @@ gulp.task('build:js', gulp.series('compile:css', function run_build_app() {
 
 gulp.task('build:app', gulp.series('build:js'));
 
-gulp.task('build', gulp.series('clean', 'copy:html', 'copy:fonts', 'build:app'));
+gulp.task('build', gulp.series('clean', 'copy:fonts', 'build:app'));
 
 gulp.task('watch', function () {
   gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {

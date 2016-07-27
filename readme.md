@@ -37,7 +37,7 @@ These features will be targeted after the MVP is ready
 - Ability to share pictures and use pictures created by others
 
 ### Want to contribute
-Check our [developer guide](docs/development.md) to get started. PRs are very much welcome and appreciated.
+Check our [developer guide](docs) to get started. PRs are very much welcome and appreciated.
 
 If you would like to contribute, you can get in touch with me at kiran.d@imaginea.com
 
