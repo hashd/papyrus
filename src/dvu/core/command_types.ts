@@ -8,5 +8,5 @@ const GROUP: string = 'group'
 export type CommandType = PRIMITIVE | COMPOSITE | ADJUST | FLOW | MODIFIER | GROUP
 
 export const COMMAND_TYPES: CommandType[] = [
-  PRIMITIVE, FLOW, ADJUST, MODIFIER, GROUP
+  PRIMITIVE, COMPOSITE, FLOW, ADJUST//, MODIFIER, GROUP
 ]

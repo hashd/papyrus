@@ -4,11 +4,13 @@ import { Scope } from './../core/scope'
 import { DatasetDefinition } from '../core/data/dataset_definition'
 import { PictureContext } from '../geometry/picture_context'
 import { SVG } from '../core/helpers/svg'
+import { CommandType } from '../core/command_types'
 import { Dimensions } from 'src/dvu/geometry/dimensions'
 import { Picture } from 'src/dvu/core/models/picture'
 
 export class CompositeVisualization extends PictureCommand {
   name: string = 'unnamed'
+  type: CommandType = 'composite'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
   dimensions: Dimensions = { width: 0, height: 0 }
   steps: Step[] = []
