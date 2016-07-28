@@ -13,7 +13,7 @@ import { Messages, Subjects } from 'src/web/services/messages'
           class="step"
           [class.selected]="step === currentStep"
           *ngFor="#step of steps; #i=index;"
-          (click)="selectStep(step)"
+          (click)="clickEvent(step)"
         >
           <pa-step-summary [step]="step"></pa-step-summary>
           <div class="remove-icon" (click)="removeStep(step)">
@@ -36,13 +36,21 @@ export class PapyrusSteps implements OnChanges {
   @Output() removedStep: EventEmitter<any> = new EventEmitter()
 
   constructor () {
-    const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION];
+    const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION];
 
-    selectedStepSubject.subscribe({
-      next: (selectedStep) => {
-        this.selectStep(selectedStep)
+    selectedElementSubject.subscribe({
+      next: (step) => {
+        this.selectStep(step)
       }
     });
+  }
+
+  clickEvent(step: Step) {
+    this.selectStep(step)
+
+    //broadcast step selection change message
+    const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION]
+    selectedStepSubject.next(step)
   }
 
   selectStep(step: Step) {

@@ -90,7 +90,7 @@ export class PapyrusCanvas implements OnChanges {
       }
 
       // If element has not already been drawn, draw else redraw (avoid creating new elements)
-      if (!this.currentStep) {
+      if (!this.currentElement) {
         this.currentElement = command.execute(this.pictureContext).element
         this.currentStep = new Step(command, this.pictureContext)
       } else {

@@ -14,6 +14,7 @@ import * as _  from 'lodash'
         (mouseup)="emitMouseEvent($event)"
         (mousemove)="emitMouseEvent($event)"
         (mouseout)="($event.relatedTarget.localName==='div')?emitMouseEvent($event):undefined"
+        (click)="clickEvent($event)"
       >
         <g #vis></g>
         <g #work></g>
@@ -42,13 +43,23 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Output() draw: EventEmitter<Object> = new EventEmitter()
 
   constructor () {
-    const refreshVisualizationSubject = Subjects[Messages.REFRESH_VISUALIZATION];
+    const removeStepSubject = Subjects[Messages.REMOVE_STEP],
+      selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION];
 
-    refreshVisualizationSubject.subscribe({
-      next: () => {
-        if (this.workCanvas) this.clearWorkCanvas()
-        if (this.vis) this.clearVis()
-        this.visualization.steps.forEach(step => this.vis.nativeElement.appendChild(step.execute().element))
+    removeStepSubject.subscribe({
+      next: (removedStep) => {
+        if(removedStep) {
+          //Needs to work on remove only removed step element
+          if (this.workCanvas) this.clearWorkCanvas()
+          if (this.vis) this.clearVis()
+          this.visualization.steps.forEach(step => this.vis.nativeElement.appendChild(step.execute().element))
+        }
+      }
+    });
+
+    selectedStepSubject.subscribe({
+      next: (selectedStep) => {
+        this.selectElement(selectedStep.getElement())
       }
     });
   }
@@ -119,23 +130,31 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
 
   keydownEvent(e) {
-    const keyCode = e.keyCode;
+    const keyCode = e.keyCode
 
     if(keyCode === 9) {
-      let selectedElement;
-      Array.from(this.vis.nativeElement.children).forEach( element => {
-        if(element.classList.contains('selected')) {
-          selectedElement = element;
+      let selectedElement
+      let element
+
+      Array.from(this.vis.nativeElement.children).forEach( child => {
+        if(child.classList.contains('selected')) {
+          selectedElement = child
         }
       });
 
-      if(selectedElement && selectedElement.nextSibling) {
-        this.selectElement(selectedElement.nextSibling)
-      } else {
-        this.selectElement(this.vis.nativeElement.firstElementChild)
-      }
+      element = selectedElement && selectedElement.nextSibling ? selectedElement.nextSibling : this.vis.nativeElement.firstElementChild
+      this.selectElement(element)
+      this.selectionChangeMessage(element)
+      e.preventDefault()
+    }
+  }
 
-      e.preventDefault();
+  clickEvent(e) {
+    let element = e.target
+    if(element && element.tagName !== 'svg') {
+      this.selectElement(element)
+      this.selectionChangeMessage(element)
+      e.preventDefault()
     }
   }
 
@@ -147,14 +166,16 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
         selected.classList.remove('selected')
       }
 
-      element.classList.add('selected');
+      element.classList.add('selected')
+    }
+  }
 
-      //broadcast step selection change message
-      const selectedStep = _.find(this.visualization.steps, function(step) { return step.getElement() === element })
-      if(selectedStep) {
-        const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION]
-        selectedStepSubject.next(selectedStep)
-      }
+  private selectionChangeMessage(element) {
+    //broadcast element selection change message
+    const selectedStep = _.find(this.visualization.steps, function(step) { return step.getElement() === element })
+    if(selectedStep) {
+      const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
+      selectedElementSubject.next(selectedStep)
     }
   }
 
