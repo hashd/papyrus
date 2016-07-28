@@ -48,7 +48,7 @@ export class PapyrusEditor {
     this.visualization.removeStep(e.step);
 
     //to refresh the visualization canvas
-    const refreshVisualizationSubject = Subjects[Messages.REFRESH_VISUALIZATION];
-    refreshVisualizationSubject.next();
+    const removeStepSubject = Subjects[Messages.REMOVE_STEP];
+    removeStepSubject.next(e.step);
   }
 }
