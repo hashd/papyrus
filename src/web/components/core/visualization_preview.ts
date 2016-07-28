@@ -1,23 +1,23 @@
 import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges,Output,EventEmitter } from 'angular2/core'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { FocusMe } from '../../directives/focus_me'
-import { PictureContext } from 'src/dvu/geometry/picture_context'
+import { PictureContext } from '../../../dvu/geometry/picture_context'
 import { Observable } from 'rxjs/Rx'
 
 @Component({
   selector: 'pa-vis-preview',
   template: `
     <div class="vis-preview">
-     <div class="del-icon">
-         <i class="fa fa-close" (click)="removeVisualization()"></i>
-       </div>
+      <div class="del-icon">
+        <i class="fa fa-trash" (click)="removeVisualization()"></i>
+      </div>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="96px" height="80px" #preview>
       
       </svg>
-    </div>
-    <div>
-      <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.name}}</div>
-      <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.name" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
+      <div>
+        <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.name}}</div>
+        <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.name" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
+      </div>
     </div>
   `,
   directives: [FocusMe]
@@ -26,8 +26,7 @@ export class VisualizationPreview implements OnChanges {
   @Input() visualization: CompositeVisualization
   @Input() arity: number
 
-  @Output()
-  onRemove = new EventEmitter()
+  @Output() onRemove = new EventEmitter()
 
   nameBeingEdited: boolean = false
   previousName: string
@@ -72,15 +71,14 @@ export class VisualizationPreview implements OnChanges {
     preview.appendChild(element)
   }
 
+  removeVisualization() {
+    const visualization = this.visualization
+    this.onRemove.emit({ visualization })
+  }
+
   private clearPreview() {
     while (this.preview.nativeElement.firstChild) {
       this.preview.nativeElement.removeChild(this.preview.nativeElement.firstChild)
     }
-  }
-
-  removeVisualization() {
-    let visualization = this.visualization
-    this.onRemove.emit({ visualization })
-
   }
 }

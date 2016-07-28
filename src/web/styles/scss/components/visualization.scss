@@ -43,9 +43,20 @@ pa-visualizations {
   .vis-preview {
     background: $white;
 
-     .del-icon {
-        position: absolute;
-        right:5px;
+    .del-icon {
+      position: absolute;
+      right: 5px;
+      display: none;
+
+      &:hover {
+        color: $danger-color;
+      }
+    }
+
+    &:hover {
+      .del-icon {
+        display: initial;
+      }
     }
   }
   

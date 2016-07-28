@@ -56,9 +56,15 @@ export class PapyrusVisualizations implements OnInit {
     this.select(vis)
   }
   
-  removeVisualization(event) {
-   
-   var index= this.visualizations.indexOf(event.visualization);
-   this.visualizations.splice(index,1);
+  removeVisualization({ visualization }) {
+    const index = this.visualizations.indexOf(visualization)
+    this.visualizations.splice(index, 1)
+
+    if (this.visualizations.length === 0) {
+      this.create()
+    } else {
+      const nextIndex = (index === this.visualizations.length) ? index - 1: index
+      this.select(this.visualizations[nextIndex])
+    }
   }
 }
