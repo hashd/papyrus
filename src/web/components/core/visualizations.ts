@@ -13,6 +13,7 @@ import { CommandService } from 'src/web/services/command'
         [class.selected]="visualization === selected"
         [visualization]="visualization"
         [arity]="visualization?.steps.length"
+        (onRemove)="removeVisualization($event)"
       >
       
       </pa-vis-preview>
@@ -53,5 +54,11 @@ export class PapyrusVisualizations implements OnInit {
     this.visualizations.push(vis)
     this.commandService.addCommand(vis)
     this.select(vis)
+  }
+  
+  removeVisualization(event) {
+   
+   var index= this.visualizations.indexOf(event.visualization);
+   this.visualizations.splice(index,1);
   }
 }

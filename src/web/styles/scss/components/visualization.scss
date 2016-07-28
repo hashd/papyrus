@@ -42,6 +42,11 @@ pa-visualizations {
   
   .vis-preview {
     background: $white;
+
+     .del-icon {
+        position: absolute;
+        right:5px;
+    }
   }
   
   pa-create-vis {

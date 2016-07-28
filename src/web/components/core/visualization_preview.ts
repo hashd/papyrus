@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges } from 'angular2/core'
+import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges,Output,EventEmitter } from 'angular2/core'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from 'src/dvu/geometry/picture_context'
@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Rx'
   selector: 'pa-vis-preview',
   template: `
     <div class="vis-preview">
+     <div class="del-icon">
+         <i class="fa fa-close" (click)="removeVisualization()"></i>
+       </div>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="96px" height="80px" #preview>
       
       </svg>
@@ -22,6 +25,9 @@ import { Observable } from 'rxjs/Rx'
 export class VisualizationPreview implements OnChanges {
   @Input() visualization: CompositeVisualization
   @Input() arity: number
+
+  @Output()
+  onRemove = new EventEmitter()
 
   nameBeingEdited: boolean = false
   previousName: string
@@ -70,5 +76,11 @@ export class VisualizationPreview implements OnChanges {
     while (this.preview.nativeElement.firstChild) {
       this.preview.nativeElement.removeChild(this.preview.nativeElement.firstChild)
     }
+  }
+
+  removeVisualization() {
+    let visualization = this.visualization
+    this.onRemove.emit({ visualization })
+
   }
 }
