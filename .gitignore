@@ -1,9 +1,14 @@
+# editor specific files
 .vscode
 .idea
+
+# OS specific files
+.DS_Store
 
 npm-debug.log
 
 jspm_packages/*
 node_modules/*
 styles/*
+src
 typings
