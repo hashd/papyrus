@@ -14787,6 +14787,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
         execute: function() {
             VisualizationPreview = (function () {
                 function VisualizationPreview() {
+                    this.onRemove = new core_1.EventEmitter();
                     this.nameBeingEdited = false;
                 }
                 VisualizationPreview.prototype.editName = function () {
@@ -14817,6 +14818,10 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                     var element = this.visualization.execute(pictureContext).element;
                     preview.appendChild(element);
                 };
+                VisualizationPreview.prototype.removeVisualization = function () {
+                    var visualization = this.visualization;
+                    this.onRemove.emit({ visualization: visualization });
+                };
                 VisualizationPreview.prototype.clearPreview = function () {
                     while (this.preview.nativeElement.firstChild) {
                         this.preview.nativeElement.removeChild(this.preview.nativeElement.firstChild);
@@ -14831,13 +14836,17 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                     __metadata('design:type', Number)
                 ], VisualizationPreview.prototype, "arity", void 0);
                 __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], VisualizationPreview.prototype, "onRemove", void 0);
+                __decorate([
                     core_1.ViewChild('preview'), 
                     __metadata('design:type', (typeof (_b = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _b) || Object)
                 ], VisualizationPreview.prototype, "preview", void 0);
                 VisualizationPreview = __decorate([
                     core_1.Component({
                         selector: 'pa-vis-preview',
-                        template: "\n    <div class=\"vis-preview\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"96px\" height=\"80px\" #preview>\n      \n      </svg>\n    </div>\n    <div>\n      <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n      <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n    </div>\n  ",
+                        template: "\n    <div class=\"vis-preview\">\n      <div class=\"del-icon\">\n        <i class=\"fa fa-trash\" (click)=\"removeVisualization()\"></i>\n      </div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"96px\" height=\"80px\" #preview>\n      \n      </svg>\n      <div>\n        <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n        <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n      </div>\n    </div>\n  ",
                         directives: [focus_me_1.FocusMe]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -14905,6 +14914,18 @@ $__System.register("9e", ["b", "9f", "9a", "9b", "a0"], function(exports_1, cont
                     this.commandService.addCommand(vis);
                     this.select(vis);
                 };
+                PapyrusVisualizations.prototype.removeVisualization = function (_a) {
+                    var visualization = _a.visualization;
+                    var index = this.visualizations.indexOf(visualization);
+                    this.visualizations.splice(index, 1);
+                    if (this.visualizations.length === 0) {
+                        this.create();
+                    }
+                    else {
+                        var nextIndex = (index === this.visualizations.length) ? index - 1 : index;
+                        this.select(this.visualizations[nextIndex]);
+                    }
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)
@@ -14916,7 +14937,7 @@ $__System.register("9e", ["b", "9f", "9a", "9b", "a0"], function(exports_1, cont
                 PapyrusVisualizations = __decorate([
                     core_1.Component({
                         selector: 'pa-visualizations',
-                        template: "\n    <pa-panel header=\"Pictures\">\n      <pa-vis-preview *ngFor=\"#visualization of visualizations\" \n        (click)=\"select(visualization)\"\n        [class.selected]=\"visualization === selected\"\n        [visualization]=\"visualization\"\n        [arity]=\"visualization?.steps.length\"\n      >\n      \n      </pa-vis-preview>\n      <pa-create-vis (click)=\"create()\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </pa-create-vis>\n    </pa-panel>\n  ",
+                        template: "\n    <pa-panel header=\"Pictures\">\n      <pa-vis-preview *ngFor=\"#visualization of visualizations\" \n        (click)=\"select(visualization)\"\n        [class.selected]=\"visualization === selected\"\n        [visualization]=\"visualization\"\n        [arity]=\"visualization?.steps.length\"\n        (onRemove)=\"removeVisualization($event)\"\n      >\n      \n      </pa-vis-preview>\n      <pa-create-vis (click)=\"create()\">\n        <i class=\"fa fa-plus-circle\"></i>\n      </pa-create-vis>\n    </pa-panel>\n  ",
                         directives: [panel_1.PanelComponent, visualization_preview_1.VisualizationPreview],
                         providers: [command_1.CommandService]
                     }), 
@@ -15527,7 +15548,7 @@ $__System.register("aa", ["b", "ab", "ac", "a0"], function(exports_1, context_1)
                 CommandBar = __decorate([
                     core_1.Component({
                         selector: 'pa-command-bar',
-                        template: "\n    <div class=\"command-bar\">\n      <div class=\"title\">Commands</div>\n      <div class=\"command-set\" *ngFor=\"#commandType of commandTypes\">\n        <div class=\"command-entry clearfix\" *ngFor=\"#cmd of getCommandsByType(commandType)\"\n          [class.selected]=\"cmd === currentCommand\"\n          (click)=\"selectCommand(cmd)\"\n        >\n          <span class=\"name\">{{cmd?.name}}</span>\n          <span class=\"key\">{{cmd?.shortcutKey}}</span>\n        </div>\n      </div>\n    </div>\n  ",
+                        template: "\n    <div class=\"command-bar\">\n      <div class=\"command-set\" *ngFor=\"#commandType of commandTypes\">\n        <div class=\"title\">{{commandType}}</div>\n        <div class=\"command-entry clearfix\" *ngFor=\"#cmd of getCommandsByType(commandType)\"\n          [class.selected]=\"cmd === currentCommand\"\n          (click)=\"selectCommand(cmd)\"\n        >\n          <span class=\"name\">{{cmd?.name}}</span>\n          <span class=\"key\">{{cmd?.shortcutKey}}</span>\n        </div>\n      </div>\n    </div>\n  ",
                         providers: [command_2.CommandService]
                     }), 
                     __metadata('design:paramtypes', [(typeof (_c = typeof command_2.CommandService !== 'undefined' && command_2.CommandService) === 'function' && _c) || Object])
@@ -15768,6 +15789,7 @@ $__System.register("9b", ["ae", "af", "a4", "b0"], function(exports_1, context_1
                 function CompositeVisualization() {
                     _super.call(this, this.name, this.getPictureCommandInterface());
                     this.name = 'unnamed';
+                    this.type = 'composite';
                     this.datasetDefinition = new dataset_definition_1.DatasetDefinition();
                     this.dimensions = { width: 0, height: 0 };
                     this.steps = [];
@@ -15845,7 +15867,7 @@ $__System.register("ac", [], function(exports_1, context_1) {
             MODIFIER = 'modifier';
             GROUP = 'group';
             exports_1("COMMAND_TYPES", COMMAND_TYPES = [
-                PRIMITIVE, FLOW, ADJUST, MODIFIER, GROUP
+                PRIMITIVE, COMPOSITE, FLOW, ADJUST //, MODIFIER, GROUP
             ]);
         }
     }
