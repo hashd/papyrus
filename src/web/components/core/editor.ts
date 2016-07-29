@@ -49,6 +49,6 @@ export class PapyrusEditor {
 
     //to refresh the visualization canvas
     const removeStepSubject = Subjects[Messages.REMOVE_STEP];
-    removeStepSubject.next(e.step);
+    removeStepSubject.next(e.step.uuid);
   }
 }

@@ -33,6 +33,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   dragModeEnabled: boolean = false
   hoveredPoint: Point
+  stepElementMap: Map = new Map()
 
   @ViewChild('canvas_parent') canvasParent: ElementRef
   @ViewChild('canvas') canvas: ElementRef
@@ -47,19 +48,16 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
       selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION];
 
     removeStepSubject.subscribe({
-      next: (removedStep) => {
-        if(removedStep) {
-          //Needs to work on remove only removed step element
-          if (this.workCanvas) this.clearWorkCanvas()
-          if (this.vis) this.clearVis()
-          this.visualization.steps.forEach(step => this.vis.nativeElement.appendChild(step.execute().element))
-        }
+      next: (uuid: string) => {
+        this.removeStepElement(uuid)
       }
     });
 
     selectedStepSubject.subscribe({
-      next: (selectedStep) => {
-        this.selectElement(selectedStep.getElement())
+      next: (uuid: string) => {
+        if(uuid) {
+          this.selectElement(this.stepElementMap.get(uuid))
+        }
       }
     });
   }
@@ -85,7 +83,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     if (this.vis) this.clearVis()
 
     if (changes.hasOwnProperty('element') && this.workCanvas) {
-      this.visualization.steps.forEach(step => this.vis.nativeElement.appendChild(step.execute().element))
+      this.visualization.steps.forEach(step => this.addStepElement(step))
       if (this.element) {
         this.workCanvas.nativeElement.appendChild(this.element)
       }
@@ -101,7 +99,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
         this.visualization.dimensions = { width: minDim, height: minDim }
       }
-      this.visualization.steps.forEach(step => this.vis.nativeElement.appendChild(step.execute().element))
+      this.visualization.steps.forEach(step => this.addStepElement(step))
     }
   }
 
@@ -172,10 +170,26 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   private selectionChangeMessage(element) {
     //broadcast element selection change message
-    const selectedStep = _.find(this.visualization.steps, function(step) { return step.getElement() === element })
+    const self = this,
+      selectedStep = _.find(this.visualization.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
     if(selectedStep) {
       const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
       selectedElementSubject.next(selectedStep)
+    }
+  }
+
+  private removeStepElement(uuid: string) {
+    if(uuid) {
+      this.vis.nativeElement.removeChild(this.stepElementMap.get(uuid))
+      this.stepElementMap.delete(uuid)
+    }
+  }
+
+  private addStepElement(step: Step) {
+    if(step) {
+      const element = step.execute().element
+      this.vis.nativeElement.appendChild(element)
+      this.stepElementMap.set(step.uuid, element)
     }
   }
 
@@ -186,6 +200,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
 
   private clearVis() {
+    this.stepElementMap.clear()
     while (this.vis.nativeElement.firstChild) {
       this.vis.nativeElement.removeChild(this.vis.nativeElement.firstChild)
     }

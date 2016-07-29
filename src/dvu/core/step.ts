@@ -3,10 +3,14 @@ import {Scope} from './scope'
 import {ValueType} from './data/data_definition'
 
 export class Step {
-  private element: Element
+  private _uuid: string = ''
 
   constructor(public command: Command, public data: Object) {
+    this._uuid = Math.random().toString(36).substr(2, 16)
+  }
 
+  get uuid(): string {
+    return this._uuid;
   }
 
   addParameter(name: string, value: ValueType) {
@@ -21,13 +25,7 @@ export class Step {
     return this.command.getSummary(this.data)
   }
 
-  getElement() {
-    return this.element
-  }
-
   execute(scope: Scope) {
-    let result = this.command.execute(this.data, scope)
-    this.element = result.element
-    return result
+    return this.command.execute(this.data, scope)
   }
 }
