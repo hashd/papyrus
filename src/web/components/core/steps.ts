@@ -50,7 +50,7 @@ export class PapyrusSteps implements OnChanges {
 
     //broadcast step selection change message
     const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION]
-    selectedStepSubject.next(step)
+    selectedStepSubject.next(step.uuid)
   }
 
   selectStep(step: Step) {
