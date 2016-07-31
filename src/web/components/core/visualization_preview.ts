@@ -9,9 +9,9 @@ import { Observable } from 'rxjs/Rx'
   template: `
     <div class="vis-preview">
       <div class="del-icon">
-        <i class="fa fa-trash" (click)="removeVisualization()"></i>
+        <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="96px" height="80px" #preview>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="90px" height="74px" #preview>
       
       </svg>
       <div>
@@ -71,9 +71,11 @@ export class VisualizationPreview implements OnChanges {
     preview.appendChild(element)
   }
 
-  removeVisualization() {
+  removeVisualization(event: Event) {
     const visualization = this.visualization
     this.onRemove.emit({ visualization })
+
+    event.stopPropagation()
   }
 
   private clearPreview() {

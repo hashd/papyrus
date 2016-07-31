@@ -60,11 +60,16 @@ export class PapyrusVisualizations implements OnInit {
     const index = this.visualizations.indexOf(visualization)
     this.visualizations.splice(index, 1)
 
-    if (this.visualizations.length === 0) {
-      this.create()
-    } else {
-      const nextIndex = (index === this.visualizations.length) ? index - 1: index
-      this.select(this.visualizations[nextIndex])
+    if (visualization === this.selected) {
+      // If user is attempting to delete the selected visualization
+      if (this.visualizations.length === 0) {
+        // If no.of visualizations is 0, then create a new one and preselect that
+        this.create()
+      } else {
+        // else select the next one in the list if it exists, otherwise the previous one
+        const nextIndex = (index === this.visualizations.length) ? index - 1: index
+        this.select(this.visualizations[nextIndex])
+      }
     }
   }
 }

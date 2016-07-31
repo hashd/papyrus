@@ -2,7 +2,8 @@ pa-visualizations {
   width: 108px !important;
   height: 100%;
   overflow-y: auto;
-  box-shadow: 2px 0 4px #ddd;
+  box-shadow: 0 0 1.5em rgba(0, 0, 0, 0.3);
+  z-index: 1;
 
   pa-panel, .pa-panel {
     height: 100%;
@@ -18,14 +19,14 @@ pa-visualizations {
     text-align: center;
     height: calc(100% - 22px);
 
-    &>* {
+    & > * {
       vertical-align: middle;
     }
   }
   
   pa-vis-preview {
     display: inline-block;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     width: 96px;
     cursor: pointer;
     position: relative;
@@ -42,6 +43,22 @@ pa-visualizations {
   
   .vis-preview {
     background: $white;
+    border: 3px solid #333;
+    transition: 0.3s all linear;
+
+    &:after {
+      content: "";
+      border: 0;
+      border-left: 8px solid transparent;
+      position: absolute;
+      right: -6px;
+      top: calc(50% - 8px);
+      height: 0;
+      width: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      transition: 0.3s all linear;
+    }
 
     .del-icon {
       position: absolute;
@@ -77,7 +94,10 @@ pa-visualizations {
     &.selected {
       .vis-preview {
         border: 3px solid $alternate-color;
-        box-shadow: 0 0 12px $alternate-color;
+
+        &:after {
+          border-left-color: $alternate-color;
+        }
       }
       
       .vis-name {
