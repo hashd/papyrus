@@ -14818,9 +14818,10 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                     var element = this.visualization.execute(pictureContext).element;
                     preview.appendChild(element);
                 };
-                VisualizationPreview.prototype.removeVisualization = function () {
+                VisualizationPreview.prototype.removeVisualization = function (event) {
                     var visualization = this.visualization;
                     this.onRemove.emit({ visualization: visualization });
+                    event.stopPropagation();
                 };
                 VisualizationPreview.prototype.clearPreview = function () {
                     while (this.preview.nativeElement.firstChild) {
@@ -14846,7 +14847,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                 VisualizationPreview = __decorate([
                     core_1.Component({
                         selector: 'pa-vis-preview',
-                        template: "\n    <div class=\"vis-preview\">\n      <div class=\"del-icon\">\n        <i class=\"fa fa-trash\" (click)=\"removeVisualization()\"></i>\n      </div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"96px\" height=\"80px\" #preview>\n      \n      </svg>\n      <div>\n        <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n        <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n      </div>\n    </div>\n  ",
+                        template: "\n    <div class=\"vis-preview\">\n      <div class=\"del-icon\">\n        <i class=\"fa fa-trash\" (click)=\"removeVisualization($event)\"></i>\n      </div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"90px\" height=\"74px\" #preview>\n      \n      </svg>\n      <div>\n        <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n        <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n      </div>\n    </div>\n  ",
                         directives: [focus_me_1.FocusMe]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -14918,12 +14919,17 @@ $__System.register("9e", ["b", "9f", "9a", "9b", "a0"], function(exports_1, cont
                     var visualization = _a.visualization;
                     var index = this.visualizations.indexOf(visualization);
                     this.visualizations.splice(index, 1);
-                    if (this.visualizations.length === 0) {
-                        this.create();
-                    }
-                    else {
-                        var nextIndex = (index === this.visualizations.length) ? index - 1 : index;
-                        this.select(this.visualizations[nextIndex]);
+                    if (visualization === this.selected) {
+                        // If user is attempting to delete the selected visualization
+                        if (this.visualizations.length === 0) {
+                            // If no.of visualizations is 0, then create a new one and preselect that
+                            this.create();
+                        }
+                        else {
+                            // else select the next one in the list if it exists, otherwise the previous one
+                            var nextIndex = (index === this.visualizations.length) ? index - 1 : index;
+                            this.select(this.visualizations[nextIndex]);
+                        }
                     }
                 };
                 __decorate([
