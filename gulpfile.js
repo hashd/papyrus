@@ -47,13 +47,13 @@ gulp.task('build:app', gulp.series('build:js'));
 
 gulp.task('build', gulp.series('clean', 'copy:fonts', 'build:app'));
 
-gulp.task('watch', function () {
+gulp.task('watch', gulp.series('build'), function () {
   gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });  
 });
 
-gulp.task('watch:dev', function () {
+gulp.task('watch:dev', gulp.series('build'), function () {
   gulp.watch([sassSrc], gulp.series('compile:css')).on('change', function (event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });  
