@@ -20,7 +20,7 @@ import { Messages, Subjects } from 'src/web/services/messages'
           [style.height]="'50%'">
         </pa-data>
 
-        <pa-steps [steps]="visualization?.block?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
+        <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" [style.height]="'50%'" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
       </div>
       <div class="col col-md-9 editor" full-length>
         <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>

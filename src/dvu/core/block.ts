@@ -1,4 +1,4 @@
-import { Step } from './step'
+import { Step, Executable } from './step'
 import { generateUUID } from '../utils/uuid'
 import { Picture } from 'src/dvu/core/models/picture'
 
@@ -38,10 +38,17 @@ export class Block implements Executable {
   }
 
   execute(scope: Scope): Picture[] {
-    const elements: Picture[] = []
-    this._steps.forEach(step => {
-      elements = elements.concat(step.execute(scope))
-    })
+    const elements: Picture[] = this._steps.reduce((acc, cur) => acc.concat(cur.execute(scope)), [])
+
+    return elements
+  }
+
+  executeUntil(count: number, scope: Scope): Picture[] {
+    const elements: Picture[] = [],
+      steps: Executable[] = this._steps
+    for (let index = 0; index < count && index < steps.length; index++) {
+      elements = elements.concat(steps[index].execute(scope))
+    }
     return elements
   }
 }

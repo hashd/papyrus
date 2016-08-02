@@ -23,9 +23,8 @@ export class CompositeVisualization extends PictureCommand {
     const depth = scope.depth
 
     if (depth < 10) {
-      const elements = this.block.execute(scope).map(picture => picture.element)
+      const elements: Element[] = this.block.execute(scope).map(picture => picture.element)
       const group = SVG.createSVG(elements, context, this.dimensions)
-
       return {
         name: this.name,
         element: group
@@ -38,14 +37,9 @@ export class CompositeVisualization extends PictureCommand {
     }
   }
 
-  executeUntil(number: number, context: PictureContext, depth: number = 0) {
-    const steps = this.block.steps
-    const elements: Element[] = []
-    for (let i = 0; i < number && i < steps.length; i++) {
-      elements.push(steps[i].execute(depth))
-    }
-
-    const group = SVG.createGroup(elements, context.getWidth(), context.getHeight())
+  executeUntil(count: number, context: PictureContext, scope: Scope = new Scope()): Picture {
+    const elements: Element[] = this.block.executeUntil(count, scope).map(picture => picture.element)
+    const group = SVG.createSVG(elements, context, this.dimensions)
 
     return {
       name: this.name,

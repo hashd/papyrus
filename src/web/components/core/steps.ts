@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, ElementRef } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { StepSummary } from './step_summary'
 import { Step } from 'src/dvu/core/step'
+import { PictureContext } from 'src/dvu/geometry/picture_context'
 import { Messages, Subjects } from 'src/web/services/messages'
 
 @Component({
@@ -15,6 +16,8 @@ import { Messages, Subjects } from 'src/web/services/messages'
           *ngFor="#step of steps; #i=index;"
           (click)="clickEvent(step)"
         >
+          <div class="step-preview" #stepPreview></div>
+          {{ drawStepPreview(stepPreview, i+1) }} <!-- added to append step preview element-->
           <pa-step-summary [step]="step"></pa-step-summary>
           <div class="remove-icon" (click)="removeStep(step)">
             <i class="fa fa-times" aria-hidden="true"></i>
@@ -29,6 +32,8 @@ import { Messages, Subjects } from 'src/web/services/messages'
 export class PapyrusSteps implements OnChanges {
   @Input()
   steps: Step[] = []
+  @Input()
+  visualization: CompositeVisualization
 
   currentStep: Step
 
@@ -60,5 +65,10 @@ export class PapyrusSteps implements OnChanges {
 
   removeStep(step: Step) {
     this.removedStep.emit({ step })
+  }
+
+  drawStepPreview(parent: ElementRef, count: number) {
+    const pictureContext = new PictureContext({ x: 0, y: 0 }, { x: parent.clientWidth,y: parent.clientHeight })
+    parent.innerHTML = this.visualization.executeUntil(count, pictureContext).element.outerHTML
   }
 }
