@@ -15140,47 +15140,6 @@ $__System.register("a3", ["b", "9f", "a1", "a4", "a2"], function(exports_1, cont
     }
 });
 
-$__System.register("9f", ["b"], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
-    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    };
-    var __metadata = (this && this.__metadata) || function (k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-    };
-    var core_1;
-    var PanelComponent;
-    return {
-        setters:[
-            function (core_1_1) {
-                core_1 = core_1_1;
-            }],
-        execute: function() {
-            PanelComponent = (function () {
-                function PanelComponent() {
-                }
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], PanelComponent.prototype, "header", void 0);
-                PanelComponent = __decorate([
-                    core_1.Component({
-                        selector: 'pa-panel',
-                        template: "\n    <div class=\"pa-panel\">\n      <div class=\"title\">{{header}}</div>\n      <div class=\"content\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  "
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], PanelComponent);
-                return PanelComponent;
-            }());
-            exports_1("PanelComponent", PanelComponent);
-        }
-    }
-});
-
 $__System.register("a5", ["b", "9f", "a6", "9d", "a7"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -21342,6 +21301,47 @@ $__System.register("b1", ["b", "9b", "a8", "a6", "ad", "ae", "b2", "9d"], functi
     }
 });
 
+$__System.register("9f", ["b"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1;
+    var PanelComponent;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            }],
+        execute: function() {
+            PanelComponent = (function () {
+                function PanelComponent() {
+                }
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', String)
+                ], PanelComponent.prototype, "header", void 0);
+                PanelComponent = __decorate([
+                    core_1.Component({
+                        selector: 'pa-panel',
+                        template: "\n    <div class=\"pa-panel\">\n      <div class=\"title\">{{header}}</div>\n      <div class=\"content\">\n        <ng-content></ng-content>\n      </div>\n    </div>\n  "
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], PanelComponent);
+                return PanelComponent;
+            }());
+            exports_1("PanelComponent", PanelComponent);
+        }
+    }
+});
+
 $__System.register("9b", ["b2", "b3", "b4", "a4", "b5"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -23386,7 +23386,7 @@ $__System.register("a7", ["dc"], function(exports_1, context_1) {
     }
 });
 
-$__System.register("dd", ["b", "a3", "a5", "b1", "de", "9b", "c7", "a7"], function(exports_1, context_1) {
+$__System.register("dd", ["b", "a3", "a5", "b1", "9f", "de", "9b", "c7", "a7"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -23398,7 +23398,7 @@ $__System.register("dd", ["b", "a3", "a5", "b1", "de", "9b", "c7", "a7"], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, data_1, steps_1, canvas_1, all_1, visualization_1, all_2, messages_1;
+    var core_1, data_1, steps_1, canvas_1, panel_1, all_1, visualization_1, all_2, messages_1;
     var PapyrusEditor;
     return {
         setters:[
@@ -23413,6 +23413,9 @@ $__System.register("dd", ["b", "a3", "a5", "b1", "de", "9b", "c7", "a7"], functi
             },
             function (canvas_1_1) {
                 canvas_1 = canvas_1_1;
+            },
+            function (panel_1_1) {
+                panel_1 = panel_1_1;
             },
             function (all_1_1) {
                 all_1 = all_1_1;
@@ -23430,10 +23433,19 @@ $__System.register("dd", ["b", "a3", "a5", "b1", "de", "9b", "c7", "a7"], functi
             PapyrusEditor = (function () {
                 function PapyrusEditor(commandService) {
                     this.commandService = commandService;
+                    this.showDataPanel = true;
+                    this.showStepsPanel = true;
+                    this.showMeasuresPanel = false;
+                    this.fullEditorMode = false;
+                    this.noOfPanelsEnabled = 2;
+                    this.toggleEditorMode = new core_1.EventEmitter();
                     this.commands = commandService.getCommands();
                 }
                 PapyrusEditor.prototype.selectStep = function (e) {
                     this.selectedStep = e.step;
+                };
+                PapyrusEditor.prototype.onPanelSwitchToggle = function (value) {
+                    this.noOfPanelsEnabled += (value ? 1 : -1);
                 };
                 PapyrusEditor.prototype.removeStep = function (e) {
                     this.visualization.block.remove(e.step);
@@ -23441,21 +23453,29 @@ $__System.register("dd", ["b", "a3", "a5", "b1", "de", "9b", "c7", "a7"], functi
                     var removeStepSubject = messages_1.Subjects[messages_1.Messages.REMOVE_STEP];
                     removeStepSubject.next(e.step.uuid);
                 };
+                PapyrusEditor.prototype.toggleFullEditorMode = function () {
+                    this.fullEditorMode = !this.fullEditorMode;
+                    this.toggleEditorMode.emit(this.fullEditorMode);
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', (typeof (_a = typeof visualization_1.CompositeVisualization !== 'undefined' && visualization_1.CompositeVisualization) === 'function' && _a) || Object)
                 ], PapyrusEditor.prototype, "visualization", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', (typeof (_b = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _b) || Object)
+                ], PapyrusEditor.prototype, "toggleEditorMode", void 0);
                 PapyrusEditor = __decorate([
                     core_1.Component({
                         selector: 'pa-editor',
-                        template: "\n    <div class=\"row row-no-padding\" full-length>\n      <div class=\"col col-md-3 sidebar\" full-length>\n        <pa-data [data]=\"visualization?.data\"\n          [dataObservables]=\"visualization?.dataObservables\"\n          [datasetDefinition]=\"visualization?.datasetDefinition\"\n          [style.height]=\"'50%'\">\n        </pa-data>\n\n        <pa-steps [steps]=\"visualization?.block?.steps\" [visualization]=\"visualization\" [style.height]=\"'50%'\" (selectedStep)=\"selectStep($event)\" (removedStep)=\"removeStep($event)\"></pa-steps>\n      </div>\n      <div class=\"col col-md-9 editor\" full-length>\n        <pa-canvas [currentStep]=\"selectedStep\" [visualization]=\"visualization\" [commands]=\"commands\" full-length></pa-canvas>\n      </div>\n    </div>\n  ",
-                        directives: [data_1.PapyrusData, steps_1.PapyrusSteps, canvas_1.PapyrusCanvas, all_1.FullLength],
+                        template: "\n    <div class=\"row row-no-padding\" full-length>\n      <div class=\"col col-md-3 sidebar\" full-length>\n        <div class=\"panel-toggles\">\n          <div class=\"visualizations-toggle\" [class.toggled]=\"fullEditorMode\">\n            <i class=\"fa fa-bars\" (click)=\"toggleFullEditorMode()\"></i>\n          </div>\n          <input type=\"checkbox\" id=\"showDataPanel\" [(ngModel)]=\"showDataPanel\" (ngModelChange)=\"onPanelSwitchToggle($event)\"/>\n          <label for=\"showDataPanel\">Data</label>\n          <input type=\"checkbox\" id=\"showStepsPanel\" [(ngModel)]=\"showStepsPanel\" (ngModelChange)=\"onPanelSwitchToggle($event)\"/>\n          <label for=\"showStepsPanel\">Steps</label>\n          <input type=\"checkbox\" id=\"showMeasuresPanel\" [(ngModel)]=\"showMeasuresPanel\" (ngModelChange)=\"onPanelSwitchToggle($event)\"/>\n          <label for=\"showMeasuresPanel\">Measures</label>\n        </div>\n   \n        <pa-data [data]=\"visualization?.data\"\n          [dataObservables]=\"visualization?.dataObservables\"\n          [datasetDefinition]=\"visualization?.datasetDefinition\"\n          *ngIf=\"showDataPanel\"\n          class=\"split-{{noOfPanelsEnabled}}\"\n         >\n        </pa-data>        \n        <pa-steps [steps]=\"visualization?.block?.steps\" [visualization]=\"visualization\" *ngIf=\"showStepsPanel\" class=\"split-{{noOfPanelsEnabled}}\"  (selectedStep)=\"selectStep($event)\" (removedStep)=\"removeStep($event)\"></pa-steps>\n        <pa-panel class=\"split-{{noOfPanelsEnabled}}\" *ngIf=\"showMeasuresPanel\" header=\"Measurements\">\n          <div></div>\n        </pa-panel>\n      </div>\n      <div class=\"col col-md-9 editor\" full-length>\n        <pa-canvas [currentStep]=\"selectedStep\" [visualization]=\"visualization\" [commands]=\"commands\" full-length></pa-canvas>\n      </div>\n    </div>\n  ",
+                        directives: [data_1.PapyrusData, steps_1.PapyrusSteps, canvas_1.PapyrusCanvas, all_1.FullLength, panel_1.PanelComponent],
                         providers: [all_2.CommandService]
                     }), 
-                    __metadata('design:paramtypes', [(typeof (_b = typeof all_2.CommandService !== 'undefined' && all_2.CommandService) === 'function' && _b) || Object])
+                    __metadata('design:paramtypes', [(typeof (_c = typeof all_2.CommandService !== 'undefined' && all_2.CommandService) === 'function' && _c) || Object])
                 ], PapyrusEditor);
                 return PapyrusEditor;
-                var _a, _b;
+                var _a, _b, _c;
             }());
             exports_1("PapyrusEditor", PapyrusEditor);
         }
@@ -37852,14 +37872,18 @@ $__System.register("132", ["b", "9e", "dd", "de"], function(exports_1, context_1
                 function PapyrusShell() {
                     this.visualizations = [];
                     this.activeVisualization = null;
+                    this.fullEditorEnabled = false;
                 }
                 PapyrusShell.prototype.select = function (e) {
                     this.activeVisualization = e.selected;
                 };
+                PapyrusShell.prototype.toggleFullEditorMode = function (e) {
+                    this.fullEditorEnabled = !this.fullEditorEnabled;
+                };
                 PapyrusShell = __decorate([
                     core_1.Component({
                         selector: 'papyrus-shell',
-                        template: "\n  \n    <div class=\"editor-space row row-no-padding\">\n     <pa-visualizations class=\"col-md-2\"\n        [visualizations]=\"visualizations\"\n        (onSelect)=\"select($event)\"\n      >\n      </pa-visualizations>\n\n      <pa-editor [visualization]=\"activeVisualization\" class=\"col-md-10\" full-length>\n      \n      </pa-editor>\n    </div>\n  ",
+                        template: " \n    <div class=\"editor-space row row-no-padding\" [class.full-editor-mode]=\"fullEditorEnabled\">\n     <pa-visualizations class=\"col-md-2\"\n        [visualizations]=\"visualizations\"\n        (onSelect)=\"select($event)\"\n      >\n      </pa-visualizations>\n\n      <pa-editor [visualization]=\"activeVisualization\" class=\"col-md-10\" (toggleEditorMode)=\"toggleFullEditorMode(e)\" full-length>\n      \n      </pa-editor>\n    </div>\n  ",
                         directives: [visualizations_1.PapyrusVisualizations, editor_1.PapyrusEditor, all_1.FullLength]
                     }), 
                     __metadata('design:paramtypes', [])

@@ -11,4 +11,5 @@ jspm_packages/*
 node_modules/*
 styles/*
 src
+public
 typings
