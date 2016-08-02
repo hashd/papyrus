@@ -9,12 +9,66 @@ pa-editor {
 .sidebar {
   background: $xxl-gray;
 
-  .pa-panel {
-    .title {
-      border-right: 1px solid $secondary-color;
-      border-bottom: 1px solid $secondary-color;
+  .panel-toggles {
+    background: $dark-gray;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 0;
+
+    .visualizations-toggle {
+      font-size: 16px;
+      color: $green;
+      position: absolute;
+      left: 12px;
+      top: 4px;
+      display: inline-block;
+      cursor: pointer;
+
+      &.toggled {
+        color: $white;
+      }
     }
 
+    input[type="checkbox"] {
+      left: -1000px;
+      position: fixed;
+    }
+
+    label {
+      font-size: 11px;
+      color: $gray;
+      margin: 0;
+      padding: 2px 0;
+      min-width: 72px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid $gray;
+      border-right: none;
+    }
+
+    label:last-child {
+      border: 1px solid $gray;
+    }
+
+    input[type="checkbox"]:checked + label {
+      background: $xxl-gray;
+      color: $alternate-color;
+    }
+  }
+  
+  .split-1 {
+    height: calc(100% - 29px)
+  }
+
+  .split-2 {
+    height: calc((100% - 29px) / 2)
+  }
+
+  .split-3{
+    height: calc((100% - 29px) / 3)
+  }
+
+  .pa-panel {
     .content {
       border-right: 1px solid #aaa;
       border-bottom: 1px solid #aaa;

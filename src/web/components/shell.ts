@@ -6,16 +6,15 @@ import { FullLength } from '../directives/all'
 
 @Component({
   selector: 'papyrus-shell',
-  template: `
-  
-    <div class="editor-space row row-no-padding">
+  template: ` 
+    <div class="editor-space row row-no-padding" [class.full-editor-mode]="fullEditorEnabled">
      <pa-visualizations class="col-md-2"
         [visualizations]="visualizations"
         (onSelect)="select($event)"
       >
       </pa-visualizations>
 
-      <pa-editor [visualization]="activeVisualization" class="col-md-10" full-length>
+      <pa-editor [visualization]="activeVisualization" class="col-md-10" (toggleEditorMode)="toggleFullEditorMode(e)" full-length>
       
       </pa-editor>
     </div>
@@ -25,8 +24,13 @@ import { FullLength } from '../directives/all'
 export class PapyrusShell {
   visualizations: CompositeVisualization[] = []
   activeVisualization: CompositeVisualization = null
-  
+  fullEditorEnabled: boolean = false
+
   select(e) {
     this.activeVisualization = e.selected
+  }
+
+  toggleFullEditorMode(e) {
+    this.fullEditorEnabled = !this.fullEditorEnabled
   }
 }

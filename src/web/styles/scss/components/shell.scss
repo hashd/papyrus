@@ -1,0 +1,18 @@
+papyrus-shell {
+  .editor-space {
+    pa-visualizations, pa-editor {
+      transition: 0.3s all linear;
+    }
+
+    &.full-editor-mode {
+      pa-visualizations {
+        transform: translateX(-108px);
+      }
+
+      pa-editor {
+        width: 100% !important;
+        margin-left: -108px;
+      }
+    }
+  }
+}

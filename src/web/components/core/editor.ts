@@ -1,7 +1,8 @@
-import { Component, Input } from 'angular2/core'
+import { Component, Input, EventEmitter, Output } from 'angular2/core'
 import { PapyrusData } from './data'
 import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
+import { PanelComponent } from '../generic/panel'
 import { FullLength } from 'src/web/directives/all'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { CommandService } from 'src/web/services/all'
@@ -14,93 +15,53 @@ import { Messages, Subjects } from 'src/web/services/messages'
   template: `
     <div class="row row-no-padding" full-length>
       <div class="col col-md-3 sidebar" full-length>
-    
-         <label>  <input type="checkbox" [(ngModel)]="showhideData" (ngModelChange)="onChange1($event)" /> Data  </label>
-         <label>  <input type="checkbox" [(ngModel)]="showhideStyle" (ngModelChange)="onChange2($event)"/> Style  </label>
-         <label>  <input type="checkbox" [(ngModel)]="showhideMac" (ngModelChange)="onChange3($event)"/> Mac  </label>
+        <div class="panel-toggles">
+          <div class="visualizations-toggle" [class.toggled]="fullEditorMode">
+            <i class="fa fa-bars" (click)="toggleFullEditorMode()"></i>
+          </div>
+          <input type="checkbox" id="showDataPanel" [(ngModel)]="showDataPanel" (ngModelChange)="onPanelSwitchToggle($event)"/>
+          <label for="showDataPanel">Data</label>
+          <input type="checkbox" id="showStepsPanel" [(ngModel)]="showStepsPanel" (ngModelChange)="onPanelSwitchToggle($event)"/>
+          <label for="showStepsPanel">Steps</label>
+          <input type="checkbox" id="showMeasuresPanel" [(ngModel)]="showMeasuresPanel" (ngModelChange)="onPanelSwitchToggle($event)"/>
+          <label for="showMeasuresPanel">Measures</label>
+        </div>
    
         <pa-data [data]="visualization?.data"
           [dataObservables]="visualization?.dataObservables"
           [datasetDefinition]="visualization?.datasetDefinition"
-          *ngIf="showhideData"
-          class="panel-height-{{count}}"
+          *ngIf="showDataPanel"
+          class="split-{{noOfPanelsEnabled}}"
          >
-        </pa-data>
-        
-        <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" *ngIf="showhideStyle" class="panel-height-{{count}}"  (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
-        <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" *ngIf="showhideMac" class="panel-height-{{count}}" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
+        </pa-data>        
+        <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" *ngIf="showStepsPanel" class="split-{{noOfPanelsEnabled}}"  (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
+        <pa-panel class="split-{{noOfPanelsEnabled}}" *ngIf="showMeasuresPanel" header="Measurements">
+          <div></div>
+        </pa-panel>
       </div>
       <div class="col col-md-9 editor" full-length>
         <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
       </div>
     </div>
   `,
-  directives: [PapyrusData, PapyrusSteps, PapyrusCanvas, FullLength],
+  directives: [PapyrusData, PapyrusSteps, PapyrusCanvas, FullLength, PanelComponent],
   providers: [CommandService]
 })
 export class PapyrusEditor {
-   showhideData:boolean = true;
-    showhideStyle:boolean = true;
-     showhideMac:boolean = true;
-    count:number=3;
-    height:any;
-
   @Input()
   visualization: CompositeVisualization
+  
   commands: Command[]
   selectedStep: Step
+  
+  showDataPanel: boolean = true
+  showStepsPanel: boolean = true
+  showMeasuresPanel: boolean = false
+  fullEditorMode: boolean = false
+  noOfPanelsEnabled: number = 2
 
-  onChange1(value: boolean) {
-    
-    this.showhideData = value;
-    
-   if(this.showhideData==false && this.showhideStyle==true && this.showhideMac==true){
-   this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==false){
-  this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==false && this.showhideMac==true){
-  this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==true){
-  this.count=3;
-   }
-   else{
-     this.count=1;
-   }
-}
-
-  onChange2(value: boolean) {
-    
-    this.showhideStyle = value;
-    
- if(this.showhideData==true && this.showhideStyle==false && this.showhideMac==true){
-   this.count=2;
-   }else if(this.showhideData==false && this.showhideStyle==true && this.showhideMac==true){
-  this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==false){
-  this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==true){
-  this.count=3;
-   }else{
-     this.count=1;
-   }
-
-  }
-  onChange3(value: boolean) {
-
-    this.showhideMac = value;
-   
-    if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==false){
-   this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==false && this.showhideMac==true){
-  this.count=2;
-   }else if(this.showhideData==false && this.showhideStyle==true && this.showhideMac==true){
-  this.count=2;
-   }else if(this.showhideData==true && this.showhideStyle==true && this.showhideMac==true){
-  this.count=3;
-   }else{
-     this.count=1;
-   }
-  }
+  @Output()
+  toggleEditorMode: EventEmitter = new EventEmitter()
 
   constructor(private commandService: CommandService) {
     this.commands = commandService.getCommands()
@@ -110,11 +71,20 @@ export class PapyrusEditor {
     this.selectedStep = e.step
   }
 
+  onPanelSwitchToggle(value: boolean) {
+    this.noOfPanelsEnabled += (value? 1: -1)
+  }
+
   removeStep(e) {
-    this.visualization.block.remove(e.step);
+    this.visualization.block.remove(e.step)
 
     //to refresh the visualization canvas
-    const removeStepSubject = Subjects[Messages.REMOVE_STEP];
-    removeStepSubject.next(e.step.uuid);
+    const removeStepSubject = Subjects[Messages.REMOVE_STEP]
+    removeStepSubject.next(e.step.uuid)
+  }
+
+  toggleFullEditorMode() {
+    this.fullEditorMode = !this.fullEditorMode
+    this.toggleEditorMode.emit(this.fullEditorMode)
   }
 }
