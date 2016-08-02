@@ -1,3 +1,16 @@
+
+  .panel-height-1{
+     height:96%
+    
+    }
+
+  .panel-height-2{
+     height: calc(96%/2)
+    }
+  .panel-height-3{
+      height: calc(96%/3)
+    }
+
 pa-data {
   pa-panel {
     height: 100%;
@@ -23,7 +36,7 @@ pa-data {
     
     i:hover {
       cursor: pointer;
-    }
+    }   
   }
   
   .variables, .iterables {
