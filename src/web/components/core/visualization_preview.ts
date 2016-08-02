@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Rx'
         <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="90px" height="74px" #preview>
-      
+
       </svg>
       <div>
         <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.name}}</div>

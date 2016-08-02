@@ -18,9 +18,9 @@ import { Messages, Subjects } from 'src/web/services/messages'
           [dataObservables]="visualization?.dataObservables"
           [datasetDefinition]="visualization?.datasetDefinition"
           [style.height]="'50%'">
-
         </pa-data>
-        <pa-steps [steps]="visualization?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
+
+        <pa-steps [steps]="visualization?.block?.steps" [style.height]="'50%'" (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
       </div>
       <div class="col col-md-9 editor" full-length>
         <pa-canvas [currentStep]="selectedStep" [visualization]="visualization" [commands]="commands" full-length></pa-canvas>
@@ -45,7 +45,7 @@ export class PapyrusEditor {
   }
 
   removeStep(e) {
-    this.visualization.removeStep(e.step);
+    this.visualization.block.remove(e.step);
 
     //to refresh the visualization canvas
     const removeStepSubject = Subjects[Messages.REMOVE_STEP];

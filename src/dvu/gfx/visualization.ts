@@ -1,5 +1,5 @@
 import { PictureCommand, PictureCommandInterface } from '../core/commands/picture'
-import { Step } from '../core/step'
+import { Block } from '../core/block'
 import { Scope } from './../core/scope'
 import { DatasetDefinition } from '../core/data/dataset_definition'
 import { PictureContext } from '../geometry/picture_context'
@@ -13,7 +13,7 @@ export class CompositeVisualization extends PictureCommand {
   type: CommandType = 'composite'
   datasetDefinition: DatasetDefinition = new DatasetDefinition()
   dimensions: Dimensions = { width: 0, height: 0 }
-  steps: Step[] = []
+  block: Block = new Block()
 
   constructor() {
     super(this.name, this.getPictureCommandInterface())
@@ -23,7 +23,7 @@ export class CompositeVisualization extends PictureCommand {
     const depth = scope.depth
 
     if (depth < 10) {
-      const elements: Element[] = this.steps.map(step => step.execute(new Scope(scope)).element)
+      const elements = this.block.execute(scope).map(picture => picture.element)
       const group = SVG.createSVG(elements, context, this.dimensions)
 
       return {
@@ -39,9 +39,10 @@ export class CompositeVisualization extends PictureCommand {
   }
 
   executeUntil(number: number, context: PictureContext, depth: number = 0) {
+    const steps = this.block.steps
     const elements: Element[] = []
-    for (let i = 0; i < number && i < this.steps.length; i++) {
-      elements.push(this.steps[i].execute(depth))
+    for (let i = 0; i < number && i < steps.length; i++) {
+      elements.push(steps[i].execute(depth))
     }
 
     const group = SVG.createGroup(elements, context.getWidth(), context.getHeight())
@@ -73,19 +74,6 @@ export class CompositeVisualization extends PictureCommand {
       getSummary(data: PictureContext): string {
         const lsp = data.getLeastSignificantPoint()
         return `Draw ${self.name} from (${lsp.x}, ${lsp.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
-      }
-    }
-  }
-
-  addStep(step: Step) {
-
-  }
-
-  removeStep(step) {
-    if(this.steps && step) {
-      const index = this.steps.indexOf(step);
-      if(index != -1) {
-      	this.steps.splice(index, 1);
       }
     }
   }

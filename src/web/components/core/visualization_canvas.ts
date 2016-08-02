@@ -83,7 +83,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     if (this.vis) this.clearVis()
 
     if (changes.hasOwnProperty('element') && this.workCanvas) {
-      this.visualization.steps.forEach(step => this.addStepElement(step))
+      this.visualization.block.steps.forEach(step => this.addStepElement(step))
       if (this.element) {
         this.workCanvas.nativeElement.appendChild(this.element)
       }
@@ -99,7 +99,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
         this.visualization.dimensions = { width: minDim, height: minDim }
       }
-      this.visualization.steps.forEach(step => this.addStepElement(step))
+      this.visualization.block.steps.forEach(step => this.addStepElement(step))
     }
   }
 
@@ -171,7 +171,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   private selectionChangeMessage(element) {
     //broadcast element selection change message
     const self = this,
-      selectedStep = _.find(this.visualization.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
+      selectedStep = _.find(this.visualization.block.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
     if(selectedStep) {
       const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
       selectedElementSubject.next(selectedStep)

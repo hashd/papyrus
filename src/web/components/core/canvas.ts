@@ -61,9 +61,10 @@ export class PapyrusCanvas implements OnChanges {
 
   ngOnChanges(changes) {
     if (changes.hasOwnProperty('visualization') && this.visualization) {
+      const steps = this.visualization.block.steps
       this.resetUserActions()
-      if (this.visualization.steps.length !== 0) {
-        this.previousStep = this.visualization.steps[this.visualization.steps.length - 1]
+      if (steps.length > 0) {
+        this.previousStep = steps[steps.length - 1]
       }
     }
   }
@@ -100,7 +101,7 @@ export class PapyrusCanvas implements OnChanges {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y
       if (this.pictureContext.end.x !== this.pictureContext.start.x || this.pictureContext.end.y !== this.pictureContext.start.y) {
-        this.visualization.steps.push(new Step(command, this.pictureContext))
+        this.visualization.block.add(new Step(command, this.pictureContext))
       }
 
       this.resetUserActions()

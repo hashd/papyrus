@@ -2,8 +2,9 @@ import { Command } from './../../command'
 import { Scope } from './../../scope'
 import { CommandType } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
-import { Step } from './../../step'
+import { Block } from './../../block'
 import { Range } from './../../../utils/range'
+import { Picture } from 'src/dvu/core/models/picture'
 
 const START: string = 'start'
 const END: string = 'end'
@@ -20,7 +21,7 @@ export class ForCommand extends Command {
   name: string = 'For'
   type: CommandType = 'flow'
   shortcutKey: string = 'f'
-  steps: Step[] = []
+  block: Block = new Block()
   datasetDefinition: DatasetDefinition = datasetDefinition
 
   constructor() {
@@ -38,7 +39,11 @@ export class ForCommand extends Command {
 
     Range.between(begin, end).forEach(i => {
       innerScope.add(INDEX, i)
-      this.steps.forEach(step => step.execute(innerScope))
+      this.block.execute(innerScope)
     });
+  }
+
+  getSummary() {
+    return 'Loop Summary: Not implemented'
   }
 }

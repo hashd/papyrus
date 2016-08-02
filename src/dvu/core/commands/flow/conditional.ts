@@ -2,7 +2,8 @@ import { Command } from './../../command'
 import { Scope } from './../../scope'
 import { CommandType } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
-import { Step } from './../../step'
+import { Block } from './../../block'
+import { Picture } from 'src/dvu/core/models/picture'
 
 const CONDITION: string = 'condition'
 
@@ -14,26 +15,28 @@ export class IfCommand extends Command {
   name: string = 'If'
   type: CommandType = 'flow'
   shortcutKey: string = 'i'
-  trueBlock: Step[] = []
-  falseBlock: Step[] = []
+  trueBlock: Block = new Block()
+  falseBlock: Block = new Block()
   datasetDefinition: DatasetDefinition = datasetDefinition
 
   constructor() {
     super()
   }
 
-  execute(data, scope: Scope = new Scope()) {
+  execute(data, scope: Scope = new Scope()): Picture[] {
     if (!this.datasetDefinition.validate(data)) {
       return
     }
 
     const innerScope = new Scope(scope)
     const conditionValue = data[CONDITION]
+    const pictures: Picture[] = []
+    const block: Block = conditionValue === true ? this.trueBlock : this.falseBlock
 
-    if (conditionValue === true) {
-      this.trueBlock.forEach(step => step.execute(innerScope))
-    } else {
-      this.falseBlock.forEach(step => step.execute(innerScope))
-    }
+    return block.execute(innerScope)
+  }
+
+  getSummary() {
+    return 'Conditional Summary: Not implemented'
   }
 }

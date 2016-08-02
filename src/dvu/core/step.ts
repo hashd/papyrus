@@ -1,12 +1,18 @@
 import {Command} from './command'
 import {Scope} from './scope'
 import {ValueType} from './data/data_definition'
+import { generateUUID } from '../utils/uuid'
+import { Picture } from 'src/dvu/core/models/picture'
 
-export class Step {
+export interface Executable<T> {
+  execute(scope: Scope): Picture[]
+}
+
+export class Step implements Executable<T> {
   private _uuid: string = ''
 
   constructor(public command: Command, public data: Object) {
-    this._uuid = Math.random().toString(36).substr(2, 16)
+    this._uuid = generateUUID()
   }
 
   get uuid(): string {
@@ -25,7 +31,7 @@ export class Step {
     return this.command.getSummary(this.data)
   }
 
-  execute(scope: Scope) {
+  execute(scope: Scope):Picture[] {
     return this.command.execute(this.data, scope)
   }
 }
