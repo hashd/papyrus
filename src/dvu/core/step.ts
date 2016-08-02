@@ -1,14 +1,14 @@
-import {Command} from './command'
-import {Scope} from './scope'
-import {ValueType} from './data/data_definition'
+import { Command } from './command'
+import { Scope } from './scope'
+import { ValueType } from './data/data_definition'
 import { generateUUID } from '../utils/uuid'
-import { Picture } from 'src/dvu/core/models/picture'
+import { Picture } from './models/picture'
 
 export interface Executable<T> {
-  execute(scope: Scope): Picture[]
+  execute(scope: Scope): T[]
 }
 
-export class Step implements Executable<T> {
+export class Step implements Executable<Picture> {
   private _uuid: string = ''
 
   constructor(public command: Command, public data: Object) {
@@ -31,7 +31,7 @@ export class Step implements Executable<T> {
     return this.command.getSummary(this.data)
   }
 
-  execute(scope: Scope):Picture[] {
+  execute(scope: Scope): Picture[] {
     return this.command.execute(this.data, scope)
   }
 }

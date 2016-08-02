@@ -1,4 +1,4 @@
-export type DataType = 'string' | 'number' | 'array' | 'expression' | 'element'
+export type DataType = 'string' | 'number' | 'array' | 'expression' | 'element' | 'boolean'
 export type ValueType = string | number | Array<any> | Element
 
 export class DataDefinition {

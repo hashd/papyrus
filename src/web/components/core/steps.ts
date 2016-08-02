@@ -9,11 +9,11 @@ import { Messages, Subjects } from 'src/web/services/messages'
   selector: 'pa-steps',
   template: `
     <pa-panel header="Steps">
-      <ul class="steps" *ngIf="steps?.length">
+      <ul class="steps" *ngIf="visualization?.block?.steps?.length">
         <li
           class="step"
           [class.selected]="step === currentStep"
-          *ngFor="#step of steps; #i=index;"
+          *ngFor="#step of visualization?.block?.steps; #i=index;"
           (click)="clickEvent(step)"
         >
           <div class="step-preview" #stepPreview></div>
@@ -24,14 +24,12 @@ import { Messages, Subjects } from 'src/web/services/messages'
           </div>
         </li>
       </ul>
-      <div *ngIf="!steps?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
+      <div *ngIf="!visualization?.block?.steps?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
     </pa-panel>
   `,
   directives: [Panel, StepSummary]
 })
-export class PapyrusSteps implements OnChanges {
-  @Input()
-  steps: Step[] = []
+export class PapyrusSteps {
   @Input()
   visualization: CompositeVisualization
 
@@ -41,13 +39,13 @@ export class PapyrusSteps implements OnChanges {
   @Output() removedStep: EventEmitter<any> = new EventEmitter()
 
   constructor () {
-    const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION];
+    const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
 
     selectedElementSubject.subscribe({
       next: (step) => {
         this.selectStep(step)
       }
-    });
+    })
   }
 
   clickEvent(step: Step) {

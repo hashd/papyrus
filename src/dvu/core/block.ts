@@ -1,10 +1,11 @@
 import { Step, Executable } from './step'
 import { generateUUID } from '../utils/uuid'
-import { Picture } from 'src/dvu/core/models/picture'
+import { Scope } from '../core/scope'
+import { Picture } from '../core/models/picture'
 
-export class Block implements Executable {
+export class Block implements Executable<Picture> {
   private _id: string
-  private _steps: Executable[] = []
+  private _steps: Executable<any>[] = []
 
   constructor() {
     this._id = generateUUID()
@@ -14,21 +15,21 @@ export class Block implements Executable {
     return this._id
   }
 
-  get steps(): Executable[] {
+  get steps(): Executable<any>[] {
     return this._steps
   }
 
-  add(step: Executable) {
-    if(this._steps && step) {
+  add(step: Executable<any>) {
+    if (this._steps && step) {
       this._steps.push(step)
     }
   }
 
-  remove(step: Executable) {
-    if(this._steps && step) {
-      const index = this._steps.indexOf(step);
-      if(index != -1) {
-      	this._steps.splice(index, 1);
+  remove(step: Executable<any>) {
+    if (this._steps && step) {
+      const index = this._steps.indexOf(step)
+      if (index != -1) {
+      	this._steps.splice(index, 1)
       }
     }
   }
@@ -38,17 +39,10 @@ export class Block implements Executable {
   }
 
   execute(scope: Scope): Picture[] {
-    const elements: Picture[] = this._steps.reduce((acc, cur) => acc.concat(cur.execute(scope)), [])
-
-    return elements
+    return this._steps.reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
   }
 
   executeUntil(count: number, scope: Scope): Picture[] {
-    const elements: Picture[] = [],
-      steps: Executable[] = this._steps
-    for (let index = 0; index < count && index < steps.length; index++) {
-      elements = elements.concat(steps[index].execute(scope))
-    }
-    return elements
+    return this._steps.slice(0, count).reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
   }
 }

@@ -3,7 +3,7 @@ import { Scope } from './../../scope'
 import { CommandType } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
-import { Picture } from 'src/dvu/core/models/picture'
+import { Picture } from '../../../core/models/picture'
 
 const CONDITION: string = 'condition'
 
@@ -15,9 +15,10 @@ export class IfCommand extends Command {
   name: string = 'If'
   type: CommandType = 'flow'
   shortcutKey: string = 'i'
+  
+  datasetDefinition: DatasetDefinition = datasetDefinition
   trueBlock: Block = new Block()
   falseBlock: Block = new Block()
-  datasetDefinition: DatasetDefinition = datasetDefinition
 
   constructor() {
     super()
@@ -29,11 +30,11 @@ export class IfCommand extends Command {
     }
 
     const innerScope = new Scope(scope)
-    const conditionValue = data[CONDITION]
-    const pictures: Picture[] = []
-    const block: Block = conditionValue === true ? this.trueBlock : this.falseBlock
-
-    return block.execute(innerScope)
+    const conditionValue: boolean = data[CONDITION]
+    
+    return conditionValue ? 
+      this.trueBlock.execute(innerScope):
+      this.falseBlock.execute(innerScope)
   }
 
   getSummary() {
