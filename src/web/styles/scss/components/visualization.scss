@@ -93,10 +93,10 @@ pa-visualizations {
   pa-vis-preview {
     &.selected {
       .vis-preview {
-        border: 3px solid $alternate-color;
+        border: 3px solid $green;
 
         &:after {
-          border-left-color: $alternate-color;
+          border-left-color: $green;
         }
       }
       

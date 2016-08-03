@@ -20,7 +20,7 @@ import { Messages, Subjects } from 'src/web/services/messages'
           {{ drawStepPreview(stepPreview, i+1) }} <!-- added to append step preview element-->
           <pa-step-summary [step]="step"></pa-step-summary>
           <div class="remove-icon" (click)="removeStep(step)">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
           </div>
         </li>
       </ul>

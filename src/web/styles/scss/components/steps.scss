@@ -11,7 +11,7 @@ ul.steps {
     overflow: hidden;
 
     .step-preview {
-      border: 1px solid $light-green;
+      border: 1px solid $gray;
       height: 60px;
       width: 60px;
       float: left;
@@ -22,18 +22,32 @@ ul.steps {
       position: absolute;
       top: calc(50% - 14px);
       right: 5px;
-      font-size: 20px;
+      font-size: 14px;
+      display: none;
+    }
+
+    &:hover .remove-icon {
+      display: inline-block;
+
+      &:hover {
+        color: $danger-color;
+      }
     }
 
     .step-summary {
       color: $dark-gray;
       text-align: left;
-      font-size: inherit;
+      font-size: 0.9em;
       cursor: pointer;
+      text-align: justify;
     }
 
     &.selected .step-summary {
       color: $alternate-color;
+    }
+
+    &.selected .step-preview {
+      border-color: $alternate-color;
     }
   }
 }
