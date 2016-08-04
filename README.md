@@ -5,7 +5,7 @@ This project tries to replicate Bret Victor's dynamic visualization tool using T
 The tool tries to incorporate the core features presented by Bret Victor in his [talk](https://vimeo.com/66085662). While we have more ideas around it, the focus is currently to get the tool up and running for people to experiment with and use feedback to transform the tool as necessary.
 
 ### Demo
-Check it out [here](https://hashd.github.io/papyrus/public).
+Check it out [here](https://hashd.github.io/papyrus/editor).
 
 The project is under active development at [Imaginea Labs](http://www.imaginea.com/labs) and the demo will be updated with features as and when they are ready.
 
@@ -40,6 +40,9 @@ These features will be targeted after the MVP is ready
 Check our [developer guide](docs) to get started. PRs are very much welcome and appreciated.
 
 If you would like to contribute, you can get in touch with me at kiran.d@imaginea.com
+
+### Contributors
+Check out [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
 ### Other related work
 - [Apparatus](http://aprt.us)
