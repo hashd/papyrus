@@ -41,9 +41,12 @@ pa-editor {
       padding: 2px 0;
       min-width: 72px;
       text-align: center;
-      font-weight: bold;
+      font-weight: normal;
       border: 1px solid $gray;
       border-right: none;
+      background: $light-color;
+      color: $primary-color;
+      opacity: 0.8;
     }
 
     label:last-child {
@@ -51,11 +54,10 @@ pa-editor {
     }
 
     input[type="checkbox"]:checked + label {
-      background: $light-color;
-      color: $alternate-color;
+      opacity: 1;
     }
   }
-  
+
   .split-1 {
     height: calc(100% - 29px)
   }
@@ -72,7 +74,7 @@ pa-editor {
     .content {
       border-right: 1px solid #aaa;
       border-bottom: 1px solid #aaa;
-     
+
     }
   }
 }
@@ -84,34 +86,34 @@ pa-editor {
 
   .command-set {
     padding: 4px 0;
-  
+
     &:empty {
       display: none;
     }
   }
-  
+
   .command-entry {
     cursor: pointer;
-    
+
     &:hover {
-      color: $amethyst;  
+      color: $amethyst;
     }
-    
+
     span {
       padding: 2px 8px;
     }
-    
+
     span:first-child {
       float: left;
       color: #888;
     }
-    
+
     span:last-child {
       float: right;
       font-weight: bold;
       font-family: $mono-fonts;
     }
-    
+
     &.selected span {
       color: $alternate-color;
     }
