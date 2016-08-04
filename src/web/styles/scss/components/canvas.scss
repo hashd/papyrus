@@ -48,12 +48,12 @@ pa-vis-canvas {
 
     g > .selected {
       stroke: $blue;
-      stroke-width: 3;
+      stroke-width: 2;
     }
 
     g > :not(.selected):hover {
       stroke: $green;
-      stroke-width: 3;
+      stroke-width: 2;
     }
   }
 }

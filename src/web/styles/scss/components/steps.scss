@@ -5,17 +5,23 @@ ul.steps {
 
   & > li {
     padding: 6px 25px 6px 12px;
+    border-top: 1px solid transparent;
     border-bottom: 1px solid $light-gray;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 
-    .step-preview {
+    svg.step-preview {
       border: 1px solid $gray;
-      height: 60px;
-      width: 60px;
       float: left;
       margin-right: 10px;
+
+      g {
+        & > :last-child {
+          stroke-width: 10;
+          stroke: $dark-magenta;
+        }
+      }
     }
 
     .remove-icon {
@@ -42,12 +48,17 @@ ul.steps {
       text-align: justify;
     }
 
-    &.selected .step-summary {
-      color: $alternate-color;
-    }
+    &.selected {
+      border-top: 1px solid $secondary-color;
+      border-bottom: 1px solid $secondary-color;
 
-    &.selected .step-preview {
-      border-color: $alternate-color;
+      .step-summary {
+        color: $secondary-color;
+      }
+
+      .step-preview {
+        border-color: $secondary-color;
+      }
     }
   }
 }

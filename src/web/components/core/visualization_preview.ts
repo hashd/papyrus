@@ -55,7 +55,6 @@ export class VisualizationPreview implements OnChanges {
         width = this.visualization.dimensions.width || preview.clientWidth,
         height = this.visualization.dimensions.height || preview.clientHeight
 
-      this.clearPreview()
       this.setPreviewDimensions(width, height)
       this.drawVisualization(width, height)
     }
@@ -66,11 +65,8 @@ export class VisualizationPreview implements OnChanges {
   }
 
   drawVisualization(width, height) {
-    const preview = this.preview.nativeElement
     const pictureContext = new PictureContext({x:0, y:0}, {x:width,y:height})
-    const element = this.visualization.execute(pictureContext).element
-
-    preview.appendChild(element)
+    this.preview.nativeElement.innerHTML = this.visualization.execute(pictureContext).element.outerHTML
   }
 
   removeVisualization(event: Event) {
@@ -78,11 +74,5 @@ export class VisualizationPreview implements OnChanges {
     this.onRemove.emit({ visualization })
 
     event.stopPropagation()
-  }
-
-  private clearPreview() {
-    while (this.preview.nativeElement.firstChild) {
-      this.preview.nativeElement.removeChild(this.preview.nativeElement.firstChild)
-    }
   }
 }

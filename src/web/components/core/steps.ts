@@ -16,7 +16,10 @@ import { Messages, Subjects } from 'src/web/services/messages'
           *ngFor="#step of visualization?.block?.steps; #i=index;"
           (click)="clickEvent(step)"
         >
-          <div class="step-preview" #stepPreview></div>
+          <svg class="step-preview" xmlns="http://www.w3.org/2000/svg"
+            version="1.1" width="60px" height="60px"
+            preserveAspectRatio="xMidYMid slice" #stepPreview>
+          </svg>
           {{ drawStepPreview(stepPreview, i+1) }} <!-- added to append step preview element-->
           <pa-step-summary [step]="step"></pa-step-summary>
           <div class="remove-icon" (click)="removeStep(step)">
@@ -65,8 +68,12 @@ export class PapyrusSteps {
     this.removedStep.emit({ step })
   }
 
-  drawStepPreview(parent: ElementRef, count: number) {
-    const pictureContext = new PictureContext({ x: 0, y: 0 }, { x: parent.clientWidth,y: parent.clientHeight })
-    parent.innerHTML = this.visualization.executeUntil(count, pictureContext).element.outerHTML
+  drawStepPreview(preview: ElementRef, count: number) {
+    const width = this.visualization.dimensions.width || preview.clientWidth,
+      height = this.visualization.dimensions.height || preview.clientHeight,
+      pictureContext = new PictureContext({ x: 0, y: 0 }, { x: width,y: height })
+
+    preview.setAttribute('viewBox', `0 0 ${width} ${height}`)
+    preview.innerHTML = this.visualization.executeUntil(count, pictureContext).element.outerHTML
   }
 }
