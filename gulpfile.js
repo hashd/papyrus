@@ -50,12 +50,16 @@ gulp.task('build', gulp.series('clean', 'copy:fonts', 'build:app'));
 gulp.task('watch', gulp.series('build', function watchSources() {
   return gulp.watch([sassSrc, appSrc, sassJsSrc], gulp.series('build:app')).on('change', function (event) {
     console.log('Change detected: ' + event + ' was modified, running tasks...');
+  }).on('error', function (error) {
+    console.log(error); 
   });  
 }));
 
 gulp.task('watch:dev', gulp.series('build', function watchCSS() {
   return gulp.watch(sassSrc, gulp.series('compile:css')).on('change', function (event) {
     console.log('Change detected: ' + event + ' was modified, running tasks...');
+  }).on('error', function (error) {
+    console.log(error); 
   });  
 }));
 
