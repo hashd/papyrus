@@ -14769,7 +14769,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, visualization_1, focus_me_1, picture_context_1;
-    var VisualizationPreview;
+    var PREVIEW_OPACITY, VisualizationPreview;
     return {
         setters:[
             function (core_1_1) {
@@ -14785,6 +14785,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                 picture_context_1 = picture_context_1_1;
             }],
         execute: function() {
+            PREVIEW_OPACITY = 0.1;
             VisualizationPreview = (function () {
                 function VisualizationPreview() {
                     this.onRemove = new core_1.EventEmitter();
@@ -14847,7 +14848,7 @@ $__System.register("9a", ["b", "9b", "9c", "9d"], function(exports_1, context_1)
                 VisualizationPreview = __decorate([
                     core_1.Component({
                         selector: 'pa-vis-preview',
-                        template: "\n    <div class=\"vis-preview\">\n      <div class=\"del-icon\">\n        <i class=\"fa fa-trash\" (click)=\"removeVisualization($event)\"></i>\n      </div>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"90px\" height=\"74px\" #preview>\n\n      </svg>\n      <div>\n        <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n        <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n      </div>\n    </div>\n  ",
+                        template: "\n    <div class=\"vis-preview\">\n      <div class=\"del-icon\">\n        <i class=\"fa fa-trash\" (click)=\"removeVisualization($event)\"></i>\n      </div>\n      <svg opacity=\"" + PREVIEW_OPACITY + "\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" preserveAspectRatio=\"xMidYMid slice\" width=\"90px\" height=\"74px\" #preview>\n\n      </svg>\n      <div>\n        <div class=\"vis-name\" *ngIf=\"!nameBeingEdited\" (dblclick)=\"editName()\">{{visualization?.name}}</div>\n        <input focus-me type=\"text\" *ngIf=\"nameBeingEdited\" [(ngModel)]=\"visualization.name\" (blur)=\"saveName($event)\" (keydown)=\"$event.keyCode === 13?saveName($event):undefined\" />\n      </div>\n    </div>\n  ",
                         directives: [focus_me_1.FocusMe]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -15216,7 +15217,7 @@ $__System.register("a5", ["b", "9f", "a6", "9d", "a7"], function(exports_1, cont
                 PapyrusSteps = __decorate([
                     core_1.Component({
                         selector: 'pa-steps',
-                        template: "\n    <pa-panel header=\"Steps\">\n      <ul class=\"steps\" *ngIf=\"visualization?.block?.steps?.length\">\n        <li\n          class=\"step\"\n          [class.selected]=\"step === currentStep\"\n          *ngFor=\"#step of visualization?.block?.steps; #i=index;\"\n          (click)=\"clickEvent(step)\"\n        >\n          <div class=\"step-preview\" #stepPreview></div>\n          {{ drawStepPreview(stepPreview, i+1) }} <!-- added to append step preview element-->\n          <pa-step-summary [step]=\"step\"></pa-step-summary>\n          <div class=\"remove-icon\" (click)=\"removeStep(step)\">\n            <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n          </div>\n        </li>\n      </ul>\n      <div *ngIf=\"!visualization?.block?.steps?.length\" class=\"step-note\">Oops!, nothing here yet. Select a command and get started.</div>\n    </pa-panel>\n  ",
+                        template: "\n    <pa-panel header=\"Steps\">\n      <ul class=\"steps\" *ngIf=\"visualization?.block?.steps?.length\">\n        <li\n          class=\"step\"\n          [class.selected]=\"step === currentStep\"\n          *ngFor=\"#step of visualization?.block?.steps; #i=index;\"\n          (click)=\"clickEvent(step)\"\n        >\n          <div class=\"step-preview\" #stepPreview></div>\n          {{ drawStepPreview(stepPreview, i+1) }} <!-- added to append step preview element-->\n          <pa-step-summary [step]=\"step\"></pa-step-summary>\n          <div class=\"remove-icon\" (click)=\"removeStep(step)\">\n            <i class=\"fa fa-times-circle\" aria-hidden=\"true\"></i>\n          </div>\n        </li>\n      </ul>\n      <div *ngIf=\"!visualization?.block?.steps?.length\" class=\"step-note\">Oops!, nothing here yet. Select a command and get started.</div>\n    </pa-panel>\n  ",
                         directives: [panel_1.PanelComponent, step_summary_1.StepSummary]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -21666,6 +21667,7 @@ $__System.register("b5", [], function(exports_1, context_1) {
                     line.setAttributeNS(null, 'y2', y2.toString());
                     line.setAttributeNS(null, 'stroke', '#555');
                     line.setAttributeNS(null, 'stroke-width', '1');
+                    line.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke');
                     return line;
                 };
                 SVG.createRect = function (x, y, width, height) {
@@ -21674,6 +21676,7 @@ $__System.register("b5", [], function(exports_1, context_1) {
                     rect.setAttributeNS(null, 'y', y.toString());
                     rect.setAttributeNS(null, 'width', width.toString());
                     rect.setAttributeNS(null, 'height', height.toString());
+                    rect.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke');
                     return rect;
                 };
                 SVG.createEllipse = function (cx, cy, rx, ry) {
@@ -21682,12 +21685,14 @@ $__System.register("b5", [], function(exports_1, context_1) {
                     ellipse.setAttributeNS(null, 'cy', cy.toString());
                     ellipse.setAttributeNS(null, 'rx', rx.toString());
                     ellipse.setAttributeNS(null, 'ry', ry.toString());
+                    ellipse.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke');
                     return ellipse;
                 };
                 SVG.createGroup = function (elements, width, height) {
                     var group = document.createElementNS(ns, 'g');
                     group.setAttributeNS(null, 'width', width.toString());
                     group.setAttributeNS(null, 'height', height.toString());
+                    group.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke');
                     elements.forEach(function (element) { return group.appendChild(element); });
                     return group;
                 };
@@ -21696,6 +21701,7 @@ $__System.register("b5", [], function(exports_1, context_1) {
                     path.setAttributeNS(null, 'fill', 'none');
                     path.setAttributeNS(null, 'stroke', '#555');
                     path.setAttributeNS(null, 'stroke-width', '1');
+                    path.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke');
                     // points.forEach(point => d = `${d}`);
                     points.forEach(function (point) {
                         if (d === '') {
