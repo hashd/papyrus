@@ -4,6 +4,8 @@ import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from '../../../dvu/geometry/picture_context'
 import { Observable } from 'rxjs/Rx'
 
+const PREVIEW_OPACITY = 0.1
+
 @Component({
   selector: 'pa-vis-preview',
   template: `
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs/Rx'
       <div class="del-icon">
         <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="90px" height="74px" #preview>
+      <svg opacity="${PREVIEW_OPACITY}" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="90px" height="74px" #preview>
 
       </svg>
       <div>

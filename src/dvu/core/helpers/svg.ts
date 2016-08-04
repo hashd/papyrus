@@ -15,6 +15,8 @@ export class SVG {
     line.setAttributeNS(null, 'y2', y2.toString())
     line.setAttributeNS(null, 'stroke', '#555')
     line.setAttributeNS(null, 'stroke-width', '1')
+    line.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
+
     return line
   }
 
@@ -24,6 +26,7 @@ export class SVG {
     rect.setAttributeNS(null, 'y', y.toString())
     rect.setAttributeNS(null, 'width', width.toString())
     rect.setAttributeNS(null, 'height', height.toString())
+    rect.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     return rect
   }
@@ -34,6 +37,7 @@ export class SVG {
     ellipse.setAttributeNS(null, 'cy', cy.toString())
     ellipse.setAttributeNS(null, 'rx', rx.toString())
     ellipse.setAttributeNS(null, 'ry', ry.toString())
+    ellipse.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     return ellipse
   }
@@ -42,6 +46,7 @@ export class SVG {
     let group = document.createElementNS(ns, 'g')
     group.setAttributeNS(null, 'width', width.toString())
     group.setAttributeNS(null, 'height', height.toString())
+    group.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     elements.forEach(element => group.appendChild(element))
     return group
@@ -53,6 +58,7 @@ export class SVG {
     path.setAttributeNS(null, 'fill', 'none')
     path.setAttributeNS(null, 'stroke', '#555')
     path.setAttributeNS(null, 'stroke-width', '1')
+    path.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     // points.forEach(point => d = `${d}`);
 
