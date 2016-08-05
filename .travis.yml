@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "6.2"
 before_install:
-  - npm install -g gulp-cli jspm typescript
+  - npm install -g gulp-cli jspm@0.16.39 typescript
 install:
   - npm install
   - jspm install
