@@ -28,6 +28,7 @@
     "gulp": "gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.3.0",
+    "gulp-tslint": "^6.0.2",
     "jspm": "^0.16.31",
     "lite-server": "^2.1.0",
     "reflect-metadata": "0.1.2",

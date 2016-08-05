@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
   sass = require('gulp-sass'),
   concat = require('gulp-concat'),
+  tslint = require('gulp-tslint'),
   del = require('del'),
   exec = require('child_process').exec;
 
@@ -39,7 +40,16 @@ gulp.task('compile:css', function () {
     .pipe(gulp.dest(sassDest));
 });
 
-gulp.task('build:js', gulp.series('compile:css', function run_build_app() {
+gulp.task('lint:src', function () {
+  return gulp.src(appSrc)
+    .pipe(tslint())
+    .pipe(tslint.report({
+        emitError: false,
+        sort: true
+      }));
+})
+
+gulp.task('build:js', gulp.series('lint:src', 'compile:css', function runBuildApp() {
   return exec('npm run build-app');
 }));
 
