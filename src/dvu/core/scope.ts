@@ -4,8 +4,8 @@ export class Scope {
   global: Scope
 
   constructor(public parent: Scope = null) {
-    this.depth = this.parent? parent.depth + 1: 0
-    this.global = this.parent? parent.global: this
+    this.depth = this.parent ? parent.depth + 1 : 0
+    this.global = this.parent ? parent.global : this
   }
 
   add(key: string, value: any) {

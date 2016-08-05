@@ -1,4 +1,4 @@
-import { Step, Executable } from './step'
+import { Executable } from './step'
 import { generateUUID } from '../utils/uuid'
 import { Scope } from '../core/scope'
 import { Picture } from '../core/models/picture'
@@ -28,8 +28,8 @@ export class Block implements Executable<Picture> {
   remove(step: Executable<any>) {
     if (this._steps && step) {
       const index = this._steps.indexOf(step)
-      if (index != -1) {
-      	this._steps.splice(index, 1)
+      if (index !== -1) {
+        this._steps.splice(index, 1)
       }
     }
   }

@@ -17,7 +17,7 @@ export class CommandService {
   getCommands() {
     return this.commands
   }
-  
+
   addCommand(command: Command) {
     this.commands.push(command)
   }

@@ -7,13 +7,13 @@ pa-visualizations {
 
   pa-panel, .pa-panel {
     height: 100%;
-    
+
     .content, .title {
       text-align: center;
       background: #333;
-    } 
+    }
   }
-  
+
   .content {
     padding: 12px 0 !important;
     text-align: center;
@@ -23,7 +23,7 @@ pa-visualizations {
       vertical-align: middle;
     }
   }
-  
+
   pa-vis-preview {
     display: inline-block;
     margin-bottom: 4px;
@@ -31,7 +31,7 @@ pa-visualizations {
     cursor: pointer;
     position: relative;
   }
-  
+
   .vis-preview,
   pa-create-vis {
     display: inline-block;
@@ -40,7 +40,7 @@ pa-visualizations {
     border: 1px solid #ddd;
     text-align: center;
   }
-  
+
   .vis-preview {
     background: $white;
     border: 3px solid #333;
@@ -76,7 +76,7 @@ pa-visualizations {
       }
     }
   }
-  
+
   pa-create-vis {
     cursor: pointer;
     border: none;
@@ -84,12 +84,12 @@ pa-visualizations {
     text-align: left;
     width: auto;
     color: $white;
-    
+
     i:hover {
       color: $alternate-color;
     }
   }
-  
+
   pa-vis-preview {
     &.selected {
       .vis-preview {
@@ -99,12 +99,12 @@ pa-visualizations {
           border-left-color: $green;
         }
       }
-      
+
       .vis-name {
         color: $primary-color;
       }
     }
-    
+
     .vis-name {
       text-align: center;
       cursor: pointer;
@@ -117,13 +117,13 @@ pa-visualizations {
       top: 31px;
       left: 12px;
     }
-    
+
     input {
       width: 100%;
       text-align: center;
       border-radius: 16px;
       border: 1px solid $primary-color;
-      
+
       &:focus {
         padding: 0px;
         outline: none;

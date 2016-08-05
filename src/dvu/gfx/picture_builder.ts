@@ -13,16 +13,16 @@ export interface PictureBuilderInterface {
 }
 
 export class PictureBuilder implements PictureBuilderInterface {
-  constructor(public _datasetDefinition: DatasetDefinition = new DatasetDefinition(), 
-              public _measureDefinition: DatasetDefinition = new DatasetDefinition(), 
+  constructor(public _datasetDefinition: DatasetDefinition = new DatasetDefinition(),
+              public _measureDefinition: DatasetDefinition = new DatasetDefinition(),
               public _steps: Step[] = []) {
-    
+
   }
-  
+
   addStep(step: Step) {
     this._steps.push(step)
   }
-  
+
   getStep(idx: number) {
     return this._steps[idx]
   }
@@ -33,7 +33,7 @@ export class PictureBuilder implements PictureBuilderInterface {
    */
   build(): PictureCommand {
     const self = this
-    
+
     return class Picture extends PictureCommand {
       static steps: Step[] = self._steps
       static datasetDefinition: DatasetDefinition = self._datasetDefinition
@@ -47,13 +47,11 @@ export class PictureBuilder implements PictureBuilderInterface {
 
   /**
    * Import visualization builder spec from an export
-   */  
+   */
   import(def: Definition): PictureBuilderInterface {
-    let config = JSON.parse(def)
-    
     return this.build()
   }
-  
+
   /**
    * Export visualization builder spec into a string format
    */
@@ -64,7 +62,7 @@ export class PictureBuilder implements PictureBuilderInterface {
       measureDefinition: this._measureDefinition
     })
   }
-  
+
   exportAsCode(): Code {
     // TODO: Implement this later on
     return 'Nothing here yet.'

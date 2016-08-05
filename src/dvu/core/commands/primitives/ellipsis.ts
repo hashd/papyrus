@@ -8,7 +8,7 @@ export const ELLIPSIS = new PictureCommand('Circle', {
   noOfInstances: 0,
 
   onMousedown(context: PictureContext): Element {
-    const { start, end } = context
+    const { start } = context
 
     const ellipsis = SVG.createEllipse(start.x, start.y, context.getWidth(), context.getHeight())
     ellipsis.setAttributeNS(null, 'stroke', '#555')
@@ -18,7 +18,6 @@ export const ELLIPSIS = new PictureCommand('Circle', {
   },
 
   onMousemove(element: Element, context: PictureContext): Element {
-    const { start, end } = context
     const rx = context.getWidth(), ry = context.getHeight()
 
     element.setAttributeNS(null, 'rx', rx.toString())
@@ -32,7 +31,7 @@ export const ELLIPSIS = new PictureCommand('Circle', {
   },
 
   getSummary(data: PictureContext) {
-    const radius = (data.getWidth() == data.getHeight()) ? data.getWidth(): `${data.getWidth()}, ${data.getHeight()}`
-    return `Draw ${data.name || ((data.getWidth() == data.getHeight())?'circle': 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
+    const radius = (data.getWidth() === data.getHeight()) ? data.getWidth() : `${data.getWidth()}, ${data.getHeight()}`
+    return `Draw ${data.name || ((data.getWidth() === data.getHeight()) ? 'circle' : 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
   }
 })

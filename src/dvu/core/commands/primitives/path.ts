@@ -14,11 +14,11 @@ export const PATH = new PictureCommand('Path', {
   onMousemove(element: Element, context: PictureContext): Element {
     const { end } = context
 
-    let d = element.getAttributeNS(null, 'd');
+    let d = element.getAttributeNS(null, 'd')
 
     element.setAttributeNS(null, 'd', `${d} L${end.x.toString()},${end.y.toString()}`)
 
-    return element;
+    return element
   },
 
   onMouseup(element: Element, context: PictureContext): Element {

@@ -72,5 +72,3 @@ export class CompositeVisualization extends PictureCommand {
     }
   }
 }
-
-export const PictureCreator = CompositeVisualization

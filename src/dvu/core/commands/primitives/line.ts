@@ -6,7 +6,7 @@ export const LINE = new PictureCommand('Line', {
   name: 'line',
   shortcutKey: 'l',
   noOfInstances: 0,
-  
+
   onMousedown(context: PictureContext): Element {
     const { start, end } = context
 

@@ -3,7 +3,7 @@ import { PanelComponent as Panel } from '../generic/panel'
 import { StepSummary } from './step_summary'
 import { Step } from 'src/dvu/core/step'
 import { PictureContext } from 'src/dvu/geometry/picture_context'
-import { Messages, Subjects } from 'src/web/services/messages'
+import { Messages, subjects } from 'src/web/services/messages'
 
 @Component({
   selector: 'pa-steps',
@@ -39,7 +39,7 @@ export class PapyrusSteps {
   @Output() removedStep: EventEmitter<any> = new EventEmitter()
 
   constructor () {
-    const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
+    const selectedElementSubject = subjects[Messages.CHANGE_ELEMENT_SELECTION]
 
     selectedElementSubject.subscribe({
       next: (step) => {
@@ -51,8 +51,8 @@ export class PapyrusSteps {
   clickEvent(step: Step) {
     this.selectStep(step)
 
-    //broadcast step selection change message
-    const selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION]
+    // broadcast step selection change message
+    const selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
     selectedStepSubject.next(step.uuid)
   }
 
@@ -66,7 +66,7 @@ export class PapyrusSteps {
   }
 
   drawStepPreview(parent: ElementRef, count: number) {
-    const pictureContext = new PictureContext({ x: 0, y: 0 }, { x: parent.clientWidth,y: parent.clientHeight })
+    const pictureContext = new PictureContext({ x: 0, y: 0 }, { x: parent.clientWidth, y: parent.clientHeight })
     parent.innerHTML = this.visualization.executeUntil(count, pictureContext).element.outerHTML
   }
 }

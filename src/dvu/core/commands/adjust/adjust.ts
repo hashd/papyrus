@@ -19,12 +19,12 @@ export class AdjustCommand extends Command {
   type: CommandType = 'adjust'
   initEvent: string = 'mousedown'
   datasetDefinition: DatasetDefinition = adjustDatasetDefinition
-  
+
   constructor(private implementation: AdjustCommandInterface) {
     super()
     this.name = implementation.name
     this.shortcutKey = implementation.shortcutKey
-    
+
     if (implementation.datasetDefinition) {
       this.datasetDefinition = implementation.datasetDefinition
     }

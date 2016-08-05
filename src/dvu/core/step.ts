@@ -16,7 +16,7 @@ export class Step implements Executable<Picture> {
   }
 
   get uuid(): string {
-    return this._uuid;
+    return this._uuid
   }
 
   addParameter(name: string, value: ValueType) {

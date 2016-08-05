@@ -1,17 +1,17 @@
 pa-data {
   pa-panel {
     height: 100%;
-    
+
     & > div {
       height: 100%;
-      
+
       .content {
         height: calc(100% - 22px);
         overflow-y: auto;
-      }  
+      }
     }
   }
-  
+
   .command-bar {
     margin: -2px -12px;
     padding: 2px 12px;
@@ -20,21 +20,21 @@ pa-data {
     margin-bottom: 6px;
     font-size: 1em;
     color: $secondary-color;
-    
+
     i:hover {
       cursor: pointer;
-    }   
+    } 
   }
-  
+
   .variables, .iterables {
     list-style: none;
     margin-top: 28px;
     padding-left: 2px;
-    
+
     .vname {
-      
+
     }
-    
+
     .vname span,
     .vname input {
       display: inline-block;
@@ -43,7 +43,7 @@ pa-data {
       padding: 2px 16px;
       border-radius: 16px;
     }
-    
+
     .vname span {
       cursor: pointer;
       background: $light-gray;
@@ -52,13 +52,13 @@ pa-data {
       overflow: hidden;
       color: $dark-gray;
     }
-    
+
     .vname input {
       color: $dark-gray;
       outline: none;
       border: 1px solid $dark-gray;
     }
-    
+
     .vvalue span,
     .vvalue input {
       display: inline-block;
@@ -68,12 +68,12 @@ pa-data {
       padding: 2px 16px;
       border-radius: 16px;
     }
-    
+
     .vvalue span {
       color: $dark-gray;
       cursor: ew-resize;
     }
-    
+
     .vvalue input {
       outline: none;
       border: 1px solid $dark-gray;

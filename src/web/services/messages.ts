@@ -6,13 +6,15 @@ const enum Messages {
   CHANGE_STEP_SELECTION
 }
 
-let Subjects = {};
+let subjects = {}
 
-for(let key in Messages) {
-  Subjects[key] = new Subject();
+for (let key in Messages) {
+  if (Messages.hasOwnProperty(key)) {
+    subjects[key] = new Subject()
+  }
 }
 
 export {
   Messages,
-  Subjects
+  subjects
 }

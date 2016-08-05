@@ -1,4 +1,3 @@
-import { Point } from '../geometry/cartesian_system'
 import { CommandType } from './command_types'
 import { Scope } from './scope'
 
@@ -22,7 +21,7 @@ export class Command implements Executable {
   execute(data, scope: Scope = new Scope()) {
 
   }
-  
+
   getSummary(data: {}): string {
     return 'This method has not been overriden and should be done for all commands'
   }

@@ -2,7 +2,7 @@ import { Point } from './../geometry/cartesian_system'
 import { Dimensions } from './../geometry/dimensions'
 import { SVG } from './../core/helpers/svg'
 
-const RADIAN_TO_DEGREE_FACTOR = 180/Math.PI
+const RADIAN_TO_DEGREE_FACTOR = 180 / Math.PI
 
 export interface Picture {
   name: string
@@ -15,7 +15,7 @@ export interface Picture {
   rotate: (initPoint: Point, endPoint: Point) => any
   scale: (initPoint: Point, endPoint: Point) => any
   duplicate: () => Picture
-  
+
   getHandle: () => Element
   getInnerElements: () => Element[]
 }
@@ -34,29 +34,29 @@ export abstract class AbstractPicture implements Picture {
   move(initPoint: Point, endPoint: Point): any {
     this.moveOffset.x += (endPoint.x - initPoint.x)
     this.moveOffset.y += (endPoint.y - initPoint.y)
-    
+
     this.updateTransform()
   }
 
   rotate(initPoint: Point, endPoint: Point): any {
-    const rotationSlope = (endPoint.y - initPoint.y)/(endPoint.x - initPoint.x)
+    const rotationSlope = (endPoint.y - initPoint.y) / (endPoint.x - initPoint.x)
 
     this.rotateAngle += (Math.atan(rotationSlope) * RADIAN_TO_DEGREE_FACTOR)
-    
+
     this.updateTransform()
   }
 
   scale(initPoint: Point, endPoint: Point): any {
-    this.scaleFactor.x *= (endPoint.x/initPoint.x)
-    this.scaleFactor.y *= (endPoint.y/initPoint.y) 
+    this.scaleFactor.x *= (endPoint.x / initPoint.x)
+    this.scaleFactor.y *= (endPoint.y / initPoint.y)
 
     this.updateTransform()
   }
-  
+
   duplicate(): Picture {
     return this
   }
-  
+
   getHandle(): Element {
     return SVG.createGroup([this.boundingElement, ...this.magnets], this.dimensions.width, this.dimensions.height)
   }
@@ -72,7 +72,7 @@ export abstract class AbstractPicture implements Picture {
     const translateProperty = `translate(${this.moveOffset.x}, ${this.moveOffset.y})`,
           rotateProperty = `rotate(${this.rotateAngle})`,
           scaleProperty = `scale(${this.scaleFactor.x}, ${this.scaleFactor.y})`
-    
+
     this.element.setAttributeNS(null, 'transform', `${translateProperty} ${rotateProperty} ${scaleProperty}`)
   }
 }

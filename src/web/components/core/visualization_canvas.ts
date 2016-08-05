@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { Point } from '../../../dvu/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
-import { Messages, Subjects } from 'src/web/services/messages'
+import { Messages, subjects } from 'src/web/services/messages'
 import * as _  from 'lodash'
 
 @Component({
@@ -44,22 +44,22 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Output() draw: EventEmitter<Object> = new EventEmitter()
 
   constructor () {
-    const removeStepSubject = Subjects[Messages.REMOVE_STEP],
-      selectedStepSubject = Subjects[Messages.CHANGE_STEP_SELECTION];
+    const removeStepSubject = subjects[Messages.REMOVE_STEP],
+      selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
 
     removeStepSubject.subscribe({
       next: (uuid: string) => {
         this.removeStepElement(uuid)
       }
-    });
+    })
 
     selectedStepSubject.subscribe({
       next: (uuid: string) => {
-        if(uuid) {
+        if (uuid) {
           this.selectElement(this.stepElementMap.get(uuid))
         }
       }
-    });
+    })
   }
 
   ngAfterViewInit() {
@@ -92,7 +92,6 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     if (changes.hasOwnProperty('visualization') && this.visualization) {
       if (this.visualization.dimensions.width === 0 && this.visualization.dimensions.height === 0) {
         const canvasParent = this.canvasParent.nativeElement,
-              canvas = this.canvas.nativeElement,
               width = canvasParent.clientWidth,
               height = canvasParent.clientHeight - 32,
               minDim = Math.min(width, height)
@@ -108,7 +107,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     this.hoveredPoint = { x: event.offsetX, y: event.offsetY }
 
     if (event.which === 1 || (event.which === 0 && this.dragModeEnabled)) {
-      this.dragModeEnabled = (event.type === 'mouseup')? false: true
+      this.dragModeEnabled = (event.type === 'mouseup') ? false : true
 
       // event.target should be used to get the selected element
       // if (event.type === 'mousedown') { console.log(event.target, event) }
@@ -130,15 +129,15 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   keydownEvent(e) {
     const keyCode = e.keyCode
 
-    if(keyCode === 9) {
+    if (keyCode === 9) {
       let selectedElement
       let element
 
       Array.from(this.vis.nativeElement.children).forEach( child => {
-        if(child.classList.contains('selected')) {
+        if (child.classList.contains('selected')) {
           selectedElement = child
         }
-      });
+      })
 
       element = selectedElement && selectedElement.nextSibling ? selectedElement.nextSibling : this.vis.nativeElement.firstElementChild
       this.selectElement(element)
@@ -149,7 +148,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   clickEvent(e) {
     let element = e.target
-    if(element && element.tagName !== 'svg') {
+    if (element && element.tagName !== 'svg') {
       this.selectElement(element)
       this.selectionChangeMessage(element)
       e.preventDefault()
@@ -157,10 +156,10 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
 
   private selectElement(element) {
-    if(element) {
-      //assuming only one element is selected
+    if (element) {
+      // assuming only one element is selected
       let selected = element.parentElement.querySelector('.selected')
-      if(selected) {
+      if (selected) {
         selected.classList.remove('selected')
       }
 
@@ -169,24 +168,25 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
 
   private selectionChangeMessage(element) {
-    //broadcast element selection change message
+    // broadcast element selection change message
     const self = this,
       selectedStep = _.find(this.visualization.block.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
-    if(selectedStep) {
-      const selectedElementSubject = Subjects[Messages.CHANGE_ELEMENT_SELECTION]
+
+    if (selectedStep) {
+      const selectedElementSubject = subjects[Messages.CHANGE_ELEMENT_SELECTION]
       selectedElementSubject.next(selectedStep)
     }
   }
 
   private removeStepElement(uuid: string) {
-    if(uuid) {
+    if (uuid) {
       this.vis.nativeElement.removeChild(this.stepElementMap.get(uuid))
       this.stepElementMap.delete(uuid)
     }
   }
 
   private addStepElement(step: Step) {
-    if(step) {
+    if (step) {
       const element = step.execute().element
       this.vis.nativeElement.appendChild(element)
       this.stepElementMap.set(step.uuid, element)

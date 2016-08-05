@@ -24,14 +24,14 @@ import { CommandService } from '../../services/command'
 export class CommandBar {
   @Input() commands: Command[]
   @Input() currentCommand: Command
-  
+
   commandTypes: CommandType[] = COMMAND_TYPES
-  
+
   @Output() select: EventEmitter<any> = new EventEmitter()
 
   constructor(private commandService: CommandService) {
   }
-  
+
   getCommandsByType(type: CommandType) {
     return this.commands.filter(cmd => cmd.type === type && cmd.name !== 'unnamed')
   }
@@ -39,10 +39,10 @@ export class CommandBar {
   refreshCommands() {
     this.commands = this.commandService.getCommands()
   }
-  
+
   selectCommand(activeCommand: Command) {
     const previousCommand = this.currentCommand
-    
+
     this.currentCommand = activeCommand
     this.select.emit({ activeCommand, previousCommand })
   }

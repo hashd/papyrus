@@ -1,8 +1,7 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef, OnChanges,Output,EventEmitter } from 'angular2/core'
+import { Component, Input, ViewChild, ElementRef, OnChanges, Output, EventEmitter } from 'angular2/core'
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from '../../../dvu/geometry/picture_context'
-import { Observable } from 'rxjs/Rx'
 
 const PREVIEW_OPACITY = 0.1
 
@@ -67,7 +66,7 @@ export class VisualizationPreview implements OnChanges {
 
   drawVisualization(width, height) {
     const preview = this.preview.nativeElement
-    const pictureContext = new PictureContext({x:0, y:0}, {x:width,y:height})
+    const pictureContext = new PictureContext({x: 0, y: 0}, {x: width, y: height})
     const element = this.visualization.execute(pictureContext).element
 
     preview.appendChild(element)

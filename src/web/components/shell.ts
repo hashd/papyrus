@@ -6,7 +6,7 @@ import { FullLength } from '../directives/all'
 
 @Component({
   selector: 'papyrus-shell',
-  template: ` 
+  template: `
     <div class="editor-space row row-no-padding" [class.full-editor-mode]="fullEditorEnabled">
      <pa-visualizations class="col-md-2"
         [visualizations]="visualizations"
@@ -15,7 +15,7 @@ import { FullLength } from '../directives/all'
       </pa-visualizations>
 
       <pa-editor [visualization]="activeVisualization" class="col-md-10" (toggleEditorMode)="toggleFullEditorMode(e)" full-length>
-      
+
       </pa-editor>
     </div>
   `,

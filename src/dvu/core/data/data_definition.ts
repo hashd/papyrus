@@ -3,7 +3,7 @@ export type ValueType = string | number | Array<any> | Element
 
 export class DataDefinition {
   id: string
-  
+
   constructor(public name: string, public type: DataType, public defaultValue: ValueType = DataDefinition.getDefaultValueForType(type)) {
     this.id = `dd-${+new Date()}`
   }

@@ -1,4 +1,4 @@
-import { AdjustCommand, AdjustCommandInterface } from './adjust'
+import { AdjustCommand } from './adjust'
 import { Picture } from '../../../models/picture'
 import { PictureContext } from '../../../geometry/picture_context'
 

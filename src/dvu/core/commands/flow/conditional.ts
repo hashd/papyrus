@@ -15,7 +15,7 @@ export class IfCommand extends Command {
   name: string = 'If'
   type: CommandType = 'flow'
   shortcutKey: string = 'i'
-  
+
   datasetDefinition: DatasetDefinition = datasetDefinition
   trueBlock: Block = new Block()
   falseBlock: Block = new Block()
@@ -31,10 +31,8 @@ export class IfCommand extends Command {
 
     const innerScope = new Scope(scope)
     const conditionValue: boolean = data[CONDITION]
-    
-    return conditionValue ? 
-      this.trueBlock.execute(innerScope):
-      this.falseBlock.execute(innerScope)
+
+    return conditionValue ? this.trueBlock.execute(innerScope) : this.falseBlock.execute(innerScope)
   }
 
   getSummary() {

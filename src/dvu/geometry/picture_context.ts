@@ -16,7 +16,7 @@ export class PictureContext {
   }
 
   getLeastSignificantPoint(): Point {
-    //noinspection TypeScriptValidateTypes
+    // noinspection TypeScriptValidateTypes
     return this.reducePoints(Math.min, {
       x: Number.MAX_SAFE_INTEGER,
       y: Number.MAX_SAFE_INTEGER
@@ -24,7 +24,7 @@ export class PictureContext {
   }
 
   getMostSignificantPoint(): Point {
-    //noinspection TypeScriptValidateTypes
+    // noinspection TypeScriptValidateTypes
     return this.reducePoints(Math.max, {
       x: Number.MIN_SAFE_INTEGER,
       y: Number.MIN_SAFE_INTEGER

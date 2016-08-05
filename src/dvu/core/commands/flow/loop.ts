@@ -4,7 +4,6 @@ import { CommandType } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
 import { Range } from './../../../utils/range'
-import { Picture } from '../../../core/models/picture'
 
 const START: string = 'start'
 const END: string = 'end'

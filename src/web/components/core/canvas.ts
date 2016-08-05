@@ -82,8 +82,8 @@ export class PapyrusCanvas implements OnChanges {
       this.pictureContext = new PictureContext({x: e.x, y: e.y}, {x: e.x, y: e.y})
     } else if (this.pictureContext && 'mousemove' === e.type) {
 
-      //Needs to remove command name dependancy
-      if(command.name === 'Path') {
+      // Needs to remove command name dependancy
+      if (command.name === 'Path') {
         this.pictureContext.addPoint({x: e.x, y: e.y})
       } else {
         this.pictureContext.end.x = e.x

@@ -68,7 +68,7 @@ export class PapyrusVisualizations implements OnInit {
         this.create()
       } else {
         // else select the next one in the list if it exists, otherwise the previous one
-        const nextIndex = (index === this.visualizations.length) ? index - 1: index
+        const nextIndex = (index === this.visualizations.length) ? index - 1 : index
         this.select(this.visualizations[nextIndex])
       }
     }

@@ -8,7 +8,7 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { CommandService } from 'src/web/services/all'
 import { Step } from '../../../dvu/core/step'
 import { Command } from '../../../dvu/core/command'
-import { Messages, Subjects } from 'src/web/services/messages'
+import { Messages, subjects } from 'src/web/services/messages'
 
 @Component({
   selector: 'pa-editor',
@@ -26,14 +26,14 @@ import { Messages, Subjects } from 'src/web/services/messages'
           <input type="checkbox" id="showMeasuresPanel" [(ngModel)]="showMeasuresPanel" (ngModelChange)="onPanelSwitchToggle($event)"/>
           <label for="showMeasuresPanel">Measures</label>
         </div>
-   
+
         <pa-data [data]="visualization?.data"
           [dataObservables]="visualization?.dataObservables"
           [datasetDefinition]="visualization?.datasetDefinition"
           *ngIf="showDataPanel"
           class="split-{{noOfPanelsEnabled}}"
          >
-        </pa-data>        
+        </pa-data>
         <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" *ngIf="showStepsPanel" class="split-{{noOfPanelsEnabled}}"  (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
         <pa-panel class="split-{{noOfPanelsEnabled}}" *ngIf="showMeasuresPanel" header="Measurements">
           <div></div>
@@ -50,10 +50,10 @@ import { Messages, Subjects } from 'src/web/services/messages'
 export class PapyrusEditor {
   @Input()
   visualization: CompositeVisualization
-  
+
   commands: Command[]
   selectedStep: Step
-  
+
   showDataPanel: boolean = true
   showStepsPanel: boolean = true
   showMeasuresPanel: boolean = false
@@ -72,14 +72,14 @@ export class PapyrusEditor {
   }
 
   onPanelSwitchToggle(value: boolean) {
-    this.noOfPanelsEnabled += (value? 1: -1)
+    this.noOfPanelsEnabled += (value ? 1 : -1)
   }
 
   removeStep(e) {
     this.visualization.block.remove(e.step)
 
-    //to refresh the visualization canvas
-    const removeStepSubject = Subjects[Messages.REMOVE_STEP]
+    // to refresh the visualization canvas
+    const removeStepSubject = subjects[Messages.REMOVE_STEP]
     removeStepSubject.next(e.step.uuid)
   }
 

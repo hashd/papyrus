@@ -16,7 +16,7 @@ import { Tweakable } from '../../directives/tweakable'
         <li *ngFor="#dd of getDefinitions(false)">
           <pa-editable class="vname" [data]="dd.name" (edited)="saveName(dd, $event)" title="{{dd.name}}"></pa-editable>
           <pa-editable class="vvalue" [data]="dd.defaultValue" (edited)="saveValue(dd, $event)" tweakable></pa-editable>
-        </li>     
+        </li>
       </ul>
       <ul class="iterables">
         <li *ngFor="#dd of getDefinitions(true)">
@@ -37,19 +37,19 @@ import { Tweakable } from '../../directives/tweakable'
 })
 export class PapyrusData {
   @Input() datasetDefinition: DatasetDefinition
-  
+
   addDataDefinition() {
-    const dd = this.datasetDefinition.addDataDefinition(undefined, 'number')
+    this.datasetDefinition.addDataDefinition(undefined, 'number')
   }
-  
+
   getDefinitions(isIterable: boolean) {
-    return this.datasetDefinition !== null? this.datasetDefinition.dataDefinitions.filter(d => isIterable? (d.type === 'array'): (d.type !== 'array')): null
+    return this.datasetDefinition !== null ? this.datasetDefinition.dataDefinitions.filter(d => isIterable ? (d.type === 'array') : (d.type !== 'array')) : null
   }
-  
+
   saveName(dd: DataDefinition, e) {
     dd.name = e.value
   }
-  
+
   saveValue(dd: DataDefinition, e) {
     dd.defaultValue = e.value
   }

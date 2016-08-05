@@ -63,7 +63,7 @@ export class SVG {
     // points.forEach(point => d = `${d}`);
 
     points.forEach(function(point) {
-      if(d === '') {
+      if (d === '') {
         d += `M${point.x.toString()},${point.y.toString()} `
       } else {
         d += `L${point.x.toString()},${point.y.toString()} `
