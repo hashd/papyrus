@@ -3,14 +3,14 @@ import {MeasureDefinition, MeasureType, ValueType} from './measure_definition'
 export class MeasuresDefinition {
   measureDefinitions: MeasureDefinition[] = []
   
-  addDataDefinition(name: string, type: MeasureType): MeasureDefinition {
-    const dd = new MeasureDefinition(name || `measure-${this.measureDefinitions.length}`, type)
+  addMeasureDefinition(name: string, type: MeasureType, defaultValue: ValueType): MeasureDefinition {
+    const md = new MeasureDefinition(name || `measure-${this.measureDefinitions.length}`, type, defaultValue)
 
-    this.measureDefinitions.push(dd)
-    return dd
+    this.measureDefinitions.push(md)
+    return md
   }
   
-  removeDataDefinition(id: string) {
+  removeMeasureDefinition(id: string) {
     const idx = this.measureDefinitions.reduce((acc, dd, idx) => dd.id === id ? idx : acc, -1)
     
     if (idx != -1) {
@@ -18,7 +18,7 @@ export class MeasuresDefinition {
     }
   }
   
-  modifyDataDefinition(id: string, name: string, type: MeasureType) {
+  modifyMeasureDefinition(id: string, name: string, type: MeasureType) {
     const dd: MeasureDefinition = this.measureDefinitions.reduce((acc, d) => d.id === id ? d : acc, undefined)
     
     if (dd !== undefined) {
@@ -37,5 +37,12 @@ export class MeasuresDefinition {
 
   validate(data: Object) {
     return this.measureDefinitions.reduce((acc, dd) => acc && dd.validate(data[dd.name]), true)
+  }
+
+  getDefaultMeasures() {
+    return this.measureDefinitions.reduce((measuresObj, measureDefinition) => {
+      measuresObj[measureDefinition.name] = measureDefinition.defaultValue
+      return measuresObj
+    }, {})
   }
 }

@@ -3,6 +3,7 @@ import {CommandType} from '../command_types'
 import {PictureContext} from '../../geometry/picture_context'
 import {Picture} from '../../core/models/picture'
 import {DatasetDefinition} from '../../core/data/dataset_definition'
+import {MeasuresDefinition} from '../../core/data/measures_definition'
 import {CommandInterface} from './command_interface'
 import {Scope} from './../scope'
 
@@ -10,10 +11,14 @@ export interface PictureCommandInterface extends CommandInterface {
   name: string
   shortcutKey: string
   noOfInstances: number
+  datasetDefinition: DatasetDefinition
+  measuresDefinition: MeasuresDefinition
+  draw: (data, measures) => Element
   onMousedown: (context: PictureContext) => Element
   onMousemove: (element: Element, context: PictureContext) => Element
   onMouseup: (element: Element, context: PictureContext) => Element
-  getSummary: (data: PictureContext) => string
+  getDataFromContext: (ctx: PictureContext) => any
+  getSummary: (data) => string
 }
 
 export class PictureCommand extends Command {

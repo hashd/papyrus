@@ -3,8 +3,8 @@ import {DataDefinition, DataType, ValueType} from './data_definition'
 export class DatasetDefinition {
   dataDefinitions: DataDefinition[] = []
   
-  addDataDefinition(name: string, type: DataType): DataDefinition {
-    const dd = new DataDefinition(name || `variable-${this.dataDefinitions.length}`, type)
+  addDataDefinition(name: string, type: DataType, defaultValue: ValueType): DataDefinition {
+    const dd = new DataDefinition(name || `variable-${this.dataDefinitions.length}`, type, defaultValue)
 
     this.dataDefinitions.push(dd)
     return dd
