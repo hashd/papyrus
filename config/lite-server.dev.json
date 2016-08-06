@@ -2,7 +2,6 @@
   "port": 8080,
   "files": ["./src/**/*.{html,htm,css,js,ts}"],
   "server": {
-    "baseDir": ".",
-    "index": "dev.html"
+    "baseDir": "."
   }
 }

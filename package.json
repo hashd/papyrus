@@ -2,11 +2,11 @@
   "name": "papyrus",
   "version": "0.0.1",
   "description": "Dynamic Visualization Playground",
-  "main": "index.js",
+  "main": "web/main.ts",
   "scripts": {
     "prod:start": "concurrently \"npm run prod:serve\" \"gulp watch\" \"npm run build-app\"",
     "prod:serve": "lite-server -c config/lite-server.json",
-    "build-app": "jspm bundle-sfx app public/app.js",
+    "build-app": "jspm build papyrus public/app.js",
     "test": "mocha",
     "start": "concurrently \"npm run serve\" \"gulp watch:dev\"",
     "serve": "lite-server -c config/lite-server.dev.json"
@@ -20,7 +20,7 @@
   "author": "hashd <kd@danduprolu.com>",
   "license": "MIT",
   "devDependencies": {
-    "angular2": "2.0.0-beta.14",
+    "angular2": "^2.0.0-beta.17",
     "chai": "^3.5.0",
     "concurrently": "^2.0.0",
     "del": "^2.2.0",
@@ -28,35 +28,175 @@
     "gulp": "gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.3.0",
-    "jspm": "^0.16.31",
+    "jspm": "^0.17.0-beta.25",
     "lite-server": "^2.1.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
+    "rxjs": "5.0.0-beta.6",
     "svg.js": "^2.3.0",
-    "zone.js": "^0.6.9"
+    "zone.js": "^0.6.12"
   },
   "jspm": {
+    "configFiles": {
+      "jspm": "config/jspm.js"
+    },
     "configFile": "config/jspm.js",
     "dependencies": {
-      "angular2": "npm:angular2@^2.0.0-beta.12",
+      "angular2": "npm:angular2@^2.0.0-beta.17",
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "css": "github:systemjs/plugin-css@^0.1.20",
-      "d3": "npm:d3@^3.5.16",
       "es6-shim": "github:es-shims/es6-shim@^0.35.0",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "jquery": "npm:jquery@^2.2.2",
       "lodash": "npm:lodash@^4.6.1",
-      "rxjs": "npm:rxjs@^5.0.0-beta.7",
-      "scss": "github:mobilexag/plugin-sass@^0.4.6",
-      "svg.js": "github:wout/svg.js@^2.3.0",
-      "zone.js": "npm:zone.js@^0.6.6"
+      "scss": "github:mobilexag/plugin-sass@^0.4.6"
     },
     "devDependencies": {
       "clean-css": "npm:clean-css@^3.4.12",
-      "typescript": "npm:typescript@^1.8.0"
+      "http": "github:jspm/nodelibs-http@^0.2.0-alpha",
+      "https": "github:jspm/nodelibs-https@^0.2.0-alpha",
+      "module": "github:jspm/nodelibs-module@^0.2.0-alpha",
+      "os": "github:jspm/nodelibs-os@^0.2.0-alpha",
+      "plugin-typescript": "github:frankwallis/plugin-typescript@^5.0.9",
+      "typescript": "npm:typescript@^1.8.0",
+      "url": "github:jspm/nodelibs-url@^0.2.0-alpha"
+    },
+    "peerDependencies": {
+      "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
+      "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
+      "constants": "github:jspm/nodelibs-constants@^0.2.0-alpha",
+      "crypto": "github:jspm/nodelibs-crypto@^0.2.0-alpha",
+      "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
+      "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
+      "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "reflect-metadata": "npm:reflect-metadata@0.1.2",
+      "rxjs": "npm:rxjs@^5.0.0-beta.6",
+      "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
+      "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
+      "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
+      "vm": "github:jspm/nodelibs-vm@^0.2.0-alpha",
+      "zone.js": "npm:zone.js@^0.6.6"
+    },
+    "overrides": {
+      "github:twbs/bootstrap@3.3.7": {
+        "shim": {
+          "js/bootstrap": {
+            "deps": [
+              "jquery"
+            ],
+            "exports": "$"
+          }
+        },
+        "dependencies": {
+          "jquery": "2"
+        },
+        "files": [
+          "dist",
+          "fonts",
+          "js",
+          "css",
+          "less",
+          "grunt",
+          "LICENSE"
+        ],
+        "systemjs": {
+          "main": "dist/js/bootstrap.js",
+          "modules": {
+            "dist/js/bootstrap.js": {
+              "deps": [
+                "jquery"
+              ],
+              "exports": "$"
+            }
+          }
+        }
+      },
+      "npm:angular2@2.0.0-beta.17": {
+        "main": false,
+        "dependencies": {
+          "reflect-metadata": "npm:reflect-metadata@0.1.2",
+          "rxjs": "npm:rxjs@^5.0.0-beta.2",
+          "zone.js": "npm:zone.js@^0.6.6"
+        },
+        "peerDependencies": {
+          "reflect-metadata": "npm:reflect-metadata@0.1.2",
+          "rxjs": "npm:rxjs@^5.0.0-beta.2",
+          "zone.js": "npm:zone.js@^0.6.6"
+        },
+        "jspmNodeConversion": false,
+        "map": {
+          "crypto": "@empty"
+        },
+        "meta": {
+          "src/*.js": {
+            "deps": [
+              "reflect-metadata",
+              "zone.js"
+            ]
+          }
+        }
+      },
+      "npm:font-awesome@4.6.3": {
+        "main": "css/font-awesome.css!",
+        "jspmNodeConversion": false,
+        "registry": "jspm",
+        "dependencies": {
+          "css": "0.1"
+        }
+      },
+      "npm:inherits@2.0.1": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:jquery@2.2.4": {
+        "format": "amd"
+      },
+      "npm:lodash@4.14.1": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
+      },
+      "npm:reflect-metadata@0.1.2": {
+        "map": {
+          "crypto": "@empty"
+        }
+      },
+      "npm:sass.js@0.9.11": {
+        "map": {
+          "ws": "@empty"
+        },
+        "meta": {
+          "dist/sass.worker.js": {
+            "format": "global"
+          }
+        }
+      },
+      "npm:typescript@1.8.10": {
+        "browser": {},
+        "map": {
+          "buffer": "@empty",
+          "child_process": "@empty",
+          "fs": "@empty",
+          "path": "@empty",
+          "process": "@empty",
+          "readline": "@empty"
+        }
+      },
+      "npm:typescript@2.0.0": {
+        "browser": {},
+        "map": {
+          "buffer": "@empty",
+          "child_process": "@empty",
+          "fs": "@empty",
+          "path": "@empty",
+          "process": "@empty",
+          "readline": "@empty"
+        }
+      }
     }
   },
-  "dependencies": {
-    "immutable": "^3.8.1"
-  }
+  "dependencies": {}
 }

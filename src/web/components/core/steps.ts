@@ -13,7 +13,7 @@ import { Messages, Subjects } from 'src/web/services/messages'
         <li
           class="step"
           [class.selected]="step === currentStep"
-          *ngFor="#step of visualization?.block?.steps; #i=index;"
+          *ngFor="let step of visualization?.block?.steps; let i=index;"
           (click)="clickEvent(step)"
         >
           <div class="step-preview" #stepPreview></div>

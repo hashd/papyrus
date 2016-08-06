@@ -8,7 +8,7 @@ import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { CommandService } from 'src/web/services/all'
 import { Step } from '../../../dvu/core/step'
 import { Command } from '../../../dvu/core/command'
-import { Messages, Subjects } from 'src/web/services/messages'
+import { Messages, Subjects } from '../../../web/services/messages'
 
 @Component({
   selector: 'pa-editor',

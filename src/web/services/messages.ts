@@ -1,18 +1,13 @@
 import { Subject } from 'rxjs/Subject'
 
-const enum Messages {
+export const enum Messages {
   REMOVE_STEP,
   CHANGE_ELEMENT_SELECTION,
   CHANGE_STEP_SELECTION
 }
 
-let Subjects = {};
+export let Subjects = {};
 
 for(let key in Messages) {
   Subjects[key] = new Subject();
-}
-
-export {
-  Messages,
-  Subjects
 }
