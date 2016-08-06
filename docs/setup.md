@@ -17,7 +17,7 @@ Also install the following global node packages
 - tslint
 
 ``` bash
-npm install -g typescript jspm@0.16.39 tslint gulp-cli concurrently lite-server
+npm install -g typescript jspm tslint gulp-cli concurrently lite-server
 ```
 
 ### Setup
@@ -32,7 +32,7 @@ npm install
 jspm install
 ```
 
-- Execute `gulp build`
+- Execute `gulp build` to check if you're able to bundle the app sources
 ``` bash
 gulp build
 ```
@@ -46,4 +46,12 @@ After you have installed prerequisites and have finished setting up, run the fol
 npm run start
 ```
 
-Note: Build process is WIP and can act cranky
+### Installing git hooks
+We've configured some git hooks which need to be followed if you want to contribute as a developer.
+
+Install the git hooks by executing the following command from this git repo's home in your local machine.
+``` bash
+./install_hooks.sh
+```
+
+This sets up hooks like pre-commit to ensure code is properly linted before being committed.
