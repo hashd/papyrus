@@ -47,7 +47,15 @@ gulp.task('lint:src', function () {
         emitError: false,
         sort: true
       }));
-})
+});
+
+gulp.task('lint:src:fail', function () {
+  return gulp.src(appSrc)
+    .pipe(tslint())
+    .pipe(tslint.report({
+        sort: true
+      }));
+});
 
 gulp.task('build:js', gulp.series('lint:src', 'compile:css', function runBuildApp() {
   return exec('npm run build-app');
