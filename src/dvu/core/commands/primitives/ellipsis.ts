@@ -1,37 +1,48 @@
-import {PictureCommand} from 'src/dvu/core/commands/picture'
-import {PictureContext} from 'src/dvu/geometry/picture_context'
-import {SVG} from 'src/dvu/core/helpers/svg'
+import { PictureContext } from 'src/dvu/geometry/picture_context'
+import { SVG } from 'src/dvu/core/helpers/svg'
+import { StepSummary } from '../../step_summary'
+import { Scope } from '../../scope'
+import { Command } from '../../command'
+import { CommandType, COMMAND_TYPES } from '../../command_types'
 
-export const ELLIPSIS = new PictureCommand('Circle', {
-  name: 'circle',
-  shortcutKey: 'c',
-  noOfInstances: 0,
+export class EllipsisCommand extends Command {
+  static commandName: string = 'ellipsis'
+  static type: CommandType = COMMAND_TYPES.PRIMITIVE
+  static shortcutKey: string = 'e'
+  static noOfInstances: number = 0
 
-  onMousedown(context: PictureContext): Element {
-    const { start } = context
+  private _element: Element
+  private _name: string
 
-    const ellipsis = SVG.createEllipse(start.x, start.y, context.getWidth(), context.getHeight())
-    ellipsis.setAttributeNS(null, 'stroke', '#555')
-    ellipsis.setAttributeNS(null, 'fill', 'transparent')
+  constructor(context: PictureContext, scope: Scope = new Scope()) {
+    this._name = `${EllipsisCommand.commandName}-${++EllipsisCommand.noOfInstances}`
 
-    return ellipsis
-  },
-
-  onMousemove(element: Element, context: PictureContext): Element {
-    const rx = context.getWidth(), ry = context.getHeight()
-
-    element.setAttributeNS(null, 'rx', rx.toString())
-    element.setAttributeNS(null, 'ry', ry.toString())
-
-    return element
-  },
-
-  onMouseup(element: Element, context: PictureContext): Element {
-    return this.onMousedown(element, context)
-  },
-
-  getSummary(data: PictureContext) {
-    const radius = (data.getWidth() === data.getHeight()) ? data.getWidth() : `${data.getWidth()}, ${data.getHeight()}`
-    return `Draw ${data.name || ((data.getWidth() === data.getHeight()) ? 'circle' : 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
+    this._element = SVG.createEllipse(0, 0, 0, 0)
+    if (context) {
+      this.execute(context, scope)
+    }
   }
-})
+
+  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
+    const { start } = context,
+      rx = context.getWidth(),
+      ry = context.getHeight()
+
+    this._element.setAttributeNS(null, 'cx', start.x)
+    this._element.setAttributeNS(null, 'cy', start.y)
+    this._element.setAttributeNS(null, 'rx', rx.toString())
+    this._element.setAttributeNS(null, 'ry', ry.toString())
+
+    return {
+      name: context.name || `${this._name}`,
+      element: this._element
+    }
+  }
+
+  getSummary(data: Object): StepSummary {
+    const radius = (data.getWidth() === data.getHeight()) ? data.getWidth() : `${data.getWidth()}, ${data.getHeight()}`,
+      summary = `Draw ${data.name || ((data.getWidth() === data.getHeight()) ? 'circle' : 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
+
+    return new StepSummary(data, summary)
+  }
+}

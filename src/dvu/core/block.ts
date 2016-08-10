@@ -1,4 +1,5 @@
 import { Executable } from './step'
+import { StepSummary } from './step_summary'
 import { generateUUID } from '../utils/uuid'
 import { Scope } from '../core/scope'
 import { Picture } from '../core/models/picture'
@@ -39,10 +40,18 @@ export class Block implements Executable<Picture> {
   }
 
   execute(scope: Scope): Picture[] {
-    return this._steps.reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
+    if (this._steps && this._steps.length > 0) {
+      return this._steps.reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
+    } else {
+      return []
+    }
   }
 
   executeUntil(count: number, scope: Scope): Picture[] {
     return this._steps.slice(0, count).reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
+  }
+
+  getSummary(data: Object): StepSummary[] {
+    return this._steps.reduce((stepSummaries, step) => stepSummaries.concat(step.getSummary(data)), [])
   }
 }

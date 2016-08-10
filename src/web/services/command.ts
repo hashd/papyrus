@@ -5,13 +5,20 @@ import { Command } from '../../dvu/core/command'
 
 @Injectable()
 export class CommandService {
-  private commands: Command[] = COMMANDS
+  private commands = COMMANDS
 
   constructor() {
   }
 
   getCommandTypes(): CommandType[] {
-    return COMMAND_TYPES
+    let commandTypes: CommandType[] = []
+    for (const type in COMMAND_TYPES) {
+      if (!isFinite(type)) {
+        commandTypes.push(type)
+      }
+    }
+
+    return commandTypes
   }
 
   getCommands() {
