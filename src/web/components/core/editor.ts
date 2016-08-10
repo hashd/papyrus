@@ -34,7 +34,7 @@ import { Messages, subjects } from 'src/web/services/messages'
           class="split-{{noOfPanelsEnabled}}"
          >
         </pa-data>
-        <pa-steps [steps]="visualization?.block?.steps" [visualization]="visualization" *ngIf="showStepsPanel" class="split-{{noOfPanelsEnabled}}"  (selectedStep)="selectStep($event)" (removedStep)="removeStep($event)"></pa-steps>
+        <pa-steps [visualization]="visualization" *ngIf="showStepsPanel" class="split-{{noOfPanelsEnabled}}"></pa-steps>
         <pa-panel class="split-{{noOfPanelsEnabled}}" *ngIf="showMeasuresPanel" header="Measurements">
           <div></div>
         </pa-panel>

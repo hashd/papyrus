@@ -7,6 +7,9 @@ const ADJUST: string = 'adjust'
 
 export type CommandType = PRIMITIVE | COMPOSITE | ADJUST | FLOW | MODIFIER | GROUP
 
-export const COMMAND_TYPES: CommandType[] = [
-  PRIMITIVE, COMPOSITE, FLOW, ADJUST// , MODIFIER, GROUP
-]
+export const enum COMMAND_TYPES {
+  PRIMITIVE,
+  COMPOSITE,
+  FLOW,
+  ADJUST
+}

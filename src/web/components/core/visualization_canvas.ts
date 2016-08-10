@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { Point } from '../../../dvu/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
+import { Step, Executable } from 'src/dvu/core/step'
+import { Block } from 'src/dvu/core/block'
 import { Messages, subjects } from 'src/web/services/messages'
 import * as _  from 'lodash'
 
@@ -15,6 +17,7 @@ import * as _  from 'lodash'
         (mousemove)="emitMouseEvent($event)"
         (mouseout)="($event.relatedTarget.localName==='div')?emitMouseEvent($event):undefined"
         (click)="clickEvent($event)"
+        (dblclick)="emitMouseEvent($event)"
       >
         <g #vis></g>
         <g #work></g>
@@ -185,11 +188,16 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     }
   }
 
-  private addStepElement(step: Step) {
+  private addStepElement(step: Executable) {
     if (step) {
-      const element = step.execute().element
-      this.vis.nativeElement.appendChild(element)
-      this.stepElementMap.set(step.uuid, element)
+      const pictures = [].concat(step.execute())
+      pictures.forEach((picture) => {
+        const element = picture.element
+        if (element) {
+          this.vis.nativeElement.appendChild(element)
+          this.stepElementMap.set(step.uuid, element)
+        }
+      })
     }
   }
 

@@ -1,9 +1,10 @@
 import { Command } from './../../command'
 import { Scope } from './../../scope'
-import { CommandType } from './../../command_types'
+import { CommandType, COMMAND_TYPES } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
 import { Picture } from '../../../core/models/picture'
+import { StepSummary } from '../../step_summary'
 
 const CONDITION: string = 'condition'
 
@@ -12,20 +13,20 @@ const datasetDefinition = new DatasetDefinition()
 datasetDefinition.addDataDefinition(CONDITION, 'boolean')
 
 export class IfCommand extends Command {
-  name: string = 'If'
-  type: CommandType = 'flow'
-  shortcutKey: string = 'i'
+  static commandName: string = 'If'
+  static type: CommandType = COMMAND_TYPES.FLOW
+  static shortcutKey: string = 'i'
 
-  datasetDefinition: DatasetDefinition = datasetDefinition
+  static datasetDefinition: DatasetDefinition = datasetDefinition
   trueBlock: Block = new Block()
   falseBlock: Block = new Block()
 
-  constructor() {
+  constructor(data: Object) {
     super()
   }
 
-  execute(data, scope: Scope = new Scope()): Picture[] {
-    if (!this.datasetDefinition.validate(data)) {
+  execute(data: Object, scope: Scope = new Scope()): Picture[] {
+    if (!IfCommand.datasetDefinition.validate(data)) {
       return
     }
 
@@ -35,7 +36,10 @@ export class IfCommand extends Command {
     return conditionValue ? this.trueBlock.execute(innerScope) : this.falseBlock.execute(innerScope)
   }
 
-  getSummary() {
-    return 'Conditional Summary: Not implemented'
+  getSummary(data: Object): StepSummary[] {
+    const trueBlock = new StepSummary(data, `if block`, this.trueBlock),
+      falseBlock = new StepSummary(data, 'else block', this.falseBlock)
+
+    return [ trueBlock, falseBlock ]
   }
 }

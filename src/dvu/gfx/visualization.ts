@@ -71,4 +71,8 @@ export class CompositeVisualization extends PictureCommand {
       }
     }
   }
+
+  getSummary(data: Object) {
+    return this.block.getSummary(data)
+  }
 }

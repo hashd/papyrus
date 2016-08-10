@@ -1,4 +1,3 @@
-pa-step-summary,
 pa-vis-canvas,
 pa-command-bar,
 pa-canvas {
@@ -13,10 +12,6 @@ pa-canvas {
   & > div:focus {
     outline: none;
   }
-}
-
-pa-step-summary {
-  text-align: center;
 }
 
 pa-vis-canvas {

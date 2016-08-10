@@ -69,7 +69,9 @@ export class VisualizationPreview implements OnChanges {
     const pictureContext = new PictureContext({x: 0, y: 0}, {x: width, y: height})
     const element = this.visualization.execute(pictureContext).element
 
-    preview.appendChild(element)
+    if (element) {
+      preview.appendChild(element)
+    }
   }
 
   removeVisualization(event: Event) {

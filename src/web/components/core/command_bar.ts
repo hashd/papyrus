@@ -13,7 +13,7 @@ import { CommandService } from '../../services/command'
           [class.selected]="cmd === currentCommand"
           (click)="selectCommand(cmd)"
         >
-          <span class="name">{{cmd?.name}}</span>
+          <span class="name">{{cmd?.commandName}}</span>
           <span class="key">{{cmd?.shortcutKey}}</span>
         </div>
       </div>
@@ -25,15 +25,16 @@ export class CommandBar {
   @Input() commands: Command[]
   @Input() currentCommand: Command
 
-  commandTypes: CommandType[] = COMMAND_TYPES
+  commandTypes: CommandType[] = []
 
   @Output() select: EventEmitter<any> = new EventEmitter()
 
   constructor(private commandService: CommandService) {
+    this.commandTypes = commandService.getCommandTypes()
   }
 
   getCommandsByType(type: CommandType) {
-    return this.commands.filter(cmd => cmd.type === type && cmd.name !== 'unnamed')
+    return this.commands.filter(cmd => cmd.type === COMMAND_TYPES[type] && cmd.name !== 'unnamed')
   }
 
   refreshCommands() {
