@@ -91,7 +91,8 @@ export class PapyrusCanvas implements OnChanges {
 
     switch (command.type) {
       case COMMAND_TYPES.PRIMITIVE:
-        this.handlePrimitiveCommand(command, e)
+      case COMMAND_TYPES.COMPOSITE:
+        this.handlePictureCommand(command, e)
         break
       case COMMAND_TYPES.FLOW:
         this.handleFlowCommand(command, e)
@@ -101,10 +102,10 @@ export class PapyrusCanvas implements OnChanges {
     }
   }
 
-  private handlePrimitiveCommand(command, e) {
+  private handlePictureCommand(command, e) {
     if ('mousedown' === e.type) {
       this.pictureContext = new PictureContext({x: e.x, y: e.y}, {x: e.x, y: e.y})
-      this.currentCommandObj = new command(this.pictureContext)
+      this.currentCommandObj = command.type === COMMAND_TYPES.COMPOSITE ? command : new command(this.pictureContext)
     } else if (this.pictureContext && 'mousemove' === e.type) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y

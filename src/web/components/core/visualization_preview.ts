@@ -16,8 +16,8 @@ const PREVIEW_OPACITY = 0.1
 
       </svg>
       <div>
-        <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.name}}</div>
-        <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.name" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
+        <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.commandName}}</div>
+        <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.commandName" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
       </div>
     </div>
   `,
@@ -35,13 +35,13 @@ export class VisualizationPreview implements OnChanges {
   @ViewChild('preview') preview: ElementRef
 
   editName() {
-    this.previousName = this.visualization.name
+    this.previousName = this.visualization.commandName
     this.nameBeingEdited = true
   }
 
   saveName(e) {
-    if (this.visualization.name === '') {
-      this.visualization.name = this.previousName
+    if (this.visualization.commandName === '') {
+      this.visualization.commandName = this.previousName
       this.previousName = undefined
     }
 
