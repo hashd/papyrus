@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "paths": {
+      "dvu/*": [
+        "dvu/*"
+      ],
+      "web/*": [
+        "web/*"
+      ]
+    },
+    "target": "es5"
+  }
+}

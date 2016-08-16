@@ -1,9 +1,6 @@
 import { CommandType } from './command_types'
 import { Scope } from './scope'
-
-export interface Executable {
-  execute(data, scope: Scope)
-}
+import { Executable } from './step'
 
 export class Command implements Executable {
   type: CommandType
