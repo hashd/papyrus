@@ -9,15 +9,15 @@ You will need the following to setup development environment
 
 Also install the following global node packages
 
-- typescript
+- typescript@next
 - jspm@0.16.39
 - gulp-cli
 - concurrently
 - lite-server
-- tslint
+- tslint@next
 
 ``` bash
-npm install -g typescript jspm tslint gulp-cli concurrently lite-server
+npm install -g typescript@next jspm@0.16.39 tslint@next gulp-cli concurrently lite-server
 ```
 
 ### Setup
