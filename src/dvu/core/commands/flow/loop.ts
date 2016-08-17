@@ -1,9 +1,11 @@
 import { Command } from './../../command'
 import { Scope } from './../../scope'
-import { CommandType } from './../../command_types'
+import { CommandType, COMMAND_TYPES } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
 import { Range } from './../../../utils/range'
+import { Picture } from '../../../core/models/picture'
+import { StepSummary } from '../../step_summary'
 
 const START: string = 'start'
 const END: string = 'end'
@@ -18,7 +20,7 @@ datasetDefinition.addDataDefinition(END, 'number')
 
 export class ForCommand extends Command {
   name: string = 'For'
-  type: CommandType = 'flow'
+  type: CommandType = COMMAND_TYPES.FLOW
   shortcutKey: string = 'f'
   block: Block = new Block()
   datasetDefinition: DatasetDefinition = datasetDefinition
@@ -27,7 +29,7 @@ export class ForCommand extends Command {
     super()
   }
 
-  execute(data, scope: Scope = new Scope()) {
+  execute(data, scope: Scope = new Scope()): Picture[] {
     if (!this.datasetDefinition.validate(data)) {
       return
     }
@@ -42,7 +44,7 @@ export class ForCommand extends Command {
     })
   }
 
-  getSummary() {
-    return 'Loop Summary: Not implemented'
+  getSummary(data: Object): StepSummary[] {
+    return new StepSummary(data, 'For', this.block)
   }
 }

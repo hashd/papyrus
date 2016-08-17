@@ -26,6 +26,8 @@ export class SVG {
     rect.setAttributeNS(null, 'y', y.toString())
     rect.setAttributeNS(null, 'width', width.toString())
     rect.setAttributeNS(null, 'height', height.toString())
+    rect.setAttributeNS(null, 'stroke', '#555')
+    rect.setAttributeNS(null, 'fill', 'transparent')
     rect.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     return rect
@@ -37,6 +39,8 @@ export class SVG {
     ellipse.setAttributeNS(null, 'cy', cy.toString())
     ellipse.setAttributeNS(null, 'rx', rx.toString())
     ellipse.setAttributeNS(null, 'ry', ry.toString())
+    ellipse.setAttributeNS(null, 'stroke', '#555')
+    ellipse.setAttributeNS(null, 'fill', 'transparent')
     ellipse.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')
 
     return ellipse
@@ -55,7 +59,7 @@ export class SVG {
   static createPath(points: Point[]) {
     let path = document.createElementNS(ns, 'path'),
       d = ''
-    path.setAttributeNS(null, 'fill', 'none')
+    path.setAttributeNS(null, 'fill', 'transparent')
     path.setAttributeNS(null, 'stroke', '#555')
     path.setAttributeNS(null, 'stroke-width', '1')
     path.setAttributeNS(null, 'vector-effect', 'non-scaling-stroke')

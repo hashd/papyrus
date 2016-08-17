@@ -1,44 +1,49 @@
-import {PictureCommand} from 'src/dvu/core/commands/picture'
-import {PictureContext} from 'src/dvu/geometry/picture_context'
-import {SVG} from 'src/dvu/core/helpers/svg'
+import { PictureContext } from 'src/dvu/geometry/picture_context'
+import { SVG } from 'src/dvu/core/helpers/svg'
+import { StepSummary } from '../../step_summary'
+import { Scope } from '../../scope'
+import { Command } from '../../command'
+import { CommandType, COMMAND_TYPES } from '../../command_types'
 
-export const RECT = new PictureCommand('Rect', {
-  name: 'rect',
-  shortcutKey: 'x',
-  noOfInstances: 0,
+export class RectCommand extends Command {
+  static commandName: string = 'rect'
+  static type: CommandType = COMMAND_TYPES.PRIMITIVE
+  static shortcutKey: string = 'r'
+  static noOfInstances: number = 0
 
-  onMousedown(context: PictureContext): Element {
-    const initPoint = context.getLeastSignificantPoint(),
-      endPoint = context.getMostSignificantPoint()
+  private _element: Element
+  private _name: string
 
-    const rect = SVG.createRect(initPoint.x, initPoint.y, endPoint.x - initPoint.x, endPoint.y - initPoint.y)
-    rect.setAttributeNS(null, 'stroke', '#555')
-    rect.setAttributeNS(null, 'fill', 'transparent')
+  constructor(context: PictureContext, scope: Scope = new Scope()) {
+    this._name = `${RectCommand.commandName}-${++RectCommand.noOfInstances}`
 
-    return rect
-  },
+    this._element = SVG.createRect(0, 0, 0, 0)
+    if (context) {
+      this.execute(context, scope)
+    }
+  }
 
-  onMousemove(element: Element, context: PictureContext): Element {
+  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
     const initPoint = context.getLeastSignificantPoint(),
       endPoint = context.getMostSignificantPoint(),
       width = endPoint.x - initPoint.x,
       height = endPoint.y - initPoint.y
 
-    element.setAttributeNS(null, 'x', initPoint.x.toString())
-    element.setAttributeNS(null, 'y', initPoint.y.toString())
-    element.setAttributeNS(null, 'width', width.toString())
-    element.setAttributeNS(null, 'height', height.toString())
+    this._element.setAttributeNS(null, 'x', initPoint.x.toString())
+    this._element.setAttributeNS(null, 'y', initPoint.y.toString())
+    this._element.setAttributeNS(null, 'width', width.toString())
+    this._element.setAttributeNS(null, 'height', height.toString())
 
-    return element
-  },
+    return {
+      name: context.name || `${this._name}`,
+      element: this._element
+    }
+  }
 
-  onMouseup(element: Element, context: PictureContext): Element {
-    return this.onMousedown(element, context)
-  },
+  getSummary(data: Object): StepSummary {
+    const initPoint = data.getLeastSignificantPoint(),
+      summary = `Draw ${data.name || this._name} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
 
-  getSummary(data: PictureContext) {
-    const initPoint = data.getLeastSignificantPoint()
-
-    return `Draw ${data.name || (this.name + '-' + data.instanceCount)} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
+    return new StepSummary(data, summary)
   }
 })

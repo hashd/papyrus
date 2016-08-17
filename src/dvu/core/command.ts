@@ -9,7 +9,7 @@ export class Command implements Executable {
   modifyEvent: string = 'mousemove'
   endEvent: string = 'mouseup'
 
-  name: string = 'unnamed'
+  commandName: string = 'unnamed'
 
   validate(data: {}): boolean {
     return true

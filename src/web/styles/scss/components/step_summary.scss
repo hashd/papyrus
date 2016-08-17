@@ -3,3 +3,79 @@
   font-size: 14px;
   border: 2px solid transparent;
 }
+
+pa-step-summary {
+  text-align: center;
+}
+
+ul.steps {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+
+  // for child steps
+  ul.steps {
+    margin-left: 25px;
+  }
+
+  & > li {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid $light-gray;
+    cursor: pointer;
+
+    .step-content {
+      position: relative;
+      overflow: hidden;
+      padding: 6px 25px 6px 12px;
+    }
+
+    .step-preview {
+      border: 1px solid $gray;
+      height: 60px;
+      width: 60px;
+      float: left;
+      margin-right: 10px;
+
+      svg > :last-child {
+        stroke: $dark-magenta;
+      }
+    }
+
+    .remove-icon {
+      position: absolute;
+      top: calc(50% - 14px);
+      right: 5px;
+      font-size: 14px;
+      display: none;
+    }
+
+    &:hover .remove-icon {
+      display: inline-block;
+
+      &:hover {
+        color: $danger-color;
+      }
+    }
+
+    .step-summary {
+      color: $dark-gray;
+      text-align: left;
+      font-size: 0.9em;
+      cursor: pointer;
+      text-align: justify;
+    }
+
+     &.selected {
+      border-top: 1px solid $secondary-color;
+      border-bottom: 1px solid $secondary-color;
+
+      .step-summary {
+        color: $secondary-color;
+      }
+
+      .step-preview {
+        border-color: $secondary-color;
+      }
+    }
+  }
+}
