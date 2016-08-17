@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
-import { Point } from '../../../dvu/geometry/cartesian_system'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
+import { Point } from '../../../dsl/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
-import { Step, Executable } from '../../../dvu/core/step'
-import { Block } from '../../../dvu/core/block'
-import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
+import { Step, Executable } from '../../../dsl/core/step'
+import { Block } from '../../../dsl/core/block'
+import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
 import { Messages, subjects } from '../../../web/services/messages'
-import * as _  from 'lodash'
 
 @Component({
   selector: 'pa-vis-canvas',
@@ -32,7 +31,7 @@ import * as _  from 'lodash'
   pipes: [PointTransform]
 })
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
-  @Input() visualization: CompositeVisualization
+  @Input() visualization: CompositePicture
   @Input() element: Element
 
   dragModeEnabled: boolean = false
@@ -49,10 +48,10 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   constructor () {
     const removeStepSubject = subjects[Messages.REMOVE_STEP],
-      selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
+          selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
 
     removeStepSubject.subscribe({
-      next: (step: Step) => {
+      next: (step: Step<any>) => {
         this.refreshVisualization()
       }
     })
@@ -140,7 +139,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
       let selectedElement
       let element
 
-      Array.from(this.vis.nativeElement.children).forEach( child => {
+      [...this.vis.nativeElement.children].forEach( child => {
         if (child.classList.contains('selected')) {
           selectedElement = child
         }
@@ -176,8 +175,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   private selectionChangeMessage(element) {
     // broadcast element selection change message
-    const self = this,
-      selectedStep = _.find(this.visualization.block.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
+    const selectedStep = this.visualization.block.steps.filter(step => this.stepElementMap.get(step.id) === element)
 
     if (selectedStep) {
       const selectedElementSubject = subjects[Messages.CHANGE_ELEMENT_SELECTION]

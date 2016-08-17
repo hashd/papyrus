@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core'
-import { Command } from '../../../dvu/core/command'
-import { CommandType, COMMAND_TYPES } from '../../../dvu/core/command_types'
+import { Command } from '../../../dsl/core/command'
+import { CommandType, COMMAND_TYPES } from '../../../dsl/core/command_types'
 import { CommandService } from '../../services/command'
 
 @Component({
@@ -22,8 +22,8 @@ import { CommandService } from '../../services/command'
   providers: [CommandService]
 })
 export class CommandBar {
-  @Input() commands: Command[]
-  @Input() currentCommand: Command
+  @Input() commands: Command<any>[]
+  @Input() currentCommand: Command<any>
 
   commandTypes: CommandType[] = []
 
@@ -41,7 +41,7 @@ export class CommandBar {
     this.commands = this.commandService.getCommands()
   }
 
-  selectCommand(activeCommand: Command) {
+  selectCommand(activeCommand: Command<any>) {
     const previousCommand = this.currentCommand
 
     this.currentCommand = activeCommand

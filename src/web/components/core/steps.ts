@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { StepSummaryComponent } from '../core/step_summary'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 
 @Component({
   selector: 'pa-steps',
@@ -13,5 +14,5 @@ import { StepSummaryComponent } from '../core/step_summary'
   directives: [Panel, StepSummaryComponent]
 })
 export class PapyrusSteps {
-  @Input() visualization: CompositeVisualization
+  @Input() visualization: CompositePicture
 }

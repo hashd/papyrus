@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core'
-import { COMMAND_TYPES, CommandType } from '../../dvu/core/command_types'
-import { COMMANDS } from '../../dvu/core/commands/all'
-import { Command } from '../../dvu/core/command'
+import { COMMAND_TYPES, CommandType } from '../../dsl/core/command_types'
+import { COMMANDS } from '../../dsl/core/commands/all'
+import { Command } from '../../dsl/core/command'
 
 @Injectable()
 export class CommandService {
@@ -13,9 +13,7 @@ export class CommandService {
   getCommandTypes(): CommandType[] {
     let commandTypes: CommandType[] = []
     for (const type in COMMAND_TYPES) {
-      if (!isFinite(type)) {
-        commandTypes.push(type)
-      }
+      commandTypes.push(type)
     }
 
     return commandTypes
@@ -25,7 +23,7 @@ export class CommandService {
     return this.commands
   }
 
-  addCommand(command: Command) {
+  addCommand(command: Command<any>) {
     this.commands.push(command)
   }
 }

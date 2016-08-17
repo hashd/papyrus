@@ -1,8 +1,8 @@
 import { Component, Input } from 'angular2/core'
 import { PanelComponent as Panel } from '../generic/panel'
 import { EditableField } from '../generic/editable'
-import { DatasetDefinition } from '../../../dvu/core/data/dataset_definition'
-import { DataDefinition } from '../../../dvu/core/data/data_definition'
+import { DatasetDefinition } from '../../../dsl/core/data/dataset_definition'
+import { DataDefinition } from '../../../dsl/core/data/data_definition'
 import { Tweakable } from '../../directives/tweakable'
 
 @Component({

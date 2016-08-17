@@ -4,10 +4,10 @@ import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
 import { PanelComponent } from '../generic/panel'
 import { FullLength } from 'src/web/directives/all'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { CommandService } from 'src/web/services/all'
-import { Step } from '../../../dvu/core/step'
-import { Command } from '../../../dvu/core/command'
+import { Step } from '../../../dsl/core/step'
+import { Command } from '../../../dsl/core/command'
 import { Messages, subjects } from 'src/web/services/messages'
 
 @Component({
@@ -49,10 +49,10 @@ import { Messages, subjects } from 'src/web/services/messages'
 })
 export class PapyrusEditor {
   @Input()
-  visualization: CompositeVisualization
+  visualization: CompositePicture
 
-  commands: Command[]
-  selectedStep: Step
+  commands: Command<any>[]
+  selectedStep: Step<any>
 
   showDataPanel: boolean = true
   showStepsPanel: boolean = true
@@ -61,7 +61,7 @@ export class PapyrusEditor {
   noOfPanelsEnabled: number = 2
 
   @Output()
-  toggleEditorMode: EventEmitter = new EventEmitter()
+  toggleEditorMode: EventEmitter<any> = new EventEmitter()
 
   constructor(private commandService: CommandService) {
     const removeStepSubject = subjects[Messages.REMOVE_STEP]
