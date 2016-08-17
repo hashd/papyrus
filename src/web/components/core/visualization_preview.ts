@@ -2,8 +2,7 @@ import { Component, Input, ViewChild, ElementRef, OnChanges, Output, EventEmitte
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from '../../../dvu/geometry/picture_context'
-
-const PREVIEW_OPACITY = 0.1
+import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
 
 @Component({
   selector: 'pa-vis-preview',
@@ -12,9 +11,7 @@ const PREVIEW_OPACITY = 0.1
       <div class="del-icon">
         <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
       </div>
-      <svg opacity="${PREVIEW_OPACITY}" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMidYMid slice" width="90px" height="74px" #preview>
-
-      </svg>
+      <div class="vis-preview-content" #preview></div>
       <div>
         <div class="vis-name" *ngIf="!nameBeingEdited" (dblclick)="editName()">{{visualization?.commandName}}</div>
         <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.commandName" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
@@ -50,27 +47,20 @@ export class VisualizationPreview implements OnChanges {
 
   ngOnChanges(changes) {
     if (changes.hasOwnProperty('arity') && this.preview) {
-      const preview = this.preview.nativeElement,
-        width = this.visualization.dimensions.width || preview.clientWidth,
-        height = this.visualization.dimensions.height || preview.clientHeight
-
-      this.clearPreview()
-      this.setPreviewDimensions(width, height)
-      this.drawVisualization(width, height)
+      this.drawVisualization()
     }
   }
 
-  setPreviewDimensions(width, height) {
-    this.preview.nativeElement.setAttribute('viewBox', `0 0 ${width} ${height}`)
-  }
+  drawVisualization() {
+    const parent = this.preview.nativeElement,
+      nodes = this.visualization.execute(),
+      height = this.visualization.dimensions.height,
+      width = this.visualization.dimensions.width,
+      svg = convertObjectModel(AdapterTypes.SVG, nodes, parent.clientHeight, parent.clientWidth, `0 0 ${width} ${height}`)
 
-  drawVisualization(width, height) {
-    const preview = this.preview.nativeElement
-    const pictureContext = new PictureContext({x: 0, y: 0}, {x: width, y: height})
-    const element = this.visualization.execute(pictureContext).element
-
-    if (element) {
-      preview.appendChild(element)
+    if (svg) {
+      parent.innerHTML = ''
+      parent.appendChild(svg)
     }
   }
 
@@ -79,11 +69,5 @@ export class VisualizationPreview implements OnChanges {
     this.onRemove.emit({ visualization })
 
     event.stopPropagation()
-  }
-
-  private clearPreview() {
-    while (this.preview.nativeElement.firstChild) {
-      this.preview.nativeElement.removeChild(this.preview.nativeElement.firstChild)
-    }
   }
 }

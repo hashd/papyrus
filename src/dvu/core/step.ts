@@ -3,7 +3,8 @@ import { Scope } from './scope'
 import { ValueType } from './data/data_definition'
 import { generateUUID } from '../utils/uuid'
 import { Picture } from './models/picture'
-import { StepSummary } from './stepSummary'
+import { StepSummary } from './step_summary'
+import { Node } from '../dom/node'
 
 export interface Executable<T> {
   execute(scope: Scope): T[]
@@ -12,7 +13,7 @@ export interface Executable<T> {
 export class Step implements Executable<Picture> {
   private _uuid: string = ''
 
-  constructor(public command: Command, public data: Object) {
+  constructor(public command: Command, public data: Object, public parent: Executable = undefined) {
     this._uuid = generateUUID()
   }
 
@@ -31,27 +32,18 @@ export class Step implements Executable<Picture> {
   getSummary(): StepSummary[] {
     // needs to refactor code
     const self = this,
-      summaries: StepSummary[] = []
-    summaries = summaries.concat(this.command.getSummary(this.data))
+      summaries: StepSummary[] = [].concat(this.command.getSummary(this.data))
+
     summaries.forEach((cur, index, array) => {
       if (cur.step === null) {
         array[index].step = self
       }
     })
+
     return summaries
   }
 
-  execute(scope: Scope): Picture[] {
-    // return this.command.execute(this.data, scope)
-
-    // temporary cloning the element node
-    let result = [].concat(this.command.execute(this.data, scope))
-    if (result) {
-      result.forEach((item) => { item.element = item.element.cloneNode(true) })
-      return result
-    } else {
-      return []
-    }
-
+  execute(scope: Scope): Node[] {
+    return [].concat(this.command.execute(this.data, scope))
   }
 }

@@ -1,5 +1,6 @@
-import { PictureContext } from 'src/dvu/geometry/picture_context'
-import { SVG } from 'src/dvu/core/helpers/svg'
+import { PictureContext } from '../../../geometry/picture_context'
+import { Line } from '../../../geometry/elements/line'
+import { Node, node, NodeTypes } from '../../../dom/node'
 import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
 import { Command } from '../../command'
@@ -11,30 +12,30 @@ export class LineCommand extends Command {
   static shortcutKey: string = 'l'
   static noOfInstances: number = 0
 
-  private _element: Element
+  private _element: Line
   private _name: string
 
   constructor(context: PictureContext, scope: Scope = new Scope()) {
+    super()
     this._name = `${LineCommand.commandName}-${++LineCommand.noOfInstances}`
-
-    this._element = SVG.createLine(0, 0, 0, 0)
+    this._element = new Line(0, 0, 0, 0)
     if (context) {
       this.execute(context, scope)
     }
   }
 
-  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
-    const { start, end } = context
+  execute(context: PictureContext, scope: Scope = new Scope()): Node {
+    const { start, end } = context,
+      element = this._element
 
-    this._element.setAttributeNS(null, 'x1', start.x.toString())
-    this._element.setAttributeNS(null, 'y1', start.y.toString())
-    this._element.setAttributeNS(null, 'x2', end.x.toString())
-    this._element.setAttributeNS(null, 'y2', end.y.toString())
+    element.setAttributes({
+      x1: start.x.toString(),
+      y1: start.y.toString(),
+      x2: end.x.toString(),
+      y2: end.y.toString()
+    })
 
-    return {
-      name: context.name || `${this._name}`,
-      element: this._element
-    }
+    return node(NodeTypes.LINE, element.attributes, [], element.magnets)
   }
 
   getSummary(data: Object): StepSummary {

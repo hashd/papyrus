@@ -44,7 +44,7 @@ export class ForCommand extends Command {
     })
   }
 
-  getSummary(data: Object): StepSummary[] {
+  getSummary(data: Object): StepSummary {
     return new StepSummary(data, 'For', this.block)
   }
 }

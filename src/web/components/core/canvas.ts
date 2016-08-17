@@ -7,8 +7,8 @@ import { COMMAND_TYPES } from '../../../dvu/core/command_types'
 // import { StepSummary } from '../core/step_summary'
 import { VisualizationCanvas } from '../core/visualization_canvas'
 import { CommandBar } from '../core/command_bar'
-import { PictureContext } from 'src/dvu/geometry/picture_context'
-import { Messages, subjects } from 'src/web/services/messages'
+import { PictureContext } from '../../../dvu/geometry/picture_context'
+import { Messages, subjects } from '../../../web/services/messages'
 
 // <pa-step-summary [step]="currentStep || previousStep"></pa-step-summary>
 
@@ -36,6 +36,7 @@ export class PapyrusCanvas implements OnChanges {
   selectedBlock: Block
   previousStep: Step = null
   currentStep: Step = null
+  currentCommandObj = null
 
   pictureContext: PictureContext
   currentElement: Element = null
@@ -114,7 +115,7 @@ export class PapyrusCanvas implements OnChanges {
         this.currentStep = new Step(this.currentCommandObj, this.pictureContext)
       }
 
-      this.currentElement = this.currentCommandObj.execute(this.pictureContext).element
+      this.currentElement = this.currentCommandObj.execute(this.pictureContext)
     } else if (this.pictureContext && ('mouseout' === e.type || 'mouseup' === e.type)) {
       this.pictureContext.end.x = e.x
       this.pictureContext.end.y = e.y

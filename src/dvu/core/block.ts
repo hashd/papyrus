@@ -1,8 +1,9 @@
-import { Executable } from './step'
+import { Executable, Step } from './step'
 import { StepSummary } from './step_summary'
 import { generateUUID } from '../utils/uuid'
 import { Scope } from '../core/scope'
 import { Picture } from '../core/models/picture'
+import { Node } from '../dom/node'
 
 export class Block implements Executable<Picture> {
   private _id: string
@@ -22,15 +23,21 @@ export class Block implements Executable<Picture> {
 
   add(step: Executable<any>) {
     if (this._steps && step) {
+      step.parent = this
       this._steps.push(step)
     }
   }
 
   remove(step: Executable<any>) {
     if (this._steps && step) {
-      const index = this._steps.indexOf(step)
-      if (index !== -1) {
-        this._steps.splice(index, 1)
+      if (step instanceof Block) {
+
+      } else if (step instanceof Step && step.parent) {
+        const steps = step.parent._steps,
+          index = steps.indexOf(step)
+        if (index !== -1) {
+          steps.splice(index, 1)
+        }
       }
     }
   }
@@ -39,16 +46,16 @@ export class Block implements Executable<Picture> {
     this._steps = []
   }
 
-  execute(scope: Scope): Picture[] {
+  execute(scope: Scope): Node[] {
     if (this._steps && this._steps.length > 0) {
-      return this._steps.reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
+      return this._steps.reduce((elements, step) => elements.concat(step.execute(scope)), [])
     } else {
       return []
     }
   }
 
-  executeUntil(count: number, scope: Scope): Picture[] {
-    return this._steps.slice(0, count).reduce((pictures, step) => pictures.concat(step.execute(scope)), [])
+  executeUntil(count: number, scope: Scope): Node[] {
+    return this._steps.slice(0, count).reduce((elements, step) => elements.concat(step.execute(scope)), [])
   }
 
   getSummary(data: Object): StepSummary[] {

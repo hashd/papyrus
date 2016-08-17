@@ -4,7 +4,8 @@ import { Block } from '../../../dvu/core/block'
 import { StepSummary } from '../../../dvu/core/step_summary'
 import { COMMAND_TYPES } from '../../../dvu/core/command_types'
 import { PictureContext } from '../../../dvu/geometry/picture_context'
-import { Messages, subjects } from 'src/web/services/messages'
+import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
+import { Messages, subjects } from '../../../web/services/messages'
 
 @Component({
   selector: 'pa-step-summary',
@@ -32,7 +33,7 @@ import { Messages, subjects } from 'src/web/services/messages'
       </li>
     </ul>
   `,
-  directives: [StepSummaryComponent]
+  directives: [ StepSummaryComponent ]
 })
 export class StepSummaryComponent {
   @Input() block: Block
@@ -75,7 +76,8 @@ export class StepSummaryComponent {
   }
 
   removeStep(step: Step) {
-    this.removedStep.emit({ step })
+    const removeStepSubject = subjects[Messages.REMOVE_STEP]
+    removeStepSubject.next(step)
   }
 
   isBlock(step: Executable) {
@@ -87,7 +89,14 @@ export class StepSummaryComponent {
   }
 
   drawStepPreview(parent: ElementRef, count: number) {
-    const pictureContext = new PictureContext({ x: 0, y: 0 }, { x: parent.clientWidth, y: parent.clientHeight })
-    parent.innerHTML = this.visualization.executeUntil(count, pictureContext).element.outerHTML
+    const nodes = this.visualization.executeUntil(count),
+      height = this.visualization.dimensions.height,
+      width = this.visualization.dimensions.width,
+      svg = convertObjectModel(AdapterTypes.SVG, nodes, parent.clientHeight, parent.clientWidth, `0 0 ${width} ${height}`)
+
+    if (svg) {
+      parent.innerHTML = ''
+      parent.appendChild(svg)
+    }
   }
 }

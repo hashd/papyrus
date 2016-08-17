@@ -1,5 +1,5 @@
-import { PictureContext } from 'src/dvu/geometry/picture_context'
-import { SVG } from 'src/dvu/core/helpers/svg'
+import { PictureContext } from '../../../geometry/picture_context'
+import { SVG } from '../../../core/helpers/svg'
 import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
 import { Command } from '../../command'
@@ -15,8 +15,9 @@ export class RectCommand extends Command {
   private _name: string
 
   constructor(context: PictureContext, scope: Scope = new Scope()) {
-    this._name = `${RectCommand.commandName}-${++RectCommand.noOfInstances}`
+    super()
 
+    this._name = `${RectCommand.commandName}-${++RectCommand.noOfInstances}`
     this._element = SVG.createRect(0, 0, 0, 0)
     if (context) {
       this.execute(context, scope)

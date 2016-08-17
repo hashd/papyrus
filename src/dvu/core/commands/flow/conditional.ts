@@ -5,6 +5,7 @@ import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
 import { Picture } from '../../../core/models/picture'
 import { StepSummary } from '../../step_summary'
+import { Node } from '../../../dom/node'
 
 const CONDITION: string = 'condition'
 
@@ -25,7 +26,7 @@ export class IfCommand extends Command {
     super()
   }
 
-  execute(data: Object, scope: Scope = new Scope()): Picture[] {
+  execute(data: Object, scope: Scope = new Scope()): Node[] {
     if (!IfCommand.datasetDefinition.validate(data)) {
       return
     }

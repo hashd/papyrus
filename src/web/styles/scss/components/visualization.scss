@@ -60,6 +60,12 @@ pa-visualizations {
       transition: 0.3s all linear;
     }
 
+    .vis-preview-content {
+      height: 100%;
+      width: 100%;
+      opacity: 0.1;
+    }
+
     .del-icon {
       position: absolute;
       right: 5px;

@@ -1,5 +1,5 @@
-import { PictureContext } from 'src/dvu/geometry/picture_context'
-import { SVG } from 'src/dvu/core/helpers/svg'
+import { PictureContext } from '../../../geometry/picture_context'
+import { SVG } from '../../../core/helpers/svg'
 import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
 import { Command } from '../../command'

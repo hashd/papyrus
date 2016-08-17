@@ -1,6 +1,7 @@
 import { CommandType } from './command_types'
 import { Scope } from './scope'
 import { Executable } from './step'
+import { StepSummary } from './step_summary'
 
 export class Command implements Executable {
   type: CommandType
@@ -19,7 +20,7 @@ export class Command implements Executable {
 
   }
 
-  getSummary(data: {}): string {
-    return 'This method has not been overriden and should be done for all commands'
+  getSummary(data: Object): StepSummary | StepSummary[]  {
+    return new StepSummary({}, 'This method has not been overriden and should be done for all commands')
   }
 }

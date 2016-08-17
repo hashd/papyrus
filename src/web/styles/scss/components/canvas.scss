@@ -41,14 +41,14 @@ pa-vis-canvas {
     border: 1px solid #ccc;
     box-shadow: 0 0 8px #ccc;
 
-    g > .selected {
+    g .selected {
       stroke: $blue;
-      stroke-width: 3;
+      stroke-width: 2;
     }
 
-    g > :not(.selected):hover {
+    g :not(.selected):hover {
       stroke: $green;
-      stroke-width: 3;
+      stroke-width: 2;
     }
   }
 }

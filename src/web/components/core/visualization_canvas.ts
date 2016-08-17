@@ -2,9 +2,10 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
 import { CompositeVisualization } from '../../../dvu/gfx/visualization'
 import { Point } from '../../../dvu/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
-import { Step, Executable } from 'src/dvu/core/step'
-import { Block } from 'src/dvu/core/block'
-import { Messages, subjects } from 'src/web/services/messages'
+import { Step, Executable } from '../../../dvu/core/step'
+import { Block } from '../../../dvu/core/block'
+import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
+import { Messages, subjects } from '../../../web/services/messages'
 import * as _  from 'lodash'
 
 @Component({
@@ -15,7 +16,7 @@ import * as _  from 'lodash'
         (mousedown)="emitMouseEvent($event)"
         (mouseup)="emitMouseEvent($event)"
         (mousemove)="emitMouseEvent($event)"
-        (mouseout)="($event.relatedTarget.localName==='div')?emitMouseEvent($event):undefined"
+        (mouseout)="($event?.relatedTarget?.localName==='div')?emitMouseEvent($event):undefined"
         (click)="clickEvent($event)"
         (dblclick)="emitMouseEvent($event)"
       >
@@ -51,8 +52,8 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
       selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
 
     removeStepSubject.subscribe({
-      next: (uuid: string) => {
-        this.removeStepElement(uuid)
+      next: (step: Step) => {
+        this.refreshVisualization()
       }
     })
 
@@ -82,14 +83,16 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if (this.workCanvas) this.clearWorkCanvas()
-    if (this.vis) this.clearVis()
-
     if (changes.hasOwnProperty('element') && this.workCanvas) {
-      this.visualization.block.steps.forEach(step => this.addStepElement(step))
+      if (this.workCanvas) this.clearWorkCanvas()
       if (this.element) {
-        this.workCanvas.nativeElement.appendChild(this.element)
+        const svg = convertObjectModel(AdapterTypes.SVG, [].concat(this.element))
+        if (svg) {
+          this.workCanvas.nativeElement.appendChild(svg)
+        }
       }
+
+      this.refreshVisualization()
     }
 
     if (changes.hasOwnProperty('visualization') && this.visualization) {
@@ -101,7 +104,8 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
         this.visualization.dimensions = { width: minDim, height: minDim }
       }
-      this.visualization.block.steps.forEach(step => this.addStepElement(step))
+
+      this.refreshVisualization()
     }
   }
 
@@ -181,23 +185,11 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
     }
   }
 
-  private removeStepElement(uuid: string) {
-    if (uuid) {
-      this.vis.nativeElement.removeChild(this.stepElementMap.get(uuid))
-      this.stepElementMap.delete(uuid)
-    }
-  }
-
-  private addStepElement(step: Executable) {
-    if (step) {
-      const pictures = [].concat(step.execute())
-      pictures.forEach((picture) => {
-        const element = picture.element
-        if (element) {
-          this.vis.nativeElement.appendChild(element)
-          this.stepElementMap.set(step.uuid, element)
-        }
-      })
+  private refreshVisualization () {
+    if (this.vis) this.clearVis()
+    const svg = convertObjectModel(AdapterTypes.SVG, this.visualization.execute())
+    if (svg) {
+      this.vis.nativeElement.appendChild(svg)
     }
   }
 

@@ -64,6 +64,16 @@ export class PapyrusEditor {
   toggleEditorMode: EventEmitter = new EventEmitter()
 
   constructor(private commandService: CommandService) {
+    const removeStepSubject = subjects[Messages.REMOVE_STEP]
+
+    removeStepSubject.subscribe({
+      next: (step) => {
+        if (step) {
+          this.visualization.block.remove(step)
+        }
+      }
+    })
+
     this.commands = commandService.getCommands()
   }
 
@@ -73,14 +83,6 @@ export class PapyrusEditor {
 
   onPanelSwitchToggle(value: boolean) {
     this.noOfPanelsEnabled += (value ? 1 : -1)
-  }
-
-  removeStep(e) {
-    this.visualization.block.remove(e.step)
-
-    // to refresh the visualization canvas
-    const removeStepSubject = subjects[Messages.REMOVE_STEP]
-    removeStepSubject.next(e.step.uuid)
   }
 
   toggleFullEditorMode() {

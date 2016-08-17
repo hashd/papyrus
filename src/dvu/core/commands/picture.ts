@@ -5,6 +5,7 @@ import {Picture} from '../../core/models/picture'
 import {DatasetDefinition} from '../../core/data/dataset_definition'
 import {CommandInterface} from './command_interface'
 import {Scope} from './../scope'
+import { StepSummary } from '../step_summary'
 
 export interface PictureCommandInterface extends CommandInterface {
   name: string
@@ -13,7 +14,7 @@ export interface PictureCommandInterface extends CommandInterface {
   onMousedown: (context: PictureContext) => Element
   onMousemove: (element: Element, context: PictureContext) => Element
   onMouseup: (element: Element, context: PictureContext) => Element
-  getSummary: (data: PictureContext) => string
+  getSummary: (data: Object) => StepSummary[]
 }
 
 export class PictureCommand extends Command {
@@ -50,7 +51,7 @@ export class PictureCommand extends Command {
     this.implementation.onMousemove(element, context)
   }
 
-  getSummary(data: PictureContext) {
+  getSummary(data: Object): StepSummary[] {
     return this.implementation.getSummary(data)
   }
 }
