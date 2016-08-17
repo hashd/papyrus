@@ -5,60 +5,43 @@ import { Scope } from '../core/scope'
 import { Picture } from '../core/models/picture'
 import { Node } from '../dom/node'
 
-export class Block implements Executable<Picture> {
-  private _id: string
-  private _steps: Executable<any>[] = []
+export class Block implements Executable<Node> {
+  id: String = generateUUID()
+  steps: Executable<any>[] = []
 
-  constructor() {
-    this._id = generateUUID()
+  constructor() { }
+
+  add(step: Step) {
+    step.parent = this
+    this.steps.push(step)
   }
 
-  get id(): string {
-    return this._id
-  }
-
-  get steps(): Executable<any>[] {
-    return this._steps
-  }
-
-  add(step: Executable<any>) {
-    if (this._steps && step) {
-      step.parent = this
-      this._steps.push(step)
-    }
-  }
-
-  remove(step: Executable<any>) {
-    if (this._steps && step) {
-      if (step instanceof Block) {
-
-      } else if (step instanceof Step && step.parent) {
-        const steps = step.parent._steps,
-          index = steps.indexOf(step)
-        if (index !== -1) {
-          steps.splice(index, 1)
-        }
+  remove(step: Step) {
+    if (step.parent) {
+      const index = this.steps.indexOf(step)
+      if (index !== -1) {
+        this.steps.splice(index, 1)
+      } else {
+        throw new Error('Cannot find step to be deleted in the block')
       }
+    } else {
+      throw new Error('Cannot delete an orphan step')
     }
   }
 
   clear() {
-    this._steps = []
+    this.steps = []
   }
 
   execute(scope: Scope): Node[] {
-    if (this._steps && this._steps.length > 0) {
-      return this._steps.reduce((elements, step) => elements.concat(step.execute(scope)), [])
-    } else {
-      return []
-    }
+    return this.steps.reduce((elements, step) => elements.concat(step.execute(scope)), [])
   }
 
   executeUntil(count: number, scope: Scope): Node[] {
-    return this._steps.slice(0, count).reduce((elements, step) => elements.concat(step.execute(scope)), [])
+    return this.steps.slice(0, count).reduce((elements, step) => elements.concat(step.execute(scope)), [])
   }
 
   getSummary(data: Object): StepSummary[] {
-    return this._steps.reduce((stepSummaries, step) => stepSummaries.concat(step.getSummary(data)), [])
+    return this.steps.reduce((stepSummaries, step) => stepSummaries.concat(step.getSummary(data)), [])
   }
 }

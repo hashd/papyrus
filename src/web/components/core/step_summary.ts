@@ -60,7 +60,7 @@ export class StepSummaryComponent {
 
       // broadcast step selection change message
       const selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
-      selectedStepSubject.next(stepSummary.step.uuid)
+      selectedStepSubject.next(stepSummary.step.id)
     } else if (stepSummary.step instanceof Block) {
       this.selectStep(stepSummary.step)
 

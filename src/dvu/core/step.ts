@@ -10,15 +10,12 @@ export interface Executable<T> {
   execute(scope: Scope): T[]
 }
 
-export class Step implements Executable<Picture> {
-  private _uuid: string = ''
+export class Step implements Executable<Node> {
+  id: string = generateUUID()
 
-  constructor(public command: Command, public data: Object, public parent: Executable = undefined) {
-    this._uuid = generateUUID()
-  }
-
-  get uuid(): string {
-    return this._uuid
+  constructor(public command: Command,
+              public data: Object,
+              public parent: Executable<any> = null) {
   }
 
   addParameter(name: string, value: ValueType) {
@@ -32,7 +29,7 @@ export class Step implements Executable<Picture> {
   getSummary(): StepSummary[] {
     // needs to refactor code
     const self = this,
-      summaries: StepSummary[] = [].concat(this.command.getSummary(this.data))
+          summaries: StepSummary[] = [].concat(this.command.getSummary(this.data))
 
     summaries.forEach((cur, index, array) => {
       if (cur.step === null) {

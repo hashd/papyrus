@@ -49,7 +49,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   constructor () {
     const removeStepSubject = subjects[Messages.REMOVE_STEP],
-      selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
+          selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
 
     removeStepSubject.subscribe({
       next: (step: Step) => {

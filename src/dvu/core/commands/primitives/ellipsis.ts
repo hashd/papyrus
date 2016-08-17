@@ -15,6 +15,7 @@ export class EllipsisCommand extends Command {
   private _name: string
 
   constructor(context: PictureContext, scope: Scope = new Scope()) {
+    super()
     this._name = `${EllipsisCommand.commandName}-${++EllipsisCommand.noOfInstances}`
 
     this._element = SVG.createEllipse(0, 0, 0, 0)
@@ -25,11 +26,11 @@ export class EllipsisCommand extends Command {
 
   execute(context: PictureContext, scope: Scope = new Scope()): Picture {
     const { start } = context,
-      rx = context.getWidth(),
-      ry = context.getHeight()
+          rx = context.getWidth(),
+          ry = context.getHeight()
 
-    this._element.setAttributeNS(null, 'cx', start.x)
-    this._element.setAttributeNS(null, 'cy', start.y)
+    this._element.setAttributeNS(null, 'cx', start.x.toString())
+    this._element.setAttributeNS(null, 'cy', start.y.toString())
     this._element.setAttributeNS(null, 'rx', rx.toString())
     this._element.setAttributeNS(null, 'ry', ry.toString())
 

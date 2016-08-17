@@ -5,11 +5,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
-      "dvu/*": [
-        "dvu/*"
-      ],
-      "web/*": [
-        "web/*"
+      "src/*": [
+        "*"
       ]
     },
     "target": "es5"

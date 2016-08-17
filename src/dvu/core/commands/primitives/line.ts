@@ -26,7 +26,7 @@ export class LineCommand extends Command {
 
   execute(context: PictureContext, scope: Scope = new Scope()): Node {
     const { start, end } = context,
-      element = this._element
+          element = this._element
 
     element.setAttributes({
       x1: start.x.toString(),

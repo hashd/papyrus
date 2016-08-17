@@ -17,8 +17,8 @@ export class IfCommand extends Command {
   static commandName: string = 'If'
   static type: CommandType = COMMAND_TYPES.FLOW
   static shortcutKey: string = 'i'
-
   static datasetDefinition: DatasetDefinition = datasetDefinition
+
   trueBlock: Block = new Block()
   falseBlock: Block = new Block()
 
@@ -39,7 +39,7 @@ export class IfCommand extends Command {
 
   getSummary(data: Object): StepSummary[] {
     const trueBlock = new StepSummary(data, `if block`, this.trueBlock),
-      falseBlock = new StepSummary(data, 'else block', this.falseBlock)
+          falseBlock = new StepSummary(data, 'else block', this.falseBlock)
 
     return [ trueBlock, falseBlock ]
   }

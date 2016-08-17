@@ -15,6 +15,7 @@ export class PathCommand extends Command {
   private _name: string
 
   constructor(context: PictureContext, scope: Scope = new Scope()) {
+    super()
     this._name = `${PathCommand.commandName}-${++PathCommand.noOfInstances}`
 
     this._element = SVG.createPath([])
