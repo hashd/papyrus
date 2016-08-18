@@ -1,5 +1,7 @@
+import { Expression } from 'dvu/parser/expression'
+
 export type DataType = 'string' | 'number' | 'array' | 'expression' | 'element' | 'boolean'
-export type ValueType = string | number | Array<any> | Element | boolean
+export type ValueType = string | number | Array<any> | Element | boolean | Expression
 
 export class DataDefinition {
   id: string
