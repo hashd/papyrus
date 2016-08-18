@@ -6,7 +6,6 @@ import { Step, Executable } from '../../../dvu/core/step'
 import { Block } from '../../../dvu/core/block'
 import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
 import { Messages, subjects } from '../../../web/services/messages'
-import * as _  from 'lodash'
 
 @Component({
   selector: 'pa-vis-canvas',
@@ -176,8 +175,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
 
   private selectionChangeMessage(element) {
     // broadcast element selection change message
-    const self = this,
-      selectedStep = _.find(this.visualization.block.steps, function(step) { return self.stepElementMap.get(step.uuid) === element })
+    const selectedStep = this.visualization.block.steps.filter(step => this.stepElementMap.get(step.id) === element)
 
     if (selectedStep) {
       const selectedElementSubject = subjects[Messages.CHANGE_ELEMENT_SELECTION]

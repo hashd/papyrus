@@ -1,31 +1,27 @@
 import { Executable, Step } from './step'
 import { StepSummary } from './step_summary'
-import { generateUUID } from '../utils/uuid'
+import { createID } from '../utils/uuid'
 import { Scope } from '../core/scope'
 import { Picture } from '../core/models/picture'
 import { Node } from '../dom/node'
 
-export class Block implements Executable<Node> {
-  id: String = generateUUID()
-  steps: Executable<any>[] = []
+export class Block<T> implements Executable<T[]> {
+  id: String = createID()
+  steps: Executable<T>[] = []
 
   constructor() { }
 
-  add(step: Step) {
+  add(step: Step<T>) {
     step.parent = this
     this.steps.push(step)
   }
 
-  remove(step: Step) {
-    if (step.parent) {
-      const index = this.steps.indexOf(step)
-      if (index !== -1) {
-        this.steps.splice(index, 1)
-      } else {
-        throw new Error('Cannot find step to be deleted in the block')
-      }
+  remove(step: Step<T>) {
+    const index = this.steps.indexOf(step)
+    if (index !== -1) {
+      this.steps.splice(index, 1)
     } else {
-      throw new Error('Cannot delete an orphan step')
+      throw new Error('Cannot find step to be deleted in the block')
     }
   }
 
@@ -33,11 +29,11 @@ export class Block implements Executable<Node> {
     this.steps = []
   }
 
-  execute(scope: Scope): Node[] {
-    return this.steps.reduce((elements, step) => elements.concat(step.execute(scope)), [])
+  execute(scope: Scope): T[] {
+    return this.steps.reduce((elements: T[], step) => elements.concat(step.execute(scope)), [])
   }
 
-  executeUntil(count: number, scope: Scope): Node[] {
+  executeUntil(count: number, scope: Scope): T[] {
     return this.steps.slice(0, count).reduce((elements, step) => elements.concat(step.execute(scope)), [])
   }
 

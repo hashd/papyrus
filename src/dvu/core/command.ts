@@ -2,23 +2,16 @@ import { CommandType } from './command_types'
 import { Scope } from './scope'
 import { Executable } from './step'
 import { StepSummary } from './step_summary'
+import { DatasetDefinition } from './data/dataset_definition'
 
-export class Command implements Executable {
-  type: CommandType
-  shortcutKey: string
-  initEvent: string = 'mousedown'
-  modifyEvent: string = 'mousemove'
-  endEvent: string = 'mouseup'
-
-  commandName: string = 'unnamed'
+export abstract class Command<T> {
+  datasetDefinition: DatasetDefinition
 
   validate(data: {}): boolean {
-    return true
+    return this.datasetDefinition.validate(data)
   }
 
-  execute(data, scope: Scope = new Scope()) {
-
-  }
+  abstract execute(data, scope: Scope): T
 
   getSummary(data: Object): StepSummary | StepSummary[]  {
     return new StepSummary({}, 'This method has not been overriden and should be done for all commands')

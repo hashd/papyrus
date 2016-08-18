@@ -5,7 +5,7 @@ import { Scope } from '../../scope'
 import { Command } from '../../command'
 import { CommandType, COMMAND_TYPES } from '../../command_types'
 
-export class RectCommand extends Command {
+export class RectCommand extends Command<Node> {
   static commandName: string = 'rect'
   static type: CommandType = COMMAND_TYPES.PRIMITIVE
   static shortcutKey: string = 'r'
@@ -43,7 +43,7 @@ export class RectCommand extends Command {
 
   getSummary(data: Object): StepSummary {
     const initPoint = data.getLeastSignificantPoint(),
-      summary = `Draw ${data.name || this._name} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
+          summary = `Draw ${data.name || this._name} from (${initPoint.x}, ${initPoint.y}) with width: ${data.getWidth()} and height: ${data.getHeight()}`
 
     return new StepSummary(data, summary)
   }
