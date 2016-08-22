@@ -18,18 +18,19 @@ const datasetDefinition = new DatasetDefinition()
 datasetDefinition.addDataDefinition(START, 'number')
 datasetDefinition.addDataDefinition(END, 'number')
 
-export class ForCommand extends Command {
-  name: string = 'For'
-  type: CommandType = COMMAND_TYPES.FLOW
-  shortcutKey: string = 'f'
-  block: Block = new Block()
-  datasetDefinition: DatasetDefinition = datasetDefinition
+export class ForCommand extends Command<Element[]> {
+  static name: string = 'For'
+  static type: CommandType = COMMAND_TYPES.FLOW
+  static datasetDefinition: DatasetDefinition = datasetDefinition
+  static shortcutKey: string = 'f'
+
+  block: Block<Element> = new Block<Element>()
 
   constructor() {
     super()
   }
 
-  execute(data, scope: Scope = new Scope()): Picture[] {
+  execute(data, scope: Scope = new Scope()): Element[] {
     if (!this.datasetDefinition.validate(data)) {
       return
     }

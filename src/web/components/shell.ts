@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core'
 import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
-import { CompositeVisualization } from 'src/dvu/gfx/visualization'
+import { CompositePicture } from 'picture.ts'
 import { FullLength } from '../directives/all'
 
 @Component({
@@ -22,8 +22,8 @@ import { FullLength } from '../directives/all'
   directives: [PapyrusVisualizations, PapyrusEditor, FullLength]
 })
 export class PapyrusShell {
-  visualizations: CompositeVisualization[] = []
-  activeVisualization: CompositeVisualization = null
+  visualizations: CompositePicture[] = []
+  activeVisualization: CompositePicture = null
   fullEditorEnabled: boolean = false
 
   select(e) {

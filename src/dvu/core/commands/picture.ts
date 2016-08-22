@@ -1,57 +1,25 @@
 import {Command} from '../../core/command'
-import {CommandType} from '../command_types'
+import {CommandType, COMMAND_TYPES} from '../command_types'
 import {PictureContext} from '../../geometry/picture_context'
-import {Picture} from '../../core/models/picture'
-import {DatasetDefinition} from '../../core/data/dataset_definition'
-import {CommandInterface} from './command_interface'
 import {Scope} from './../scope'
-import { StepSummary } from '../step_summary'
 
-export interface PictureCommandInterface extends CommandInterface {
-  name: string
-  shortcutKey: string
-  noOfInstances: number
-  onMousedown: (context: PictureContext) => Element
-  onMousemove: (element: Element, context: PictureContext) => Element
-  onMouseup: (element: Element, context: PictureContext) => Element
-  getSummary: (data: Object) => StepSummary[]
-}
-
-export class PictureCommand extends Command {
-  static noOfInstances: number = 0
-
-  type: CommandType = 'primitive'
-  defaultName: string = 'picture'
-  datasetDefinition: DatasetDefinition = new DatasetDefinition()
-
-  constructor(public name: string, private implementation: PictureCommandInterface) {
+export abstract class PictureCommand extends Command<Element> {
+  constructor() {
     super()
-    this.shortcutKey = implementation.shortcutKey
   }
 
-  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
-    return this.draw(context, scope.depth)
-  }
+  abstract convertContext(context: PictureContext): Object
 
-  private draw(context: PictureContext, depth: number = 0): Picture {
-    let element: Element = this.implementation.onMousedown(context)
+  abstract execute(data, scope: Scope): Element
 
-    if (!context.instanceCount) {
-      this.implementation.noOfInstances = this.implementation.noOfInstances + 1
-      context.instanceCount = this.implementation.noOfInstances
-    }
-
-    return {
-      name: context.name || `${this.implementation.name}-${context.instanceCount}` || `${this.defaultName}-${context.instanceCount}`,
-      element
-    }
-  }
-
-  redraw(element: Element, context: PictureContext) {
-    this.implementation.onMousemove(element, context)
-  }
-
-  getSummary(data: Object): StepSummary[] {
-    return this.implementation.getSummary(data)
+  /**
+   * Convert picture context into the data form and then execute
+   *
+   * @param context: Picture Context
+   * @param scope: Scope to be executed within
+   * @returns {Element}
+   */
+  executeWithPictureContext(context: PictureContext, scope: Scope): Element {
+    return this.execute(this.convertContext(context), scope)
   }
 }

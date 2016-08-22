@@ -4,7 +4,7 @@ import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
 import { PanelComponent } from '../generic/panel'
 import { FullLength } from 'src/web/directives/all'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
 import { CommandService } from 'src/web/services/all'
 import { Step } from '../../../dvu/core/step'
 import { Command } from '../../../dvu/core/command'
@@ -49,7 +49,7 @@ import { Messages, subjects } from 'src/web/services/messages'
 })
 export class PapyrusEditor {
   @Input()
-  visualization: CompositeVisualization
+  visualization: CompositePicture
 
   commands: Command[]
   selectedStep: Step

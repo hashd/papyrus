@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, OnChanges, Output, EventEmitter } from 'angular2/core'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
 import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from '../../../dvu/geometry/picture_context'
 import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
@@ -21,7 +21,7 @@ import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
   directives: [FocusMe]
 })
 export class VisualizationPreview implements OnChanges {
-  @Input() visualization: CompositeVisualization
+  @Input() visualization: CompositePicture
   @Input() arity: number
 
   @Output() onRemove = new EventEmitter()

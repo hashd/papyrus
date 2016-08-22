@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core'
 import { PanelComponent } from '../generic/panel'
 import { VisualizationPreview } from './visualization_preview'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
 import { CommandService } from 'src/web/services/command'
 
 @Component({
@@ -28,8 +28,8 @@ import { CommandService } from 'src/web/services/command'
 })
 export class PapyrusVisualizations implements OnInit {
   @Input()
-  visualizations: CompositeVisualization[]
-  selected: CompositeVisualization
+  visualizations: CompositePicture[]
+  selected: CompositePicture
 
   @Output()
   onSelect = new EventEmitter()
@@ -42,7 +42,7 @@ export class PapyrusVisualizations implements OnInit {
     }
   }
 
-  select(v: CompositeVisualization) {
+  select(v: CompositePicture) {
     this.selected = v
     this.onSelect.emit({ selected: v })
   }
@@ -51,7 +51,7 @@ export class PapyrusVisualizations implements OnInit {
    * Create a new visualization and select it automatically
    */
   create() {
-    let vis = new CompositeVisualization()
+    let vis = new CompositePicture()
     this.visualizations.push(vis)
     this.commandService.addCommand(vis)
     this.select(vis)

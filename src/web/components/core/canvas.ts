@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from 'angular2/core'
 import { Command } from '../../../dvu/core/command'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
 import { Step } from '../../../dvu/core/step'
 import { Block } from '../../../dvu/core/block'
 import { COMMAND_TYPES } from '../../../dvu/core/command_types'
@@ -29,7 +29,7 @@ import { Messages, subjects } from '../../../web/services/messages'
 })
 export class PapyrusCanvas implements OnChanges {
   @Input() commands: Command[]
-  @Input() visualization: CompositeVisualization
+  @Input() visualization: CompositePicture
   @Input() currentStep: Step
 
   selectedCommand: Command

@@ -13,26 +13,26 @@ const CONDITION: string = 'condition'
 const datasetDefinition = new DatasetDefinition()
 datasetDefinition.addDataDefinition(CONDITION, 'boolean')
 
-export class IfCommand extends Command {
+export class IfCommand extends Command<Element[]> {
   static commandName: string = 'If'
   static type: CommandType = COMMAND_TYPES.FLOW
   static shortcutKey: string = 'i'
   static datasetDefinition: DatasetDefinition = datasetDefinition
 
-  trueBlock: Block = new Block()
-  falseBlock: Block = new Block()
+  trueBlock: Block<Element> = new Block<Element>()
+  falseBlock: Block<Element> = new Block<Element>()
 
   constructor(data: Object) {
     super()
   }
 
-  execute(data: Object, scope: Scope = new Scope()): Node[] {
+  execute(data: Object, scope: Scope = new Scope()): Element[] {
     if (!IfCommand.datasetDefinition.validate(data)) {
       return
     }
 
     const innerScope = new Scope(scope)
-    const conditionValue: boolean = data[CONDITION]
+    const conditionValue: boolean = true // #TODO: data[CONDITION]
 
     return conditionValue ? this.trueBlock.execute(innerScope) : this.falseBlock.execute(innerScope)
   }

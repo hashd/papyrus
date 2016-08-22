@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
-import { CompositeVisualization } from '../../../dvu/gfx/visualization'
+import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
 import { Point } from '../../../dvu/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
 import { Step, Executable } from '../../../dvu/core/step'
@@ -31,7 +31,7 @@ import { Messages, subjects } from '../../../web/services/messages'
   pipes: [PointTransform]
 })
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
-  @Input() visualization: CompositeVisualization
+  @Input() visualization: CompositePicture
   @Input() element: Element
 
   dragModeEnabled: boolean = false

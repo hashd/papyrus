@@ -1,5 +1,5 @@
 import { PictureContext } from '../../../geometry/picture_context'
-import { Line } from '../../../geometry/elements/line'
+import { Line } from '../../../models/line'
 import { Node, node, NodeTypes } from '../../../dom/node'
 import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
@@ -7,23 +7,17 @@ import { Command } from '../../command'
 import { CommandType, COMMAND_TYPES } from '../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { DataType } from './../../data/data_definition'
-
-const datasetDefinition = new DatasetDefinition()
-datasetDefinition.addDataDefinition('x1', 'number')
-datasetDefinition.addDataDefinition('y1', 'number')
-datasetDefinition.addDataDefinition('x2', 'number')
-datasetDefinition.addDataDefinition('y2', 'number')
+import { LINE_DEFINITION } from './../definitions/line_definition'
 
 export class LineCommand extends Command<Node> {
   static commandName: string = 'line'
   static type: CommandType = COMMAND_TYPES.PRIMITIVE
   static shortcutKey: string = 'l'
   static noOfInstances: number = 0
-  static datasetDefinition = datasetDefinition
 
   private _element: Line
   private _name: string
-  datasetDefinition = LineCommand.datasetDefinition
+  datasetDefinition = LINE_DEFINITION
 
   constructor(context: PictureContext, scope: Scope = new Scope()) {
     super()

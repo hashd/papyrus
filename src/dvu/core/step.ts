@@ -19,6 +19,10 @@ export class Step<T> implements Executable<T> {
               public parent: Executable<any> = null) {
   }
 
+  execute(scope: Scope): T {
+    return this.command.execute(this.data, scope)
+  }
+
   addParameter(name: string, value: ValueType) {
     this.data[name] = value
   }
@@ -38,9 +42,5 @@ export class Step<T> implements Executable<T> {
     })
 
     return summaries
-  }
-
-  execute(scope: Scope): T {
-    return this.command.execute(this.data, scope)
   }
 }

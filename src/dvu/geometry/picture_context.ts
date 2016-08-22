@@ -5,7 +5,7 @@ export class PictureContext {
   points: Point[] = []
   instanceCount: number = 0
 
-  constructor(public start: Point, public end: Point) {
+  constructor(public start: Point, public end: Point = start) {
     this.points.push(start)
     this.points.push(end)
   }

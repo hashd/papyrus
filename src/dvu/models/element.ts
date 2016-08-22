@@ -1,8 +1,11 @@
-import { Point } from '../cartesian_system'
+import { Magnet } from 'dvu/models/magnet'
 
 export interface Element {
+  name: string
+  getAttribute: (name: string) => string
+  getAttributes: () => {[key: string]: string}
   setAttribute: (name: string, value: string) => Element
-  setMagnets: () => void
+  getMagnets: () => Magnet[]
 }
 
 export interface TransformElement extends Element {
@@ -30,23 +33,37 @@ export interface TransformProperties {
   skewY: number
 }
 
-export abstract class SimpleAbstractTransformElement implements TransformElement {
+export abstract class BasicElement implements TransformElement {
   private transformProperties: TransformProperties
-  public attributes: {[key: string]: string} = {}
-  protected _magnets: Point[] = []
+  name: string = 'unnamed'
+  attributes: {[key: string]: string} = {}
+  magnets: Magnet[] = []
 
-  get magnets() {
-    return this._magnets
+  constructor(public name: string = 'unnamed') {
   }
 
-  setAttribute(name: string, value: string): SimpleAbstractTransformElement {
+  protected abstract setMagnets()
+
+  getAttribute(name: string): string {
+    return this.attributes[name]
+  }
+
+  getAttributes(): {[key: string]: string} {
+    return this.attributes
+  }
+
+  getMagnets(): Magnet[] {
+    return this.magnets
+  }
+
+  setAttribute(name: string, value: string): TransformElement {
     this.attributes[name] = value
     this.setMagnets()
 
     return this
   }
 
-  setAttributes(attributes: { [key: string]: string }): SimpleAbstractTransformElement {
+  setAttributes(attributes: { [key: string]: string }): TransformElement {
     for (const attr in attributes) {
       if (attributes.hasOwnProperty(attr)) {
         this.setAttribute(attr, attributes[attr])
@@ -56,25 +73,21 @@ export abstract class SimpleAbstractTransformElement implements TransformElement
     return this
   }
 
-  protected setMagnets() {
-    // implement it in extended classes 
-  }
-
-  translate(tx: number, ty: number): SimpleAbstractTransformElement {
+  translate(tx: number, ty: number): TransformElement {
     this.transformProperties.translate.tx += tx
     this.transformProperties.translate.ty += ty
 
     return this.transform()
   }
 
-  scale(sx: number, sy: number): SimpleAbstractTransformElement {
+  scale(sx: number, sy: number): TransformElement {
     this.transformProperties.scale.sx *= sx
     this.transformProperties.scale.sy *= sy
 
     return this.transform()
   }
 
-  rotate(angle: number, rx: number, ry: number): SimpleAbstractTransformElement {
+  rotate(angle: number, rx: number, ry: number): TransformElement {
     this.transformProperties.rotate.angle = angle
     this.transformProperties.rotate.rx = rx
     this.transformProperties.rotate.ry = ry
@@ -82,14 +95,14 @@ export abstract class SimpleAbstractTransformElement implements TransformElement
     return this.transform()
   }
 
-  skew(xAngle: number, yAngle: number): SimpleAbstractTransformElement {
+  skew(xAngle: number, yAngle: number): TransformElement {
     this.transformProperties.skewX = xAngle ? xAngle : this.transformProperties.skewX
     this.transformProperties.skewY = yAngle ? yAngle : this.transformProperties.skewY
 
     return this.transform()
   }
 
-  private transform(): SimpleAbstractTransformElement {
+  private transform(): TransformElement {
     let transformValue = ''
     const { translate: {tx, ty}, scale: {sx, sy}, rotate: {angle, rx, ry}, skewX, skewY} = this.transformProperties
 
