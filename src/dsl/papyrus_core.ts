@@ -1,4 +1,4 @@
-export * from 'src/dvu/core/command'
+export * from '/core/command'
 export * from '/main/command'
 export * from '/main/step'
 export * from '/main/commands/adjust'

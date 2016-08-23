@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core'
-import { COMMAND_TYPES, CommandType } from '../../dvu/core/command_types'
-import { COMMANDS } from '../../dvu/core/commands/all'
-import { Command } from '../../dvu/core/command'
+import { COMMAND_TYPES, CommandType } from '../../dsl/core/command_types'
+import { COMMANDS } from '../../dsl/core/commands/all'
+import { Command } from '../../dsl/core/command'
 
 @Injectable()
 export class CommandService {

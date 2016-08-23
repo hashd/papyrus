@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core'
-import { Command } from '../../../dvu/core/command'
-import { CommandType, COMMAND_TYPES } from '../../../dvu/core/command_types'
+import { Command } from '../../../dsl/core/command'
+import { CommandType, COMMAND_TYPES } from '../../../dsl/core/command_types'
 import { CommandService } from '../../services/command'
 
 @Component({

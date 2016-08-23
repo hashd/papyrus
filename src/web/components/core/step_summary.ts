@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ElementRef } from 'angular2/core'
-import { Step, Executable } from '../../../dvu/core/step'
-import { Block } from '../../../dvu/core/block'
-import { StepSummary } from '../../../dvu/core/step_summary'
-import { COMMAND_TYPES } from '../../../dvu/core/command_types'
-import { PictureContext } from '../../../dvu/geometry/picture_context'
-import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
+import { Step, Executable } from '../../../dsl/core/step'
+import { Block } from '../../../dsl/core/block'
+import { StepSummary } from '../../../dsl/core/step_summary'
+import { COMMAND_TYPES } from '../../../dsl/core/command_types'
+import { PictureContext } from '../../../dsl/geometry/picture_context'
+import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
 import { Messages, subjects } from '../../../web/services/messages'
 
 @Component({

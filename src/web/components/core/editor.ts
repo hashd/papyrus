@@ -4,10 +4,10 @@ import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
 import { PanelComponent } from '../generic/panel'
 import { FullLength } from 'src/web/directives/all'
-import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { CommandService } from 'src/web/services/all'
-import { Step } from '../../../dvu/core/step'
-import { Command } from '../../../dvu/core/command'
+import { Step } from '../../../dsl/core/step'
+import { Command } from '../../../dsl/core/command'
 import { Messages, subjects } from 'src/web/services/messages'
 
 @Component({

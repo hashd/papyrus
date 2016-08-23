@@ -1,4 +1,4 @@
-import { Magnet } from 'dvu/models/magnet'
+import { Magnet } from '..//models/magnet'
 
 export interface Element {
   name: string

@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
-import { CompositePicture } from '../../../dvu/core/commands/composite/picture'
-import { Point } from '../../../dvu/geometry/cartesian_system'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
+import { Point } from '../../../dsl/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
-import { Step, Executable } from '../../../dvu/core/step'
-import { Block } from '../../../dvu/core/block'
-import { convertObjectModel, AdapterTypes } from '../../../dvu/adapters/adapter'
+import { Step, Executable } from '../../../dsl/core/step'
+import { Block } from '../../../dsl/core/block'
+import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
 import { Messages, subjects } from '../../../web/services/messages'
 
 @Component({
