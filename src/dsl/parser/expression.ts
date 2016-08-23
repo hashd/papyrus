@@ -2,6 +2,7 @@ import { Token, TokenType } from './token'
 import { hasValue, getValue, escapeValue } from './../utils/parser_utils'
 import { Parser } from './parser'
 import { builtinOps1, builtinOps2, builtinFunctions } from './builtins'
+import { ValueType } from './../core/data/data_definition'
 
 export class Expression {
   constructor(private _tokens: Token[] = [],
@@ -86,7 +87,7 @@ export class Expression {
     return new Expression(newExpression, this.ops1, this.ops2, this.functions)
   }
 
-  evaluate(values: {[key: string]: any} = {}): string | number {
+  evaluate(values: {[key: string]: any} = {}): ValueType {
     const nStack = []
 
     this.tokens.forEach((token, idx) => {

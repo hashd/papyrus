@@ -1,3 +1,4 @@
+import {Element} from '../../models/element'
 import {Command} from '../../core/command'
 import {CommandType, COMMAND_TYPES} from '../command_types'
 import {PictureContext} from '../../geometry/picture_context'

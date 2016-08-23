@@ -3,7 +3,6 @@ import { Scope } from './../../scope'
 import { CommandType, COMMAND_TYPES } from './../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { Block } from './../../block'
-import { Picture } from '../../../core/models/picture'
 import { StepSummary } from '../../step_summary'
 import { Node } from '../../../dom/node'
 

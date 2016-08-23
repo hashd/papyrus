@@ -1,45 +1,48 @@
 import { PictureContext } from '../../../geometry/picture_context'
+import { Element } from '../../../models/element'
 import { Line } from '../../../models/line'
 import { Node, node, NodeTypes } from '../../../dom/node'
 import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
 import { Command } from '../../command'
+import { PictureCommand } from '../picture'
 import { CommandType, COMMAND_TYPES } from '../../command_types'
 import { DatasetDefinition } from './../../data/dataset_definition'
 import { DataType } from './../../data/data_definition'
 import { LINE_DEFINITION } from './../definitions/line_definition'
+import { Expression } from '../../../parser/expression'
 
-export class LineCommand extends Command<Node> {
+export class LineCommand extends PictureCommand {
   static commandName: string = 'line'
   static type: CommandType = COMMAND_TYPES.PRIMITIVE
   static shortcutKey: string = 'l'
   static noOfInstances: number = 0
 
-  private _element: Line
-  private _name: string
   datasetDefinition = LINE_DEFINITION
 
-  constructor(context: PictureContext, scope: Scope = new Scope()) {
+  constructor() {
     super()
-    this._name = `${LineCommand.commandName}-${++LineCommand.noOfInstances}`
-    this._element = new Line(0, 0, 0, 0)
-    if (context) {
-      this.execute(context, scope)
-    }
   }
 
-  execute(context: PictureContext, scope: Scope = new Scope()): Node {
-    const { start, end } = context,
-          element = this._element
+  execute(data, scope: Scope = new Scope()): Element {
+    // Resolve expressions to values and add to scope
+    this.resolveExpressions(data, scope)
 
-    element.setAttributes({
-      x1: start.x.toString(),
-      y1: start.y.toString(),
-      x2: end.x.toString(),
-      y2: end.y.toString()
-    })
+    // If data passed doesn't satisfy the type information return 
+    if (this.datasetDefinition.validate(data) !== true) {
+      throw new Error('Arguments passed are not as expected.')
+    }
 
-    return node(NodeTypes.LINE, element.attributes, [], element.magnets)
+    return new Line(data.name || `${LineCommand.commandName}-${LineCommand.noOfInstances}`, data.x1, data.y1, data.x2, data.y2)
+  }
+
+  convertContext(context: PictureContext): Object {
+    return {
+      x1: context.start.x,
+      x2: context.end.x,
+      y1: context.start.y,
+      y2: context.start.x
+    }
   }
 
   getSummary(data: Object): StepSummary {

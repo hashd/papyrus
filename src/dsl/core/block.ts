@@ -2,7 +2,6 @@ import { Executable, Step } from './step'
 import { StepSummary } from './step_summary'
 import { createID } from '../utils/uuid'
 import { Scope } from '../core/scope'
-import { Picture } from '../core/models/picture'
 import { Node } from '../dom/node'
 
 export class Block<T> implements Executable<T[]> {

@@ -1,3 +1,5 @@
+import { Expression } from './../parser/expression'
+
 export class Scope {
   data: {[key: string]: any} = {}
   depth: number
@@ -17,6 +19,16 @@ export class Scope {
       return this.data[key]
     }
 
-    return this.parent.getValue(key)
+    return this.parent === null ? undefined : this.parent.getValue(key)
+  }
+
+  resolve(expression: Expression) {
+    const variables = expression.variables(),
+          values = variables.reduce((values, variable) => {
+            values[variable] = this.getValue(variable)
+            return values
+          }, {})
+
+    return expression.evaluate(values)
   }
 }

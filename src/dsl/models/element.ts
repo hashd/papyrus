@@ -35,7 +35,6 @@ export interface TransformProperties {
 
 export abstract class BasicElement implements TransformElement {
   private transformProperties: TransformProperties
-  name: string = 'unnamed'
   attributes: {[key: string]: string} = {}
   magnets: Magnet[] = []
 
