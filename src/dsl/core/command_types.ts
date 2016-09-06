@@ -5,7 +5,7 @@ const ADJUST: string = 'adjust'
 // const MODIFIER: string = 'modifier'
 // const GROUP: string = 'group'
 
-export type CommandType = PRIMITIVE | COMPOSITE | ADJUST | FLOW | MODIFIER | GROUP
+export type CommandType = 'primitive' | 'composite' | 'adjust' | 'flow' | 'modifier' | 'group'
 
 export const enum COMMAND_TYPES {
   PRIMITIVE,

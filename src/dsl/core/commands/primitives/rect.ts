@@ -47,4 +47,4 @@ export class RectCommand extends Command<Node> {
 
     return new StepSummary(data, summary)
   }
-})
+}
