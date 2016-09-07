@@ -5,7 +5,7 @@ import { Point } from '../../dsl/geometry/cartesian_system'
   name: 'point'
 })
 export class PointTransform implements PipeTransform {
-  transform(point: Point, prefix: string, suffix: string): string {
+  transform(point: Point, [prefix, suffix]): string {
     return point ? `${prefix} [${point.x}, ${point.y}]` : ''
   }
 }

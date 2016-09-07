@@ -6,7 +6,7 @@ import { Node } from '../dom/node'
 
 export class Block<T> implements Executable<T[]> {
   id: String = createID()
-  steps: Executable<T>[] = []
+  steps: Step<T>[]  = []
 
   constructor() { }
 
@@ -37,6 +37,6 @@ export class Block<T> implements Executable<T[]> {
   }
 
   getSummary(data: Object): StepSummary[] {
-    return this.steps.reduce((stepSummaries, step) => stepSummaries.concat(step.getSummary(data)), [])
+    return this.steps.reduce((stepSummaries, step) => stepSummaries.concat(step.getSummary()), [])
   }
 }

@@ -4,8 +4,9 @@ import { StepSummary } from '../../step_summary'
 import { Scope } from '../../scope'
 import { Command } from '../../command'
 import { CommandType, COMMAND_TYPES } from '../../command_types'
+import { Element } from '../../../models/element'
 
-export class EllipsisCommand extends Command {
+export class EllipsisCommand extends Command<Element> {
   static commandName: string = 'ellipsis'
   static type: CommandType = COMMAND_TYPES.PRIMITIVE
   static shortcutKey: string = 'e'
@@ -24,7 +25,7 @@ export class EllipsisCommand extends Command {
     }
   }
 
-  execute(context: PictureContext, scope: Scope = new Scope()): Picture {
+  execute(context: PictureContext, scope: Scope = new Scope()): Element {
     const { start } = context,
           rx = context.getWidth(),
           ry = context.getHeight()
@@ -40,7 +41,7 @@ export class EllipsisCommand extends Command {
     }
   }
 
-  getSummary(data: Object): StepSummary {
+  getSummary(data): StepSummary {
     const radius = (data.getWidth() === data.getHeight()) ? data.getWidth() : `${data.getWidth()}, ${data.getHeight()}`,
       summary = `Draw ${data.name || ((data.getWidth() === data.getHeight()) ? 'circle' : 'ellipsis') + '-' + data.instanceCount} from (${data.start.x}, ${data.start.y}) with radius: ${radius}`
 

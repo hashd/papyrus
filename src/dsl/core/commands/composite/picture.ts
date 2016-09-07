@@ -8,6 +8,7 @@ import { StepSummary } from '../../step_summary'
 import { Command } from '../../command'
 import { PictureCommand } from '../picture'
 import { Group } from './../../../models/group'
+import { Element } from './../../../models/element'
 
 export class CompositePicture extends PictureCommand {
   commandName: string = 'unnamed'
