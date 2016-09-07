@@ -22,8 +22,8 @@ import { CommandService } from '../../services/command'
   providers: [CommandService]
 })
 export class CommandBar {
-  @Input() commands: Command[]
-  @Input() currentCommand: Command
+  @Input() commands: Command<any>[]
+  @Input() currentCommand: Command<any>
 
   commandTypes: CommandType[] = []
 
@@ -41,7 +41,7 @@ export class CommandBar {
     this.commands = this.commandService.getCommands()
   }
 
-  selectCommand(activeCommand: Command) {
+  selectCommand(activeCommand: Command<any>) {
     const previousCommand = this.currentCommand
 
     this.currentCommand = activeCommand

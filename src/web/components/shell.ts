@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core'
 import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
-import { CompositePicture } from 'picture.ts'
+import { CompositePicture } from './../../dsl/core/commands/composite/picture'
 import { FullLength } from '../directives/all'
 
 @Component({

@@ -7,6 +7,8 @@ import { Expression } from './../parser/expression'
 
 export abstract class Command<T> {
   datasetDefinition: DatasetDefinition
+  type: CommandType
+  name: string
 
   validate(data: {}): boolean {
     return this.datasetDefinition.validate(data)

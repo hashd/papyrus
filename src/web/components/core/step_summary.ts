@@ -6,6 +6,7 @@ import { COMMAND_TYPES } from '../../../dsl/core/command_types'
 import { PictureContext } from '../../../dsl/geometry/picture_context'
 import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
 import { Messages, subjects } from '../../../web/services/messages'
+import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 
 @Component({
   selector: 'pa-step-summary',
@@ -36,10 +37,10 @@ import { Messages, subjects } from '../../../web/services/messages'
   directives: [ StepSummaryComponent ]
 })
 export class StepSummaryComponent {
-  @Input() block: Block
-  @Input() visualization: CompositeVisualization
+  @Input() block: Block<any>
+  @Input() visualization: CompositePicture
 
-  currentStep: Step
+  currentStep: Step<any>
 
   @Output() selectedStep: EventEmitter<any> = new EventEmitter()
   @Output() removedStep: EventEmitter<any> = new EventEmitter()
@@ -70,33 +71,34 @@ export class StepSummaryComponent {
     }
   }
 
-  selectStep(step: Step) {
+  selectStep(step: Step<any>) {
     this.currentStep = step
     this.selectedStep.emit({ step })
   }
 
-  removeStep(step: Step) {
+  removeStep(step: Step<any>) {
     const removeStepSubject = subjects[Messages.REMOVE_STEP]
     removeStepSubject.next(step)
   }
 
-  isBlock(step: Executable) {
+  isBlock(step: Executable<any>) {
     return step instanceof Block
   }
 
-  hasPreview(step: Executable) {
+  hasPreview(step: Executable<any>) {
     return step instanceof Step && step.command.type !== COMMAND_TYPES.FLOW
   }
 
   drawStepPreview(parent: ElementRef, count: number) {
     const nodes = this.visualization.executeUntil(count),
-      height = this.visualization.dimensions.height,
-      width = this.visualization.dimensions.width,
-      svg = convertObjectModel(AdapterTypes.SVG, nodes, parent.clientHeight, parent.clientWidth, `0 0 ${width} ${height}`)
+          parentElement = parent.nativeElement,
+          height = this.visualization.dimensions.height,
+          width = this.visualization.dimensions.width,
+          svg = convertObjectModel(AdapterTypes.SVG, nodes, parentElement.clientHeight, parentElement.clientWidth, `0 0 ${width} ${height}`)
 
     if (svg) {
-      parent.innerHTML = ''
-      parent.appendChild(svg)
+      parentElement.innerHTML = ''
+      parentElement.appendChild(svg)
     }
   }
 }

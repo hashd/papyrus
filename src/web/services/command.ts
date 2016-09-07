@@ -13,9 +13,7 @@ export class CommandService {
   getCommandTypes(): CommandType[] {
     let commandTypes: CommandType[] = []
     for (const type in COMMAND_TYPES) {
-      if (!isFinite(type)) {
-        commandTypes.push(type)
-      }
+      commandTypes.push(type)
     }
 
     return commandTypes
@@ -25,7 +23,7 @@ export class CommandService {
     return this.commands
   }
 
-  addCommand(command: Command) {
+  addCommand(command: Command<any>) {
     this.commands.push(command)
   }
 }

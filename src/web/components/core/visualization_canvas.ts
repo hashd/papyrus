@@ -51,7 +51,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
           selectedStepSubject = subjects[Messages.CHANGE_STEP_SELECTION]
 
     removeStepSubject.subscribe({
-      next: (step: Step) => {
+      next: (step: Step<any>) => {
         this.refreshVisualization()
       }
     })
@@ -139,7 +139,7 @@ export class VisualizationCanvas implements AfterViewInit, OnChanges {
       let selectedElement
       let element
 
-      Array.from(this.vis.nativeElement.children).forEach( child => {
+      [...this.vis.nativeElement.children].forEach( child => {
         if (child.classList.contains('selected')) {
           selectedElement = child
         }

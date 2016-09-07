@@ -30,7 +30,7 @@ export class CompositePicture extends PictureCommand {
     }
   }
 
-  execute(data, scope: Scope = new Scope()): Element {
+  execute(data = {}, scope: Scope = new Scope()): Element {
     this.instances++
 
     return new Group(`${this.commandName}-${this.instances}`, this.block.execute(scope))

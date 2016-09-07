@@ -51,8 +51,8 @@ export class PapyrusEditor {
   @Input()
   visualization: CompositePicture
 
-  commands: Command[]
-  selectedStep: Step
+  commands: Command<any>[]
+  selectedStep: Step<any>
 
   showDataPanel: boolean = true
   showStepsPanel: boolean = true
@@ -61,7 +61,7 @@ export class PapyrusEditor {
   noOfPanelsEnabled: number = 2
 
   @Output()
-  toggleEditorMode: EventEmitter = new EventEmitter()
+  toggleEditorMode: EventEmitter<any> = new EventEmitter()
 
   constructor(private commandService: CommandService) {
     const removeStepSubject = subjects[Messages.REMOVE_STEP]

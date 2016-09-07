@@ -5,7 +5,7 @@ import { Scope } from '../core/scope'
 import { Node } from '../dom/node'
 
 export class Block<T> implements Executable<T[]> {
-  id: String = createID()
+  id: string = createID()
   steps: Step<T>[]  = []
 
   constructor() { }

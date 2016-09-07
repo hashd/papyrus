@@ -9,6 +9,7 @@ import { VisualizationCanvas } from '../core/visualization_canvas'
 import { CommandBar } from '../core/command_bar'
 import { PictureContext } from '../../../dsl/geometry/picture_context'
 import { Messages, subjects } from '../../../web/services/messages'
+import { PictureCommand } from '../../../dsl/core/commands/picture'
 
 // <pa-step-summary [step]="currentStep || previousStep"></pa-step-summary>
 
@@ -28,26 +29,25 @@ import { Messages, subjects } from '../../../web/services/messages'
   directives: [VisualizationCanvas, CommandBar]
 })
 export class PapyrusCanvas implements OnChanges {
-  @Input() commands: Command[]
+  @Input() commands: Command<any>[]
   @Input() visualization: CompositePicture
-  @Input() currentStep: Step
+  @Input() currentStep: Step<any>
 
-  selectedCommand: Command
-  selectedBlock: Block
-  previousStep: Step = null
-  currentStep: Step = null
+  selectedCommand: Command<any>
+  selectedBlock: Block<any>
+  previousStep: Step<any> = null
   currentCommandObj = null
 
   pictureContext: PictureContext
   currentElement: Element = null
 
-  @Output() steps: EventEmitter<Step> = new EventEmitter()
+  @Output() steps: EventEmitter<Step<any>> = new EventEmitter()
 
   constructor() {
     // broadcast block selection change message
     const selectedBlockSubject = subjects[Messages.CHANGE_BLOCK_SELECTION]
     selectedBlockSubject.subscribe({
-      next: (block: Block) => {
+      next: (block: Block<any>) => {
         this.selectBlock(block)
       }
     })
@@ -55,10 +55,10 @@ export class PapyrusCanvas implements OnChanges {
 
   activateCommand(e) {
     const keyCode = e.keyCode
-    let selectedCommand: Command
+    let selectedCommand: Command<any>
 
     if (keyCode >= 65 && keyCode <= 90) {
-      selectedCommand = this.commands.find(cmd => cmd.shortcutKey.charCodeAt(0) - 32 === keyCode)
+      selectedCommand = this.commands.filter(cmd => cmd.shortcutKey.charCodeAt(0) - 32 === keyCode)[0]
     }
 
     if (selectedCommand !== undefined) {
@@ -82,7 +82,7 @@ export class PapyrusCanvas implements OnChanges {
     }
   }
 
-  private selectBlock(block: Block) {
+  private selectBlock(block: Block<any>) {
     this.selectedBlock = block
   }
 
@@ -112,7 +112,7 @@ export class PapyrusCanvas implements OnChanges {
       this.pictureContext.end.y = e.y
 
       if (!this.currentStep) {
-        this.currentStep = new Step(this.currentCommandObj, this.pictureContext)
+        this.currentStep = new Step(this.currentCommandObj, this.currentCommandObj.convertContext(this.pictureContext))
       }
 
       this.currentElement = this.currentCommandObj.execute(this.pictureContext)
