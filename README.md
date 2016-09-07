@@ -1,4 +1,6 @@
 ## Papyrus
+[![Build Status](https://travis-ci.org/hashd/papyrus.svg?branch=master)](https://travis-ci.org/hashd/papyrus)
+
 This project tries to replicate Bret Victor's dynamic visualization tool using TypeScript, Angular 2, RxJS. JSPM is used for bundling the app and sources are written in ts, html, sass.
 
 ### Premise

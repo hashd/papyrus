@@ -2,11 +2,11 @@ language: node_js
 node_js:
   - "6.2"
 before_install:
-  - npm install -g gulp-cli jspm typescript
+  - npm install -g gulp-cli jspm typescript@next tslint@next
 install:
   - npm install
   - jspm install
 script:
   - gulp lint:src:fail
-  - npm run build-app
   - gulp build
+  - npm run build-app
