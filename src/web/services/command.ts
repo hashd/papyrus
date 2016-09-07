@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core'
+import { Injectable } from '@angular/core'
 import { COMMAND_TYPES, CommandType } from '../../dsl/core/command_types'
 import { COMMANDS } from '../../dsl/core/commands/all'
 import { Command } from '../../dsl/core/command'
@@ -13,7 +13,9 @@ export class CommandService {
   getCommandTypes(): CommandType[] {
     let commandTypes: CommandType[] = []
     for (const type in COMMAND_TYPES) {
-      commandTypes.push(type)
+      if (Object.prototype.hasOwnProperty.call(COMMAND_TYPES, type)) {
+        commandTypes.push(type)
+      }
     }
 
     return commandTypes

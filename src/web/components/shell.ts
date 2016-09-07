@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core'
+import { Component } from '@angular/core'
 import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
 import { CompositePicture } from './../../dsl/core/commands/composite/picture'

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core'
 import { Step, Executable } from '../../../dsl/core/step'
 import { Block } from '../../../dsl/core/block'
 import { StepSummary } from '../../../dsl/core/step_summary'
@@ -15,7 +15,7 @@ import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
       <li
         class="step"
         [class.selected]="stepSummary.step === currentStep"
-        *ngFor="#stepSummary of block?.getSummary(); #i=index;"
+        *ngFor="let stepSummary of block?.getSummary(); let i = index;"
         (click)="clickEvent(stepSummary)"
       >
         <div class="step-content">
@@ -33,8 +33,7 @@ import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
         <pa-step-summary *ngIf="isBlock(stepSummary.step)"  [visualization]="visualization" [block]="stepSummary.step"></pa-step-summary>
       </li>
     </ul>
-  `,
-  directives: [ StepSummaryComponent ]
+  `
 })
 export class StepSummaryComponent {
   @Input() block: Block<any>

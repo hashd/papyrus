@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core'
 import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { Point } from '../../../dsl/geometry/cartesian_system'
 import { PointTransform } from '../../pipes/point_transform'
@@ -27,8 +27,7 @@ import { Messages, subjects } from '../../../web/services/messages'
         <span class="rf">{{hoveredPoint | point: 'At'}}</span>
       </div>
     </div>
-  `,
-  pipes: [PointTransform]
+  `
 })
 export class VisualizationCanvas implements AfterViewInit, OnChanges {
   @Input() visualization: CompositePicture

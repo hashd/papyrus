@@ -1,10 +1,5 @@
-import 'angular2/bundles/angular2-polyfills'
-import 'src/web/styles/main'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+import { PapyrusIDE } from './ide'
 
-// you may need es6-shim if you get an error relating to list.fill
-// import es6-shim;
-
-import { bootstrap } from 'angular2/platform/browser'
-import { PapyrusShell } from './components/shell'
-
-bootstrap(PapyrusShell)
+const platform = platformBrowserDynamic()
+platform.bootstrapModule(PapyrusIDE)

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnChanges, Output, EventEmitter } from 'angular2/core'
+import { Component, Input, ViewChild, ElementRef, OnChanges, Output, EventEmitter } from '@angular/core'
 import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { FocusMe } from '../../directives/focus_me'
 import { PictureContext } from '../../../dsl/geometry/picture_context'

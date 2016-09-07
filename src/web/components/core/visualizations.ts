@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { PanelComponent } from '../generic/panel'
 import { VisualizationPreview } from './visualization_preview'
 import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
@@ -9,7 +9,7 @@ import { CommandService } from 'src/web/services/command'
   template: `
     <pa-panel header="Pictures">
 
-      <pa-vis-preview *ngFor="#visualization of visualizations"
+      <pa-vis-preview *ngFor="let visualization of visualizations"
         (click)="select(visualization)"
         [class.selected]="visualization === selected"
         [visualization]="visualization"
@@ -18,12 +18,11 @@ import { CommandService } from 'src/web/services/command'
       >
 
       </pa-vis-preview>
-      <pa-create-vis (click)="create()">
+      <span class="pa-create-vis" (click)="create()">
         <i class="fa fa-plus-circle"></i>
-      </pa-create-vis>
+      </span>
     </pa-panel>
   `,
-  directives: [PanelComponent, VisualizationPreview],
   providers: [CommandService]
 })
 export class PapyrusVisualizations implements OnInit {

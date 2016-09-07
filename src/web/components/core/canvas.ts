@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from 'angular2/core'
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core'
 import { Command } from '../../../dsl/core/command'
 import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { Step } from '../../../dsl/core/step'

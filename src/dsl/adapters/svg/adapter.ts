@@ -1,11 +1,12 @@
 import { NodeTypes, Node } from '../../dom/node'
+import { Group } from '../../models/group'
 import { SVG } from './helper'
 
-export function convertObjectModelToSVG(nodes: Node[], height: number, width: number, viewBox: string) {
+export function convertObjectModelToSVG(group: Group, height: number, width: number, viewBox: string) {
   const svg = SVG.createSVG(height, width, viewBox)
 
-  if (nodes) {
-    nodes.forEach((node: Node) => {
+  if (group) {
+    group.children.forEach((node: Node) => {
       if (node) {
         switch (node.type) {
           case NodeTypes.LINE:

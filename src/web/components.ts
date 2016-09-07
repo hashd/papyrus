@@ -9,9 +9,11 @@ import { PapyrusSteps } from './components/core/steps'
 import { VisualizationCanvas } from './components/core/visualization_canvas'
 import { VisualizationPreview } from './components/core/visualization_preview'
 import { PapyrusVisualizations } from './components/core/visualizations'
+import { EditableField } from './components/generic/editable'
 
 export {
   CommandBar,
+  EditableField,
   PanelComponent,
   PapyrusCanvas,
   PapyrusData,

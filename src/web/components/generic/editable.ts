@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { FocusMe } from '../../directives/focus_me'
 
 @Component({
@@ -15,8 +15,7 @@ import { FocusMe } from '../../directives/focus_me'
       (keydown)="clearEdit($event)"
       focus-me
     />
-  `,
-  directives: [FocusMe]
+  `
 })
 export class EditableField {
   @Input() data: string

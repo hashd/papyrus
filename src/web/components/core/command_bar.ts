@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Command } from '../../../dsl/core/command'
 import { CommandType, COMMAND_TYPES } from '../../../dsl/core/command_types'
 import { CommandService } from '../../services/command'
@@ -7,9 +7,9 @@ import { CommandService } from '../../services/command'
   selector: 'pa-command-bar',
   template: `
     <div class="command-bar">
-      <div class="command-set" *ngFor="#commandType of commandTypes">
+      <div class="command-set" *ngFor="let commandType of commandTypes">
         <div class="title">{{commandType}}</div>
-        <div class="command-entry clearfix" *ngFor="#cmd of getCommandsByType(commandType)"
+        <div class="command-entry clearfix" *ngFor="let cmd of getCommandsByType(commandType)"
           [class.selected]="cmd === currentCommand"
           (click)="selectCommand(cmd)"
         >

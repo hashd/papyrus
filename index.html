@@ -12,10 +12,15 @@
   
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik' type='text/css'>
 </head>
-<body>
-  
+<body>  
   <papyrus-shell></papyrus-shell>
   
+  <!-- Polyfill(s) for older browsers -->
+  <script src="node_modules/core-js/client/shim.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+
+  <!-- Load SystemJS and its corresponding config -->
   <script src="/jspm_packages/system.js"></script>
   <script src="/config/jspm.js"></script>
   <script>

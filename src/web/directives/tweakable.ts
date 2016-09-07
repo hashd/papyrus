@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit } from 'angular2/core'
+import { Directive, ElementRef, AfterViewInit } from '@angular/core'
 
 @Directive({
   selector: '[tweakable]'

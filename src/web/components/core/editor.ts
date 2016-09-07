@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from 'angular2/core'
+import { Component, Input, EventEmitter, Output } from '@angular/core'
 import { PapyrusData } from './data'
 import { PapyrusSteps } from './steps'
 import { PapyrusCanvas } from './canvas'
@@ -27,9 +27,7 @@ import { Messages, subjects } from 'src/web/services/messages'
           <label for="showMeasuresPanel">Measures</label>
         </div>
 
-        <pa-data [data]="visualization?.data"
-          [dataObservables]="visualization?.dataObservables"
-          [datasetDefinition]="visualization?.datasetDefinition"
+        <pa-data [datasetDefinition]="visualization?.datasetDefinition"
           *ngIf="showDataPanel"
           class="split-{{noOfPanelsEnabled}}"
          >
@@ -44,7 +42,6 @@ import { Messages, subjects } from 'src/web/services/messages'
       </div>
     </div>
   `,
-  directives: [PapyrusData, PapyrusSteps, PapyrusCanvas, FullLength, PanelComponent],
   providers: [CommandService]
 })
 export class PapyrusEditor {
