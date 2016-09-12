@@ -2,22 +2,14 @@ import 'src/web/styles/main'
 
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
-import {
-  CommandBar,
-  EditableField,
-  PanelComponent,
-  PapyrusCanvas,
-  PapyrusData,
-  PapyrusEditor,
-  PapyrusShell,
-  PapyrusSteps,
-  PapyrusVisualizations,
-  StepSummaryComponent,
-  VisualizationCanvas,
-  VisualizationPreview
+import { NgModule } from '@angular/core'
+
+import { CommandBar, EditableField, PanelComponent, PapyrusCanvas,
+  PapyrusData, PapyrusEditor, PapyrusShell, PapyrusSteps,
+  PapyrusVisualizations, StepSummaryComponent, VisualizationCanvas, VisualizationPreview
 } from './components'
 import { PointTransform } from './pipes'
-import { NgModule } from '@angular/core'
+import { FocusMe, Tweakable, FullLength } from './directives'
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
@@ -26,7 +18,7 @@ import { NgModule } from '@angular/core'
     PapyrusCanvas, PapyrusData, PapyrusEditor,
     PapyrusShell, PapyrusSteps, PapyrusVisualizations,
     StepSummaryComponent, VisualizationCanvas, VisualizationPreview,
-    PointTransform
+    FocusMe, Tweakable, FullLength, PointTransform
   ],
   bootstrap: [PapyrusShell]
 })
