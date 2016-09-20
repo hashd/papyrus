@@ -17,15 +17,15 @@ pa-editor {
 
     .visualizations-toggle {
       font-size: 16px;
-      color: $gray;
+      color: $light-gray;
       position: absolute;
       left: 12px;
-      top: 4px;
+      top: 5px;
       display: inline-block;
       cursor: pointer;
 
       &.toggled {
-        color: $white;
+        color: $green;
       }
     }
 
@@ -35,7 +35,7 @@ pa-editor {
     }
 
     label {
-      font-size: 11px;
+      font-size: 12px;
       color: $gray;
       margin: 0;
       padding: 2px 0;
@@ -59,28 +59,28 @@ pa-editor {
   }
 
   .split-1 {
-    height: calc(100% - 29px)
+    height: calc(100% - 31px)
   }
 
   .split-2 {
-    height: calc((100% - 29px) / 2)
+    height: calc((100% - 31px) / 2)
   }
 
   .split-3{
-    height: calc((100% - 29px) / 3)
+    height: calc((100% - 31px) / 3)
   }
 
   .pa-panel {
     .content {
-      border-right: 1px solid #aaa;
-      border-bottom: 1px solid #aaa;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
 
     }
   }
 }
 
 .command-bar {
-  background: $xxl-gray;
+  background: $white;
   border: 1px solid $light-gray;
   border-right: none;
 

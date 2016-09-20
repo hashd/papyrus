@@ -8,7 +8,7 @@ import { subjects, Messages } from 'src/web/services/messages'
 @Component({
   selector: 'pa-visualizations',
   template: `
-    <pa-panel header="Pictures">
+    <pa-panel header="Papyrus">
 
       <pa-vis-preview *ngFor="let visualization of visualizations"
         (click)="select(visualization)"
@@ -82,7 +82,7 @@ export class PapyrusVisualizations implements OnInit {
       idx = idx === 0 ? 10 : idx
 
       // If visualization at that index exists, select else just ignore
-      if (idx < this.visualizations.length) {
+      if (idx <= this.visualizations.length) {
         this.select(this.visualizations[idx - 1])
       }
     }

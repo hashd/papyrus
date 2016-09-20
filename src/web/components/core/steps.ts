@@ -10,8 +10,7 @@ import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
       <pa-step-summary [visualization]="visualization" [block]="visualization?.block"></pa-step-summary>
       <div *ngIf="!visualization?.getSummary()?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
     </pa-panel>
-  `,
-  directives: [Panel, StepSummaryComponent]
+  `
 })
 export class PapyrusSteps {
   @Input() visualization: CompositePicture
