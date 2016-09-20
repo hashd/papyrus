@@ -3,11 +3,12 @@ import { PapyrusVisualizations } from './core/visualizations'
 import { PapyrusEditor } from './core/editor'
 import { CompositePicture } from './../../dsl/core/commands/composite/picture'
 import { FullLength } from '../directives/all'
+import { subjects, Messages } from '../services/messages'
 
 @Component({
   selector: 'papyrus-shell',
   template: `
-    <div class="editor-space row row-no-padding" [class.full-editor-mode]="fullEditorEnabled">
+    <div class="editor-space row row-no-padding" [class.full-editor-mode]="fullEditorEnabled" (keydown)="handleKeydownEvent($event)" tabindex=2 autofocus>
      <pa-visualizations class="col-md-2"
         [visualizations]="visualizations"
         (onSelect)="select($event)"
@@ -18,8 +19,7 @@ import { FullLength } from '../directives/all'
 
       </pa-editor>
     </div>
-  `,
-  directives: [PapyrusVisualizations, PapyrusEditor, FullLength]
+  `
 })
 export class PapyrusShell {
   visualizations: CompositePicture[] = []
@@ -32,5 +32,9 @@ export class PapyrusShell {
 
   toggleFullEditorMode(e) {
     this.fullEditorEnabled = !this.fullEditorEnabled
+  }
+
+  handleKeydownEvent(event: Event) {
+    subjects[Messages.KEYBOARD_SHORTCUT].next(event)
   }
 }

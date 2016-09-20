@@ -25,8 +25,7 @@ import { PictureCommand } from '../../../dsl/core/commands/picture'
         <pa-command-bar [commands]="commands" [currentCommand]="selectedCommand" (select)="changeCommand($event)"></pa-command-bar>
       </div>
     </div>
-  `,
-  directives: [VisualizationCanvas, CommandBar]
+  `
 })
 export class PapyrusCanvas implements OnChanges {
   @Input() commands: Command<any>[]

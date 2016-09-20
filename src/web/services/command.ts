@@ -5,7 +5,7 @@ import { Command } from '../../dsl/core/command'
 
 @Injectable()
 export class CommandService {
-  private commands = COMMANDS
+  private commands: (Function | Command<any>)[] = COMMANDS
 
   constructor() {
   }
@@ -13,7 +13,7 @@ export class CommandService {
   getCommandTypes(): CommandType[] {
     let commandTypes: CommandType[] = []
     for (const type in COMMAND_TYPES) {
-      if (Object.prototype.hasOwnProperty.call(COMMAND_TYPES, type)) {
+      if (COMMAND_TYPES.hasOwnProperty(type)) {
         commandTypes.push(type)
       }
     }

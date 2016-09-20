@@ -3,6 +3,7 @@ import { PanelComponent } from '../generic/panel'
 import { VisualizationPreview } from './visualization_preview'
 import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
 import { CommandService } from 'src/web/services/command'
+import { subjects, Messages } from 'src/web/services/messages'
 
 @Component({
   selector: 'pa-visualizations',
@@ -39,6 +40,8 @@ export class PapyrusVisualizations implements OnInit {
     if (this.visualizations.length === 0) {
       this.create()
     }
+
+    subjects[Messages.KEYBOARD_SHORTCUT].subscribe((e: KeyboardEvent) => this.handleKeyboardShortcut(e))
   }
 
   select(v: CompositePicture) {
@@ -69,6 +72,18 @@ export class PapyrusVisualizations implements OnInit {
         // else select the next one in the list if it exists, otherwise the previous one
         const nextIndex = (index === this.visualizations.length) ? index - 1 : index
         this.select(this.visualizations[nextIndex])
+      }
+    }
+  }
+
+  handleKeyboardShortcut(event: KeyboardEvent) {
+    if (event.ctrlKey && ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105))) {
+      let idx = (event.keyCode >= 48 && event.keyCode <= 57) ? event.keyCode - 48 : event.keyCode - 96
+      idx = idx === 0 ? 10 : idx
+
+      // If visualization at that index exists, select else just ignore
+      if (idx < this.visualizations.length) {
+        this.select(this.visualizations[idx - 1])
       }
     }
   }
