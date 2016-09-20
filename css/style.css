@@ -45,12 +45,12 @@ body {
 
 .links a {
   padding: 10px 16px;
-  background: #F10C49;
-  border: 1px solid #F10C49;
+  background: #88C425;
+  border: 1px solid #88C425;
   display: inline-block;
   min-width: 120px;
   text-decoration: none;
-  color: #eee;
+  color: #fafafa;
   transform: skew(-20deg);
   margin-left: 8px;
   margin-top: 8px;
@@ -69,11 +69,11 @@ body {
 }
 
 h1 {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-  font-size: 3em;
+  font-family: Julee, Arial, Helvetica, sans-serif;
+  font-size: 4em;
   font-weight: bold;
-  color: #fff;
-  margin-bottom: 8px;
+  color: #88C425;
+  margin-bottom: 16px;
 }
 
 h5 {
