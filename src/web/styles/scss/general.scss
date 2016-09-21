@@ -6,14 +6,19 @@ $xxl-amethyst: #fafaff;
 
 $cherry-cream: #F54828;
 
-$green: #88C425;
+$spring-warmth: #F49020; // #FFC52C;
+
+$pristine-green: #88C425;
+$green: $spring-warmth;
 $dark-green: #1F6764;
 $light-green: #92C7A3;
 $xl-green: #c9e3d1;
 $xxl-green: #f9fffc;
 
-$dark-blue: #104c7b;
+$xd-blue: #282931;
+$dark-blue: #003154;
 $blue: #269;
+$bright-blue: #00DFFC;
 
 $magenta: #FF3D5A;
 $dark-magenta: #F10C49;
@@ -24,6 +29,7 @@ $xxl-gray: #fcfcfc;
 $gray: #aaa;
 $dark-gray: #333;
 
+$bright-color: $bright-blue;
 $primary-color: $blue;
 $secondary-color: $dark-blue;
 $light-color: $light-gray;
@@ -54,7 +60,8 @@ body {
   bottom: 0;
   margin: 0;
   color: $normal-font-color;
-  background: #fafafa;
+  background: #f2f2f2;
+  letter-spacing: 0.1px;
 }
 
 // @include scrollbars(.5em, $light-color);

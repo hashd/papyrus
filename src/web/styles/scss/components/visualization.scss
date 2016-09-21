@@ -10,14 +10,14 @@ pa-visualizations {
 
     .title {
       font-family: 'Righteous', 'Arial';
-      color: $green;
+      color: $bright-color;
       font-size: 1.6em;
       padding: 4px 0;
     }
 
     .content, .title {
       text-align: center;
-      background: #222;
+      background: $xd-blue;
     }
   }
 
@@ -107,10 +107,10 @@ pa-visualizations {
   pa-vis-preview {
     &.selected {
       .vis-preview {
-        border: 3px solid $green;
+        border: 3px solid $bright-color;
 
         &:after {
-          border-left-color: $green;
+          border-left-color: $bright-color;
         }
       }
 

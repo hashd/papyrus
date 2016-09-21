@@ -66,8 +66,9 @@ pa-vis-canvas {
 
 pa-command-bar {
   position: absolute;
-  top: 108px;
+  top: 0;
   right: 0;
+  bottom: 0;
   width: 120px;
 
   .title {
@@ -78,5 +79,9 @@ pa-command-bar {
 
   .command-set {
     border-bottom: 1px solid $light-amethyst;
+  }
+
+  .command-bar {
+    height: 100%;
   }
 }

@@ -10,7 +10,7 @@ pa-editor {
   background: $xxl-gray;
 
   .panel-toggles {
-    background: $dark-gray;
+    background: $secondary-color;
     text-align: center;
     padding: 4px 0;
     font-size: 0;
@@ -25,7 +25,7 @@ pa-editor {
       cursor: pointer;
 
       &.toggled {
-        color: $green;
+        color: $bright-color;
       }
     }
 
@@ -81,8 +81,9 @@ pa-editor {
 
 .command-bar {
   background: $white;
-  border: 1px solid $light-gray;
   border-right: none;
+  border-left: 1px solid #ddd;
+  padding: 2px 8px;
 
   .command-set {
     padding: 4px 0;
