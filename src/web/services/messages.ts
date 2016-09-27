@@ -5,7 +5,8 @@ enum Messages {
   CHANGE_ELEMENT_SELECTION,
   CHANGE_STEP_SELECTION,
   CHANGE_BLOCK_SELECTION,
-  KEYBOARD_SHORTCUT
+  KEYBOARD_SHORTCUT,
+  KEYBOARD_SHORTCUT_UP
 }
 
 let subjects: {[key: string]: Subject<{}>} = {}
