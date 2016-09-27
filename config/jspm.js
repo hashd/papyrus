@@ -40,13 +40,10 @@ System.config({
     "@angular/forms": "npm:@angular/forms@2.0.0",
     "@angular/platform-browser": "npm:@angular/platform-browser@2.0.0",
     "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@2.0.0",
-    "bootstrap": "github:twbs/bootstrap@3.3.7",
     "clean-css": "npm:clean-css@3.4.19",
     "css": "github:systemjs/plugin-css@0.1.27",
     "es6-shim": "github:es-shims/es6-shim@0.35.1",
     "font-awesome": "npm:font-awesome@4.6.3",
-    "jquery": "npm:jquery@2.2.4",
-    "lodash": "npm:lodash@4.15.0",
     "rxjs": "npm:rxjs@5.0.0-beta.12",
     "ts": "github:frankwallis/plugin-typescript@5.1.2",
     "typescript": "npm:typescript@1.8.10",
@@ -106,9 +103,6 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
-    },
-    "github:twbs/bootstrap@3.3.7": {
-      "jquery": "npm:jquery@2.2.4"
     },
     "npm:@angular/common@2.0.0": {
       "@angular/core": "npm:@angular/core@2.0.0"

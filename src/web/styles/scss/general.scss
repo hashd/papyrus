@@ -65,3 +65,8 @@ body {
 }
 
 // @include scrollbars(.5em, $light-color);
+
+// Font awesome overrides
+.fa {
+  transition: 0.3s all ease-in;
+}

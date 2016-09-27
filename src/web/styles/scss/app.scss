@@ -1,10 +1,9 @@
-@import 'mixins';
+// @import 'mixins';
 
+@import 'grid';
 @import 'general';
 @import 'layout';
 @import 'loader';
-@import 'bootstrap_overrides';
-@import 'fontawesome_overrides';
 
 // Components related Styling
 @import 'components/canvas';
