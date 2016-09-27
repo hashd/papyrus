@@ -37,6 +37,31 @@ pa-visualizations {
     width: 96px;
     cursor: pointer;
     position: relative;
+
+    .num-icon {
+      display: none;
+
+      i {
+        color: $alternate-color;
+        font-style: normal;
+        padding: 12px;
+        border-radius: 50%;
+      }
+    }
+
+    &.selector-mode {
+      .num-icon {
+        display: inline-block;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 90px;
+        height: 74px;
+        background: rgba(5,5,5,0.9);
+        z-index: 10;
+        padding-top: 28px;
+      }
+    }
   }
 
   .vis-preview,

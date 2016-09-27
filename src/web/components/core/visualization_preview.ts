@@ -8,8 +8,13 @@ import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
   selector: 'pa-vis-preview',
   template: `
     <div class="vis-preview">
-      <div class="del-icon">
-        <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
+      <div class="icons">
+        <div class="del-icon">
+          <i class="fa fa-trash" (click)="removeVisualization($event)"></i>
+        </div>
+        <div class="num-icon">
+          <i>{{index}}</i>
+        </div>
       </div>
       <div class="vis-preview-content" #preview></div>
       <div>
@@ -17,12 +22,12 @@ import { convertObjectModel, AdapterTypes } from '../../../dsl/adapters/adapter'
         <input focus-me type="text" *ngIf="nameBeingEdited" [(ngModel)]="visualization.commandName" (blur)="saveName($event)" (keydown)="$event.keyCode === 13?saveName($event):undefined" />
       </div>
     </div>
-  `,
-  directives: [FocusMe]
+  `
 })
 export class VisualizationPreview implements OnChanges {
   @Input() visualization: CompositePicture
   @Input() arity: number
+  @Input() index: number
 
   @Output() onRemove = new EventEmitter()
 

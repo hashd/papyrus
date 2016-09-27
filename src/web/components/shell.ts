@@ -8,8 +8,14 @@ import { subjects, Messages } from '../services/messages'
 @Component({
   selector: 'papyrus-shell',
   template: `
-    <div class="editor-space row row-no-padding" [class.full-editor-mode]="fullEditorEnabled" (keydown)="handleKeydownEvent($event)" tabindex=2 autofocus>
-     <pa-visualizations class="col-md-2"
+    <div class="editor-space row row-no-padding" 
+      [class.full-editor-mode]="fullEditorEnabled"
+      (keydown)="handleKeydownEvent($event)"
+      (keyup)="handleKeyupEvent($event)"
+      tabindex=1
+      autofocus
+    >
+      <pa-visualizations class="col-md-2"
         [visualizations]="visualizations"
         (onSelect)="select($event)"
       >
@@ -36,5 +42,9 @@ export class PapyrusShell {
 
   handleKeydownEvent(event: Event) {
     subjects[Messages.KEYBOARD_SHORTCUT].next(event)
+  }
+
+  handleKeyupEvent(event: Event) {
+    subjects[Messages.KEYBOARD_SHORTCUT_UP].next(event)
   }
 }

@@ -9,11 +9,12 @@ import { subjects, Messages } from 'src/web/services/messages'
   selector: 'pa-visualizations',
   template: `
     <pa-panel header="Papyrus">
-
-      <pa-vis-preview *ngFor="let visualization of visualizations"
+      <pa-vis-preview *ngFor="let visualization of visualizations; let i = index;"
         (click)="select(visualization)"
         [class.selected]="visualization === selected"
+        [class.selector-mode]="keyboardSelectorEnabled"
         [visualization]="visualization"
+        [index]="i+1"
         [arity]="visualization?.block?.steps.length"
         (onRemove)="removeVisualization($event)"
       >
@@ -28,8 +29,9 @@ import { subjects, Messages } from 'src/web/services/messages'
 })
 export class PapyrusVisualizations implements OnInit {
   @Input()
-  visualizations: CompositePicture[]
-  selected: CompositePicture
+  visualizations: CompositePicture[] = []
+  selected: CompositePicture = null
+  keyboardSelectorEnabled: boolean = false
 
   @Output()
   onSelect = new EventEmitter()
@@ -41,7 +43,7 @@ export class PapyrusVisualizations implements OnInit {
       this.create()
     }
 
-    subjects[Messages.KEYBOARD_SHORTCUT].subscribe((e: KeyboardEvent) => this.handleKeyboardShortcut(e))
+    this.subscribeEvents()
   }
 
   select(v: CompositePicture) {
@@ -76,6 +78,11 @@ export class PapyrusVisualizations implements OnInit {
     }
   }
 
+  subscribeEvents() {
+    subjects[Messages.KEYBOARD_SHORTCUT].subscribe((e: KeyboardEvent) => this.handleKeyboardShortcut(e))
+    subjects[Messages.KEYBOARD_SHORTCUT_UP].subscribe((e: KeyboardEvent) => this.handleKeyboardShortcutUp(e))
+  }
+
   handleKeyboardShortcut(event: KeyboardEvent) {
     if (event.ctrlKey && ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105))) {
       let idx = (event.keyCode >= 48 && event.keyCode <= 57) ? event.keyCode - 48 : event.keyCode - 96
@@ -85,6 +92,16 @@ export class PapyrusVisualizations implements OnInit {
       if (idx <= this.visualizations.length) {
         this.select(this.visualizations[idx - 1])
       }
+    } else if (event.ctrlKey && event.key === 'n') {
+      this.create()
+    } else if (event.ctrlKey === true) {
+      this.keyboardSelectorEnabled = true
+    }
+  }
+
+  handleKeyboardShortcutUp(event: KeyboardEvent) {
+    if (event.key === 'Control') {
+      this.keyboardSelectorEnabled = false
     }
   }
 }
