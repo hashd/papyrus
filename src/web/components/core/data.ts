@@ -12,13 +12,13 @@ import { Tweakable } from '../../directives/tweakable'
       <div class="command-bar">
         <i class="fa fa-plus" (click)="addDataDefinition()"></i>
       </div>
-      <ul class="variables">
+      <ul class="variables" *ngIf="datasetDefinition?.dataDefinitions?.length !== 0">
         <li *ngFor="let dd of getDefinitions(false)">
           <pa-editable class="vname" [data]="dd.name" (edited)="saveName(dd, $event)" title="{{dd.name}}"></pa-editable>
           <pa-editable class="vvalue" [data]="dd.defaultValue" (edited)="saveValue(dd, $event)" tweakable></pa-editable>
         </li>
       </ul>
-      <ul class="iterables">
+      <ul class="iterables" *ngIf="datasetDefinition?.dataDefinitions?.length !== 0">
         <li *ngFor="let dd of getDefinitions(true)">
           <span class="vname" title="{{dd.name}}">
             <span>{{dd.name}}</span>

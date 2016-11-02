@@ -8,6 +8,21 @@
 
   & > .content {
     background: $white;
+
+    .command-bar {
+      font-size: 1em;
+      color: $secondary-color;
+      background: $white;
+      padding: 4px 6px;
+
+      i {
+        margin-right: 4px;
+      }
+
+      i:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   & > div {

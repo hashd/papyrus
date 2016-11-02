@@ -9,7 +9,6 @@ export type CommandType = 'primitive' | 'composite' | 'adjust' | 'flow' | 'modif
 
 export const COMMAND_TYPES = {
   PRIMITIVE,
-  COMPOSITE,
-  FLOW,
-  ADJUST
+  ADJUST,
+  COMPOSITE
 }

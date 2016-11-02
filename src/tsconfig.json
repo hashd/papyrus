@@ -4,6 +4,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "outFile": "../public/app.js",
+    "sourceMap": true,
     "paths": {
       "src/*": [
         "*"
@@ -12,6 +14,7 @@
     "target": "es5"
   },
   "exclude": [
-    "dsl/core/commands/adjust"
+    "dsl/core/commands/adjust",
+    "node_modules"
   ]
 }

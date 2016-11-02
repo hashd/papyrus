@@ -1,14 +1,14 @@
-import { Magnet } from '..//models/magnet'
+import { Magnet } from 'src/dsl/models/magnet'
 
-export interface Element {
+export interface NaiveElement {
   name: string
   getAttribute: (name: string) => string
   getAttributes: () => {[key: string]: string}
-  setAttribute: (name: string, value: string) => Element
+  setAttribute: (name: string, value: string) => NaiveElement
   getMagnets: () => Magnet[]
 }
 
-export interface TransformElement extends Element {
+export interface TransformElement extends NaiveElement {
   translate: (tx: number, ty: number) => TransformElement
   scale: (sx: number, sy: number) => TransformElement
   rotate: (angle: number, rx: number, ry: number) => TransformElement
@@ -33,7 +33,7 @@ export interface TransformProperties {
   skewY: number
 }
 
-export abstract class BasicElement implements TransformElement {
+export abstract class Element implements TransformElement {
   private transformProperties: TransformProperties
   attributes: {[key: string]: string} = {}
   magnets: Magnet[] = []

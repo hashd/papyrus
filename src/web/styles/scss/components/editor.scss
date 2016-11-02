@@ -47,6 +47,7 @@ pa-editor {
       background: $light-color;
       color: $primary-color;
       opacity: 0.8;
+      box-shadow: inset 0 0 8px #888;
     }
 
     label:last-child {
@@ -55,6 +56,7 @@ pa-editor {
 
     input[type="checkbox"]:checked + label {
       opacity: 1;
+      box-shadow: none;
     }
   }
 

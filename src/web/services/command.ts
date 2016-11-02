@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core'
-import { COMMAND_TYPES, CommandType } from '../../dsl/core/command_types'
+import { CommandType } from '../../dsl/core/command_types'
 import { COMMANDS } from '../../dsl/core/commands/all'
 import { Command } from '../../dsl/core/command'
+
+const COMMAND_TYPES: CommandType[] = ['PRIMITIVE', 'ADJUST', 'COMPOSITE']
 
 @Injectable()
 export class CommandService {
@@ -11,14 +13,7 @@ export class CommandService {
   }
 
   getCommandTypes(): CommandType[] {
-    let commandTypes: CommandType[] = []
-    for (const type in COMMAND_TYPES) {
-      if (COMMAND_TYPES.hasOwnProperty(type)) {
-        commandTypes.push(type)
-      }
-    }
-
-    return commandTypes
+    return COMMAND_TYPES
   }
 
   getCommands() {

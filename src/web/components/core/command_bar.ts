@@ -31,6 +31,7 @@ export class CommandBar {
 
   constructor(private commandService: CommandService) {
     this.commandTypes = commandService.getCommandTypes()
+    this.commands = commandService.getCommands()
   }
 
   getCommandsByType(type: CommandType) {

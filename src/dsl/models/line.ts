@@ -1,7 +1,7 @@
-import { BasicElement } from './element'
+import { Element } from './element'
 import { Magnet } from './magnet'
 
-export class Line extends BasicElement {
+export class Line extends Element {
   constructor(name: string, public x1: number, public y1: number, public x2: number, public y2: number) {
     super(name)
 

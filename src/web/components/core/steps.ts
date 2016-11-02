@@ -7,6 +7,10 @@ import { CompositePicture } from '../../../dsl/core/commands/composite/picture'
   selector: 'pa-steps',
   template: `
     <pa-panel header="Steps">
+      <div class="command-bar">
+        <i class="fa fa-repeat" title="Loop (l)"></i>
+        <i class="fa fa-code-fork" title="If (i)"></i>
+      </div>
       <pa-step-summary [visualization]="visualization" [block]="visualization?.block"></pa-step-summary>
       <div *ngIf="!visualization?.getSummary()?.length" class="step-note">Oops!, nothing here yet. Select a command and get started.</div>
     </pa-panel>
