@@ -13,9 +13,23 @@ pa-data {
     }
   }
 
+  .data-note {
+    text-align: center;
+  }
+
   .variables, .iterables {
     list-style: none;
     padding-left: 2px;
+
+    & > li {
+      padding: 1px 8px;
+    }
+
+    .vname:after {
+      content: '=';
+      vertical-align: top;
+      line-height: 24px;
+    }
 
     .vname span,
     .vname input {
@@ -23,12 +37,13 @@ pa-data {
       width: 25%;
       min-width: 120px;
       padding: 2px 16px;
-      border-radius: 16px;
+      border-radius: 4px;
     }
 
     .vname span {
       cursor: pointer;
-      background: $light-gray;
+      background: $white;
+      border: 1px solid $dim-gray;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;

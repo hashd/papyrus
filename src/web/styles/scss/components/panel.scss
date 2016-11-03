@@ -7,12 +7,12 @@
   }
 
   & > .content {
-    background: $white;
+    background: $light-gray;
 
     .command-bar {
       font-size: 1em;
       color: $secondary-color;
-      background: $white;
+      background: transparent;
       padding: 4px 6px;
 
       i {

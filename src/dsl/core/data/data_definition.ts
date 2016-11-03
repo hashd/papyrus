@@ -1,11 +1,13 @@
+import { createID } from 'src/dsl/utils/uuid'
+
 export type DataType = 'string' | 'number' | 'array' | 'expression' | 'element' | 'boolean'
 export type ValueType = string | number | Array<any> | Element | boolean
 
 export class DataDefinition {
   id: string
 
-  constructor(public name: string, public type: DataType, public defaultValue: ValueType = DataDefinition.getDefaultValueForType(type)) {
-    this.id = `dd-${+new Date()}`
+  constructor(public name: string, public type: DataType, public defaultValue: ValueType = getDefaultValueForType(type)) {
+    this.id = createID()
   }
 
   setDefaultValue(value: ValueType): boolean {
@@ -17,24 +19,24 @@ export class DataDefinition {
     // TODO: add logic to validate a value against a valuetype
     return true
   }
+}
 
-  private static getDefaultValueForType(type: DataType): ValueType {
-    switch (type) {
-      case 'number':
-        return 0
+export function getDefaultValueForType(type: DataType): ValueType {
+  switch (type) {
+    case 'number':
+      return 0
 
-      case 'string':
-      case 'expression':
-        return ''
+    case 'string':
+    case 'expression':
+      return ''
 
-      case 'array':
-        return []
+    case 'array':
+      return []
 
-      case 'element':
-        return undefined
+    case 'element':
+      return undefined
 
-      default:
-        return undefined
-    }
+    default:
+      return undefined
   }
 }

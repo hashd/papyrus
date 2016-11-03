@@ -4,6 +4,7 @@ import { EditableField } from '../generic/editable'
 import { DatasetDefinition } from '../../../dsl/core/data/dataset_definition'
 import { DataDefinition } from '../../../dsl/core/data/data_definition'
 import { Tweakable } from '../../directives/tweakable'
+import { VARIABLE_NAME_REGEX } from 'src/dsl/utils/regex'
 
 @Component({
   selector: 'pa-data',
@@ -45,8 +46,11 @@ export class PapyrusData {
     return this.datasetDefinition !== null ? this.datasetDefinition.dataDefinitions.filter(d => isIterable ? (d.type === 'array') : (d.type !== 'array')) : null
   }
 
-  saveName(dd: DataDefinition, e) {
-    dd.name = e.value
+  saveName(dd: DataDefinition, { value }) {
+    if (VARIABLE_NAME_REGEX.test(value) === true) {
+      dd.name = value
+    }
+    console.log(dd)
   }
 
   saveValue(dd: DataDefinition, e) {
