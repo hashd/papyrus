@@ -28,6 +28,6 @@ export abstract class Command<T> {
   }
 
   getSummary(data: Object): StepSummary | StepSummary[]  {
-    return new StepSummary({}, 'This method has not been overriden and should be done for all commands')
+    throw new Error('This method has not been overriden and should be done for all commands')
   }
 }

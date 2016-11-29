@@ -50,7 +50,6 @@ export class PapyrusData {
     if (VARIABLE_NAME_REGEX.test(value) === true) {
       dd.name = value
     }
-    console.log(dd)
   }
 
   saveValue(dd: DataDefinition, e) {

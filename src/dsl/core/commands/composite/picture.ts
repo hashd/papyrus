@@ -22,7 +22,7 @@ export class CompositePicture extends PictureCommand {
     super()
   }
 
-  convertContext(context: PictureContext) {
+  convertContext(context: PictureContext): Object {
     return {
       basePoint: context.getLeastSignificantPoint(),
       width: context.getWidth(),
